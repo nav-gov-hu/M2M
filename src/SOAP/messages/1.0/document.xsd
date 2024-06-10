@@ -1,0 +1,258 @@
+<?xml  version='1.0' encoding='utf-8' ?>
+<xs:schema targetNamespace="https://soap.api.nav.gov.hu/definitions/messages/1.0/document" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="https://soap.api.nav.gov.hu/definitions/messages/1.0/document" xmlns:msg_document="https://soap.api.nav.gov.hu/definitions/messages/1.0/document" xmlns:msg_common="https://soap.api.nav.gov.hu/definitions/messages/1.0/common">
+	<xs:import namespace="https://soap.api.nav.gov.hu/definitions/messages/1.0/common" schemaLocation="../../messages/1.0/common.xsd"/>
+	<xs:simpleType name="CreateDocumentResult">
+		<xs:annotation>
+			<xs:documentation>Az M2M bizonylat létrehozás művelet lehetséges eredményei:&#xD;
+CREATE_DOCUMENT_SUCCESS - A bizonylat létrehozása a validációval sikeresen megtörtént.&#xD;
+UNKNOWN_FILE_ID - A megadott azonosítóval nem található fájl a fájltárolóban.&#xD;
+FILE_ID_ALREADY_USED - A megadott fájltárolóbeli fájazonosítóval már létezik bizonylat.&#xD;
+UNSUCCESSFUL_VALIDATION - A validáció valamilyen hiba miatt nem tudott lefutni.&#xD;
+INVALID_SIGNATURE: Érvénytelen aláírás.&#xD;
+INVALID_SENDER - Érvénytelen beküldő&#xD;
+INVALID_TAXPAYER - Érvénytelen adózó&#xD;
+SENDER_HAS_NO_RIGHT - A beküldőnek nincs jogosultsága a bizonylat beküldésére az adózó nevében.&#xD;
+INVALID_DOCUMENT_TYPE - A bizonylattípus nem küldhető be.&#xD;
+INVALID_DOCUMENT_VERSION - A bizonylatverzió nem küldhető be.&#xD;
+FILE_CONTAINS_VIRUS - A bizonylatfájl, vagy annak csatolmánya vírusos.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="CREATE_DOCUMENT_SUCCESS"/>
+			<xs:enumeration value="UNKNOWN_FILE_ID"/>
+			<xs:enumeration value="FILE_ID_ALREADY_USED"/>
+			<xs:enumeration value="OTHER_ERROR"/>
+			<xs:enumeration value="UNSUCCESSFUL_VALIDATION"/>
+			<xs:enumeration value="INVALID_SIGNATURE"/>
+			<xs:enumeration value="INVALID_SENDER"/>
+			<xs:enumeration value="INVALID_TAXPAYER"/>
+			<xs:enumeration value="SENDER_HAS_NO_RIGHT"/>
+			<xs:enumeration value="INVALID_DOCUMENT_TYPE"/>
+			<xs:enumeration value="INVALID_DOCUMENT_VERSION"/>
+			<xs:enumeration value="FILE_CONTAINS_VIRUS"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="DocumentStatus">
+		<xs:annotation>
+			<xs:documentation>A bizonylat lehetséges státuszai:&#xD;
+UNDER_VALIDATION: A bizonylat ellenőrzése folyamatban van.&#xD;
+VALIDATION_ERROR: A bizonylat nem a megfelelő kitöltéssel és/vagy csatolmányokkal lett elkészítve.&#xD;
+VALIDATED: A bizonylat megfelelőpen lett kitöltve, és a csatományai is rendben vannak.&#xD;
+UNDER_SUBMIT: A bizonylat beküldése folymatban van.&#xD;
+SUBMIT_ERROR: A bizonylat beküldése sikertelen.&#xD;
+SUBMITTED: A bizonylat sikeresen be lett küldve.&#xD;
+DELETED: A bizonylatfájl a megőrzési időpontban automatikusan törlve lett  a fájltárolóból.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="UNDER_VALIDATION"/>
+			<xs:enumeration value="VALIDATION_ERROR"/>
+			<xs:enumeration value="VALIDATED"/>
+			<xs:enumeration value="UNDER_SUBMIT"/>
+			<xs:enumeration value="SUBMIT_ERROR"/>
+			<xs:enumeration value="SUBMITTED"/>
+			<xs:enumeration value="DELETED"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="GetDocumentResult">
+		<xs:annotation>
+			<xs:documentation>Az M2M bizonylatlekérdezés művelet lehetséges eredményei:&#xD;
+GET_DOCUMENT_SUCCESS - A bizonylatadatok lekérdezése sikeresen megtörtént.&#xD;
+UNKNOWN_FILE_ID - A megadott azonosítóval nem található fájl a fájltárolóban.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="GET_DOCUMENT_SUCCESS"/>
+			<xs:enumeration value="UNKNOWN_FILE_ID"/>
+			<xs:enumeration value="OTHER_ERROR"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="UpdateDocumentResult">
+		<xs:annotation>
+			<xs:documentation>Az M2M bizonylat módosítás művelet lehetséges eredményei:&#xD;
+UPDATE_DOCUMENT_SUCCESS - A bizonylat módosítása sikeresen megtörtént.&#xD;
+UNKNOWN_FILE_ID - A megadott azonosítóval nem található fájl a fájltárolóban.&#xD;
+STATUS_CHANGE_NOT_ENABLED - A bizonylat aktuális státuszából, a bizonylat módosítás kérésben megadott státuszba nem engedélyezett az átmenet.&#xD;
+SUBMIT_ERROR: A bizonylat beküldése sikertelen.&#xD;
+TO_BIG_KR_FILE: A KR fájl mérete meghaladja a beküldési limitet.&#xD;
+INVALID_SIGNATURE: Érvénytelen aláírás.&#xD;
+INVALID_SENDER - Érvénytelen beküldő&#xD;
+INVALID_TAXPAYER - Érvénytelen adózó&#xD;
+SENDER_HAS_NO_RIGHT - A beküldőnek nincs jogosultsága a bizonylat beküldésére az adózó nevében.&#xD;
+INVALID_DOCUMENT_TYPE - A bizonylattípus nem küldhető be.&#xD;
+INVALID_DOCUMENT_VERSION - A bizonylatverzió nem küldhető be.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="UPDATE_DOCUMENT_SUCCESS"/>
+			<xs:enumeration value="UNKNOWN_FILE_ID"/>
+			<xs:enumeration value="STATUS_CHANGE_NOT_ENABLED"/>
+			<xs:enumeration value="SUBMIT_ERROR"/>
+			<xs:enumeration value="TO_BIG_KR_FILE"/>
+			<xs:enumeration value="OTHER_ERROR"/>
+			<xs:enumeration value="INVALID_SIGNATURE"/>
+			<xs:enumeration value="INVALID_SENDER"/>
+			<xs:enumeration value="INVALID_TAXPAYER"/>
+			<xs:enumeration value="SENDER_HAS_NO_RIGHT"/>
+			<xs:enumeration value="INVALID_DOCUMENT_TYPE"/>
+			<xs:enumeration value="INVALID_DOCUMENT_VERSION"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="Attachment">
+		<xs:annotation>
+			<xs:documentation>A bizonylat csatolmányának adatai.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="documentPartType" type="xs:string" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Az a részbizonylat típus, amihez a csatolmány csatolva lett.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="fileId" type="xs:string" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>A csatolmány azonosítója a fájltárolóban.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="fileName" type="xs:string" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>A csatolmány fájl neve kiterjesztéssel együtt</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="type" type="xs:string" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>A csatolmány típusa. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DocumentBaseRequestType">
+		<xs:sequence>
+			<xs:element name="documentFileId" type="xs:string" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>A bizonylat fájl egyedi azonosítója a fájltárolóban.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GetDocumentStatusRequestType">
+		<xs:annotation>
+			<xs:documentation>A bizonylat státusz lekérdezés kérésadatok</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="DocumentBaseRequestType">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="GetDocumentStatusResponseType">
+		<xs:annotation>
+			<xs:documentation>A bizonylat lekérdezés válasz adatok</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="msg_common:BaseResponseType">
+				<xs:sequence>
+					<xs:element name="documentFileId" type="xs:string" minOccurs="0" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>A bizonylatfájl fájltárolóbeli azonosítója, amennyiben a műűvelet sikeres, és a bizonylat fájl a fájltárolóban van.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="errors" type="xs:base64Binary" minOccurs="0" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>Hibákat megállapító validáció esetén a hibákat tartalmazó xml fájl bzip2-vel tömörítve, majd base64 kódolva. Az xml a hibalista.xsd-vel dolgozható fel.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="documentStatus" type="DocumentStatus" minOccurs="0" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>A bizonylat státusza</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="resultCode" type="GetDocumentResult" minOccurs="1" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>Válaszkód</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="SendInDocumentRequestType">
+		<xs:annotation>
+			<xs:documentation>Bizonylatbeküldés kérés adatok</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="DocumentBaseRequestType">
+				<xs:sequence>
+					<xs:element name="signature" type="xs:string" minOccurs="1" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>Aláírás</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="SendInDocumentResponseType">
+		<xs:annotation>
+			<xs:documentation>Bizonylatbeküldés válasz adatok</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="msg_common:BaseResponseType">
+				<xs:sequence>
+					<xs:element name="arrivalNumber" type="xs:string" minOccurs="0" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>Sikeres beküldés esetén az érkeztetési szám.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="documentStatus" type="DocumentStatus" minOccurs="0" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>A bizonylat státusza</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="resultCode" type="UpdateDocumentResult" minOccurs="1" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>Válaszkód</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ValidateDocumentRequestType">
+		<xs:annotation>
+			<xs:documentation>Bizonylatvalidáció kérés adatok</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="DocumentBaseRequestType">
+				<xs:sequence>
+					<xs:element name="signature" type="xs:string" minOccurs="1" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>Aláírás</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="attachments" type="Attachment" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>A bizonylat csatolmányainak adatai</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ValidateDocumentResponseType">
+		<xs:annotation>
+			<xs:documentation>Bizonylatvalidáció válasz adatok</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="msg_common:BaseResponseType">
+				<xs:sequence>
+					<xs:element name="resultCode" type="CreateDocumentResult" minOccurs="1" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>Válaszkód</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="documentStatus" type="DocumentStatus" minOccurs="0" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>A bizonylat státusza</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+</xs:schema>

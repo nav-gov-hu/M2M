@@ -1,0 +1,304 @@
+openapi: 3.0.0
+x-generator-comment: 'Generalt service: NavM2mDocument'
+info:
+  title: NavM2mDocument
+  description: 'OpenAPI Document NAV M2M Document szolgáltatáshoz. '
+  version: '1.0'
+paths:
+  /NavM2mDocument/documentService/Document/{documentFileId}:
+    get:
+      tags:
+        - DocumentService
+      summary: Document.getDocument
+      description: >-
+        A bizonylat státuszának lekérdezéséet biztosító művelet. Visszaadja a
+        bizonylat státuszát. (Letrehozva a Document.getDocument(Authorization:
+        char, messageId: char, correlationId: char, documentFileId:
+        char):GetDocumentResponseType operation-bol.)
+      operationId: getDocument
+      parameters:
+        - name: Authorization
+          in: header
+          description: Hozzáférési token
+          schema:
+            type: string
+        - name: messageId
+          in: header
+          description: Az üzenet egyedi azonosítója
+          schema:
+            type: string
+        - name: correlationId
+          in: header
+          description: Üzenetek összekapcsolását biztosító egyedi azonosító.
+          schema:
+            type: string
+      x-generator-comment: 'Operation return type: getDocumentResponseBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/getDocumentResponseBody'
+    parameters:
+      - name: documentFileId
+        in: path
+        required: true
+        description: >-
+          A bizonylat egyedi azonosítója a fájltárolóban Path parameterkent
+          letrehozva!
+        schema:
+          type: string
+  /NavM2mDocument/documentService/Document:
+    patch:
+      tags:
+        - DocumentService
+      summary: Document.updateDocument
+      description: >-
+        A bizonylat státuszváltását biztosító művelet. Jelenleg egy
+        státuszváltás kezdeményezhető.  Az UNDER_SUBMIT státusz megadásával
+        kezdeményezhető a bizonyat beküldése. Visszaadja a bizonylat státuszát
+        és az érkeztetési számot. (Letrehozva a
+        Document.updateDocument(Authorization: char, messageId: char,
+        correlationId: char, requestData:
+        UpdateDocumentRequestType):UpdateDocumentResponseType operation-bol.)
+      operationId: updateDocument
+      requestBody:
+        $ref: '#/components/requestBodies/updateDocumentRequestBody'
+      parameters:
+        - name: Authorization
+          in: header
+          description: Hozzáférési token
+          schema:
+            type: string
+        - name: messageId
+          in: header
+          description: Az üzenet egyedi azonosítója
+          schema:
+            type: string
+        - name: correlationId
+          in: header
+          description: Üzenetek összekapcsolását biztosító egyedi azonosító.
+          schema:
+            type: string
+      x-generator-comment: 'Operation return type: updateDocumentResponseBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/updateDocumentResponseBody'
+    post:
+      tags:
+        - DocumentService
+      summary: Document.createDocument
+      description: >-
+        A bizonylat létrehozását és validálását biztosító művelet. Visszaadja a
+        bizonylat státuszát és a validációs hibákat. (Letrehozva a
+        Document.createDocument(Authorization: char, messageId: char,
+        correlationId: char, requestData:
+        CreateDocumentRequestType):CreateDocumentResponseType operation-bol.)
+      operationId: createDocument
+      requestBody:
+        $ref: '#/components/requestBodies/createDocumentRequestBody'
+      parameters:
+        - name: Authorization
+          in: header
+          description: Hozzáférési token
+          schema:
+            type: string
+        - name: messageId
+          in: header
+          description: Az üzenet egyedi azonosítója
+          schema:
+            type: string
+        - name: correlationId
+          in: header
+          description: Üzenetek összekapcsolását biztosító egyedi azonosító.
+          schema:
+            type: string
+      x-generator-comment: 'Operation return type: createDocumentResponseBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/createDocumentResponseBody'
+    parameters: []
+components:
+  requestBodies:
+    updateDocumentRequestBody:
+      description: ''
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/updateDocumentRequestBodyType'
+    createDocumentRequestBody:
+      description: ''
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/createDocumentRequestBodyType'
+  responses:
+    getDocumentResponseBody:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GetDocumentResponseType'
+    createDocumentResponseBody:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CreateDocumentResponseType'
+    updateDocumentResponseBody:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UpdateDocumentResponseType'
+  schemas:
+    BaseResponseType:
+      type: object
+      properties:
+        resultMessage:
+          description: Válaszüzenet
+          type: string
+    CreateDocumentResponseType:
+      allOf:
+        - $ref: '#/components/schemas/DocumentBaseResponseType'
+        - type: object
+          properties:
+            resultCode:
+              $ref: '#/components/schemas/CreateDocumentResult'
+    GetDocumentResult:
+      type: string
+      enum:
+        - GET_DOCUMENT_SUCCESS
+        - UNKNOWN_FILE_ID
+        - OTHER_ERROR
+    updateDocumentRequestBodyType:
+      type: object
+      properties:
+        requestData:
+          $ref: '#/components/schemas/UpdateDocumentRequestType'
+    DocumentStatus:
+      type: string
+      enum:
+        - UNDER_VALIDATION
+        - VALIDATION_ERROR
+        - VALIDATED
+        - UNDER_SUBMIT
+        - SUBMIT_ERROR
+        - SUBMITTED
+        - DELETED
+    createDocumentRequestBodyType:
+      type: object
+      properties:
+        requestData:
+          $ref: '#/components/schemas/CreateDocumentRequestType'
+    UpdateDocumentResult:
+      type: string
+      enum:
+        - UPDATE_DOCUMENT_SUCCESS
+        - UNKNOWN_FILE_ID
+        - STATUS_CHANGE_NOT_ENABLED
+        - SUBMIT_ERROR
+        - TO_BIG_KR_FILE
+        - OTHER_ERROR
+        - INVALID_SIGNATURE
+        - INVALID_SENDER
+        - INVALID_TAXPAYER
+        - SENDER_HAS_NO_RIGHT
+        - INVALID_DOCUMENT_TYPE
+        - INVALID_DOCUMENT_VERSION
+    CreateDocumentRequestType:
+      type: object
+      properties:
+        documentFileId:
+          description: A bizonylat fájl egyedi azonosítója a fájltárolóban.
+          type: string
+        signature:
+          description: >-
+            Bizonylat létrehozás aláírása. Aláírás képzése:
+            SHA3-512(messageId+timestamp+documentFileId+signatureKey)
+          type: string
+        attachments:
+          type: array
+          items:
+            $ref: '#/components/schemas/Attachment'
+    CreateDocumentResult:
+      type: string
+      enum:
+        - CREATE_DOCUMENT_SUCCESS
+        - UNKNOWN_FILE_ID
+        - FILE_ID_ALREADY_USED
+        - OTHER_ERROR
+        - UNSUCCESSFUL_VALIDATION
+        - INVALID_SIGNATURE
+        - INVALID_SENDER
+        - INVALID_TAXPAYER
+        - SENDER_HAS_NO_RIGHT
+        - INVALID_DOCUMENT_TYPE
+        - INVALID_DOCUMENT_VERSION
+        - FILE_CONTAINS_VIRUS
+    GetDocumentResponseType:
+      allOf:
+        - $ref: '#/components/schemas/DocumentBaseResponseType'
+        - type: object
+          properties:
+            documentFileId:
+              description: >-
+                A bizonylatfájl fájltárolóbeli azonosítója, amennyiben a művelet
+                sikeres, és a bizonylat fájl a fájltárolóban van.
+              type: string
+            errors:
+              description: >-
+                Hibákat megállapító validáció esetén a hibákat tartalmazó xml
+                fájl zippelve, majd base64 kódolva. Az xml a hibalista.xsd-vel
+                dolgozható fel.
+              type: string
+              format: binary
+            resultCode:
+              $ref: '#/components/schemas/GetDocumentResult'
+    Attachment:
+      type: object
+      properties:
+        documentPartType:
+          description: Az a részbizonylat típus, amihez a csatolmány csatolva lett.
+          type: string
+        fileId:
+          description: A csatolmány azonosítója a fájltárolóban.
+          type: string
+        fileName:
+          description: A csatolmány fájl neve kiterjesztéssel együtt
+          type: string
+        type:
+          description: 'A csatolmány típusa. '
+          type: string
+    DocumentBaseResponseType:
+      allOf:
+        - $ref: '#/components/schemas/BaseResponseType'
+        - type: object
+          properties:
+            documentStatus:
+              $ref: '#/components/schemas/DocumentStatus'
+    UpdateDocumentRequestType:
+      type: object
+      properties:
+        documentFileId:
+          description: A bizonylat fájl egyedi azonosítója a fájltárolóban.
+          type: string
+        signature:
+          description: >-
+            Bizonylat feltöltés aláírása.
+            SHA3-512(messageId+timestamp+documentFileId+signatureKey)
+          type: string
+        documentStatus:
+          $ref: '#/components/schemas/DocumentStatus'
+    UpdateDocumentResponseType:
+      allOf:
+        - $ref: '#/components/schemas/DocumentBaseResponseType'
+        - type: object
+          properties:
+            arrivalNumber:
+              description: Sikeres beküldés esetén az érkeztetési szám.
+              type: string
+            resultCode:
+              $ref: '#/components/schemas/UpdateDocumentResult'
+tags:
+  - name: DocumentService
+    description: ' A Document service csomagba tartozo OAS elemek'

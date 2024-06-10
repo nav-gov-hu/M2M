@@ -1,0 +1,1052 @@
+{
+	"info": {
+		"_postman_id": "b1619adc-74da-41e3-a12f-2412775c058a",
+		"name": "M2m gateway",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6870063"
+	},
+	"item": [
+		{
+			"name": "getToken",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.collectionVariables.set('access_token', pm.response.json().accessToken);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "messageId",
+						"value": "{{message_id}}",
+						"type": "text"
+					},
+					{
+						"key": "correlationId",
+						"value": "{{$randomUUID}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"requestData\": {\r\n    \"clientId\": \"{{client}}\",\r\n    \"clientSecret\": \"{{client_secret}}\",\r\n    \"password\": \"{{password}}\",\r\n    \"username\": \"{{user}}\"\r\n  }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{agw_server}}/NavM2mCommon/tokenService/Token",
+					"host": [
+						"{{agw_server}}"
+					],
+					"path": [
+						"NavM2mCommon",
+						"tokenService",
+						"Token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "redeemNonce",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.collectionVariables.set('signature_key_second_part', pm.response.json().signatureKeySecondPart);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}"
+					},
+					{
+						"key": "messageId",
+						"value": "{{message_id}}"
+					},
+					{
+						"key": "correlationId",
+						"value": "{{$randomUUID}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"requestData\": {\r\n    \"nonce\": \"7gld8gk48g\"\r\n  }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{agw_server}}/NavM2mCommon/userregistrationService/Nonce",
+					"host": [
+						"{{agw_server}}"
+					],
+					"path": [
+						"NavM2mCommon",
+						"userregistrationService",
+						"Nonce"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "activation",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const cryptoJs = require('crypto-js');\r",
+							"var timestamp = new Date().toISOString().replace(/[^\\d]/g, '').substring(0,14);\r",
+							"var message_id = pm.collectionVariables.get('message_id');\r",
+							"var signature_key_first_part = pm.collectionVariables.get('signature_key_first_part');\r",
+							"var signature_key_second_part = pm.collectionVariables.get('signature_key_second_part');\r",
+							"var signature = cryptoJs.SHA256(message_id+timestamp+signature_key_first_part+signature_key_second_part).toString(cryptoJs.enc.Base64).toUpperCase();\r",
+							"\r",
+							"pm.collectionVariables.set(\"signature\", signature);\r",
+							"pm.collectionVariables.set(\"message_id\", message_id);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}"
+					},
+					{
+						"key": "messageId",
+						"value": "{{message_id}}"
+					},
+					{
+						"key": "correlationId",
+						"value": "{{$randomUUID}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"requestData\": {\r\n    \"signature\": \"{{signature}}\"\r\n  }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{agw_server}}/NavM2mCommon/userregistrationService/Activation",
+					"host": [
+						"{{agw_server}}"
+					],
+					"path": [
+						"NavM2mCommon",
+						"userregistrationService",
+						"Activation"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "fileUpload",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.collectionVariables.set(\"file_id\", pm.response.json().fileId);\r",
+							"console.log(pm.collectionVariables.get(\"file_id\"));"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const cryptoJs = require('crypto-js');\r",
+							"var timestamp = new Date().toISOString().replace(/[^\\d]/g, '').substring(0,14);\r",
+							"var message_id = pm.collectionVariables.get('message_id');\r",
+							"var signature_key_first_part = pm.collectionVariables.get('signature_key_first_part');\r",
+							"var signature_key_second_part = pm.collectionVariables.get('signature_key_second_part');\r",
+							"var file_hash = pm.collectionVariables.get(\"file_hash\");\r",
+							"\r",
+							"var signature = cryptoJs.SHA256(message_id+timestamp+file_hash+signature_key_first_part+signature_key_second_part).toString(cryptoJs.enc.Base64).toUpperCase();\r",
+							"pm.collectionVariables.set(\"signature\", signature);\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}"
+					},
+					{
+						"key": "messageId",
+						"value": "{{message_id}}",
+						"type": "text"
+					},
+					{
+						"key": "correlationId",
+						"value": "{{$randomUUID}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "file",
+					"file": {
+						"src": "/C:/Users/budai.kiss.tamas/Desktop/teszt_2308_bevfeld.xml"
+					}
+				},
+				"url": {
+					"raw": "{{agw_server}}/NavM2mCommon/filestoreUploadService/File?sha256hash={{file_hash}}&signature={{signature}}",
+					"host": [
+						"{{agw_server}}"
+					],
+					"path": [
+						"NavM2mCommon",
+						"filestoreUploadService",
+						"File"
+					],
+					"query": [
+						{
+							"key": "sha256hash",
+							"value": "{{file_hash}}"
+						},
+						{
+							"key": "signature",
+							"value": "{{signature}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "fileUpload attachment",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.collectionVariables.set(\"attachment_id\", pm.response.json().fileId);\r",
+							"console.log(pm.collectionVariables.get(\"attachment_id\"));"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const cryptoJs = require('crypto-js');\r",
+							"var timestamp = new Date().toISOString().replace(/[^\\d]/g, '').substring(0,14);\r",
+							"var message_id = pm.collectionVariables.get('message_id');\r",
+							"var signature_key_first_part = pm.collectionVariables.get('signature_key_first_part');\r",
+							"var signature_key_second_part = pm.collectionVariables.get('signature_key_second_part');\r",
+							"var attachment_hash = pm.collectionVariables.get(\"attachment_hash\");\r",
+							"\r",
+							"var signature = cryptoJs.SHA256(message_id+timestamp+attachment_hash+signature_key_first_part+signature_key_second_part).toString(cryptoJs.enc.Base64).toUpperCase();\r",
+							"pm.collectionVariables.set(\"signature\", signature);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}"
+					},
+					{
+						"key": "messageId",
+						"value": "{{message_id}}",
+						"type": "text"
+					},
+					{
+						"key": "correlationId",
+						"value": "{{$randomUUID}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "file",
+					"file": {
+						"src": "/C:/Users/budai.kiss.tamas/Desktop/obj.xlsx"
+					}
+				},
+				"url": {
+					"raw": "{{agw_server}}/NavM2mCommon/filestoreUploadService/File?sha256hash={{attachment_hash}}&signature={{signature}}",
+					"host": [
+						"{{agw_server}}"
+					],
+					"path": [
+						"NavM2mCommon",
+						"filestoreUploadService",
+						"File"
+					],
+					"query": [
+						{
+							"key": "sha256hash",
+							"value": "{{attachment_hash}}"
+						},
+						{
+							"key": "signature",
+							"value": "{{signature}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "file status",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}"
+					},
+					{
+						"key": "messageId",
+						"value": "{{message_id}}"
+					},
+					{
+						"key": "correlationId",
+						"value": "{{$randomUUID}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{agw_server}}/NavM2mCommon/filestoreDownloadService/File/{{attachment_id}}",
+					"host": [
+						"{{agw_server}}"
+					],
+					"path": [
+						"NavM2mCommon",
+						"filestoreDownloadService",
+						"File",
+						"{{attachment_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "REST createDocument",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const cryptoJs = require('crypto-js');\r",
+							"var timestamp = new Date().toISOString().replace(/[^\\d]/g, '').substring(0,14);\r",
+							"var message_id = pm.collectionVariables.get('message_id');\r",
+							"var file_id = pm.collectionVariables.get('file_id');\r",
+							"var signature_key_first_part = pm.collectionVariables.get('signature_key_first_part');\r",
+							"var signature_key_second_part = pm.collectionVariables.get('signature_key_second_part');\r",
+							"var signature = cryptoJs.SHA256(message_id+timestamp+file_id+signature_key_first_part+signature_key_second_part).toString(cryptoJs.enc.Base64).toUpperCase();\r",
+							"\r",
+							"pm.collectionVariables.set(\"signature\", signature);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}"
+					},
+					{
+						"key": "messageId",
+						"value": "{{message_id}}",
+						"type": "text"
+					},
+					{
+						"key": "correlationId",
+						"value": "{{$randomUUID}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"requestData\": {\r\n    \"documentFileId\": \"{{file_id}}\",\r\n    \"signature\": \"{{signature}}\",\r\n    \"attachments\": [\r\n      {\r\n        \"documentPartType\": \"2308M\",\r\n        \"fileId\": \"{{attachment_id}}\",\r\n        \"fileName\": \"obj.xlsx\",\r\n        \"type\": \"bizonylat\"\r\n      }\r\n    ]\r\n  }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{agw_server}}/NavM2mDocument/documentService/Document",
+					"host": [
+						"{{agw_server}}"
+					],
+					"path": [
+						"NavM2mDocument",
+						"documentService",
+						"Document"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "REST getDocument",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}"
+					},
+					{
+						"key": "messageId",
+						"value": "{{message_id}}",
+						"type": "text"
+					},
+					{
+						"key": "correlationId",
+						"value": "{{$randomUUID}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{agw_server}}/NavM2mDocument/documentService/Document/{{file_id}}",
+					"host": [
+						"{{agw_server}}"
+					],
+					"path": [
+						"NavM2mDocument",
+						"documentService",
+						"Document",
+						"{{file_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "REST updateDocument",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const cryptoJs = require('crypto-js');\r",
+							"var timestamp = new Date().toISOString().replace(/[^\\d]/g, '').substring(0,14);\r",
+							"var message_id = pm.collectionVariables.get('message_id');\r",
+							"var file_id = pm.collectionVariables.get('file_id');\r",
+							"var signature_key_first_part = pm.collectionVariables.get('signature_key_first_part');\r",
+							"var signature_key_second_part = pm.collectionVariables.get('signature_key_second_part');\r",
+							"var signature = cryptoJs.SHA256(message_id+timestamp+file_id+signature_key_first_part+signature_key_second_part).toString(cryptoJs.enc.Base64).toUpperCase();\r",
+							"\r",
+							"pm.collectionVariables.set(\"signature\", signature);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}"
+					},
+					{
+						"key": "messageId",
+						"value": "{{message_id}}",
+						"type": "text"
+					},
+					{
+						"key": "correlationId",
+						"value": "{{$randomUUID}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"requestData\": {\r\n    \"documentFileId\": \"{{file_id}}\",\r\n    \"signature\": \"{{signature}}\",\r\n    \"documentStatus\": \"UNDER_SUBMIT\"\r\n  }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{agw_server}}/NavM2mDocument/documentService/Document",
+					"host": [
+						"{{agw_server}}"
+					],
+					"path": [
+						"NavM2mDocument",
+						"documentService",
+						"Document"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "fileUpload for SOAP",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.collectionVariables.set(\"file_id\", pm.response.json().fileId);\r",
+							"console.log(pm.collectionVariables.get(\"file_id\"));"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const cryptoJs = require('crypto-js');\r",
+							"var timestamp = new Date().toISOString().replace(/[^\\d]/g, '').substring(0,14);\r",
+							"var message_id = pm.collectionVariables.get('message_id');\r",
+							"var signature_key_first_part = pm.collectionVariables.get('signature_key_first_part');\r",
+							"var signature_key_second_part = pm.collectionVariables.get('signature_key_second_part');\r",
+							"var file_hash = pm.collectionVariables.get(\"file_hash\");\r",
+							"\r",
+							"var signature = cryptoJs.SHA256(message_id+timestamp+file_hash+signature_key_first_part+signature_key_second_part).toString(cryptoJs.enc.Base64).toUpperCase();\r",
+							"pm.collectionVariables.set(\"signature\", signature);\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}"
+					},
+					{
+						"key": "messageId",
+						"value": "{{message_id}}",
+						"type": "text"
+					},
+					{
+						"key": "correlationId",
+						"value": "{{$randomUUID}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "file",
+					"file": {
+						"src": "/C:/Users/budai.kiss.tamas/Desktop/teszt_2308_bevfeld.xml"
+					}
+				},
+				"url": {
+					"raw": "{{agw_server}}/NavM2mCommon/filestoreUploadService/File?sha256hash={{file_hash}}&signature={{signature}}",
+					"host": [
+						"{{agw_server}}"
+					],
+					"path": [
+						"NavM2mCommon",
+						"filestoreUploadService",
+						"File"
+					],
+					"query": [
+						{
+							"key": "sha256hash",
+							"value": "{{file_hash}}"
+						},
+						{
+							"key": "signature",
+							"value": "{{signature}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "fileUpload attachment for SOAP",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.collectionVariables.set(\"attachment_id\", pm.response.json().fileId);\r",
+							"console.log(pm.collectionVariables.get(\"attachment_id\"));"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const cryptoJs = require('crypto-js');\r",
+							"var timestamp = new Date().toISOString().replace(/[^\\d]/g, '').substring(0,14);\r",
+							"var message_id = pm.collectionVariables.get('message_id');\r",
+							"var signature_key_first_part = pm.collectionVariables.get('signature_key_first_part');\r",
+							"var signature_key_second_part = pm.collectionVariables.get('signature_key_second_part');\r",
+							"var attachment_hash = pm.collectionVariables.get(\"attachment_hash\");\r",
+							"\r",
+							"var signature = cryptoJs.SHA256(message_id+timestamp+attachment_hash+signature_key_first_part+signature_key_second_part).toString(cryptoJs.enc.Base64).toUpperCase();\r",
+							"pm.collectionVariables.set(\"signature\", signature);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}"
+					},
+					{
+						"key": "messageId",
+						"value": "{{message_id}}",
+						"type": "text"
+					},
+					{
+						"key": "correlationId",
+						"value": "{{$randomUUID}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "file",
+					"file": {
+						"src": "/C:/Users/budai.kiss.tamas/Desktop/obj.xlsx"
+					}
+				},
+				"url": {
+					"raw": "{{agw_server}}/NavM2mCommon/filestoreUploadService/File?sha256hash={{attachment_hash}}&signature={{signature}}",
+					"host": [
+						"{{agw_server}}"
+					],
+					"path": [
+						"NavM2mCommon",
+						"filestoreUploadService",
+						"File"
+					],
+					"query": [
+						{
+							"key": "sha256hash",
+							"value": "{{attachment_hash}}"
+						},
+						{
+							"key": "signature",
+							"value": "{{signature}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SOAP validateDocument",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const cryptoJs = require('crypto-js');\r",
+							"var timestamp = new Date().toISOString().replace(/[^\\d]/g, '').substring(0,14);\r",
+							"var message_id = pm.collectionVariables.get('message_id');\r",
+							"var file_id = pm.collectionVariables.get('file_id');\r",
+							"var signature_key_first_part = pm.collectionVariables.get('signature_key_first_part');\r",
+							"var signature_key_second_part = pm.collectionVariables.get('signature_key_second_part');\r",
+							"var signature = cryptoJs.SHA256(message_id+timestamp+file_id+signature_key_first_part+signature_key_second_part).toString(cryptoJs.enc.Base64).toUpperCase();\r",
+							"\r",
+							"pm.collectionVariables.set(\"signature\", signature);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/xml;charset=UTF-8",
+						"type": "default"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:loc=\"https://soap.api.nav.gov.hu/definitions/services/1.0/document/local\">\r\n   <soapenv:Header>\r\n      <loc:NAVm2mSoapHeader>\r\n         <correlationId>{{$randomUUID}}</correlationId>\r\n         <messageId>{{message_id}}</messageId>\r\n      </loc:NAVm2mSoapHeader>\r\n   </soapenv:Header>\r\n   <soapenv:Body>\r\n      <loc:ValidateDocumentRequestElem>\r\n         <documentFileId>{{file_id}}</documentFileId>\r\n         <signature>{{signature}}</signature>\r\n         <!--Zero or more repetitions:-->\r\n         <attachments>\r\n            <documentPartType>2308M</documentPartType>\r\n            <fileId>{{attachment_id}}</fileId>\r\n            <fileName>obj.xlsx</fileName>\r\n            <type>bizonylat</type>\r\n         </attachments>\r\n      </loc:ValidateDocumentRequestElem>\r\n   </soapenv:Body>\r\n</soapenv:Envelope>",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{agw_server}}/soap-api/document",
+					"host": [
+						"{{agw_server}}"
+					],
+					"path": [
+						"soap-api",
+						"document"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SOAP getStatusDocument",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var file_id = pm.collectionVariables.get('file_id');"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/xml;charset=UTF-8",
+						"type": "default"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:loc=\"https://soap.api.nav.gov.hu/definitions/services/1.0/document/local\">\r\n   <soapenv:Header>\r\n      <loc:NAVm2mSoapHeader>\r\n         <correlationId>{{$randomUUID}}</correlationId>\r\n         <messageId>{{message_id}}</messageId>\r\n      </loc:NAVm2mSoapHeader>\r\n   </soapenv:Header>\r\n   <soapenv:Body>\r\n      <loc:GetDocumentStatusRequestElem>\r\n         <documentFileId>{{file_id}}</documentFileId>\r\n      </loc:GetDocumentStatusRequestElem>\r\n   </soapenv:Body>\r\n</soapenv:Envelope>",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{agw_server}}/soap-api/document",
+					"host": [
+						"{{agw_server}}"
+					],
+					"path": [
+						"soap-api",
+						"document"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SOAP sendInDocument",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const cryptoJs = require('crypto-js');\r",
+							"var timestamp = new Date().toISOString().replace(/[^\\d]/g, '').substring(0,14);\r",
+							"var message_id = pm.collectionVariables.get('message_id');\r",
+							"var file_id = pm.collectionVariables.get('file_id');\r",
+							"var signature_key_first_part = pm.collectionVariables.get('signature_key_first_part');\r",
+							"var signature_key_second_part = pm.collectionVariables.get('signature_key_second_part');\r",
+							"var signature = cryptoJs.SHA256(message_id+timestamp+file_id+signature_key_first_part+signature_key_second_part).toString(cryptoJs.enc.Base64).toUpperCase();\r",
+							"\r",
+							"pm.collectionVariables.set(\"signature\", signature);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/xml;charset=UTF-8",
+						"type": "default"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:loc=\"https://soap.api.nav.gov.hu/definitions/services/1.0/document/local\">\r\n   <soapenv:Header>\r\n      <loc:NAVm2mSoapHeader>\r\n         <correlationId>{{$randomUUID}}</correlationId>\r\n         <messageId>{{message_id}}</messageId>\r\n      </loc:NAVm2mSoapHeader>\r\n   </soapenv:Header>\r\n   <soapenv:Body>\r\n      <loc:SendInDocumentRequestElem>\r\n         <documentFileId>{{file_id}}</documentFileId>\r\n         <signature>{{signature}}</signature>\r\n      </loc:SendInDocumentRequestElem>\r\n   </soapenv:Body>\r\n</soapenv:Envelope>",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{agw_server}}/soap-api/document",
+					"host": [
+						"{{agw_server}}"
+					],
+					"path": [
+						"soap-api",
+						"document"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "agw_server",
+			"value": "https://m2m-agw.dm2m.secdmz.nav.gov.hu",
+			"type": "string"
+		},
+		{
+			"key": "user",
+			"value": "janedoe",
+			"type": "string"
+		},
+		{
+			"key": "password",
+			"value": "password",
+			"type": "string"
+		},
+		{
+			"key": "client",
+			"value": "m2m-apps",
+			"type": "string"
+		},
+		{
+			"key": "client_secret",
+			"value": "5blUKV36TGSjKyzrQhKISOjNh1veGURf",
+			"type": "string"
+		},
+		{
+			"key": "access_token",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "file_id",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "attachment_id",
+			"value": ""
+		},
+		{
+			"key": "timestamp",
+			"value": ""
+		},
+		{
+			"key": "signature",
+			"value": ""
+		},
+		{
+			"key": "message_id",
+			"value": "message_id"
+		},
+		{
+			"key": "file_hash",
+			"value": "c723919795fb5fc58e1df7421effbde678b461cfcbade838b6a3e39e661031ec"
+		},
+		{
+			"key": "attachment_hash",
+			"value": "b522b66fe7c554528c1eea5e138983db43f009a84e9a8b193ca61f77546e0243"
+		},
+		{
+			"key": "signature_key_first_part",
+			"value": "signature_key"
+		},
+		{
+			"key": "signature_key_second_part",
+			"value": ""
+		}
+	]
+}

@@ -1,0 +1,36 @@
+<?xml  version='1.0' encoding='utf-8' ?>
+<xs:schema targetNamespace="https://soap.api.nav.gov.hu/definitions/services/1.0/document/local" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:loc="https://soap.api.nav.gov.hu/definitions/services/1.0/document/local" xmlns:msg_document="https://soap.api.nav.gov.hu/definitions/messages/1.0/document" xmlns:msg_common="https://soap.api.nav.gov.hu/definitions/messages/1.0/common" xmlns:wnkerr10="https://soap.api.nav.gov.hu/external/webnyk/hibalista/1.0">
+	<xs:import namespace="https://soap.api.nav.gov.hu/definitions/messages/1.0/common" schemaLocation="../../messages/1.0/common.xsd"/>
+	<xs:import namespace="https://soap.api.nav.gov.hu/definitions/messages/1.0/document" schemaLocation="../../messages/1.0/document.xsd"/>
+	<xs:element name="GetDocumentStatusRequestElem" type="msg_document:GetDocumentStatusRequestType">
+		<xs:annotation>
+			<xs:documentation>'getStatusDocument' operation bemeneti paraméterét definiáló XSD element. </xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="GetDocumentStatusResponseElem" type="msg_document:GetDocumentStatusResponseType">
+		<xs:annotation>
+			<xs:documentation>'getStatusDocument' operation visszatérési értéket definiáló XSD element. </xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="NAVm2mSoapHeader" type="msg_common:NAVm2mSoapHeader"/>
+	<xs:element name="SendInDocumentRequestElem" type="msg_document:SendInDocumentRequestType">
+		<xs:annotation>
+			<xs:documentation>'sendInDocument' operation bemeneti paraméterét definiáló XSD element. </xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="SendInDocumentResponseElem" type="msg_document:SendInDocumentResponseType">
+		<xs:annotation>
+			<xs:documentation>'sendInDocument' operation visszatérési értéket definiáló XSD element. </xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ValidateDocumentRequestElem" type="msg_document:ValidateDocumentRequestType">
+		<xs:annotation>
+			<xs:documentation>'validateDocument' operation bemeneti paraméterét definiáló XSD element. </xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ValidateDocumentResponseElem" type="msg_document:ValidateDocumentResponseType">
+		<xs:annotation>
+			<xs:documentation>'validateDocument' operation visszatérési értéket definiáló XSD element. </xs:documentation>
+		</xs:annotation>
+	</xs:element>
+</xs:schema>
