@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "b1619adc-74da-41e3-a12f-2412775c058a",
-		"name": "M2m gateway",
+		"_postman_id": "6f9fed0c-e6c9-49b8-9cbc-fc965232fcc9",
+		"name": "M2M TEST",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "6870063"
 	},
@@ -13,7 +13,17 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.collectionVariables.set('access_token', pm.response.json().accessToken);"
+							"//pm.collectionVariables.set('access_token', pm.response.json().accessToken);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
 						],
 						"type": "text/javascript",
 						"packages": {}
@@ -44,11 +54,13 @@
 					}
 				},
 				"url": {
-					"raw": "{{agw_server}}/NavM2mCommon/tokenService/Token",
+					"raw": "{{external_server}}/rest-api/1.0/NavM2mCommon/tokenService/Token",
 					"host": [
-						"{{agw_server}}"
+						"{{external_server}}"
 					],
 					"path": [
+						"rest-api",
+						"1.0",
 						"NavM2mCommon",
 						"tokenService",
 						"Token"
@@ -64,7 +76,19 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.collectionVariables.set('signature_key_second_part', pm.response.json().signatureKeySecondPart);"
+							"if (pm.response.json().signatureKeySecondPart != null){\r",
+							"pm.collectionVariables.set('signature_key_second_part', pm.response.json().signatureKeySecondPart);\r",
+							"}"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
 						],
 						"type": "text/javascript",
 						"packages": {}
@@ -89,7 +113,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"requestData\": {\r\n    \"nonce\": \"7gld8gk48g\"\r\n  }\r\n}",
+					"raw": "{\r\n  \"requestData\": {\r\n    \"nonce\": \"{{nonce}}\"\r\n  }\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -97,11 +121,13 @@
 					}
 				},
 				"url": {
-					"raw": "{{agw_server}}/NavM2mCommon/userregistrationService/Nonce",
+					"raw": "{{external_server}}/rest-api/1.0/NavM2mCommon/userregistrationService/Nonce",
 					"host": [
-						"{{agw_server}}"
+						"{{external_server}}"
 					],
 					"path": [
+						"rest-api",
+						"1.0",
 						"NavM2mCommon",
 						"userregistrationService",
 						"Nonce"
@@ -168,11 +194,13 @@
 					}
 				},
 				"url": {
-					"raw": "{{agw_server}}/NavM2mCommon/userregistrationService/Activation",
+					"raw": "{{external_server}}/rest-api/1.0/NavM2mCommon/userregistrationService/Activation",
 					"host": [
-						"{{agw_server}}"
+						"{{external_server}}"
 					],
 					"path": [
+						"rest-api",
+						"1.0",
 						"NavM2mCommon",
 						"userregistrationService",
 						"Activation"
@@ -188,8 +216,10 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.collectionVariables.set(\"file_id\", pm.response.json().fileId);\r",
-							"console.log(pm.collectionVariables.get(\"file_id\"));"
+							"if (pm.response.json().fileId != null) {\r",
+							"    pm.collectionVariables.set(\"file_id\", pm.response.json().fileId);\r",
+							"}\r",
+							""
 						],
 						"type": "text/javascript",
 						"packages": {}
@@ -205,8 +235,9 @@
 							"var signature_key_first_part = pm.collectionVariables.get('signature_key_first_part');\r",
 							"var signature_key_second_part = pm.collectionVariables.get('signature_key_second_part');\r",
 							"var file_hash = pm.collectionVariables.get(\"file_hash\");\r",
-							"\r",
-							"var signature = cryptoJs.SHA256(message_id+timestamp+file_hash+signature_key_first_part+signature_key_second_part).toString(cryptoJs.enc.Base64).toUpperCase();\r",
+							"var toSign = message_id+timestamp+file_hash+signature_key_first_part+signature_key_second_part;\r",
+							"console.log(toSign);\r",
+							"var signature = cryptoJs.SHA256(toSign).toString(cryptoJs.enc.Base64).toUpperCase();\r",
 							"pm.collectionVariables.set(\"signature\", signature);\r",
 							""
 						],
@@ -236,15 +267,17 @@
 				"body": {
 					"mode": "file",
 					"file": {
-						"src": "/C:/Users/budai.kiss.tamas/Desktop/teszt_2308_bevfeld.xml"
+						"src": "/C:/Users/budai.kiss.tamas/Desktop/24T34.xml"
 					}
 				},
 				"url": {
-					"raw": "{{agw_server}}/NavM2mCommon/filestoreUploadService/File?sha256hash={{file_hash}}&signature={{signature}}",
+					"raw": "{{external_server}}/rest-api/1.0/NavM2mCommon/filestoreUploadService/File?sha256hash={{file_hash}}&signature={{signature}}",
 					"host": [
-						"{{agw_server}}"
+						"{{external_server}}"
 					],
 					"path": [
+						"rest-api",
+						"1.0",
 						"NavM2mCommon",
 						"filestoreUploadService",
 						"File"
@@ -270,8 +303,10 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.collectionVariables.set(\"attachment_id\", pm.response.json().fileId);\r",
-							"console.log(pm.collectionVariables.get(\"attachment_id\"));"
+							"if (pm.response.json().fileId != null) {\r",
+							"    pm.collectionVariables.set(\"attachment_id\", pm.response.json().fileId);\r",
+							"}\r",
+							""
 						],
 						"type": "text/javascript",
 						"packages": {}
@@ -321,11 +356,13 @@
 					}
 				},
 				"url": {
-					"raw": "{{agw_server}}/NavM2mCommon/filestoreUploadService/File?sha256hash={{attachment_hash}}&signature={{signature}}",
+					"raw": "{{external_server}}/rest-api/1.0/NavM2mCommon/filestoreUploadService/File?sha256hash={{attachment_hash}}&signature={{signature}}",
 					"host": [
-						"{{agw_server}}"
+						"{{external_server}}"
 					],
 					"path": [
+						"rest-api",
+						"1.0",
 						"NavM2mCommon",
 						"filestoreUploadService",
 						"File"
@@ -356,6 +393,13 @@
 						"type": "text/javascript",
 						"packages": {}
 					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [],
+						"type": "text/javascript"
+					}
 				}
 			],
 			"request": {
@@ -376,11 +420,13 @@
 					}
 				],
 				"url": {
-					"raw": "{{agw_server}}/NavM2mCommon/filestoreDownloadService/File/{{attachment_id}}",
+					"raw": "{{external_server}}/rest-api/1.0/NavM2mCommon/filestoreDownloadService/File/{{attachment_id}}",
 					"host": [
-						"{{agw_server}}"
+						"{{external_server}}"
 					],
 					"path": [
+						"rest-api",
+						"1.0",
 						"NavM2mCommon",
 						"filestoreDownloadService",
 						"File",
@@ -442,7 +488,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"requestData\": {\r\n    \"documentFileId\": \"{{file_id}}\",\r\n    \"signature\": \"{{signature}}\",\r\n    \"attachments\": [\r\n      {\r\n        \"documentPartType\": \"2308M\",\r\n        \"fileId\": \"{{attachment_id}}\",\r\n        \"fileName\": \"obj.xlsx\",\r\n        \"type\": \"bizonylat\"\r\n      }\r\n    ]\r\n  }\r\n}",
+					"raw": "{\r\n  \"requestData\": {\r\n    \"documentFileId\": \"{{file_id}}\",\r\n    \"signature\": \"{{signature}}\"//,\r\n    //\"attachments\": [\r\n      //{\r\n        //\"documentPartType\": \"2308M\",\r\n        //\"fileId\": \"{{attachment_id}}\",\r\n        //\"fileName\": \"obj.xlsx\",\r\n        //\"type\": \"bizonylat\"\r\n      //}\r\n    //]\r\n  }\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -450,11 +496,13 @@
 					}
 				},
 				"url": {
-					"raw": "{{agw_server}}/NavM2mDocument/documentService/Document",
+					"raw": "{{external_server}}/rest-api/1.0/NavM2mDocument/documentService/Document",
 					"host": [
-						"{{agw_server}}"
+						"{{external_server}}"
 					],
 					"path": [
+						"rest-api",
+						"1.0",
 						"NavM2mDocument",
 						"documentService",
 						"Document"
@@ -496,11 +544,13 @@
 					}
 				},
 				"url": {
-					"raw": "{{agw_server}}/NavM2mDocument/documentService/Document/{{file_id}}",
+					"raw": "{{external_server}}/rest-api/1.0/NavM2mDocument/documentService/Document/{{file_id}}",
 					"host": [
-						"{{agw_server}}"
+						"{{external_server}}"
 					],
 					"path": [
+						"rest-api",
+						"1.0",
 						"NavM2mDocument",
 						"documentService",
 						"Document",
@@ -570,11 +620,13 @@
 					}
 				},
 				"url": {
-					"raw": "{{agw_server}}/NavM2mDocument/documentService/Document",
+					"raw": "{{external_server}}/rest-api/1.0/NavM2mDocument/documentService/Document",
 					"host": [
-						"{{agw_server}}"
+						"{{external_server}}"
 					],
 					"path": [
+						"rest-api",
+						"1.0",
 						"NavM2mDocument",
 						"documentService",
 						"Document"
@@ -590,8 +642,10 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.collectionVariables.set(\"file_id\", pm.response.json().fileId);\r",
-							"console.log(pm.collectionVariables.get(\"file_id\"));"
+							"if (pm.response.json().fileId != null) {\r",
+							"    pm.collectionVariables.set(\"file_id\", pm.response.json().fileId);\r",
+							"}\r",
+							""
 						],
 						"type": "text/javascript",
 						"packages": {}
@@ -642,11 +696,13 @@
 					}
 				},
 				"url": {
-					"raw": "{{agw_server}}/NavM2mCommon/filestoreUploadService/File?sha256hash={{file_hash}}&signature={{signature}}",
+					"raw": "{{external_server}}/rest-api/1.0/NavM2mCommon/filestoreUploadService/File?sha256hash={{file_hash}}&signature={{signature}}",
 					"host": [
-						"{{agw_server}}"
+						"{{external_server}}"
 					],
 					"path": [
+						"rest-api",
+						"1.0",
 						"NavM2mCommon",
 						"filestoreUploadService",
 						"File"
@@ -672,8 +728,10 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.collectionVariables.set(\"attachment_id\", pm.response.json().fileId);\r",
-							"console.log(pm.collectionVariables.get(\"attachment_id\"));"
+							"if (pm.response.json().fileId != null) {\r",
+							"    pm.collectionVariables.set(\"attachment_id\", pm.response.json().fileId);\r",
+							"}\r",
+							""
 						],
 						"type": "text/javascript",
 						"packages": {}
@@ -723,11 +781,13 @@
 					}
 				},
 				"url": {
-					"raw": "{{agw_server}}/NavM2mCommon/filestoreUploadService/File?sha256hash={{attachment_hash}}&signature={{signature}}",
+					"raw": "{{external_server}}/rest-api/1.0/NavM2mCommon/filestoreUploadService/File?sha256hash={{attachment_hash}}&signature={{signature}}",
 					"host": [
-						"{{agw_server}}"
+						"{{external_server}}"
 					],
 					"path": [
+						"rest-api",
+						"1.0",
 						"NavM2mCommon",
 						"filestoreUploadService",
 						"File"
@@ -807,12 +867,13 @@
 					}
 				},
 				"url": {
-					"raw": "{{agw_server}}/soap-api/document",
+					"raw": "{{external_server}}/soap-api/1.0/document",
 					"host": [
-						"{{agw_server}}"
+						"{{external_server}}"
 					],
 					"path": [
 						"soap-api",
+						"1.0",
 						"document"
 					]
 				}
@@ -872,12 +933,13 @@
 					}
 				},
 				"url": {
-					"raw": "{{agw_server}}/soap-api/document",
+					"raw": "{{external_server}}/soap-api/1.0/document",
 					"host": [
-						"{{agw_server}}"
+						"{{external_server}}"
 					],
 					"path": [
 						"soap-api",
+						"1.0",
 						"document"
 					]
 				}
@@ -945,12 +1007,13 @@
 					}
 				},
 				"url": {
-					"raw": "{{agw_server}}/soap-api/document",
+					"raw": "{{external_server}}/soap-api/1.0/document",
 					"host": [
-						"{{agw_server}}"
+						"{{external_server}}"
 					],
 					"path": [
 						"soap-api",
+						"1.0",
 						"document"
 					]
 				}
@@ -982,34 +1045,51 @@
 	],
 	"variable": [
 		{
-			"key": "agw_server",
-			"value": "https://m2m-agw.dm2m.secdmz.nav.gov.hu",
-			"type": "string"
-		},
-		{
-			"key": "user",
-			"value": "janedoe",
-			"type": "string"
-		},
-		{
-			"key": "password",
-			"value": "password",
-			"type": "string"
-		},
-		{
-			"key": "client",
-			"value": "m2m-apps",
-			"type": "string"
-		},
-		{
-			"key": "client_secret",
-			"value": "5blUKV36TGSjKyzrQhKISOjNh1veGURf",
+			"key": "external_server",
+			"value": "https://m2m-dev.nav.gov.hu",
 			"type": "string"
 		},
 		{
 			"key": "access_token",
 			"value": "",
 			"type": "string"
+		},
+		{
+			"key": "user",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "password",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "client",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "client_secret",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "signature_key_first_part",
+			"value": ""
+		},
+		{
+			"key": "signature_key_second_part",
+			"value": ""
+		},
+		{
+			"key": "nonce",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "message_id",
+			"value": "8fe488ca-2275-11ef-9262-0242ac120002"
 		},
 		{
 			"key": "file_id",
@@ -1029,24 +1109,12 @@
 			"value": ""
 		},
 		{
-			"key": "message_id",
-			"value": "message_id"
-		},
-		{
 			"key": "file_hash",
-			"value": "c723919795fb5fc58e1df7421effbde678b461cfcbade838b6a3e39e661031ec"
+			"value": "c2745554c59bb239cf9092ddf68973e4a3db81cdc6f6be1f39906dcfe413c52c"
 		},
 		{
 			"key": "attachment_hash",
-			"value": "b522b66fe7c554528c1eea5e138983db43f009a84e9a8b193ca61f77546e0243"
-		},
-		{
-			"key": "signature_key_first_part",
-			"value": "signature_key"
-		},
-		{
-			"key": "signature_key_second_part",
-			"value": ""
+			"value": "4b44658c13a430cc0fb4d7ab24ac5b29b241392ca8b575c38ae053996742cc20"
 		}
 	]
 }

@@ -173,7 +173,12 @@
 	</wsdl:binding>
 	<wsdl:service name="Document">
 		<wsdl:port name="Document" binding="Document">
-			<soap:address location="change.me.to.real.endpoint.of.service.Document.port.Document"/>
+			<wsdl:documentation>Éles környezeti szolgáltatás végpont</wsdl:documentation>
+			<soap:address location="https://m2m.nav.gov.hu/soap-api/1.0/document"/>
+		</wsdl:port>
+		<wsdl:port name="DocumentDev" binding="Document">
+			<wsdl:documentation>Fejlesztői célú szolgáltatás végpont - A szolgáltatások ezen a környezeten mock válaszokat küldenek</wsdl:documentation>
+			<soap:address location="https://m2m-dev.nav.gov.hu/soap-api/1.0/document"/>
 		</wsdl:port>
 	</wsdl:service>
 </wsdl:definitions>

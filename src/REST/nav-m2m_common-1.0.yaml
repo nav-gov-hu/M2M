@@ -7,6 +7,62 @@ info:
     minta használatához kialakított fájl tároló szolgáltatás. 
   version: '1.0'
 paths:
+  /NavM2mCommon/userregistrationService/Nonce:
+    post:
+      tags:
+        - UserregistrationService
+      summary: Nonce.redeemNonce
+      description: >-
+        Nonce beváltását biztosító művelet (Letrehozva a
+        Nonce.redeemNonce(requestData: RedeemNonceRequestType, messageId: char,
+        correlationId: char, Authorization: char):RedeemNonceResponseType
+        operation-bol.)
+      operationId: redeemNonce
+      requestBody:
+        $ref: '#/components/requestBodies/redeemNonceRequestBody'
+      parameters:
+        - name: messageId
+          in: header
+          description: Az üzenet egyedi azonosítója
+          schema:
+            type: string
+          required: true
+        - name: correlationId
+          in: header
+          description: Üzenetek összekapcsolását biztosító egyedi azonosító.
+          schema:
+            type: string
+      x-generator-comment: 'Operation return type: redeemNonceResponseBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/redeemNonceResponseBody'
+    parameters: []
+  /NavM2mCommon/userregistrationService/Activation:
+    post:
+      tags:
+        - UserregistrationService
+      summary: Activation.activateUserRegistration
+      description: ' (Letrehozva a Activation.activateUserRegistration(requestData: ActivateUserRegistrationRequestType, messageId: char, correlationId: char, Authorization: char):ActivateUserRegistrationResponseType operation-bol.)'
+      operationId: activateUserRegistration
+      requestBody:
+        $ref: '#/components/requestBodies/activateUserRegistrationRequestBody'
+      parameters:
+        - name: messageId
+          in: header
+          description: Az üzenet egyedi azonosítója
+          schema:
+            type: string
+          required: true
+        - name: correlationId
+          in: header
+          description: Üzenetek összekapcsolását biztosító egyedi azonosító.
+          schema:
+            type: string
+      x-generator-comment: 'Operation return type: activateUserRegistrationResponseBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/activateUserRegistrationResponseBody'
+    parameters: []
   /NavM2mCommon/filestoreDownloadService/File/{fileId}:
     get:
       tags:
@@ -28,11 +84,7 @@ paths:
           description: Az üzenet egyedi azonosítója
           schema:
             type: string
-        - name: Authorization
-          in: header
-          description: Hozzáférési token
-          schema:
-            type: string
+          required: true
       x-generator-comment: 'Operation return type: getFileStatusResponseBody'
       responses:
         '200':
@@ -46,70 +98,6 @@ paths:
           letrehozva!
         schema:
           type: string
-  /NavM2mCommon/userregistrationService/Activation:
-    post:
-      tags:
-        - UserregistrationService
-      summary: Activation.activateUserRegistration
-      description: ' (Letrehozva a Activation.activateUserRegistration(requestData: ActivateUserRegistrationRequestType, messageId: char, correlationId: char, Authorization: char):ActivateUserRegistrationResponseType operation-bol.)'
-      operationId: activateUserRegistration
-      requestBody:
-        $ref: '#/components/requestBodies/activateUserRegistrationRequestBody'
-      parameters:
-        - name: messageId
-          in: header
-          description: Az üzenet egyedi azonosítója
-          schema:
-            type: string
-        - name: correlationId
-          in: header
-          description: Üzenetek összekapcsolását biztosító egyedi azonosító.
-          schema:
-            type: string
-        - name: Authorization
-          in: header
-          description: Hozzáférési token
-          schema:
-            type: string
-      x-generator-comment: 'Operation return type: activateUserRegistrationResponseBody'
-      responses:
-        '200':
-          $ref: '#/components/responses/activateUserRegistrationResponseBody'
-    parameters: []
-  /NavM2mCommon/userregistrationService/Nonce:
-    post:
-      tags:
-        - UserregistrationService
-      summary: Nonce.redeemNonce
-      description: >-
-        Nonce beváltását biztosító művelet (Letrehozva a
-        Nonce.redeemNonce(requestData: RedeemNonceRequestType, messageId: char,
-        correlationId: char, Authorization: char):RedeemNonceResponseType
-        operation-bol.)
-      operationId: redeemNonce
-      requestBody:
-        $ref: '#/components/requestBodies/redeemNonceRequestBody'
-      parameters:
-        - name: messageId
-          in: header
-          description: Az üzenet egyedi azonosítója
-          schema:
-            type: string
-        - name: correlationId
-          in: header
-          description: Üzenetek összekapcsolását biztosító egyedi azonosító.
-          schema:
-            type: string
-        - name: Authorization
-          in: header
-          description: Hozzáférési token
-          schema:
-            type: string
-      x-generator-comment: 'Operation return type: redeemNonceResponseBody'
-      responses:
-        '200':
-          $ref: '#/components/responses/redeemNonceResponseBody'
-    parameters: []
   /NavM2mCommon/filestoreUploadService/File:
     post:
       tags:
@@ -135,11 +123,7 @@ paths:
           description: Az üzenet egyedi azonosítója
           schema:
             type: string
-        - name: Authorization
-          in: header
-          description: Hozzáférési token
-          schema:
-            type: string
+          required: true
         - name: sha256hash
           in: query
           description: A fájltárolóba betöltendő fájlból képzett SHA3-256 hash.
@@ -176,6 +160,7 @@ paths:
           description: Az üzenet egyedi azonosítója
           schema:
             type: string
+          required: true
         - name: correlationId
           in: header
           description: Üzenetek összekapcsolását biztosító egyedi azonosító.
@@ -187,14 +172,11 @@ paths:
           $ref: '#/components/responses/createTokenResponseBody'
     parameters: []
 components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
   requestBodies:
-    redeemNonceRequestBody:
-      description: ''
-      required: true
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/redeemNonceRequestBodyType'
     activateUserRegistrationRequestBody:
       description: ''
       required: true
@@ -202,6 +184,13 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/activateUserRegistrationRequestBodyType'
+    redeemNonceRequestBody:
+      description: ''
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/redeemNonceRequestBodyType'
     addFileRequestBody:
       description: ''
       required: true
@@ -218,57 +207,37 @@ components:
           schema:
             $ref: '#/components/schemas/createTokenRequestBodyType'
   responses:
-    activateUserRegistrationResponseBody:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ActivateUserRegistrationResponseType'
-    redeemNonceResponseBody:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/RedeemNonceResponseType'
     getFileStatusResponseBody:
       description: ''
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/GetFileStatusResponseType'
-    addFileResponseBody:
+    redeemNonceResponseBody:
       description: ''
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/AddFileResponseType'
+            $ref: '#/components/schemas/RedeemNonceResponseType'
+    activateUserRegistrationResponseBody:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ActivateUserRegistrationResponseType'
     createTokenResponseBody:
       description: ''
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/CreateTokenResponseType'
+    addFileResponseBody:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AddFileResponseType'
   schemas:
-    redeemNonceRequestBodyType:
-      type: object
-      properties:
-        requestData:
-          $ref: '#/components/schemas/RedeemNonceRequestType'
-    activateUserRegistrationRequestBodyType:
-      type: object
-      properties:
-        requestData:
-          $ref: '#/components/schemas/ActivateUserRegistrationRequestType'
-    ActivateUserRegistrationRequestType:
-      type: object
-      properties:
-        signature:
-          description: >-
-            Felhasználó regisztráció aktiválás aláírása. Aláírás képzése:
-            SHA256(username+clientId+signature_key)
-          type: string
-      required:
-        - signature
     ActivateUserRegistrationResponseType:
       allOf:
         - $ref: '#/components/schemas/BaseResponseType'
@@ -276,23 +245,6 @@ components:
           properties:
             resultCode:
               $ref: '#/components/schemas/ActivateUserRegistrationResult'
-    ActivateUserRegistrationResult:
-      type: string
-      enum:
-        - ACTIVATE_USER_REGISTRATION_SUCCESSFUL
-        - USER_REGISTRATION_ALREADY_ACTIVATED
-        - OTHER_ERROR
-        - INVALID_SIGNATURE
-    RedeemNonceRequestType:
-      type: object
-      properties:
-        nonce:
-          description: >-
-            Nonce. Az aláírókulcs második felének elkérésére alkalmas ideiglenes
-            jelszó.
-          type: string
-      required:
-        - nonce
     RedeemNonceResponseType:
       allOf:
         - $ref: '#/components/schemas/BaseResponseType'
@@ -305,28 +257,58 @@ components:
               $ref: '#/components/schemas/RedeemNonceResult'
       required:
         - signatureKeySecondPart
+    BaseResponseType:
+      type: object
+      properties:
+        resultMessage:
+          description: Válasz üzenet
+          type: string
+    ActivateUserRegistrationResult:
+      type: string
+      enum:
+        - ACTIVATE_USER_REGISTRATION_SUCCESSFUL
+        - USER_REGISTRATION_ALREADY_ACTIVATED
+        - OTHER_ERROR
+        - INVALID_SIGNATURE
     RedeemNonceResult:
       type: string
       enum:
         - REDEEM_NONCE_SUCCESSFUL
         - INVALID_NONCE
         - OTHER_ERROR
-    TokenBaseResponseType:
-      allOf:
-        - $ref: '#/components/schemas/BaseResponseType'
-        - type: object
-          properties:
-            accessToken:
-              description: A hozzáférést biztosító token
-              type: string
-    BaseResponseType:
+    activateUserRegistrationRequestBodyType:
       type: object
       properties:
-        resultMessage:
-          description: Válaszüzenet
+        requestData:
+          $ref: '#/components/schemas/ActivateUserRegistrationRequestType'
+    redeemNonceRequestBodyType:
+      type: object
+      properties:
+        requestData:
+          $ref: '#/components/schemas/RedeemNonceRequestType'
+    ActivateUserRegistrationRequestType:
+      type: object
+      properties:
+        signature:
+          description: Aláírás
           type: string
       required:
-        - resultMessage
+        - signature
+    RedeemNonceRequestType:
+      type: object
+      properties:
+        nonce:
+          description: >-
+            Nonce. Az aláírókulcs második felének elkérésére alkalmas ideiglenes
+            jelszó.
+          type: string
+      required:
+        - nonce
+    createTokenRequestBodyType:
+      type: object
+      properties:
+        requestData:
+          $ref: '#/components/schemas/CreateTokenRequestType'
     GetFileStatusResponseType:
       allOf:
         - $ref: '#/components/schemas/BaseResponseType'
@@ -346,8 +328,7 @@ components:
             fileId:
               description: >-
                 A fájl egyedi azonosítója, ami alapján a fájlra hivatkozni
-                lehet. Formátuma: 20 karakteres véletlenszerű betű-szám
-                kombináció. Az egyedi azonosító bizalmas információ! 
+                lehet. 
               type: string
             result_code:
               $ref: '#/components/schemas/FileUploadResult'
@@ -364,11 +345,6 @@ components:
         - UPLOAD_SUCCESS
         - HASH_FAILURE
         - OTHER_ERROR
-    CreateTokenResult:
-      type: string
-      enum:
-        - TOKEN_CREATION_SUCCESSFUL
-        - TOKEN_CREATION_FAILED
     CreateTokenRequestType:
       type: object
       properties:
@@ -400,17 +376,39 @@ components:
               format: int32
             resultCode:
               $ref: '#/components/schemas/CreateTokenResult'
-    createTokenRequestBodyType:
-      type: object
-      properties:
-        requestData:
-          $ref: '#/components/schemas/CreateTokenRequestType'
+    TokenBaseResponseType:
+      allOf:
+        - $ref: '#/components/schemas/BaseResponseType'
+        - type: object
+          properties:
+            accessToken:
+              description: A hozzáférést biztosító token
+              type: string
+    CreateTokenResult:
+      type: string
+      enum:
+        - TOKEN_CREATION_SUCCESSFUL
+        - TOKEN_CREATION_FAILED
 tags:
   - name: UserregistrationService
     description: ' A UserRegistration service csomagba tartozo OAS elemek'
+  - name: TokenService
+    description: ' A Token service csomagba tartozo OAS elemek'
   - name: FilestoreDownloadService
     description: ' A Filestore download service csomagba tartozo OAS elemek'
   - name: FilestoreUploadService
     description: ' A Filestore upload service csomagba tartozo OAS elemek'
-  - name: TokenService
-    description: ' A Token service csomagba tartozo OAS elemek'
+    
+servers: [
+    {
+      "url": https://m2m.nav.gov.hu/rest-api/1.0/,
+      "description": "Éles környezet szolgáltatás végpont"
+    },
+    {
+      "url": https://m2m-dev.nav.gov.hu/rest-api/1.0/,
+      "description": "Fejlesztői célú szolgáltatás végpont. A szolgáltatások ezen a végponton nem valós tartalommal kerülnek megvalósításra!"
+    }
+]
+
+security:
+  - bearerAuth: []
