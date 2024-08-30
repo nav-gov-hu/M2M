@@ -166,6 +166,9 @@ components:
                 hibalista.xsd-vel dolgozható fel.
               type: string
               format: binary
+            arrivalNumber:
+              description: Sikeres beküldés esetén az érkeztetési szám.
+              type: string
             resultCode:
               $ref: '#/components/schemas/GetDocumentResult'
     createDocumentRequestBodyType:
@@ -280,7 +283,7 @@ components:
         - UNKNOWN_FILE_ID
         - STATUS_CHANGE_NOT_ENABLED
         - SUBMIT_ERROR
-        - TO_BIG_KR_FILE
+        - TOO_BIG_KR_FILE
         - OTHER_ERROR
         - INVALID_SIGNATURE
         - INVALID_SENDER
@@ -291,13 +294,14 @@ components:
     DocumentStatus:
       type: string
       enum:
+        - UNDER_PREVALIDATION
+        - PREVALIDATION_ERROR
         - UNDER_VALIDATION
         - VALIDATION_ERROR
         - VALIDATED
         - UNDER_SUBMIT
         - SUBMIT_ERROR
         - SUBMITTED
-        - DELETED
 tags:
   - name: DocumentService
     description: ' A Document service csomagba tartozo OAS elemek'

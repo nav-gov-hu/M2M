@@ -34,22 +34,24 @@ FILE_CONTAINS_VIRUS - A bizonylatfájl, vagy annak csatolmánya vírusos.</xs:do
 	<xs:simpleType name="DocumentStatus">
 		<xs:annotation>
 			<xs:documentation>A bizonylat lehetséges státuszai:&#xD;
+UNDER_PREVALIDATION: A bizonylat előellenőrzése folyamatban van.&#xD;
+PREVALIDATION_ERROR: Hiba a bizonylat előellenőrzése során.&#xD;
 UNDER_VALIDATION: A bizonylat ellenőrzése folyamatban van.&#xD;
 VALIDATION_ERROR: A bizonylat nem a megfelelő kitöltéssel és/vagy csatolmányokkal lett elkészítve.&#xD;
 VALIDATED: A bizonylat megfelelőpen lett kitöltve, és a csatományai is rendben vannak.&#xD;
 UNDER_SUBMIT: A bizonylat beküldése folymatban van.&#xD;
 SUBMIT_ERROR: A bizonylat beküldése sikertelen.&#xD;
-SUBMITTED: A bizonylat sikeresen be lett küldve.&#xD;
-DELETED: A bizonylatfájl a megőrzési időpontban automatikusan törlve lett  a fájltárolóból.</xs:documentation>
+SUBMITTED: A bizonylat sikeresen be lett küldve.</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
+			<xs:enumeration value="UNDER_PREVALIDATION"/>
+			<xs:enumeration value="PREVALIDATION_ERROR"/>
 			<xs:enumeration value="UNDER_VALIDATION"/>
 			<xs:enumeration value="VALIDATION_ERROR"/>
 			<xs:enumeration value="VALIDATED"/>
 			<xs:enumeration value="UNDER_SUBMIT"/>
 			<xs:enumeration value="SUBMIT_ERROR"/>
 			<xs:enumeration value="SUBMITTED"/>
-			<xs:enumeration value="DELETED"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="GetDocumentResult">
@@ -84,7 +86,7 @@ INVALID_DOCUMENT_VERSION - A bizonylatverzió nem küldhető be.</xs:documentati
 			<xs:enumeration value="UNKNOWN_FILE_ID"/>
 			<xs:enumeration value="STATUS_CHANGE_NOT_ENABLED"/>
 			<xs:enumeration value="SUBMIT_ERROR"/>
-			<xs:enumeration value="TO_BIG_KR_FILE"/>
+			<xs:enumeration value="TOO_BIG_KR_FILE"/>
 			<xs:enumeration value="OTHER_ERROR"/>
 			<xs:enumeration value="INVALID_SIGNATURE"/>
 			<xs:enumeration value="INVALID_SENDER"/>
@@ -160,6 +162,11 @@ INVALID_DOCUMENT_VERSION - A bizonylatverzió nem küldhető be.</xs:documentati
 					<xs:element name="documentStatus" type="DocumentStatus" minOccurs="0" maxOccurs="1">
 						<xs:annotation>
 							<xs:documentation>A bizonylat státusza</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="arrivalNumber" type="xs:string" minOccurs="1" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>Sikeres beküldés esetén az érkeztetési szám.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="resultCode" type="GetDocumentResult" minOccurs="1" maxOccurs="1">
