@@ -164,7 +164,7 @@ INVALID_DOCUMENT_VERSION - A bizonylatverzió nem küldhető be.</xs:documentati
 							<xs:documentation>A bizonylat státusza</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="arrivalNumber" type="xs:string" minOccurs="1" maxOccurs="1">
+					<xs:element name="arrivalNumber" type="xs:string" minOccurs="0" maxOccurs="1">
 						<xs:annotation>
 							<xs:documentation>Sikeres beküldés esetén az érkeztetési szám.</xs:documentation>
 						</xs:annotation>
