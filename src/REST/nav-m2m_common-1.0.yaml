@@ -255,8 +255,6 @@ components:
               type: string
             resultCode:
               $ref: '#/components/schemas/RedeemNonceResult'
-      required:
-        - signatureKeySecondPart
     BaseResponseType:
       type: object
       properties:
