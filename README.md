@@ -20,3 +20,13 @@ Kérjük figyelembe venni, hogy bár a tárhely publikusan elérhető, a vélem�
 ## Moderálás
 
 A NAV fenntartja a jogot, hogy az általános etikettet vagy jó ízlést sértő hozzászólásokat, kommenteket a tárhelyről kérdés nélkül eltávolítsa.
+
+## Gyakran ismételt kérdések
+
+Külün dokumentumban érhető el itt a Github-on: [GYIK](https://github.com/nav-gov-hu/M2M/raw/refs/heads/main/docs/M2M_GYIK.docx)
+
+## Éles beküldéssel kapcsolatos problémák bejelentése
+
+Egy konkrét beküldési probléma esetén az alábbi linken lehet bejelenteni a problémát:
+[Hibabejelentés](https://nav.gov.hu/ugyfeliranytu/keressen_minket/levelkuldes?subjectid=92) \
+A bejelentésben kérjük feltüntetni a beküldő felhasználó userId-ját és a header-ben megadott messageId, correlationId értékét.
