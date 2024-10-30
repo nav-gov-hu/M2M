@@ -1,0 +1,184 @@
+<?xml  version='1.0' encoding='utf-8' ?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" name="Document" targetNamespace="https://soap.api.nav.gov.hu/definitions/services/1.1/document" xmlns="https://soap.api.nav.gov.hu/definitions/services/1.1/document" xmlns:local="https://soap.api.nav.gov.hu/definitions/services/1.1/document/local" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.1.xsd">
+	<wsdl:types>
+		<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="https://soap.api.nav.gov.hu/definitions/services/1.1/document/local" xmlns:loc="https://soap.api.nav.gov.hu/definitions/services/1.1/document/local" xmlns:msg_document="https://soap.api.nav.gov.hu/definitions/messages/1.1/document" xmlns:msg_common="https://soap.api.nav.gov.hu/definitions/messages/1.1/common">
+			<xs:import namespace="https://soap.api.nav.gov.hu/definitions/messages/1.1/common" schemaLocation="../../messages/1.1/common.xsd"/>
+			<xs:import namespace="https://soap.api.nav.gov.hu/definitions/messages/1.1/document" schemaLocation="../../messages/1.1/document.xsd"/>
+			<xs:element name="GetDocumentStatusRequestElem" type="msg_document:GetDocumentStatusRequestType">
+				<xs:annotation>
+					<xs:documentation>'getStatusDocument' operation bemeneti paraméterét definiáló XSD element. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="GetDocumentStatusResponseElem" type="msg_document:GetDocumentStatusResponseType">
+				<xs:annotation>
+					<xs:documentation>'getStatusDocument' operation visszatérési értéket definiáló XSD element. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="NAVm2mSoapHeader" type="msg_common:NAVm2mSoapHeader"/>
+			<xs:element name="SendInDocumentRequestElem" type="msg_document:SendInDocumentRequestType">
+				<xs:annotation>
+					<xs:documentation>'sendInDocument' operation bemeneti paraméterét definiáló XSD element. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="SendInDocumentResponseElem" type="msg_document:SendInDocumentResponseType">
+				<xs:annotation>
+					<xs:documentation>'sendInDocument' operation visszatérési értéket definiáló XSD element. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="UploadDocumentRequestElem">
+				<xs:annotation>
+					<xs:documentation>'uploadDocument' operation bemeneti paraméterét definiáló XSD element. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="UploadDocumentResponseElem">
+				<xs:annotation>
+					<xs:documentation>'uploadDocument' operation visszatérési értéket definiáló XSD element. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ValidateDocumentRequestElem" type="msg_document:ValidateDocumentRequestType">
+				<xs:annotation>
+					<xs:documentation>'validateDocument' operation bemeneti paraméterét definiáló XSD element. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ValidateDocumentResponseElem" type="msg_document:ValidateDocumentResponseType">
+				<xs:annotation>
+					<xs:documentation>'validateDocument' operation visszatérési értéket definiáló XSD element. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:schema>
+	</wsdl:types>
+	<wsdl:message name="sendInDocumentResponse">
+		<wsdl:part name="navSoapHeader" element="local:NAVm2mSoapHeader">
+			<wsdl:documentation>NAV SOAP Header message part</wsdl:documentation>
+		</wsdl:part>
+		<wsdl:part name="returnValue" element="local:SendInDocumentResponseElem">
+			<wsdl:documentation>A message part tényleges tartalma a 'SendInDocumentResponseType' típusban van meghatározva. </wsdl:documentation>
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getStatusDocumentRequest">
+		<wsdl:part name="in" element="local:GetDocumentStatusRequestElem">
+			<wsdl:documentation> Az üzenet payload-ot hordozó message part. </wsdl:documentation>
+		</wsdl:part>
+		<wsdl:part name="navSoapHeader" element="local:NAVm2mSoapHeader">
+			<wsdl:documentation>NAV SOAP Header message part</wsdl:documentation>
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="validateDocumentRequest">
+		<wsdl:part name="in" element="local:ValidateDocumentRequestElem">
+			<wsdl:documentation> Az üzenet payload-ot hordozó message part. </wsdl:documentation>
+		</wsdl:part>
+		<wsdl:part name="navSoapHeader" element="local:NAVm2mSoapHeader">
+			<wsdl:documentation>NAV SOAP Header message part</wsdl:documentation>
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="sendInDocumentRequest">
+		<wsdl:part name="in" element="local:SendInDocumentRequestElem">
+			<wsdl:documentation> Az üzenet payload-ot hordozó message part. </wsdl:documentation>
+		</wsdl:part>
+		<wsdl:part name="navSoapHeader" element="local:NAVm2mSoapHeader">
+			<wsdl:documentation>NAV SOAP Header message part</wsdl:documentation>
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getStatusDocumentResponse">
+		<wsdl:part name="navSoapHeader" element="local:NAVm2mSoapHeader">
+			<wsdl:documentation>NAV SOAP Header message part</wsdl:documentation>
+		</wsdl:part>
+		<wsdl:part name="returnValue" element="local:GetDocumentStatusResponseElem">
+			<wsdl:documentation>A message part tényleges tartalma a 'GetDocumentStatusResponseType' típusban van meghatározva. </wsdl:documentation>
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="validateDocumentResponse">
+		<wsdl:part name="navSoapHeader" element="local:NAVm2mSoapHeader">
+			<wsdl:documentation>NAV SOAP Header message part</wsdl:documentation>
+		</wsdl:part>
+		<wsdl:part name="returnValue" element="local:ValidateDocumentResponseElem">
+			<wsdl:documentation>A message part tényleges tartalma a 'ValidateDocumentResponseType' típusban van meghatározva. </wsdl:documentation>
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:portType name="Document">
+		<wsdl:documentation>Bizonylatkezelést támogató interfész</wsdl:documentation>
+		<wsdl:operation name="getStatusDocument">
+			<wsdl:documentation>Bizonylat státuszát lekérdező művelet</wsdl:documentation>
+			<wsdl:input name="getStatusDocumentRequestRequest" message="getStatusDocumentRequest">
+				<wsdl:documentation>Bemenő header és body adatok a(z) getStatusDocument mûvelethez.</wsdl:documentation>
+			</wsdl:input>
+			<wsdl:output name="getStatusDocumentRequestResponse" message="getStatusDocumentResponse">
+				<wsdl:documentation>Kimenő header és body adatok a(z) getStatusDocument mûvelethez.</wsdl:documentation>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="sendInDocument">
+			<wsdl:documentation>Bizonylat beküldését biztosító művelet</wsdl:documentation>
+			<wsdl:input name="sendInDocumentRequestRequest" message="sendInDocumentRequest">
+				<wsdl:documentation>Bemenő header és body adatok a(z) sendInDocument mûvelethez.</wsdl:documentation>
+			</wsdl:input>
+			<wsdl:output name="sendInDocumentRequestResponse" message="sendInDocumentResponse">
+				<wsdl:documentation>Kimenő header és body adatok a(z) sendInDocument mûvelethez.</wsdl:documentation>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="validateDocument">
+			<wsdl:documentation>Bizonylat validálását biztosító művelet</wsdl:documentation>
+			<wsdl:input name="validateDocumentRequestRequest" message="validateDocumentRequest">
+				<wsdl:documentation>Bemenő header és body adatok a(z) validateDocument mûvelethez.</wsdl:documentation>
+			</wsdl:input>
+			<wsdl:output name="validateDocumentRequestResponse" message="validateDocumentResponse">
+				<wsdl:documentation>Kimenő header és body adatok a(z) validateDocument mûvelethez.</wsdl:documentation>
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="Document" type="Document">
+		<wsdl:documentation>Bizonylatkezelést támogató interfész</wsdl:documentation>
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="getStatusDocument">
+			<wsdl:documentation>Bizonylat státuszát lekérdező művelet</wsdl:documentation>
+			<soap:operation soapAction="https://soap.api.nav.gov.hu/definitions/services/1.1/document#getStatusDocument" style="document"/>
+			<wsdl:input name="getStatusDocumentRequestRequest">
+				<wsdl:documentation>Bemenő header és body adatok a(z) getStatusDocument mûvelethez.</wsdl:documentation>
+				<soap:body parts="in" use="literal"/>
+				<soap:header message="getStatusDocumentRequest" part="navSoapHeader" use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="getStatusDocumentRequestResponse">
+				<wsdl:documentation>Kimenő header és body adatok a(z) getStatusDocument mûvelethez.</wsdl:documentation>
+				<soap:body parts="returnValue" use="literal"/>
+				<soap:header message="getStatusDocumentResponse" part="navSoapHeader" use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="sendInDocument">
+			<wsdl:documentation>Bizonylat beküldését biztosító művelet</wsdl:documentation>
+			<soap:operation soapAction="https://soap.api.nav.gov.hu/definitions/services/1.1/document#sendInDocument" style="document"/>
+			<wsdl:input name="sendInDocumentRequestRequest">
+				<wsdl:documentation>Bemenő header és body adatok a(z) sendInDocument mûvelethez.</wsdl:documentation>
+				<soap:body parts="in" use="literal"/>
+				<soap:header message="sendInDocumentRequest" part="navSoapHeader" use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="sendInDocumentRequestResponse">
+				<wsdl:documentation>Kimenő header és body adatok a(z) sendInDocument mûvelethez.</wsdl:documentation>
+				<soap:body parts="returnValue" use="literal"/>
+				<soap:header message="sendInDocumentResponse" part="navSoapHeader" use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="validateDocument">
+			<wsdl:documentation>Bizonylat validálását biztosító művelet</wsdl:documentation>
+			<soap:operation soapAction="https://soap.api.nav.gov.hu/definitions/services/1.1/document#validateDocument" style="document"/>
+			<wsdl:input name="validateDocumentRequestRequest">
+				<wsdl:documentation>Bemenő header és body adatok a(z) validateDocument mûvelethez.</wsdl:documentation>
+				<soap:body parts="in" use="literal"/>
+				<soap:header message="validateDocumentRequest" part="navSoapHeader" use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="validateDocumentRequestResponse">
+				<wsdl:documentation>Kimenő header és body adatok a(z) validateDocument mûvelethez.</wsdl:documentation>
+				<soap:body parts="returnValue" use="literal"/>
+				<soap:header message="validateDocumentResponse" part="navSoapHeader" use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="Document">
+		<wsdl:port name="Document" binding="Document">
+			<wsdl:documentation>Éles környezeti szolgáltatás végpont</wsdl:documentation>
+			<soap:address location="https://m2m.nav.gov.hu/soap-api/1.1/document"/>
+		</wsdl:port>
+		<wsdl:port name="DocumentDev" binding="Document">
+			<wsdl:documentation>Fejlesztői célú szolgáltatás végpont - A szolgáltatások ezen a környezeten mock válaszokat küldenek</wsdl:documentation>
+			<soap:address location="https://m2m-dev.nav.gov.hu/soap-api/1.1/document"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

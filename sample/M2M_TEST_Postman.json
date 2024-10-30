@@ -54,13 +54,13 @@
 					}
 				},
 				"url": {
-					"raw": "{{external_server}}/rest-api/1.0/NavM2mCommon/tokenService/Token",
+					"raw": "{{external_server}}/rest-api/1.1/NavM2mCommon/tokenService/Token",
 					"host": [
 						"{{external_server}}"
 					],
 					"path": [
 						"rest-api",
-						"1.0",
+						"1.1",
 						"NavM2mCommon",
 						"tokenService",
 						"Token"
@@ -121,13 +121,13 @@
 					}
 				},
 				"url": {
-					"raw": "{{external_server}}/rest-api/1.0/NavM2mCommon/userregistrationService/Nonce",
+					"raw": "{{external_server}}/rest-api/1.1/NavM2mCommon/userregistrationService/Nonce",
 					"host": [
 						"{{external_server}}"
 					],
 					"path": [
 						"rest-api",
-						"1.0",
+						"1.1",
 						"NavM2mCommon",
 						"userregistrationService",
 						"Nonce"
@@ -194,13 +194,13 @@
 					}
 				},
 				"url": {
-					"raw": "{{external_server}}/rest-api/1.0/NavM2mCommon/userregistrationService/Activation",
+					"raw": "{{external_server}}/rest-api/1.1/NavM2mCommon/userregistrationService/Activation",
 					"host": [
 						"{{external_server}}"
 					],
 					"path": [
 						"rest-api",
-						"1.0",
+						"1.1",
 						"NavM2mCommon",
 						"userregistrationService",
 						"Activation"
@@ -271,13 +271,13 @@
 					}
 				},
 				"url": {
-					"raw": "{{external_server}}/rest-api/1.0/NavM2mCommon/filestoreUploadService/File?sha256hash={{file_hash}}&signature={{signature}}",
+					"raw": "{{external_server}}/rest-api/1.1/NavM2mCommon/filestoreUploadService/File?sha256hash={{file_hash}}&signature={{signature}}",
 					"host": [
 						"{{external_server}}"
 					],
 					"path": [
 						"rest-api",
-						"1.0",
+						"1.1",
 						"NavM2mCommon",
 						"filestoreUploadService",
 						"File"
@@ -356,13 +356,13 @@
 					}
 				},
 				"url": {
-					"raw": "{{external_server}}/rest-api/1.0/NavM2mCommon/filestoreUploadService/File?sha256hash={{attachment_hash}}&signature={{signature}}",
+					"raw": "{{external_server}}/rest-api/1.1/NavM2mCommon/filestoreUploadService/File?sha256hash={{attachment_hash}}&signature={{signature}}",
 					"host": [
 						"{{external_server}}"
 					],
 					"path": [
 						"rest-api",
-						"1.0",
+						"1.1",
 						"NavM2mCommon",
 						"filestoreUploadService",
 						"File"
@@ -420,13 +420,13 @@
 					}
 				],
 				"url": {
-					"raw": "{{external_server}}/rest-api/1.0/NavM2mCommon/filestoreDownloadService/File/{{attachment_id}}",
+					"raw": "{{external_server}}/rest-api/1.1/NavM2mCommon/filestoreDownloadService/File/{{attachment_id}}",
 					"host": [
 						"{{external_server}}"
 					],
 					"path": [
 						"rest-api",
-						"1.0",
+						"1.1",
 						"NavM2mCommon",
 						"filestoreDownloadService",
 						"File",
@@ -496,13 +496,13 @@
 					}
 				},
 				"url": {
-					"raw": "{{external_server}}/rest-api/1.0/NavM2mDocument/documentService/Document",
+					"raw": "{{external_server}}/rest-api/1.1/NavM2mDocument/documentService/Document",
 					"host": [
 						"{{external_server}}"
 					],
 					"path": [
 						"rest-api",
-						"1.0",
+						"1.1",
 						"NavM2mDocument",
 						"documentService",
 						"Document"
@@ -544,13 +544,13 @@
 					}
 				},
 				"url": {
-					"raw": "{{external_server}}/rest-api/1.0/NavM2mDocument/documentService/Document/{{file_id}}",
+					"raw": "{{external_server}}/rest-api/1.1/NavM2mDocument/documentService/Document/{{file_id}}",
 					"host": [
 						"{{external_server}}"
 					],
 					"path": [
 						"rest-api",
-						"1.0",
+						"1.1",
 						"NavM2mDocument",
 						"documentService",
 						"Document",
@@ -620,13 +620,13 @@
 					}
 				},
 				"url": {
-					"raw": "{{external_server}}/rest-api/1.0/NavM2mDocument/documentService/Document",
+					"raw": "{{external_server}}/rest-api/1.1/NavM2mDocument/documentService/Document",
 					"host": [
 						"{{external_server}}"
 					],
 					"path": [
 						"rest-api",
-						"1.0",
+						"1.1",
 						"NavM2mDocument",
 						"documentService",
 						"Document"
@@ -696,13 +696,13 @@
 					}
 				},
 				"url": {
-					"raw": "{{external_server}}/rest-api/1.0/NavM2mCommon/filestoreUploadService/File?sha256hash={{file_hash}}&signature={{signature}}",
+					"raw": "{{external_server}}/rest-api/1.1/NavM2mCommon/filestoreUploadService/File?sha256hash={{file_hash}}&signature={{signature}}",
 					"host": [
 						"{{external_server}}"
 					],
 					"path": [
 						"rest-api",
-						"1.0",
+						"1.1",
 						"NavM2mCommon",
 						"filestoreUploadService",
 						"File"
@@ -781,13 +781,13 @@
 					}
 				},
 				"url": {
-					"raw": "{{external_server}}/rest-api/1.0/NavM2mCommon/filestoreUploadService/File?sha256hash={{attachment_hash}}&signature={{signature}}",
+					"raw": "{{external_server}}/rest-api/1.1/NavM2mCommon/filestoreUploadService/File?sha256hash={{attachment_hash}}&signature={{signature}}",
 					"host": [
 						"{{external_server}}"
 					],
 					"path": [
 						"rest-api",
-						"1.0",
+						"1.1",
 						"NavM2mCommon",
 						"filestoreUploadService",
 						"File"
@@ -859,7 +859,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:loc=\"https://soap.api.nav.gov.hu/definitions/services/1.0/document/local\">\r\n   <soapenv:Header>\r\n      <loc:NAVm2mSoapHeader>\r\n         <correlationId>{{$randomUUID}}</correlationId>\r\n         <messageId>{{message_id}}</messageId>\r\n      </loc:NAVm2mSoapHeader>\r\n   </soapenv:Header>\r\n   <soapenv:Body>\r\n      <loc:ValidateDocumentRequestElem>\r\n         <documentFileId>{{file_id}}</documentFileId>\r\n         <signature>{{signature}}</signature>\r\n         <!--Zero or more repetitions:-->\r\n         <attachments>\r\n            <documentPartType>2308M</documentPartType>\r\n            <fileId>{{attachment_id}}</fileId>\r\n            <fileName>obj.xlsx</fileName>\r\n            <type>bizonylat</type>\r\n         </attachments>\r\n      </loc:ValidateDocumentRequestElem>\r\n   </soapenv:Body>\r\n</soapenv:Envelope>",
+					"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:loc=\"https://soap.api.nav.gov.hu/definitions/services/1.1/document/local\">\r\n   <soapenv:Header>\r\n      <loc:NAVm2mSoapHeader>\r\n         <correlationId>{{$randomUUID}}</correlationId>\r\n         <messageId>{{message_id}}</messageId>\r\n      </loc:NAVm2mSoapHeader>\r\n   </soapenv:Header>\r\n   <soapenv:Body>\r\n      <loc:ValidateDocumentRequestElem>\r\n         <documentFileId>{{file_id}}</documentFileId>\r\n         <signature>{{signature}}</signature>\r\n         <!--Zero or more repetitions:-->\r\n         <attachments>\r\n            <documentPartType>2308M</documentPartType>\r\n            <fileId>{{attachment_id}}</fileId>\r\n            <fileName>obj.xlsx</fileName>\r\n            <type>bizonylat</type>\r\n         </attachments>\r\n      </loc:ValidateDocumentRequestElem>\r\n   </soapenv:Body>\r\n</soapenv:Envelope>",
 					"options": {
 						"raw": {
 							"language": "xml"
@@ -867,13 +867,13 @@
 					}
 				},
 				"url": {
-					"raw": "{{external_server}}/soap-api/1.0/document",
+					"raw": "{{external_server}}/soap-api/1.1/document",
 					"host": [
 						"{{external_server}}"
 					],
 					"path": [
 						"soap-api",
-						"1.0",
+						"1.1",
 						"document"
 					]
 				}
@@ -925,7 +925,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:loc=\"https://soap.api.nav.gov.hu/definitions/services/1.0/document/local\">\r\n   <soapenv:Header>\r\n      <loc:NAVm2mSoapHeader>\r\n         <correlationId>{{$randomUUID}}</correlationId>\r\n         <messageId>{{message_id}}</messageId>\r\n      </loc:NAVm2mSoapHeader>\r\n   </soapenv:Header>\r\n   <soapenv:Body>\r\n      <loc:GetDocumentStatusRequestElem>\r\n         <documentFileId>{{file_id}}</documentFileId>\r\n      </loc:GetDocumentStatusRequestElem>\r\n   </soapenv:Body>\r\n</soapenv:Envelope>",
+					"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:loc=\"https://soap.api.nav.gov.hu/definitions/services/1.1/document/local\">\r\n   <soapenv:Header>\r\n      <loc:NAVm2mSoapHeader>\r\n         <correlationId>{{$randomUUID}}</correlationId>\r\n         <messageId>{{message_id}}</messageId>\r\n      </loc:NAVm2mSoapHeader>\r\n   </soapenv:Header>\r\n   <soapenv:Body>\r\n      <loc:GetDocumentStatusRequestElem>\r\n         <documentFileId>{{file_id}}</documentFileId>\r\n      </loc:GetDocumentStatusRequestElem>\r\n   </soapenv:Body>\r\n</soapenv:Envelope>",
 					"options": {
 						"raw": {
 							"language": "xml"
@@ -933,13 +933,13 @@
 					}
 				},
 				"url": {
-					"raw": "{{external_server}}/soap-api/1.0/document",
+					"raw": "{{external_server}}/soap-api/1.1/document",
 					"host": [
 						"{{external_server}}"
 					],
 					"path": [
 						"soap-api",
-						"1.0",
+						"1.1",
 						"document"
 					]
 				}
@@ -999,7 +999,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:loc=\"https://soap.api.nav.gov.hu/definitions/services/1.0/document/local\">\r\n   <soapenv:Header>\r\n      <loc:NAVm2mSoapHeader>\r\n         <correlationId>{{$randomUUID}}</correlationId>\r\n         <messageId>{{message_id}}</messageId>\r\n      </loc:NAVm2mSoapHeader>\r\n   </soapenv:Header>\r\n   <soapenv:Body>\r\n      <loc:SendInDocumentRequestElem>\r\n         <documentFileId>{{file_id}}</documentFileId>\r\n         <signature>{{signature}}</signature>\r\n      </loc:SendInDocumentRequestElem>\r\n   </soapenv:Body>\r\n</soapenv:Envelope>",
+					"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:loc=\"https://soap.api.nav.gov.hu/definitions/services/1.1/document/local\">\r\n   <soapenv:Header>\r\n      <loc:NAVm2mSoapHeader>\r\n         <correlationId>{{$randomUUID}}</correlationId>\r\n         <messageId>{{message_id}}</messageId>\r\n      </loc:NAVm2mSoapHeader>\r\n   </soapenv:Header>\r\n   <soapenv:Body>\r\n      <loc:SendInDocumentRequestElem>\r\n         <documentFileId>{{file_id}}</documentFileId>\r\n         <signature>{{signature}}</signature>\r\n      </loc:SendInDocumentRequestElem>\r\n   </soapenv:Body>\r\n</soapenv:Envelope>",
 					"options": {
 						"raw": {
 							"language": "xml"
@@ -1007,13 +1007,13 @@
 					}
 				},
 				"url": {
-					"raw": "{{external_server}}/soap-api/1.0/document",
+					"raw": "{{external_server}}/soap-api/1.1/document",
 					"host": [
 						"{{external_server}}"
 					],
 					"path": [
 						"soap-api",
-						"1.0",
+						"1.1",
 						"document"
 					]
 				}

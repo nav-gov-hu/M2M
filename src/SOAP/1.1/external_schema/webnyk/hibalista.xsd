@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="https://soap.api.nav.gov.hu/external/webnyk/hibalista/1.1" xmlns:wnkerr10="https://soap.api.nav.gov.hu/external/webnyk/hibalista/1.1">
+  <xs:element name="Hibalista">
+    <xs:annotation>
+      <xs:documentation xml:lang="hu">
+      NAV adat xml - ellenőrzés hibalista
+      </xs:documentation>
+    </xs:annotation>
+	<xs:complexType>
+      <xs:sequence>	 
+        <xs:element name="BizonylatEllenorzes" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation xml:lang="hu">
+            A hibalista bizonylatrészenként tagolt. Ez jellemzően a kötegelt ('multi') nyomtatványok esetén értelmezhető, 'single' nyomtatványok esetén egyetlen bizonylatrészt tartalmaz
+            Megefelel az adat xml 'nyomtatvany' tagjának
+            </xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:sequence>	  	  
+              <xs:element name="Bizonylatresz" maxOccurs="unbounded">
+                <xs:annotation>
+                  <xs:documentation xml:lang="hu">
+                  A hibalista bizonylatrészenként tagolt. Ez jellemzően a kötegelt ('multi') nyomtatványok esetén értelmezhető, 'single' nyomtatványok esetén egyetlen bizonylatrészt tartalmaz
+                  Megefelel az adat xml 'nyomtatvany' tagjának
+                  </xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                  <xs:sequence>              
+                    <xs:element name="Azonositas">
+                    <xs:annotation>
+                      <xs:documentation xml:lang="hu">
+                      A bizonylatrész azonosítását szolgáló tag
+                      </xs:documentation>
+                    </xs:annotation>
+                      <xs:complexType>
+                        <xs:sequence>                       
+                          <xs:choice>
+                            <xs:element name="AlbizonylatAzonositas">
+                            <xs:annotation>
+                              <xs:documentation xml:lang="hu">
+                              Általános kötegelt nyomtatvány albizonylat azonosítására szolgál (a járulék - 08 speciális típus)
+                              Az elemek rendre megfelelnek az adat xml-ben küldött értékeknek
+                              Kizárólag 'multi' esetben
+                              </xs:documentation>
+                            </xs:annotation>                      
+                              <xs:complexType>
+                                <xs:sequence>
+                                  <xs:element name="Megnevezes" type="xs:string"/>
+                                  <xs:element name="Azonosito" type="xs:string"/>
+                                </xs:sequence>
+                              </xs:complexType>
+                            </xs:element>
+                            <xs:element name="Munkavallalo">                      
+                            <xs:annotation>
+                              <xs:documentation xml:lang="hu">
+                              Járulék típusú (pl. 2408) kötegelt nyomtatvány albizonylat azonosítására szolgál
+                              Az elemek rendre megfelelnek az adat xml-ben küldött értékeknek
+                              Kizárólag 'multi' esetben
+                              </xs:documentation>
+                            </xs:annotation>                                                                  
+                              <xs:complexType>
+                                <xs:sequence>
+                                  <xs:element name="Nev" type="xs:string"/>
+                                  <xs:element name="Adoazonosito">
+                                    <xs:simpleType>
+                                      <xs:restriction base="xs:integer">
+                                        <xs:pattern value="\d{10}"/>
+                                      </xs:restriction>
+                                    </xs:simpleType>
+                                  </xs:element>                            
+                                </xs:sequence>
+                              </xs:complexType>
+                            </xs:element>
+                            <xs:element name="Adozo">
+                            <xs:annotation>
+                              <xs:documentation xml:lang="hu">
+                              Főbizonylat azonosítására szolgál
+                              Az elemek rendre megfelelnek az adat xml-ben küldött értékeknek
+                              'multi' esetben a főbizonylat azonosítása, 'single' esetben maga a bizonylaté
+                              </xs:documentation>
+                            </xs:annotation>                                        
+                              <xs:complexType>
+                                <xs:sequence>
+                                  <xs:element name="Nev"/>
+                                  <xs:element name="Adoszam" minOccurs="0">
+                                  <xs:simpleType>
+                                    <xs:restriction base="xs:integer">
+                                      <xs:pattern value="\d{8,11}"/>
+                                    </xs:restriction>
+                                  </xs:simpleType>
+                                  </xs:element>
+                                  <xs:element name="Adoazonosito" minOccurs="0">
+                                    <xs:simpleType>
+                                      <xs:restriction base="xs:integer">
+                                        <xs:pattern value="\d{10}"/>
+                                      </xs:restriction>
+                                    </xs:simpleType>
+                                  </xs:element>
+                                </xs:sequence>
+                              </xs:complexType>
+                            </xs:element>
+                          </xs:choice>						                              						  
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="Hibak">              
+                    <xs:annotation>
+                      <xs:documentation xml:lang="hu">
+                      Az adott bizonylatrész ellenőrzése során keletkezett hibák
+                      - kod:
+                      A nyomtatványsablonban definiált hibakód
+                      - hibaszoveg:
+                      A nyomtatványsablonban definiált hibaszöveg
+                      - szint
+                      A nyomtatványsablonban definiált hibaszint
+                        A hibaszint lehetséges értékei: 
+                        - 1 figyelmeztetés
+                        - 2 hiba
+                        - 3 súlyos hiba
+                      Súlyos hiba esetén a nyomtatvány nem küldhető be. A folyamat későbbi lépésében a művelet nem hajtható majd végre
+                      - dinamikusLapIndex
+                      Az esetleges dinamikus lapon lévő hiba lapszámának jelölése, 0 bázissal
+                      - eazon
+                      A hiba forrását jelentő adatmező egyedi azonosítója a sablonban.
+                      Megfelel az adat xml 'eazon' attributummal jelölt 'mezo'-jének
+                      </xs:documentation>
+                    </xs:annotation>                      
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="Hiba" maxOccurs="unbounded">
+                            <xs:complexType>
+                              <xs:attribute name="kod" use="required" type="xs:string"/>                                                                    
+                              <xs:attribute name="hibaszoveg" use="required" type="xs:string"/>                                            
+                              <xs:attribute name="szint" use="required">
+                                <xs:simpleType>
+                                  <xs:restriction base="xs:string">
+                                    <xs:pattern value="1|2|3"/>                          
+                                  </xs:restriction>                          
+                                </xs:simpleType>
+                              </xs:attribute>                        
+                              <xs:attribute name="dinamikusLapIndex" use="required" type="xs:integer"/>                                            
+                              <xs:attribute name="eazon" type="xs:string"/>                                              
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+				  <xs:attribute name="formId" type="xs:string" use="required">
+				  <xs:annotation>
+                    <xs:documentation>
+                      - formId  bizonylatrész azonosítója - az adat xml 'nyomtatvanyazonosito' tagjának értéke                      
+                    </xs:documentation>
+				  </xs:annotation>
+				  </xs:attribute>
+				  <xs:attribute name="elemindex" type="xs:integer" use="required">                  
+				  <xs:annotation>
+                    <xs:documentation>
+                      - elemindex:
+                        A bizonylatrész sorszáma az adat xml-ben. A hibalista xml bizonylatrész szerkezete eltér az adat xml-étől. 
+                        A hibalista az albizonylatok (pl. 2408M) hibáival kezdődik 1-es sorszámmal.
+                        A főbizonylat (pl. 2408A) hibalistája az utolsó helyen van 0-s sorszámmal.
+                        Ez a szerkezet az ellenőrzés jellegéből adódik, minden esetben a főbizonylat ellenőrzése az utolsó
+                        A sorszámozásnak kizárólag 'multi' esetben van jelentősége
+                    </xs:documentation>
+				  </xs:annotation>
+				  </xs:attribute>
+                </xs:complexType>
+              </xs:element>        
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="CsatolmanyEllenorzes" maxOccurs="1" minOccurs="0">
+        <xs:annotation>
+        <xs:documentation xml:lang="hu">
+        A bizonylathoz csatolt csatolmányok ellenőrzésének eredménye.
+        </xs:documentation>
+        </xs:annotation>    
+          <xs:complexType>
+            <xs:sequence>    
+              <xs:element name="CsatolmanyForm" minOccurs="0" maxOccurs="2">                    
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:annotation>
+                    <xs:documentation xml:lang="hu">                    
+	  	            Csatolmányokat nem részbizonylatonként, hanem részbizonylat típusonként lehet csatolni (pl. 2408A, 2408M)
+					A nyomtatványsablonból származó 'FORM' alapján tagolt csatolmány ellenőrzések
+                    </xs:documentation>
+                    </xs:annotation>
+                    <xs:element name="CsatolmanyHibak">              
+                      <xs:annotation>
+                      <xs:documentation xml:lang="hu">
+                      Az adott csatomány fájl ellenőrzése során keletkezett hibák
+                      - hibaszoveg:
+                      - a csatolmány fájl neve
+                      </xs:documentation>
+                      </xs:annotation>                      
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="CsatolmanyHiba" maxOccurs="unbounded">
+                            <xs:complexType>                            							
+                              <xs:attribute name="hibakod" use="required" type="xs:string"/>                                            
+                              <xs:attribute name="hibaszoveg" use="required" type="xs:string"/>
+                              <xs:attribute name="csatolmanyFajlnev" type="xs:string"/>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+				  <xs:attribute name="formId" type="xs:string" use="required">
+				  <xs:annotation>
+                    <xs:documentation xml:lang="hu">
+                    A bizonylatrész azonosítója - az adat xml 'nyomtatvanyazonosito' tagjának értéke - A nyomtatványsablonból származó 'FORM' id attributuma
+                    </xs:documentation>
+                    </xs:annotation>
+				  </xs:attribute>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>    
+      </xs:sequence>        
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
+<!-- 'BizonylatreszAzonosito' tag kimaradt, attributumai felkerültek a 'Bizonylatresz' -be 
+'Hiba' tag 'eazon' attributuma nem 'required', mert vannak nyomtatvány szintű, nem mezőhöz kapcsolódó hibák
+'id' attributumok -> 'formId'
+'BizonylatEllenorzes' minOccurs="1" -> "0"
+-->

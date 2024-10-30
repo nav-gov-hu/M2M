@@ -1,0 +1,414 @@
+openapi: 3.0.0
+x-generator-comment: 'Generalt service: NavM2mCommon'
+info:
+  title: NavM2mCommon
+  description: >-
+    OpenAPI Document NAV M2M Common szolgáltatáshoz. Claim Check integrációs
+    minta használatához kialakított fájl tároló szolgáltatás. 
+  version: '1.1'
+paths:
+  /NavM2mCommon/userregistrationService/Nonce:
+    post:
+      tags:
+        - UserregistrationService
+      summary: Nonce.redeemNonce
+      description: >-
+        Nonce beváltását biztosító művelet (Letrehozva a
+        Nonce.redeemNonce(requestData: RedeemNonceRequestType, messageId: char,
+        correlationId: char, Authorization: char):RedeemNonceResponseType
+        operation-bol.)
+      operationId: redeemNonce
+      requestBody:
+        $ref: '#/components/requestBodies/redeemNonceRequestBody'
+      parameters:
+        - name: messageId
+          in: header
+          description: Az üzenet egyedi azonosítója
+          schema:
+            type: string
+          required: true
+        - name: correlationId
+          in: header
+          description: Üzenetek összekapcsolását biztosító egyedi azonosító.
+          schema:
+            type: string
+      x-generator-comment: 'Operation return type: redeemNonceResponseBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/redeemNonceResponseBody'
+    parameters: []
+  /NavM2mCommon/userregistrationService/Activation:
+    post:
+      tags:
+        - UserregistrationService
+      summary: Activation.activateUserRegistration
+      description: ' (Letrehozva a Activation.activateUserRegistration(requestData: ActivateUserRegistrationRequestType, messageId: char, correlationId: char, Authorization: char):ActivateUserRegistrationResponseType operation-bol.)'
+      operationId: activateUserRegistration
+      requestBody:
+        $ref: '#/components/requestBodies/activateUserRegistrationRequestBody'
+      parameters:
+        - name: messageId
+          in: header
+          description: Az üzenet egyedi azonosítója
+          schema:
+            type: string
+          required: true
+        - name: correlationId
+          in: header
+          description: Üzenetek összekapcsolását biztosító egyedi azonosító.
+          schema:
+            type: string
+      x-generator-comment: 'Operation return type: activateUserRegistrationResponseBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/activateUserRegistrationResponseBody'
+    parameters: []
+  /NavM2mCommon/filestoreDownloadService/File/{fileId}:
+    get:
+      tags:
+        - FilestoreDownloadService
+      summary: File.getFileStatus
+      description: >-
+        Egy feltöltött fájl állapotának lekérdezése.  (Letrehozva a
+        File.getFileStatus(fileId: char, correlationId: char, messageId: char,
+        Authorization: char):GetFileStatusResponseType operation-bol.)
+      operationId: getFileStatus
+      parameters:
+        - name: correlationId
+          in: header
+          description: Üzenetek összekapcsolását biztosító egyedi azonosító.
+          schema:
+            type: string
+        - name: messageId
+          in: header
+          description: Az üzenet egyedi azonosítója
+          schema:
+            type: string
+          required: true
+      x-generator-comment: 'Operation return type: getFileStatusResponseBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/getFileStatusResponseBody'
+    parameters:
+      - name: fileId
+        in: path
+        required: true
+        description: >-
+          A fájl egyedi azonosítója a fájltárolóban. Path parameterkent
+          letrehozva!
+        schema:
+          type: string
+  /NavM2mCommon/filestoreUploadService/File:
+    post:
+      tags:
+        - FilestoreUploadService
+      summary: File.addFile
+      description: >-
+        Egy fájl feltöltésére szolgáló művelet. A visszatérési értékben szerepel
+        a file azonosítója, amivel a feldolgozások során hivatkozni lehet rá.
+        (Letrehozva a File.addFile(*/*: file, correlationId: char, messageId:
+        char, Authorization: char, sha256hash: char, signature:
+        char):AddFileResponseType operation-bol.)
+      operationId: addFile
+      requestBody:
+        $ref: '#/components/requestBodies/addFileRequestBody'
+      parameters:
+        - name: correlationId
+          in: header
+          description: Üzenetek összekapcsolását biztosító egyedi azonosító.
+          schema:
+            type: string
+        - name: messageId
+          in: header
+          description: Az üzenet egyedi azonosítója
+          schema:
+            type: string
+          required: true
+        - name: sha256hash
+          in: query
+          description: A fájltárolóba betöltendő fájlból képzett SHA3-256 hash.
+          schema:
+            type: string
+        - name: signature
+          in: query
+          description: >-
+            Fájlfeltöltés aláírása. Aláírás képzése:
+            SHA3-256(messageId+timestamp+sha256hash+signatureKey) 
+          schema:
+            type: string
+      x-generator-comment: 'Operation return type: addFileResponseBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/addFileResponseBody'
+    parameters: []
+  /NavM2mCommon/tokenService/Token:
+    post:
+      tags:
+        - TokenService
+      summary: Token.createToken
+      description: >-
+        Új token kérését biztosító művelet, amely egy belépést és egy token
+        frissítést lehetővé tevő tokent ad vissza. (Letrehozva a
+        Token.createToken(requestData: CreateTokenRequestType, messageId:
+        string, correlationId: string):CreateTokenResponseType operation-bol.)
+      operationId: createToken
+      requestBody:
+        $ref: '#/components/requestBodies/createTokenRequestBody'
+      parameters:
+        - name: messageId
+          in: header
+          description: Az üzenet egyedi azonosítója
+          schema:
+            type: string
+          required: true
+        - name: correlationId
+          in: header
+          description: Üzenetek összekapcsolását biztosító egyedi azonosító.
+          schema:
+            type: string
+      x-generator-comment: 'Operation return type: createTokenResponseBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/createTokenResponseBody'
+    parameters: []
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+  requestBodies:
+    activateUserRegistrationRequestBody:
+      description: ''
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/activateUserRegistrationRequestBodyType'
+    redeemNonceRequestBody:
+      description: ''
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/redeemNonceRequestBodyType'
+    addFileRequestBody:
+      description: ''
+      required: true
+      content:
+        '*/*':
+          schema:
+            type: string
+            format: binary
+    createTokenRequestBody:
+      description: ''
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/createTokenRequestBodyType'
+  responses:
+    getFileStatusResponseBody:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GetFileStatusResponseType'
+    redeemNonceResponseBody:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RedeemNonceResponseType'
+    activateUserRegistrationResponseBody:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ActivateUserRegistrationResponseType'
+    createTokenResponseBody:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CreateTokenResponseType'
+    addFileResponseBody:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AddFileResponseType'
+  schemas:
+    ActivateUserRegistrationResponseType:
+      allOf:
+        - $ref: '#/components/schemas/BaseResponseType'
+        - type: object
+          properties:
+            resultCode:
+              $ref: '#/components/schemas/ActivateUserRegistrationResult'
+    RedeemNonceResponseType:
+      allOf:
+        - $ref: '#/components/schemas/BaseResponseType'
+        - type: object
+          properties:
+            signatureKeySecondPart:
+              description: Aláírókulcs második fele
+              type: string
+            resultCode:
+              $ref: '#/components/schemas/RedeemNonceResult'
+    BaseResponseType:
+      type: object
+      properties:
+        resultMessage:
+          description: Válasz üzenet
+          type: string
+    ActivateUserRegistrationResult:
+      type: string
+      enum:
+        - ACTIVATE_USER_REGISTRATION_SUCCESSFUL
+        - USER_REGISTRATION_ALREADY_ACTIVATED
+        - OTHER_ERROR
+        - INVALID_SIGNATURE
+    RedeemNonceResult:
+      type: string
+      enum:
+        - REDEEM_NONCE_SUCCESSFUL
+        - INVALID_NONCE
+        - OTHER_ERROR
+    activateUserRegistrationRequestBodyType:
+      type: object
+      properties:
+        requestData:
+          $ref: '#/components/schemas/ActivateUserRegistrationRequestType'
+    redeemNonceRequestBodyType:
+      type: object
+      properties:
+        requestData:
+          $ref: '#/components/schemas/RedeemNonceRequestType'
+    ActivateUserRegistrationRequestType:
+      type: object
+      properties:
+        signature:
+          description: Aláírás
+          type: string
+      required:
+        - signature
+    RedeemNonceRequestType:
+      type: object
+      properties:
+        nonce:
+          description: >-
+            Nonce. Az aláírókulcs második felének elkérésére alkalmas ideiglenes
+            jelszó.
+          type: string
+      required:
+        - nonce
+    createTokenRequestBodyType:
+      type: object
+      properties:
+        requestData:
+          $ref: '#/components/schemas/CreateTokenRequestType'
+    GetFileStatusResponseType:
+      allOf:
+        - $ref: '#/components/schemas/BaseResponseType'
+        - type: object
+          properties:
+            retentionTime:
+              description: Az állomány garantált megőrzési ideje.
+              type: string
+              format: date-time
+            resultCode:
+              $ref: '#/components/schemas/VirusScanResult'
+    AddFileResponseType:
+      allOf:
+        - $ref: '#/components/schemas/BaseResponseType'
+        - type: object
+          properties:
+            fileId:
+              description: >-
+                A fájl egyedi azonosítója, ami alapján a fájlra hivatkozni
+                lehet. 
+              type: string
+            result_code:
+              $ref: '#/components/schemas/FileUploadResult'
+            virusScanResultCode:
+              $ref: '#/components/schemas/VirusScanResult'
+    VirusScanResult:
+      type: string
+      enum:
+        - PASSED
+        - FAILED
+        - WAITING
+        - OTHER_ERROR
+    FileUploadResult:
+      type: string
+      enum:
+        - UPLOAD_SUCCESS
+        - HASH_FAILURE
+        - OTHER_ERROR
+    CreateTokenRequestType:
+      type: object
+      properties:
+        clientId:
+          description: Kliens azonosító
+          type: string
+        clientSecret:
+          description: Kliens jelszó
+          type: string
+        password:
+          description: Felhasználó jelszó
+          type: string
+        username:
+          description: Felhasználónév
+          type: string
+      required:
+        - clientId
+        - clientSecret
+        - password
+        - username
+    CreateTokenResponseType:
+      allOf:
+        - $ref: '#/components/schemas/TokenBaseResponseType'
+        - type: object
+          properties:
+            expires:
+              description: A token ennyi másodperc után veszíti el érvényességét(jár le).
+              type: integer
+              format: int32
+            resultCode:
+              $ref: '#/components/schemas/CreateTokenResult'
+    TokenBaseResponseType:
+      allOf:
+        - $ref: '#/components/schemas/BaseResponseType'
+        - type: object
+          properties:
+            accessToken:
+              description: A hozzáférést biztosító token
+              type: string
+    CreateTokenResult:
+      type: string
+      enum:
+        - TOKEN_CREATION_SUCCESSFUL
+        - TOKEN_CREATION_FAILED
+tags:
+  - name: UserregistrationService
+    description: ' A UserRegistration service csomagba tartozo OAS elemek'
+  - name: TokenService
+    description: ' A Token service csomagba tartozo OAS elemek'
+  - name: FilestoreDownloadService
+    description: ' A Filestore download service csomagba tartozo OAS elemek'
+  - name: FilestoreUploadService
+    description: ' A Filestore upload service csomagba tartozo OAS elemek'
+    
+servers: [
+    {
+      "url": https://m2m.nav.gov.hu/rest-api/1.0/,
+      "description": "Éles környezet szolgáltatás végpont"
+    },
+    {
+      "url": https://m2m-dev.nav.gov.hu/rest-api/1.0/,
+      "description": "Fejlesztői célú szolgáltatás végpont. A szolgáltatások ezen a végponton nem valós tartalommal kerülnek megvalósításra!"
+    }
+]
+
+security:
+  - bearerAuth: []
