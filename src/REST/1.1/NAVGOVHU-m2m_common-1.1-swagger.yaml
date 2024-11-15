@@ -126,14 +126,14 @@ paths:
           required: true
         - name: sha256hash
           in: query
-          description: A fájltárolóba betöltendő fájlból képzett SHA3-256 hash.
+          description: A fájltárolóba betöltendő fájlból képzett SHA256 hash.
           schema:
             type: string
         - name: signature
           in: query
           description: >-
             Fájlfeltöltés aláírása. Aláírás képzése:
-            SHA3-256(messageId+timestamp+sha256hash+signatureKey) 
+            SHA256(messageId+timestamp+sha256hash+signatureKey)
           schema:
             type: string
       x-generator-comment: 'Operation return type: addFileResponseBody'
