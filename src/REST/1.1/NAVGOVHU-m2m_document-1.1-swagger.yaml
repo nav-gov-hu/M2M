@@ -173,11 +173,15 @@ components:
       properties:
         requestData:
           $ref: '#/components/schemas/CreateDocumentRequestType'
+      required:
+        - requestData
     updateDocumentRequestBodyType:
       type: object
       properties:
         requestData:
           $ref: '#/components/schemas/UpdateDocumentRequestType'
+      required:
+        - requestData
     UpdateDocumentRequestType:
       type: object
       properties:

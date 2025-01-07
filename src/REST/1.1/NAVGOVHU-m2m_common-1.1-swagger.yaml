@@ -279,11 +279,15 @@ components:
       properties:
         requestData:
           $ref: '#/components/schemas/ActivateUserRegistrationRequestType'
+      required:
+        - requestData
     redeemNonceRequestBodyType:
       type: object
       properties:
         requestData:
           $ref: '#/components/schemas/RedeemNonceRequestType'
+      required:
+        - requestData
     ActivateUserRegistrationRequestType:
       type: object
       properties:
@@ -307,6 +311,8 @@ components:
       properties:
         requestData:
           $ref: '#/components/schemas/CreateTokenRequestType'
+      required:
+        - requestData
     GetFileStatusResponseType:
       allOf:
         - $ref: '#/components/schemas/BaseResponseType'
