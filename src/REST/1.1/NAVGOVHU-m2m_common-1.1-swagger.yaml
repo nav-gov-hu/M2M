@@ -133,7 +133,7 @@ paths:
           in: query
           description: >-
             Fájlfeltöltés aláírása. Aláírás képzése:
-            SHA256(messageId+timestamp+sha256hash+signatureKey)
+            SHA256(messageId+timestamp+sha256hash+signatureKey) 
           schema:
             type: string
       x-generator-comment: 'Operation return type: addFileResponseBody'
@@ -407,11 +407,11 @@ tags:
     
 servers: [
     {
-      "url": https://m2m.nav.gov.hu/rest-api/1.0/,
+      "url": https://m2m.nav.gov.hu/rest-api/1.1/,
       "description": "Éles környezet szolgáltatás végpont"
     },
     {
-      "url": https://m2m-dev.nav.gov.hu/rest-api/1.0/,
+      "url": https://m2m-dev.nav.gov.hu/rest-api/1.1/,
       "description": "Fejlesztői célú szolgáltatás végpont. A szolgáltatások ezen a végponton nem valós tartalommal kerülnek megvalósításra!"
     }
 ]

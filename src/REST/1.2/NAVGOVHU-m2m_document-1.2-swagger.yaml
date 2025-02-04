@@ -3,7 +3,7 @@ x-generator-comment: 'Generalt service: NavM2mDocument'
 info:
   title: NavM2mDocument
   description: 'OpenAPI Document NAV M2M Document szolgáltatáshoz. '
-  version: '1.1'
+  version: '1.2'
 paths:
   /NavM2mDocument/documentService/Document:
     patch:
@@ -193,9 +193,13 @@ components:
           type: string
         documentStatus:
           $ref: '#/components/schemas/DocumentStatus'
+        replyStoreId:
+          description: Annak a tárhelynek az azonosítója, ahová a beküldő a nyugtákat várja. Akkor kell megadni, ha hivatal a beküldő, és nem a felhasználói regisztráció során megadott tárhelyre szeretné kapni a nyugtákat.
+          type: string
       required:
         - documentFileId
         - signature
+        - documentStatus
     CreateDocumentRequestType:
       type: object
       properties:
@@ -217,6 +221,13 @@ components:
         - $ref: '#/components/schemas/DocumentBaseResponseType'
         - type: object
           properties:
+            errors:
+              description: >-
+                Hibákat megállapító validáció esetén a hibákat tartalmazó xml
+                fájl bzip2-vel tömörítve, majd base64 kódolva. Az xml a
+                hibalista.xsd-vel dolgozható fel.
+              type: string
+              format: binary
             resultCode:
               $ref: '#/components/schemas/CreateDocumentResult'
     Attachment:
@@ -292,6 +303,7 @@ components:
         - SENDER_HAS_NO_RIGHT
         - INVALID_DOCUMENT_TYPE
         - INVALID_DOCUMENT_VERSION
+        - REPLY_STORE_ID_NOT_ALLOWED
     DocumentStatus:
       type: string
       enum:
@@ -308,11 +320,11 @@ tags:
     
 servers: [
     {
-      "url": https://m2m.nav.gov.hu/rest-api/1.1/,
+      "url": https://m2m.nav.gov.hu/rest-api/1.2/,
       "description": "Éles környezet szolgáltatás végpont"
     },
     {
-      "url": https://m2m-dev.nav.gov.hu/rest-api/1.1/,
+      "url": https://m2m-dev.nav.gov.hu/rest-api/1.2/,
       "description": "Fejlesztői célú szolgáltatás végpont. A szolgáltatások ezen a végponton nem valós tartalommal kerülnek megvalósításra!"
     }
 ]
