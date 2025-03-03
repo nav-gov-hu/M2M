@@ -265,6 +265,8 @@ components:
         - INVALID_DOCUMENT_TYPE
         - INVALID_DOCUMENT_VERSION
         - FILE_CONTAINS_VIRUS
+        - INVALID_ENCODING
+        - ILLEGAL_CHARACTER
     GetDocumentResult:
       type: string
       enum:
@@ -317,16 +319,16 @@ components:
 tags:
   - name: DocumentService
     description: ' A Document service csomagba tartozo OAS elemek'
-    
+
 servers: [
-    {
-      "url": https://m2m.nav.gov.hu/rest-api/1.2/,
-      "description": "Éles környezet szolgáltatás végpont"
-    },
-    {
-      "url": https://m2m-dev.nav.gov.hu/rest-api/1.2/,
-      "description": "Fejlesztői célú szolgáltatás végpont. A szolgáltatások ezen a végponton nem valós tartalommal kerülnek megvalósításra!"
-    }
+  {
+    "url": https://m2m.nav.gov.hu/rest-api/1.2/,
+    "description": "Éles környezet szolgáltatás végpont"
+  },
+  {
+    "url": https://m2m-dev.nav.gov.hu/rest-api/1.2/,
+    "description": "Fejlesztői célú szolgáltatás végpont. A szolgáltatások ezen a végponton nem valós tartalommal kerülnek megvalósításra!"
+  }
 ]
 security:
   - bearerAuth: []

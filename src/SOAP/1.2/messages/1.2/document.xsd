@@ -4,17 +4,19 @@
 	<xs:simpleType name="CreateDocumentResult">
 		<xs:annotation>
 			<xs:documentation>Az M2M bizonylat létrehozás művelet lehetséges eredményei:&#xD;
-CREATE_DOCUMENT_SUCCESS - A bizonylat létrehozása a validációval sikeresen megtörtént.&#xD;
-UNKNOWN_FILE_ID - A megadott azonosítóval nem található fájl a fájltárolóban.&#xD;
-FILE_ID_ALREADY_USED - A megadott fájltárolóbeli fájazonosítóval már létezik bizonylat.&#xD;
-UNSUCCESSFUL_VALIDATION - A validáció valamilyen hiba miatt nem tudott lefutni.&#xD;
-INVALID_SIGNATURE: Érvénytelen aláírás.&#xD;
-INVALID_SENDER - Érvénytelen beküldő&#xD;
-INVALID_TAXPAYER - Érvénytelen adózó&#xD;
-SENDER_HAS_NO_RIGHT - A beküldőnek nincs jogosultsága a bizonylat beküldésére az adózó nevében.&#xD;
-INVALID_DOCUMENT_TYPE - A bizonylattípus nem küldhető be.&#xD;
-INVALID_DOCUMENT_VERSION - A bizonylatverzió nem küldhető be.&#xD;
-FILE_CONTAINS_VIRUS - A bizonylatfájl, vagy annak csatolmánya vírusos.</xs:documentation>
+				CREATE_DOCUMENT_SUCCESS - A bizonylat létrehozása a validációval sikeresen megtörtént.&#xD;
+				UNKNOWN_FILE_ID - A megadott azonosítóval nem található fájl a fájltárolóban.&#xD;
+				FILE_ID_ALREADY_USED - A megadott fájltárolóbeli fájazonosítóval már létezik bizonylat.&#xD;
+				UNSUCCESSFUL_VALIDATION - A validáció valamilyen hiba miatt nem tudott lefutni.&#xD;
+				INVALID_SIGNATURE: Érvénytelen aláírás.&#xD;
+				INVALID_SENDER - Érvénytelen beküldő&#xD;
+				INVALID_TAXPAYER - Érvénytelen adózó&#xD;
+				SENDER_HAS_NO_RIGHT - A beküldőnek nincs jogosultsága a bizonylat beküldésére az adózó nevében.&#xD;
+				INVALID_DOCUMENT_TYPE - A bizonylattípus nem küldhető be.&#xD;
+				INVALID_DOCUMENT_VERSION - A bizonylatverzió nem küldhető be.&#xD;
+				FILE_CONTAINS_VIRUS - A bizonylatfájl, vagy annak csatolmánya vírusos.&#xD;
+				INVALID_ENCODING - Nem UTF-8 karakterkódolás van használva a beküldött bizonylatban.&#xD;
+				ILLEGAL_CHARACTER - Olyan karaktert tartalmaz a bizonylat, ami az UTF-8 szerint nem értelmezhető.</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="CREATE_DOCUMENT_SUCCESS"/>
@@ -29,6 +31,8 @@ FILE_CONTAINS_VIRUS - A bizonylatfájl, vagy annak csatolmánya vírusos.</xs:do
 			<xs:enumeration value="INVALID_DOCUMENT_TYPE"/>
 			<xs:enumeration value="INVALID_DOCUMENT_VERSION"/>
 			<xs:enumeration value="FILE_CONTAINS_VIRUS"/>
+			<xs:enumeration value="INVALID_ENCODING"/>
+			<xs:enumeration value="ILLEGAL_CHARACTER"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="DocumentStatus">
