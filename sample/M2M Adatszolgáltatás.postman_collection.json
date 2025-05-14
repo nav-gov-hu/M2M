@@ -1,0 +1,1069 @@
+{
+	"info": {
+		"_postman_id": "0a8220ca-2e4c-4b74-a7df-dde537e697e1",
+		"name": "M2M Adatszolgáltatás",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6870063"
+	},
+	"item": [
+		{
+			"name": "getToken",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.collectionVariables.set('access_token', pm.response.json().accessToken);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "messageId",
+						"value": "{{message_id}}",
+						"type": "text"
+					},
+					{
+						"key": "correlationId",
+						"value": "{{$randomUUID}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"requestData\": {\r\n    \"clientId\": \"{{client}}\",\r\n    \"clientSecret\": \"{{client_secret}}\",\r\n    \"password\": \"{{password}}\",\r\n    \"username\": \"{{user}}\"\r\n  }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{agw_server}}/rest-api/1.1/NavM2mCommon/tokenService/Token",
+					"host": [
+						"{{agw_server}}"
+					],
+					"path": [
+						"rest-api",
+						"1.1",
+						"NavM2mCommon",
+						"tokenService",
+						"Token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "KoztartozasEgyenleg",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const cryptoJs = require('crypto-js');\r",
+							"var timestamp = new Date().toISOString().replace(/[^\\d]/g, '').substring(0,14);\r",
+							"var message_id = pm.collectionVariables.get('message_id');\r",
+							"var signature_key_first_part = pm.collectionVariables.get('signature_key_first_part');\r",
+							"var signature_key_second_part = pm.collectionVariables.get('signature_key_second_part');\r",
+							"var toSign = message_id+timestamp+signature_key_first_part+signature_key_second_part;\r",
+							"console.log(toSign);\r",
+							"var signature = cryptoJs.SHA256(toSign).toString(cryptoJs.enc.Base64).toUpperCase();\r",
+							"pm.collectionVariables.set(\"signature\", signature);\r",
+							"console.log(signature);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}"
+					},
+					{
+						"key": "messageId",
+						"value": "{{message_id}}"
+					},
+					{
+						"key": "correlationId",
+						"value": "{{$randomUUID}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{agw_server}}/rest-api/1.0/NavM2mAdozo/adozoService/KoztartozasEgyenleg/25022870?signature={{signature}}",
+					"host": [
+						"{{agw_server}}"
+					],
+					"path": [
+						"rest-api",
+						"1.0",
+						"NavM2mAdozo",
+						"adozoService",
+						"KoztartozasEgyenleg",
+						"25022870"
+					],
+					"query": [
+						{
+							"key": "signature",
+							"value": "{{signature}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SOAP KoztartozasEgyenleg",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const cryptoJs = require('crypto-js');\r",
+							"var timestamp = new Date().toISOString().replace(/[^\\d]/g, '').substring(0,14);\r",
+							"var message_id = pm.collectionVariables.get('message_id');\r",
+							"var signature_key_first_part = pm.collectionVariables.get('signature_key_first_part');\r",
+							"var signature_key_second_part = pm.collectionVariables.get('signature_key_second_part');\r",
+							"var toSign = message_id+timestamp+signature_key_first_part+signature_key_second_part;\r",
+							"console.log(toSign);\r",
+							"var signature = cryptoJs.SHA256(toSign).toString(cryptoJs.enc.Base64).toUpperCase();\r",
+							"pm.collectionVariables.set(\"signature\", signature);\r",
+							"console.log(signature);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/xml;charset=UTF-8",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:loc=\"https://soap.api.nav.gov.hu/definitions/services/1.0/adozo/local\">\r\n    <soapenv:Header>\r\n        <loc:NAVm2mSoapHeader>\r\n            <correlationId>{{$randomUUID}}</correlationId>\r\n            <messageId>{{message_id}}</messageId>\r\n        </loc:NAVm2mSoapHeader>\r\n    </soapenv:Header>\r\n    <soapenv:Body>\r\n        <loc:GetKoztartozasEgyenlegResquestElem>\r\n            <adoalanyAzonosito>25022870</adoalanyAzonosito>\r\n            <signature>{{signature}}</signature>\r\n        </loc:GetKoztartozasEgyenlegResquestElem>\r\n    </soapenv:Body>\r\n</soapenv:Envelope>",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{agw_server}}/soap-api/1.0/adozo/KoztartozasEgyenleg",
+					"host": [
+						"{{agw_server}}"
+					],
+					"path": [
+						"soap-api",
+						"1.0",
+						"adozo",
+						"KoztartozasEgyenleg"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TetelesAdoszamla",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const cryptoJs = require('crypto-js');\r",
+							"var timestamp = new Date().toISOString().replace(/[^\\d]/g, '').substring(0,14);\r",
+							"var message_id = pm.collectionVariables.get('message_id');\r",
+							"var signature_key_first_part = pm.collectionVariables.get('signature_key_first_part');\r",
+							"var signature_key_second_part = pm.collectionVariables.get('signature_key_second_part');\r",
+							"var toSign = message_id+timestamp+signature_key_first_part+signature_key_second_part;\r",
+							"console.log(toSign);\r",
+							"var signature = cryptoJs.SHA256(toSign).toString(cryptoJs.enc.Base64).toUpperCase();\r",
+							"pm.collectionVariables.set(\"signature\", signature);\r",
+							"console.log(signature);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}"
+					},
+					{
+						"key": "messageId",
+						"value": "{{message_id}}"
+					},
+					{
+						"key": "correlationId",
+						"value": "{{$randomUUID}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{agw_server}}/rest-api/1.0/NavM2mAdozo/adozoService/TetelesAdoszamla/26892920?signature={{signature}}&adonemKodok=101&tetelTipus=KONYVELT_ES_KONYVELESRE_VARO&idoszakVege=2025-03-13",
+					"host": [
+						"{{agw_server}}"
+					],
+					"path": [
+						"rest-api",
+						"1.0",
+						"NavM2mAdozo",
+						"adozoService",
+						"TetelesAdoszamla",
+						"26892920"
+					],
+					"query": [
+						{
+							"key": "signature",
+							"value": "{{signature}}"
+						},
+						{
+							"key": "adonemKodok",
+							"value": "101"
+						},
+						{
+							"key": "tetelTipus",
+							"value": "KONYVELT_ES_KONYVELESRE_VARO"
+						},
+						{
+							"key": "idoszakVege",
+							"value": "2025-03-13"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SOAP TetelesAdoszamla",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const cryptoJs = require('crypto-js');\r",
+							"var timestamp = new Date().toISOString().replace(/[^\\d]/g, '').substring(0,14);\r",
+							"var message_id = pm.collectionVariables.get('message_id');\r",
+							"var signature_key_first_part = pm.collectionVariables.get('signature_key_first_part');\r",
+							"var signature_key_second_part = pm.collectionVariables.get('signature_key_second_part');\r",
+							"var toSign = message_id+timestamp+signature_key_first_part+signature_key_second_part;\r",
+							"console.log(toSign);\r",
+							"var signature = cryptoJs.SHA256(toSign).toString(cryptoJs.enc.Base64).toUpperCase();\r",
+							"pm.collectionVariables.set(\"signature\", signature);\r",
+							"console.log(signature);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "text/xml;charset=UTF-8",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:loc=\"https://soap.api.nav.gov.hu/definitions/services/1.0/adozo/local\">\r\n   <soapenv:Header>\r\n      <loc:NAVm2mSoapHeader>\r\n         <correlationId>{{$randomUUID}}</correlationId>\r\n         <messageId>{{message_id}}</messageId>\r\n      </loc:NAVm2mSoapHeader>\r\n   </soapenv:Header>\r\n      <soapenv:Body>\r\n      <loc:GetTetelesAdoszamlaRequestElem>\r\n        <adoalanyAzonosito>26892920</adoalanyAzonosito>\r\n        <signature>{{signature}}</signature>\r\n         <idoszakVege>2025-03-13</idoszakVege>\r\n         <adonemKodok><adonemKod>101</adonemKod></adonemKodok>\r\n         <tetelTipus>KONYVELT_ES_KONYVELESRE_VARO</tetelTipus>\r\n      </loc:GetTetelesAdoszamlaRequestElem>\r\n   </soapenv:Body>\r\n</soapenv:Envelope>",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{agw_server}}/soap-api/1.0/adozo/Adoszamla",
+					"host": [
+						"{{agw_server}}"
+					],
+					"path": [
+						"soap-api",
+						"1.0",
+						"adozo",
+						"Adoszamla"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "OsszesitettAdoszamla",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const cryptoJs = require('crypto-js');\r",
+							"var timestamp = new Date().toISOString().replace(/[^\\d]/g, '').substring(0,14);\r",
+							"var message_id = pm.collectionVariables.get('message_id');\r",
+							"var signature_key_first_part = pm.collectionVariables.get('signature_key_first_part');\r",
+							"var signature_key_second_part = pm.collectionVariables.get('signature_key_second_part');\r",
+							"var toSign = message_id+timestamp+signature_key_first_part+signature_key_second_part;\r",
+							"console.log(toSign);\r",
+							"var signature = cryptoJs.SHA256(toSign).toString(cryptoJs.enc.Base64).toUpperCase();\r",
+							"pm.collectionVariables.set(\"signature\", signature);\r",
+							"console.log(signature);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}"
+					},
+					{
+						"key": "messageId",
+						"value": "{{message_id}}"
+					},
+					{
+						"key": "correlationId",
+						"value": "{{$randomUUID}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{agw_server}}/rest-api/1.0/NavM2mAdozo/adozoService/OsszesitettAdoszamla/8495512912?signature={{signature}}&idoszakVege=2025-05-05",
+					"host": [
+						"{{agw_server}}"
+					],
+					"path": [
+						"rest-api",
+						"1.0",
+						"NavM2mAdozo",
+						"adozoService",
+						"OsszesitettAdoszamla",
+						"8495512912"
+					],
+					"query": [
+						{
+							"key": "signature",
+							"value": "{{signature}}"
+						},
+						{
+							"key": "idoszakVege",
+							"value": "2025-05-05"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SOAP OsszesitettAdoszamla",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const cryptoJs = require('crypto-js');\r",
+							"var timestamp = new Date().toISOString().replace(/[^\\d]/g, '').substring(0,14);\r",
+							"var message_id = pm.collectionVariables.get('message_id');\r",
+							"var signature_key_first_part = pm.collectionVariables.get('signature_key_first_part');\r",
+							"var signature_key_second_part = pm.collectionVariables.get('signature_key_second_part');\r",
+							"var toSign = message_id+timestamp+signature_key_first_part+signature_key_second_part;\r",
+							"console.log(toSign);\r",
+							"var signature = cryptoJs.SHA256(toSign).toString(cryptoJs.enc.Base64).toUpperCase();\r",
+							"pm.collectionVariables.set(\"signature\", signature);\r",
+							"console.log(signature);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "text/xml;charset=UTF-8",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:loc=\"https://soap.api.nav.gov.hu/definitions/services/1.0/adozo/local\">\r\n   <soapenv:Header>\r\n      <loc:NAVm2mSoapHeader>\r\n         <correlationId>{{$randomUUID}}</correlationId>\r\n         <messageId>{{message_id}}</messageId>\r\n      </loc:NAVm2mSoapHeader>\r\n   </soapenv:Header>\r\n      <soapenv:Body>\r\n      <loc:GetOsszesitettAdoszamlaRequestElem>\r\n        <adoalanyAzonosito>8495512912</adoalanyAzonosito>\r\n        <signature>{{signature}}</signature>\r\n        \r\n      </loc:GetOsszesitettAdoszamlaRequestElem>\r\n   </soapenv:Body>\r\n</soapenv:Envelope>",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{agw_server}}/soap-api/1.0/adozo/Adoszamla",
+					"host": [
+						"{{agw_server}}"
+					],
+					"path": [
+						"soap-api",
+						"1.0",
+						"adozo",
+						"Adoszamla"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "LegalRelationshipFoglalkoztatoAdatok",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const cryptoJs = require('crypto-js');\r",
+							"var timestamp = new Date().toISOString().replace(/[^\\d]/g, '').substring(0,14);\r",
+							"var message_id = pm.collectionVariables.get('message_id');\r",
+							"var signature_key_first_part = pm.collectionVariables.get('signature_key_first_part');\r",
+							"var signature_key_second_part = pm.collectionVariables.get('signature_key_second_part');\r",
+							"var toSign = message_id+timestamp+signature_key_first_part+signature_key_second_part;\r",
+							"console.log(toSign);\r",
+							"var signature = cryptoJs.SHA256(toSign).toString(cryptoJs.enc.Base64).toUpperCase();\r",
+							"pm.collectionVariables.set(\"signature\", signature);\r",
+							"console.log(signature);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.collectionVariables.set('request_id', pm.response.json().requestData.requestId);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}"
+					},
+					{
+						"key": "messageId",
+						"value": "{{message_id}}"
+					},
+					{
+						"key": "correlationId",
+						"value": "{{$randomUUID}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{agw_server}}/rest-api/1.0/NavM2mAdozo/adozoService/BiztositottiJogviszonyFoglalkoztatoAdat/11117423?lekerdezesiIdoszakKezdete=2020-01-01&lekerdezesiIdoszakVege=2025-05-05&jogviszonyTipus=MIND&signature={{signature}}",
+					"host": [
+						"{{agw_server}}"
+					],
+					"path": [
+						"rest-api",
+						"1.0",
+						"NavM2mAdozo",
+						"adozoService",
+						"BiztositottiJogviszonyFoglalkoztatoAdat",
+						"11117423"
+					],
+					"query": [
+						{
+							"key": "lekerdezesiIdoszakKezdete",
+							"value": "2020-01-01"
+						},
+						{
+							"key": "lekerdezesiIdoszakVege",
+							"value": "2025-05-05"
+						},
+						{
+							"key": "bejelentesDatuma",
+							"value": "2025-03-19",
+							"disabled": true
+						},
+						{
+							"key": "jogviszonyTipus",
+							"value": "MIND"
+						},
+						{
+							"key": "signature",
+							"value": "{{signature}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SOAP LegalRelationshipFoglalkoztatoAdatok",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const cryptoJs = require('crypto-js');\r",
+							"var timestamp = new Date().toISOString().replace(/[^\\d]/g, '').substring(0,14);\r",
+							"var message_id = pm.collectionVariables.get('message_id');\r",
+							"var signature_key_first_part = pm.collectionVariables.get('signature_key_first_part');\r",
+							"var signature_key_second_part = pm.collectionVariables.get('signature_key_second_part');\r",
+							"var toSign = message_id+timestamp+signature_key_first_part+signature_key_second_part;\r",
+							"console.log(toSign);\r",
+							"var signature = cryptoJs.SHA256(toSign).toString(cryptoJs.enc.Base64).toUpperCase();\r",
+							"pm.collectionVariables.set(\"signature\", signature);\r",
+							"console.log(signature);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const responseJson = xml2Json(pm.response.text());\r",
+							"var result = responseJson['soap:Envelope']['soap:Body']['ns2:GetBiztositottiJogviszonyFoglalkoztatoAdatResponseElem']['requestData']['requestId'];\r",
+							"pm.collectionVariables.set(\"request_id\", result);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "text/xml;charset=UTF-8",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:loc=\"https://soap.api.nav.gov.hu/definitions/services/1.0/adozo/local\">\r\n   <soapenv:Header>\r\n      <loc:NAVm2mSoapHeader>\r\n         <correlationId>{{$randomUUID}}</correlationId>\r\n         <messageId>{{message_id}}</messageId>\r\n      </loc:NAVm2mSoapHeader>\r\n   </soapenv:Header>\r\n      <soapenv:Body>\r\n      <loc:GetBiztositottiJogviszonyFoglalkoztatoAdatRequestElem>\r\n        <adoalanyAzonosito>11117423</adoalanyAzonosito>\r\n        <signature>{{signature}}</signature>\r\n        \r\n        <lekerdezesiIdoszakKezdete>2025-01-01</lekerdezesiIdoszakKezdete>\r\n        <lekerdezesiIdoszakVege>2025-03-13</lekerdezesiIdoszakVege>\r\n        <jogviszonyTipus>MIND</jogviszonyTipus>\r\n      </loc:GetBiztositottiJogviszonyFoglalkoztatoAdatRequestElem>\r\n   </soapenv:Body>\r\n</soapenv:Envelope>",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{agw_server}}/soap-api/1.0/adozo/FoglalkoztatoAdatok",
+					"host": [
+						"{{agw_server}}"
+					],
+					"path": [
+						"soap-api",
+						"1.0",
+						"adozo",
+						"FoglalkoztatoAdatok"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "LegalRelationshipEmployerStatus Copy",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const cryptoJs = require('crypto-js');\r",
+							"var timestamp = new Date().toISOString().replace(/[^\\d]/g, '').substring(0,14);\r",
+							"var message_id = pm.collectionVariables.get('message_id');\r",
+							"var signature_key_first_part = pm.collectionVariables.get('signature_key_first_part');\r",
+							"var signature_key_second_part = pm.collectionVariables.get('signature_key_second_part');\r",
+							"var toSign = message_id+timestamp+signature_key_first_part+signature_key_second_part;\r",
+							"console.log(toSign);\r",
+							"var signature = cryptoJs.SHA256(toSign).toString(cryptoJs.enc.Base64).toUpperCase();\r",
+							"pm.collectionVariables.set(\"signature\", signature);\r",
+							"console.log(signature);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}"
+					},
+					{
+						"key": "messageId",
+						"value": "{{message_id}}"
+					},
+					{
+						"key": "correlationId",
+						"value": "{{$randomUUID}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{agw_server}}/rest-api/1.0/NavM2mAdozo/adozoService/BiztositottiJogviszonyFoglalkoztatoAdatStatusz/{{request_id}}?signature={{signature}}&pageNumber=0",
+					"host": [
+						"{{agw_server}}"
+					],
+					"path": [
+						"rest-api",
+						"1.0",
+						"NavM2mAdozo",
+						"adozoService",
+						"BiztositottiJogviszonyFoglalkoztatoAdatStatusz",
+						"{{request_id}}"
+					],
+					"query": [
+						{
+							"key": "signature",
+							"value": "{{signature}}"
+						},
+						{
+							"key": "pageNumber",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SOAP LegalRelationshipEmployerStatus",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const cryptoJs = require('crypto-js');\r",
+							"var timestamp = new Date().toISOString().replace(/[^\\d]/g, '').substring(0,14);\r",
+							"var message_id = pm.collectionVariables.get('message_id');\r",
+							"var signature_key_first_part = pm.collectionVariables.get('signature_key_first_part');\r",
+							"var signature_key_second_part = pm.collectionVariables.get('signature_key_second_part');\r",
+							"var toSign = message_id+timestamp+signature_key_first_part+signature_key_second_part;\r",
+							"console.log(toSign);\r",
+							"var signature = cryptoJs.SHA256(toSign).toString(cryptoJs.enc.Base64).toUpperCase();\r",
+							"pm.collectionVariables.set(\"signature\", signature);\r",
+							"console.log(signature);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "text/xml;charset=UTF-8",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:loc=\"https://soap.api.nav.gov.hu/definitions/services/1.0/adozo/local\">\r\n   <soapenv:Header>\r\n      <loc:NAVm2mSoapHeader>\r\n         <correlationId>{{$randomUUID}}</correlationId>\r\n         <messageId>{{message_id}}</messageId>\r\n      </loc:NAVm2mSoapHeader>\r\n   </soapenv:Header>\r\n      <soapenv:Body>\r\n      <loc:GetBiztositottiJogviszonyFoglalkoztatoAdatStatuszRequestElem>\r\n         <pageNumber>0</pageNumber>        \r\n         <requestId>{{request_id}}</requestId>\r\n         <signature>{{signature}}</signature>        \r\n         \r\n      </loc:GetBiztositottiJogviszonyFoglalkoztatoAdatStatuszRequestElem>\r\n   </soapenv:Body>\r\n</soapenv:Envelope>",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{agw_server}}/soap-api/1.0/adozo/FoglalkoztatoAdatok",
+					"host": [
+						"{{agw_server}}"
+					],
+					"path": [
+						"soap-api",
+						"1.0",
+						"adozo",
+						"FoglalkoztatoAdatok"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "HianyzoBevallas",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const cryptoJs = require('crypto-js');\r",
+							"var timestamp = new Date().toISOString().replace(/[^\\d]/g, '').substring(0,14);\r",
+							"var message_id = pm.collectionVariables.get('message_id');\r",
+							"var signature_key_first_part = pm.collectionVariables.get('signature_key_first_part');\r",
+							"var signature_key_second_part = pm.collectionVariables.get('signature_key_second_part');\r",
+							"var toSign = message_id+timestamp+signature_key_first_part+signature_key_second_part;\r",
+							"console.log(toSign);\r",
+							"var signature = cryptoJs.SHA256(toSign).toString(cryptoJs.enc.Base64).toUpperCase();\r",
+							"pm.collectionVariables.set(\"signature\", signature);\r",
+							"console.log(signature);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}"
+					},
+					{
+						"key": "messageId",
+						"value": "{{message_id}}"
+					},
+					{
+						"key": "correlationId",
+						"value": "{{$randomUUID}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{agw_server}}/rest-api/1.0/NavM2mAdozo/adozoService/HianyzoBevallas/12452284?signature={{signature}}",
+					"host": [
+						"{{agw_server}}"
+					],
+					"path": [
+						"rest-api",
+						"1.0",
+						"NavM2mAdozo",
+						"adozoService",
+						"HianyzoBevallas",
+						"12452284"
+					],
+					"query": [
+						{
+							"key": "signature",
+							"value": "{{signature}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SOAP HianyzoBevallas",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const cryptoJs = require('crypto-js');\r",
+							"var timestamp = new Date().toISOString().replace(/[^\\d]/g, '').substring(0,14);\r",
+							"var message_id = pm.collectionVariables.get('message_id');\r",
+							"var signature_key_first_part = pm.collectionVariables.get('signature_key_first_part');\r",
+							"var signature_key_second_part = pm.collectionVariables.get('signature_key_second_part');\r",
+							"var toSign = message_id+timestamp+signature_key_first_part+signature_key_second_part;\r",
+							"console.log(toSign);\r",
+							"var signature = cryptoJs.SHA256(toSign).toString(cryptoJs.enc.Base64).toUpperCase();\r",
+							"pm.collectionVariables.set(\"signature\", signature);\r",
+							"console.log(signature);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "text/xml;charset=UTF-8",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:loc=\"https://soap.api.nav.gov.hu/definitions/services/1.0/adozo/local\">\r\n   <soapenv:Header>\r\n      <loc:NAVm2mSoapHeader>\r\n         <correlationId>{{$randomUUID}}</correlationId>\r\n         <messageId>{{message_id}}</messageId>\r\n      </loc:NAVm2mSoapHeader>\r\n   </soapenv:Header>\r\n      <soapenv:Body>\r\n      <loc:GetHianyzoBevallasRequestElem>\r\n        <adoalanyAzonosito>12452284</adoalanyAzonosito>\r\n        <signature>{{signature}}</signature>\r\n        \r\n      </loc:GetHianyzoBevallasRequestElem>\r\n   </soapenv:Body>\r\n</soapenv:Envelope>",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{agw_server}}/soap-api/1.0/adozo/HianyzoBevallas",
+					"host": [
+						"{{agw_server}}"
+					],
+					"path": [
+						"soap-api",
+						"1.0",
+						"adozo",
+						"HianyzoBevallas"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "agw_server",
+			"value": "https://m2m-dev.nav.gov.hu",
+			"type": "string"
+		},
+		{
+			"key": "user",
+			"value": "kitöltendő",
+			"type": "string"
+		},
+		{
+			"key": "password",
+			"value": "kitöltendő",
+			"type": "string"
+		},
+		{
+			"key": "client",
+			"value": "kitöltendő",
+			"type": "string"
+		},
+		{
+			"key": "client_secret",
+			"value": "kitöltendő",
+			"type": "string"
+		},
+		{
+			"key": "signature_key_second_part",
+			"value": "kitöltendő"
+		},
+		{
+			"key": "signature_key_first_part",
+			"value": "kitöltendő"
+		},
+		{
+			"key": "access_token",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "timestamp",
+			"value": ""
+		},
+		{
+			"key": "signature",
+			"value": ""
+		},
+		{
+			"key": "message_id",
+			"value": "4fe488ca-2275-11ef-9262-0242ac130002"
+		},
+		{
+			"key": "request_id",
+			"value": "",
+			"type": "string"
+		}
+	]
+}

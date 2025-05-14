@@ -1,0 +1,1205 @@
+<?xml  version='1.0' encoding='utf-8' ?>
+<xs:schema targetNamespace="https://soap.api.nav.gov.hu/definitions/messages/1.0/adozo" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="https://soap.api.nav.gov.hu/definitions/messages/1.0/adozo" xmlns:msg_adozo="https://soap.api.nav.gov.hu/definitions/messages/1.0/adozo" xmlns:msg_common="https://soap.api.nav.gov.hu/definitions/messages/1.0/common" xmlns:foglalkoztatas10="https://soap.api.nav.gov.hu/definitions/model/1.0/foglalkoztatas">
+	<xs:import namespace="https://soap.api.nav.gov.hu/definitions/model/1.0/foglalkoztatas" schemaLocation="../../model/1.0/foglalkoztatas/schema_definition.xsd"/>
+	<xs:import namespace="https://soap.api.nav.gov.hu/definitions/messages/1.0/common" schemaLocation="../../messages/1.0/common.xsd"/>
+	<xs:complexType name="Deviza">
+		<xs:annotation>
+			<xs:documentation>Deviza összeg</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="arfolyam" type="xs:string" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Árfolyam</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="devizanem" type="xs:string" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Devizanem</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="osszeg" type="xs:double" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="EgyenlegMinosites">
+		<xs:annotation>
+			<xs:documentation>Egyenleg típusa</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="EGYENLEG">
+				<xs:annotation>
+					<xs:documentation>egyenleg</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TARTOZAS">
+				<xs:annotation>
+					<xs:documentation>tartozás</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TULFIZETES">
+				<xs:annotation>
+					<xs:documentation>túlfizetés</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="GetBiztositottiJogviszonyFoglalkoztatoAdatResult">
+		<xs:annotation>
+			<xs:documentation>getBiztositottiJogviszonyFoglalkoztatoAdat  művelet válaszkódjai.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="SIKERES">
+				<xs:annotation>
+					<xs:documentation>Sikeres művelet.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="JOGOSULTSAG_ELLENORZES_PROBLEMA">
+				<xs:annotation>
+					<xs:documentation>A jogosultságvizsgálat nem érhető el.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ERVENYTELEN_ADOALANY_AZONOSITO">
+				<xs:annotation>
+					<xs:documentation>Érvénytelen adóalany azonosító</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="FOLYAMATBAN">
+				<xs:annotation>
+					<xs:documentation>A válaszadás sokáig tart a vélhetően nagy lekérdezett adatmenniység miatt, ezért a getBiztositottiJogviszonyFoglalkoztatoAdatStatusz művelettel kell később lekérdezni az eredményt.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EGYEB_HIBA">
+				<xs:annotation>
+					<xs:documentation>Egyéb hiba</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NINCS_JOGOSULTSAG">
+				<xs:annotation>
+					<xs:documentation>A lekérdezőnek nincs jogosultsága a lekérdzett adózó adataihoz.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ERVENYTELEN_ALAIRAS">
+				<xs:annotation>
+					<xs:documentation>Érvénytelen aláírás</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ERVENYTELEN_JOGVISZONY_TIPUS">
+				<xs:annotation>
+					<xs:documentation>A jogviszonyTipus parameter nem NYITOTT, vagy MIND.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TUL_SOK_KERES">
+				<xs:annotation>
+					<xs:documentation>Egy felhasználó egyszerre csak egyet kezdeményezhet. Új lekérdezés nem kezdeményezhező, amíg az előző nem fejeződött be.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="FOGLALKOZTATO_NEM_TALALHATO">
+				<xs:annotation>
+					<xs:documentation>A foglalkoztató nem található</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NINCS_BEJELENTETT_JOGVISZONY">
+				<xs:annotation>
+					<xs:documentation>A foglalkoztató az adott időszakra nem jelentett be jogviszonyt</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NINCS_BENYUJTOTT_ADATLAP">
+				<xs:annotation>
+					<xs:documentation>A foglalkoztató nem nyújtott be egészségügyi szolgáltatási járulékfizetési kötelezettséggel kapcsolatos adatlapot</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NINCS_ADAT">
+				<xs:annotation>
+					<xs:documentation>Nincs a szűrési paraméternek megfelelő jogviszony</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="GetBiztositottiJogviszonyFoglalkoztatoAdatStatuszResult">
+		<xs:annotation>
+			<xs:documentation>getBiztositottiJogviszonyFoglalkoztatoAdat  művelet válaszkódjai.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="SIKERES">
+				<xs:annotation>
+					<xs:documentation>Sikeres művelet.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="JOGOSULTSAG_ELLENORZES_PROBLEMA">
+				<xs:annotation>
+					<xs:documentation>A jogosultságvizsgálat nem érhető el.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ERVENYTELEN_LEKERDEZES_AZONOSITO">
+				<xs:annotation>
+					<xs:documentation>A lekérdezés azonosító nem létezik.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="FOLYAMATBAN">
+				<xs:annotation>
+					<xs:documentation>A válaszadás sokáig tart a vélhetően nagy lekérdezett adatmenniység miatt, ezért a getBiztositottiJogviszonyFoglalkoztatoAdatStatusz művelettel kell később lekérdezni az eredményt.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EGYEB_HIBA">
+				<xs:annotation>
+					<xs:documentation>Egyéb hiba</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NINCS_JOGOSULTSAG">
+				<xs:annotation>
+					<xs:documentation>A lekérdezőnek nincs jogosultsága a lekérdzett adózó adataihoz.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ERVENYTELEN_ALAIRAS">
+				<xs:annotation>
+					<xs:documentation>Érvénytelen aláírás</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ERVENYTELEN_POZICIO">
+				<xs:annotation>
+					<xs:documentation>A megadott pozíció túl nagy. Nincs ennyi foglalkoztatottja a foglalkoztatónak.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="FOGLALKOZTATO_NEM_TALALHATO">
+				<xs:annotation>
+					<xs:documentation>A foglalkoztató nem található</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NINCS_BEJELENTETT_JOGVISZONY">
+				<xs:annotation>
+					<xs:documentation>A foglalkoztató az adott időszakra nem jelentett be jogviszonyt</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NINCS_BENYUJTOTT_ADATLAP">
+				<xs:annotation>
+					<xs:documentation>A foglalkoztató nem nyújtott be egészségügyi szolgáltatási járulékfizetési kötelezettséggel kapcsolatos adatlapot</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NINCS_ADAT">
+				<xs:annotation>
+					<xs:documentation>Nincs a szűrési paraméternek megfelelő jogviszony</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="GetHianyzoBevallasResult">
+		<xs:annotation>
+			<xs:documentation>A getHianyzoBevallas művelet válaszkódjai.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="SIKERES">
+				<xs:annotation>
+					<xs:documentation>Sikeres művelet.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EGYEB_HIBA">
+				<xs:annotation>
+					<xs:documentation>Hiba lépett fel az adatok lekérdezése közben.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NINCS_ADAT">
+				<xs:annotation>
+					<xs:documentation>Nem áll rendelkezésre  adat</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NINCS_JOGOSULTSAG">
+				<xs:annotation>
+					<xs:documentation>A lekérdezőnek nincs jogosultsága a lekérdzett adózó adataihoz.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="JOGOSULTSAG_ELLENORZES_PROBLEMA">
+				<xs:annotation>
+					<xs:documentation>A jogosultságvizsgálat nem érhető el.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ERVENYTELEN_ADOALANY_AZONOSITO">
+				<xs:annotation>
+					<xs:documentation>Érvénytelen adóalany azonosító</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ERVENYTELEN_ALAIRAS">
+				<xs:annotation>
+					<xs:documentation>Érvénytelen aláírás</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="GetKoztartozasEgyenlegResult">
+		<xs:annotation>
+			<xs:documentation>getKoztartozasEgyenleg művelet válaszkódjai.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="SIKERES">
+				<xs:annotation>
+					<xs:documentation>Sikeres művelet.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EGYEB_HIBA">
+				<xs:annotation>
+					<xs:documentation>Hiba lépett fel az adatok lekérdezése közben.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NINCS_ADAT">
+				<xs:annotation>
+					<xs:documentation>Nem áll rendelkezésre  adat</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NINCS_JOGOSULTSAG">
+				<xs:annotation>
+					<xs:documentation>A lekérdezőnek nincs jogosultsága a lekérdzett adózó adataihoz.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="JOGOSULTSAG_ELLENORZES_PROBLEMA">
+				<xs:annotation>
+					<xs:documentation>A jogosultságvizsgálat nem érhető el.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ERVENYTELEN_ADOALANY_AZONOSITO">
+				<xs:annotation>
+					<xs:documentation>Érvénytelen adóalany azonosító</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ERVENYTELEN_ALAIRAS">
+				<xs:annotation>
+					<xs:documentation>Érvénytelen aláírás</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LEKERDEZES_NEM_TELJESITHETO">
+				<xs:annotation>
+					<xs:documentation>A lekérdezés a könyvelési adatok alapján jelenleg nem teljesíthető. Kérjük, forduljon ügyfélszolgálatunkhoz!</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="GetOsszesitettAdoszamlaResult">
+		<xs:annotation>
+			<xs:documentation>getOsszesitettAdoszamla művelet válaszkódjai.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="SIKERES">
+				<xs:annotation>
+					<xs:documentation>Sikeres művelet.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EGYEB_HIBA">
+				<xs:annotation>
+					<xs:documentation>Hiba lépett fel az adatok lekérdezése közben.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ADAT_NEM_ERHETO_EL">
+				<xs:annotation>
+					<xs:documentation>Jelenleg az adatok  lekérdezése technikai okokból nem lehetséges.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NINCS_JOGOSULTSAG">
+				<xs:annotation>
+					<xs:documentation>A lekérdezőnek nincs jogosultsága a lekérdzett adózó adataihoz.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="JOGOSULTSAG_ELLENORZES_PROBLEMA">
+				<xs:annotation>
+					<xs:documentation>A jogosultságvizsgálat nem érhető el.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ERVENYTELEN_ADOALANY_AZONOSITO">
+				<xs:annotation>
+					<xs:documentation>Érvénytelen adóalany azonosító</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ERVENYTELEN_ALAIRAS">
+				<xs:annotation>
+					<xs:documentation>Érvénytelen aláírás</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="GetTetelesAdoszamlaResult">
+		<xs:annotation>
+			<xs:documentation>getTetelesAdoszamla művelet válaszkódjai.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="SIKERES">
+				<xs:annotation>
+					<xs:documentation>Sikeres művelet.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EGYEB_HIBA">
+				<xs:annotation>
+					<xs:documentation>Hiba lépett fel az adatok lekérdezése közben.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ADAT_NEM_ERHETO_EL">
+				<xs:annotation>
+					<xs:documentation>Jelenleg az adatok  lekérdezése technikai okokból nem lehetséges.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NINCS_JOGOSULTSAG">
+				<xs:annotation>
+					<xs:documentation>A lekérdezőnek nincs jogosultsága a lekérdzett adózó adataihoz.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="JOGOSULTSAG_ELLENORZES_PROBLEMA">
+				<xs:annotation>
+					<xs:documentation>A jogosultságvizsgálat nem érhető el.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ERVENYTELEN_ADOALANY_AZONOSITO">
+				<xs:annotation>
+					<xs:documentation>Érvénytelen adóalany azonosító</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ERVENYTELEN_ALAIRAS">
+				<xs:annotation>
+					<xs:documentation>Érvénytelen aláírás</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ERVENYTELEN_TETEL_TIPUS">
+				<xs:annotation>
+					<xs:documentation>A tetelTipus bemenő paraméter nem KONYVELT, vagy KONYVELT_ES_KONYVELESRE_VARO</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="JogviszonyTipus">
+		<xs:annotation>
+			<xs:documentation>Jogviszony típusa</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="MIND">
+				<xs:annotation>
+					<xs:documentation>Mind</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NYITOTT">
+				<xs:annotation>
+					<xs:documentation>nyitott</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="Penzforgalom">
+		<xs:annotation>
+			<xs:documentation>Pénzforgalom adatai</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="osszeg" type="xs:double" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Összeg</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="deviza" type="Deviza" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Deviza</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="TetelTipus">
+		<xs:annotation>
+			<xs:documentation>Tétel típusa</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="KONYVELT">
+				<xs:annotation>
+					<xs:documentation> Csak a már könyvelt tételek. </xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KONYVELT_ES_KONYVELESRE_VARO">
+				<xs:annotation>
+					<xs:documentation> A könyvelt és a könyvelésre váró tételek is.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="VanEloremutatoTetel">
+		<xs:annotation>
+			<xs:documentation>Van előremutató tétel?&#xD;
+YES: A könyvelésre váró tételeket is beleszámolja az eredménybe.&#xD;
+NO: A könyvelésre váró tételek nélkül számolja az eredményt.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="IGEN"/>
+			<xs:enumeration value="NEM"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="Adonem">
+		<xs:annotation>
+			<xs:documentation>Adónem adatok</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="kod" type="xs:string" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Adónemkód</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="konyvelesreVaroOsszesen" type="xs:double" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Könyveletlen tételek összesen</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="kotelezettsegOsszesen" type="xs:double" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Kötelezettség összesen</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="megnevezes" type="xs:string" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Adónem megnevezése</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="penzforgalomOsszesen" type="xs:double" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Pénzforgalom oldali könyvelt tételek összesen</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="szamlaszam" type="xs:string" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Adónem számlaszáma</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="adonemEgyenleg" type="Egyenleg" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Az adónem egyenlege</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="konyvelesreUzenet" type="KonyvelesreUzenet" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Könyvelésre váró tétel hiány indokának kódja és szövege</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="konyvelesreVaroTetel" type="KonyvelesreVaroTetel" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Könyveletlen tételek</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="tetel" type="Tetel" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Könyvelt tétetlek</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AdonemBase">
+		<xs:annotation>
+			<xs:documentation>Adónem alapadat</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="adonemKod" type="xs:string" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Adónem kód</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Adozo">
+		<xs:annotation>
+			<xs:documentation>Adózó adatai</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="adoalanyAzonosito" type="xs:string" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>A lekérdezett adózó adóalanyazonosítója: adószám, vagy adóazonosító jel</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="cim" type="xs:string" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Adózó címe</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="idoszak" type="xs:string" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Lekérdezett időszak</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="konyvelesiAzonosito" type="xs:string" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Könyvelési azonosító: adószám, vagy adóazonosító jel</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="lekerdezesIdopontja" type="xs:dateTime" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Lekérdezés időpontja</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="nev" type="xs:string" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Adózó neve</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="vpid" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Vámazonosító</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AdozoLekerdezesBaseRequestType">
+		<xs:annotation>
+			<xs:documentation>Adózói lekérdezések alapadatai</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="adoalanyAzonosito" type="xs:string" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>A lekérdezett adózó adóalany azonosítója. . Adóalany azonosító: az adószám első 8 számjegye, vagy az adóazonosító jel.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="signature" type="xs:string" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Aláírás</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Egyenleg">
+		<xs:annotation>
+			<xs:documentation>Egyenleg adatok</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="osszeg" type="xs:double" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Az egyenleg összege</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="minosites" type="EgyenlegMinosites" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Az egyenleg típusa</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GetBiztositottiJogviszonyFoglalkoztatoAdatRequestType">
+		<xs:annotation>
+			<xs:documentation>Foglalkoztató foglalkoztatottjainak lekérdezésekor a kérés body-ban található adatok.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="AdozoLekerdezesBaseRequestType">
+				<xs:sequence>
+					<xs:element name="bejelentesDatuma" type="xs:date" minOccurs="0" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>Bejelentés dátuma</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="lekerdezesiIdoszakKezdete" type="xs:date" minOccurs="0" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>Időszak kezdete</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="lekerdezesiIdoszakVege" type="xs:date" minOccurs="0" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>Időszak vége</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="jogviszonyTipus" type="JogviszonyTipus" minOccurs="1" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>Jogviszony típusa</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="GetBiztositottiJogviszonyFoglalkoztatoAdatResponseType">
+		<xs:annotation>
+			<xs:documentation>Foglalkoztató foglalkoztatottjainak lekérdezésekor a válaszüzenet body-ban található adatok.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="msg_common:BaseResponseType">
+				<xs:sequence>
+					<xs:element name="foglalkoztatottak" type="foglalkoztatas10:BiztositottiJogviszonyFoglalkoztatoAdatai" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Foglalkoztatottak adatai</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="resultCode" type="GetBiztositottiJogviszonyFoglalkoztatoAdatResult" minOccurs="1" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>Válaszkód</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="requestData" type="RequestData" minOccurs="0" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>Lekérdezés adatai. Csak SIKERES, vagy FOLYAMATBAN státusz esetén kitöltött.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="GetBiztositottiJogviszonyFoglalkoztatoAdatStatuszRequestType">
+		<xs:annotation>
+			<xs:documentation>Foglalkoztató foglalkoztatottjainak státuszlekérdezésekor a kérés body-ban található adatok.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="pageNumber" type="xs:int" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Annak a lapnak a száma, ahonnan az adatok  lekérdezése indul a lapméretnek megfelelő adatmennyiséggel. A kezdő lapszám a nulla.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="requestId" type="xs:string" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>A lekérdezés egyedi azonosítója</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="signature" type="xs:string" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Aláírás</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GetBiztositottiJogviszonyFoglalkoztatoAdatStatuszResponseType">
+		<xs:annotation>
+			<xs:documentation>Foglalkoztató foglalkoztatottjainak státuszlekérdezésekor a válaszüzenet body-ban található adatok.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="msg_common:BaseResponseType">
+				<xs:sequence>
+					<xs:element name="foglalkoztatottak" type="foglalkoztatas10:BiztositottiJogviszonyFoglalkoztatoAdatai" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Foglalkoztatottak adatai</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="resultCode" type="GetBiztositottiJogviszonyFoglalkoztatoAdatStatuszResult" minOccurs="1" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>Válaszkód</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="requestData" type="RequestData" minOccurs="0" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>Lekérdezés adatai. Csak SIKERES, vagy FOLYAMATBAN státusz esetén kitöltött.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="GetHianyzoBevallasRequestType">
+		<xs:annotation>
+			<xs:documentation>Hiányzó bevallások lekérdezésekor a kérés body-ban található adatok.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="AdozoLekerdezesBaseRequestType">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="GetHianyzoBevallasResponseType">
+		<xs:annotation>
+			<xs:documentation>Hiányzó bevallások lekérdezésekor a válasz body-ban található adatok.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="msg_common:BaseResponseType">
+				<xs:sequence>
+					<xs:element name="adoalanyAzonosito" type="xs:string" minOccurs="1" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>A lekérdezett adózó adóalany azonosítója. . Adóalany azonosító: az adószám első 8 számjegye, vagy az adóazonosító jel.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="resultCode" type="GetHianyzoBevallasResult" minOccurs="1" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>Válaszkód</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="hianyzoBevallas" type="HianyzoBevallas" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Hiányzó bevallás adatok</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="GetKoztartozasEgyenlegResponseType">
+		<xs:annotation>
+			<xs:documentation>Köztartozás lekérdezésekor a válasz body-ban található adatok.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="msg_common:BaseResponseType">
+				<xs:sequence>
+					<xs:element name="resultCode" type="GetKoztartozasEgyenlegResult" minOccurs="1" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>Válaszkód</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="koztartozasEgyenleg" type="KoztartozasEgyenleg" minOccurs="0" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>Köztartozás adatok</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="GetKoztartozasEgyenlegResquestType">
+		<xs:complexContent>
+			<xs:extension base="AdozoLekerdezesBaseRequestType">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="GetOsszesitettAdoszamlaRequestType">
+		<xs:annotation>
+			<xs:documentation>Összesített adószámla lekérdezésekor a kérés body-ban található adatok.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="AdozoLekerdezesBaseRequestType">
+				<xs:sequence>
+					<xs:element name="idoszakVege" type="xs:date" minOccurs="0" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>Amennyiben nincs megadva időszak az aktuális adatok lesznek lekérdezve. Ha meg van adva, akkor a megadott dátumra történik a lekérdezés.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="GetOsszesitettAdoszamlaResponseType">
+		<xs:annotation>
+			<xs:documentation>Összesített adószámla lekérdezésekor a válaszüzenet body-ban található adatok.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="msg_common:BaseResponseType">
+				<xs:sequence>
+					<xs:element name="resultCode" type="GetOsszesitettAdoszamlaResult" minOccurs="1" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>Válaszkód</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="osszesitettAdoszamla" type="OsszesitettAdoszamla" minOccurs="0" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>Összesített adószámla adatok</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="GetTetelesAdoszamlaRequestType">
+		<xs:annotation>
+			<xs:documentation>Tételes adószámla lekérdezésekor a kérés body-ban található adatok.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="AdozoLekerdezesBaseRequestType">
+				<xs:sequence>
+					<xs:element name="idoszakVege" type="xs:date" minOccurs="1" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>A megadott dátumra történik a lekérdezés.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="adonemKodok" type="AdonemBase" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Adónem kód, aminek tételei megjelenjenek a válaszban</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="tetelTipus" type="TetelTipus" minOccurs="1" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>Tétel típusa</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="GetTetelesAdoszamlaResponseType">
+		<xs:annotation>
+			<xs:documentation>Tételes adószámla lekérdezésekor a válaszüzenet body-ban található adatok.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="msg_common:BaseResponseType">
+				<xs:sequence>
+					<xs:element name="resultCode" type="GetTetelesAdoszamlaResult" minOccurs="1" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>A művelet eredménykódja</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="tetelesAdoszamla" type="TetelesAdoszamla" minOccurs="0" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>Tételes adószámla adatok</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="HianyzoBevallas">
+		<xs:annotation>
+			<xs:documentation>Hiányzó bevallás adatok</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="bevallasAzonosito" type="xs:string" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Hiányzó bevallás azonosítója</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="bevallasIdoszak" type="xs:string" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Hiányzó bevallás időszaka (év/időszak száma {havi, vagy negyedéves bevallásnál}/időszak típusa {pl. hó, negyedév, év}) visszaadott érték pontos jelölése: éves időszak esetén az év utolsó két számjegye, pl. 21-es évi bevallás éves időszaka: 21, negyedéves időszakoknál: év utolsó két számjegye és a negyedév sorszáma, pl. 21-es év 3. negyedév jelölése: 213, havi gyakoriság esetén év utolsó két számjegye és a hónap sorszáma két számjeggyel, pl. 21-es év februári időszak: 2102</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="bevallasMegnevezes" type="xs:string" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Hiányzó bevallás neve</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="bevallasTipus" type="xs:string" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Hiányzó bevallás típusa</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="eredetiEsedekesseg" type="xs:date" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Eredet esedékesség dátuma</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="JogcimBontas">
+		<xs:annotation>
+			<xs:documentation>Adatok jogcím szerinti bontásban</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="befizetes" type="xs:double" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Befizetés</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="elnevezes" type="xs:string" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Jogcím elnevezése</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="eloiras" type="xs:double" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Előírás</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="fennalloHatralek" type="xs:double" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>A jogcímen fennálló hátralék</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="jovairas" type="xs:double" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Jóváírás</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="kod" type="xs:string" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Jogcím kódja</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="visszafizetes" type="xs:double" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Visszafizetés</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="KodLista">
+		<xs:annotation>
+			<xs:documentation>Bekódolt adatok magyarázó táblázatai: pénzforgalmi tételtípus, átvezetés forrásazonosító, befizetés forrás számlaszáma</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="nev" type="xs:string" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Kódlista neve</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="kodListaElem" type="KodListaElem" minOccurs="1" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Kódlista elem</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="KodListaElem">
+		<xs:annotation>
+			<xs:documentation>A kódlista egy elemének adatai</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="ertek" type="xs:string" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Kódlista elem értéke</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="kod" type="xs:string" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Kódlista elem kódja</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="KonyvelesreUzenet">
+		<xs:annotation>
+			<xs:documentation>Könyvelésre váró tétel hiány indokának kódja és szövege</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="kod" type="xs:string" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Kód</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="szoveg" type="xs:string" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Szöveg</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="KonyvelesreVaroTetel">
+		<xs:annotation>
+			<xs:documentation>Könyveletlen tétel</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="barkod" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Bárkód</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="bizonylatSzama" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Bizonylat száma</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ellenszamlaKod" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Ellenszámla kódja, ahonnan jön a befizetés, vagy ahová megy a kiutalás</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="hatarozatszam" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Határozat száma</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="kozlemeny" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>A befizetés közlemény rovata</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="osszeg" type="xs:double" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Összeg</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="teteltipus" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Befizetés típusa</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="tranzakcioIdopont" type="xs:dateTime" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Befizetés időpontja</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="KoztartozasEgyenleg">
+		<xs:sequence>
+			<xs:element name="osszesBefizetes" type="xs:double" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Összes befizetés</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="osszesEloiras" type="xs:double" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Összes előírás</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="osszesJogcimTeljesFennalloHatralek" type="xs:double" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Összes jogcím teljes fennálló hátralék</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="osszesJovairas" type="xs:double" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Összes jóváírás</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="osszesVisszafizetes" type="xs:double" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Összes visszafizetés</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="jogcimBontas" type="JogcimBontas" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Adatok jogcím szerinti bontásban</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="MindOsszesen">
+		<xs:annotation>
+			<xs:documentation>Mindösszesen adatok</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="tartozas" type="xs:double" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Tartozás</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="tulfizetes" type="xs:double" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Túlfizetés</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="egyenleg" type="Egyenleg" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Egyenleg</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="letetiEgyenleg" type="Egyenleg" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Letéti egyenleg</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="OsszesitettAdoszamla">
+		<xs:annotation>
+			<xs:documentation>Összesített adószámla adatok</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="adozoiTartozas" type="xs:double" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Adózói tartozás (a tartozást mutató adónemek összesített egyenlege)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="adozoiTulfizetes" type="xs:double" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Adózói túlfizetés(a túlfizetést mutató adónemek összesített egyenlege)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="konyveletlenOsszesen" type="xs:double" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>A könyveletlen tételek összege</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ugyfelOsszesen" type="xs:double" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Ügyfél összesen (a könyvelt tételek összege)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="vanEloremutatoTetel" type="VanEloremutatoTetel" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>A könyvelésre váró tételekkel együtt?</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="RequestData">
+		<xs:sequence>
+			<xs:element name="numberOfAllElements" type="xs:int" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Az összes elem száma.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="numberOfElements" type="xs:int" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>A visszaadott elemek száma.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="pageNumber" type="xs:int" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Annak a lapnak a száma, ahonnan az adatok  lekérdezése indul a lapméretnek megfelelő adatmennyiséggel. A kezdő lapszám a nulla.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="requestId" type="xs:string" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Lekérdezés egyedi azonosítója</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="timeOfRequest" type="xs:dateTime" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Az adatok lekérdezésének időpontja. Erre az időpontra vonatkozó állapotot tükröznek az adatok.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Tetel">
+		<xs:annotation>
+			<xs:documentation>Adónem tétel</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="aladonem" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Aladónem</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ellenszamlaKod" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Ellenszámla kódja, ahonnan jön a befizetés, vagy ahová megy a kiutalás</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="esedekessegiDatum" type="xs:date" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Esedékesség dátuma</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="kotelezettseg" type="xs:double" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Kötelezettség</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="kotelezettsegAtvezetveForrasKod" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Kötelezettség átvezetett tétel esetében a forrás adóalany kódja</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="megnevezes" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>A tétel típusának neve</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="penzforgalmAtvezetveForrasKod" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Pénzforgalom átvezetett tétel esetében a forrás adóalany kódja</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="teljesitesiDatum" type="xs:date" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Pénzforgalmi tétel teljesítési dátum</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="tipus" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Pénzforgalmi tétel típus kódja</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="penzforgalom" type="Penzforgalom" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Pénzforgalom</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="TetelesAdoszamla">
+		<xs:annotation>
+			<xs:documentation>Részletes adószámla adatok</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="bhtlUzenet" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Behajthatatlan tételekről szakmai üzenet</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="adonem" type="Adonem" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Adónem tételes adat</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="adozo" type="Adozo" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Adózói adatok</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="kodLista" type="KodLista" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Bekódolt adatok magyarázó táblázatai: pénzforgalmi tételtípus, átvezetés forrásazonosító, befizetés forrás számlaszáma</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="mindOsszesen" type="MindOsszesen" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>mindösszesen</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

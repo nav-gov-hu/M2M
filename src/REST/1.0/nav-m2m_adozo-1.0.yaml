@@ -1,0 +1,1265 @@
+openapi: 3.0.0
+x-generator-comment: 'Generalt service: NavM2mAdozo'
+info:
+  title: NavM2mAdozo
+  description: OpenAPI leíró a NAV M2M Adózó adatszolgáltatáshoz.
+  version: '1.0'
+paths:
+  /NavM2mAdozo/adozoService/HianyzoBevallas/{adolanyAzonosito}:
+    get:
+      tags:
+        - AdozoService
+      summary: HianyzoBevallas.getHianyzoBevallas
+      description: >-
+        Hiányzó bevallás adatok lekérdezését biztosító művelet. Visszaadja a
+        képviselő egy képviseltjének hiányzó bevallás adatait. (Letrehozva a
+        HianyzoBevallas.getHianyzoBevallas(adolanyAzonosito: char, signatute:
+        char, messageId: char, correlationId:
+        char):GetHianyzoBevallasResponseType operation-bol.)
+      operationId: getHianyzoBevallas
+      parameters:
+        - name: signature
+          in: query
+          description: Aláírás
+          schema:
+            type: string
+          required: true
+        - name: messageId
+          in: header
+          description: Üzenet egyedi azonosítója
+          schema:
+            type: string
+          required: true
+        - name: correlationId
+          in: header
+          description: Üzenetek összekapcsolását biztosító egyedi azonosító.
+          schema:
+            type: string
+      x-generator-comment: 'Operation return type: getHianyzoBevallasResponseBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/getHianyzoBevallasResponseBody'
+    parameters:
+      - name: adolanyAzonosito
+        in: path
+        required: true
+        description: >-
+          A lekérdezett adózó adóalany azonosítója. . Adóalany azonosító: az
+          adószám első 8 számjegye, vagy az adóazonosító jel. Path parameterkent
+          letrehozva!
+        schema:
+          type: string
+  /NavM2mAdozo/adozoService/KoztartozasEgyenleg/{adolanyAzonosito}:
+    get:
+      tags:
+        - AdozoService
+      summary: KoztartozasEgyenleg.getKoztartozasEgyenleg
+      description: >-
+        Köztartozás adatok lekérdezését biztosító művelet. Visszaadja a
+        képviselő egy képviseltjének köztartozás adatait. (Letrehozva a
+        KoztartozasEgyenleg.getKoztartozasEgyenleg(adolanyAzonosito: char,
+        signature: char, messageId: char, correlationId:
+        char):GetKoztartozasEgyenlegResponseType operation-bol.)
+      operationId: getKoztartozasEgyenleg
+      parameters:
+        - name: signature
+          in: query
+          description: Aáírás
+          schema:
+            type: string
+          required: true
+        - name: messageId
+          in: header
+          description: Az üzenet egyedi azonosítója
+          schema:
+            type: string
+          required: true
+        - name: correlationId
+          in: header
+          description: Üzenetek összekapcsolását biztosító egyedi azonosító.
+          schema:
+            type: string
+      x-generator-comment: 'Operation return type: getKoztartozasEgyenlegResponseBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/getKoztartozasEgyenlegResponseBody'
+    parameters:
+      - name: adolanyAzonosito
+        in: path
+        required: true
+        description: >-
+          A lekérdezett adózó adóalany azonosítója. . Adóalany azonosító: az
+          adószám első 8 számjegye, vagy az adóazonosító jel. Path parameterkent
+          letrehozva!
+        schema:
+          type: string
+  /NavM2mAdozo/adozoService/BiztositottiJogviszonyFoglalkoztatoAdat/{adolanyAzonosito}:
+    get:
+      tags:
+        - AdozoService
+      summary: >-
+        BiztositottiJogviszonyFoglalkoztatoAdat.getBiztositottiJogviszonyFoglalkoztatoAdat
+      description: >-
+        Foglalkoztató foglalkoztatottjainak biztosítotti jogviszony adatainak
+        lekérdezését biztosító művelet. Amennyiben a válaszban nem érkeznek meg
+        az adatok, akkor vélhetően sok foglalkoztatott adatait visszaadó,
+        elhúzódó műveletről van szó, aminek eredménye a
+        getLegalRelationshipEmployerDataStatus művelettel kérdezhető le.
+        (Letrehozva a
+        BiztositottiJogviszonyFoglalkoztatoAdat.getBiztositottiJogviszonyFoglalkoztatoAdat(adolanyAzonosito:
+        char, lekerdezesiIdoszakKezdete: date, lekerdezesiIdoszakVege: date,
+        bejelentesDatuma: date, jogviszonyTipus: char, signature: char,
+        messageId: char, correlationId:
+        char):GetBiztositottiJogviszonyFoglalkoztatoAdatResponseType
+        operation-bol.)
+      operationId: getBiztositottiJogviszonyFoglalkoztatoAdat
+      parameters:
+        - name: lekerdezesiIdoszakKezdete
+          in: query
+          description: Lekérdezési időszak kezdete
+          schema:
+            type: string
+            format: date
+        - name: lekerdezesiIdoszakVege
+          in: query
+          description: Lekérdezési időszak vége
+          schema:
+            type: string
+            format: date
+        - name: bejelentesDatuma
+          in: query
+          description: Bejelentés dátuma
+          schema:
+            type: string
+            format: date
+        - name: jogviszonyTipus
+          in: query
+          description: Jogviszony típusa (NYITOTT-nyitott, MIND-mind)
+          schema:
+            type: string
+          required: true
+        - name: signature
+          in: query
+          description: Aláírás
+          schema:
+            type: string
+          required: true
+        - name: messageId
+          in: header
+          description: Üzenet egyedi azonosítója
+          schema:
+            type: string
+          required: true
+        - name: correlationId
+          in: header
+          description: Üzenetek összekapcsolását biztosító egyedi azonosító.
+          schema:
+            type: string
+      x-generator-comment: >-
+        Operation return type:
+        getBiztositottiJogviszonyFoglalkoztatoAdatResponseBody
+      responses:
+        '200':
+          $ref: >-
+            #/components/responses/getBiztositottiJogviszonyFoglalkoztatoAdatResponseBody
+    parameters:
+      - name: adolanyAzonosito
+        in: path
+        required: true
+        description: >-
+          A lekérdezett adózó adóalany azonosítója. . Adóalany azonosító: az
+          adószám első 8 számjegye, vagy az adóazonosító jel. Path parameterkent
+          letrehozva!
+        schema:
+          type: string
+  /NavM2mAdozo/adozoService/TetelesAdoszamla/{adolanyAzonosito}:
+    get:
+      tags:
+        - AdozoService
+      summary: TetelesAdoszamla.getTetelesAdoszamla
+      description: >-
+        Tételes adószámla adatok lekérdezését biztosító művelet. Visszaadja a
+        képviselő egy képviseltjének tételes adószámla adatait. (Letrehozva a
+        TetelesAdoszamla.getTetelesAdoszamla(adolanyAzonosito: char,
+        idoszakVege: date, tetelTipus: char, adonemKodok: array, signature:
+        char, messageId: char, correlationId:
+        char):GetTetelesAdoszamlaResponseType operation-bol.)
+      operationId: getTetelesAdoszamla
+      parameters:
+        - name: idoszakVege
+          in: query
+          description: Időszak vége
+          schema:
+            type: string
+            format: date
+          required: true
+        - name: tetelTipus
+          in: query
+          description: >-
+            KONYVELT: Csak a már könyvelt tételek. KONYVELT_ES_KONYVELESRE_VARO:
+            A könyvelt és a könyvelésre váró tételek is.
+          schema:
+            type: string
+          required: true
+        - name: adonemKodok
+          in: query
+          description: Adónem kód
+          schema:
+            type: array
+            items:
+              type: string
+        - name: signature
+          in: query
+          description: Aláírás
+          schema:
+            type: string
+          required: true
+        - name: messageId
+          in: header
+          description: Az üzenet egyedi azonosítója.
+          schema:
+            type: string
+          required: true
+        - name: correlationId
+          in: header
+          description: Üzenetek összekapcsolását biztosító egyedi azonosító.
+          schema:
+            type: string
+      x-generator-comment: 'Operation return type: getTetelesAdoszamlaResponseBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/getTetelesAdoszamlaResponseBody'
+    parameters:
+      - name: adolanyAzonosito
+        in: path
+        required: true
+        description: >-
+          A lekérdezett adózó adóalany azonosítója. . Adóalany azonosító: az
+          adószám első 8 számjegye, vagy az adóazonosító jel. Path parameterkent
+          letrehozva!
+        schema:
+          type: string
+  /NavM2mAdozo/adozoService/OsszesitettAdoszamla/{adolanyAzonosito}:
+    get:
+      tags:
+        - AdozoService
+      summary: OsszesitettAdoszamla.getOsszesitettAdoszamla
+      description: >-
+        Összesített adószámla adatok lekérdezését biztosító művelet. Visszaadja
+        a képviselő egy képviseltjének összesített adószámla adatait.
+        (Letrehozva a
+        OsszesitettAdoszamla.getOsszesitettAdoszamla(adolanyAzonosito: char, idoszakVege: date, 
+        signature: char, messageId: char, correlationId:
+        char):GetOsszesitettAdoszamlaResponseType operation-bol.)
+      operationId: getOsszesitettAdoszamla
+      parameters:
+        - name: idoszakVege
+          in: query
+          description: Amennyiben nincs megadva időszak az aktuális adatok lesznek lekérdezve. Ha meg van adva, akkor a megadott dátumra történik a lekérdezés.
+          schema:
+            type: string
+            format: date
+        - name: signature
+          in: query
+          description: Aláírás
+          schema:
+            type: string
+          required: true
+        - name: messageId
+          in: header
+          description: Az üzenet egyedi azonosítója.
+          schema:
+            type: string
+          required: true
+        - name: correlationId
+          in: header
+          description: Üzenetek összekapcsolását biztosító egyedi azonosító.
+          schema:
+            type: string
+      x-generator-comment: 'Operation return type: getOsszesitettAdoszamlaResponseBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/getOsszesitettAdoszamlaResponseBody'
+    parameters:
+      - name: adolanyAzonosito
+        in: path
+        required: true
+        description: >-
+          A lekérdezett adózó adóalany azonosítója. . Adóalany azonosító: az
+          adószám első 8 számjegye, vagy az adóazonosító jel. Path parameterkent
+          letrehozva!
+        schema:
+          type: string
+  /NavM2mAdozo/adozoService/BiztositottiJogviszonyFoglalkoztatoAdatStatusz/{requestId}:
+    get:
+      tags:
+        - AdozoService
+      summary: >-
+        BiztositottiJogviszonyFoglalkoztatoAdatStatusz.getBiztositottiJogviszonyFoglalkoztatoAdatStatusz
+      description: >-
+        Foglalkoztató foglalkoztatottjainak biztosítotti jogviszony adatainak
+        lekérdezését biztosító művelet(getLegalRelationshipEmployerData)
+        státuszát lekérdező művelet. Amennyiben a
+        getLegalRelationshipEmployerData válaszban nem érkeznek meg az adatok,
+        akkor vélhetően sok foglalkoztatott adatait visszaadó, elhúzódó
+        műveletről van szó, aminek eredménye a
+        getLegalRelationshipEmployerDataStatus művelettel kérdezhető le.
+        (Letrehozva a
+        BiztositottiJogviszonyFoglalkoztatoAdatStatusz.getBiztositottiJogviszonyFoglalkoztatoAdatStatusz(requestId:
+        char, pageNumber: int, signature: char, messageId: char, correlationId:
+        char):GetBiztositottiJogviszonyFoglalkoztatoAdatStatuszResponseType
+        operation-bol.)
+      operationId: getBiztositottiJogviszonyFoglalkoztatoAdatStatusz
+      parameters:
+        - name: pageNumber
+          in: query
+          description: >-
+            Annak a lapnak a száma, ahonnan az adatok  lekérdezése indul a
+            lapméretnek megfelelő adatmennyiséggel. A kezdő lapszám a nulla.
+          schema:
+            type: integer
+            format: int32
+          required: true
+        - name: signature
+          in: query
+          description: Aláírás
+          schema:
+            type: string
+          required: true
+        - name: messageId
+          in: header
+          description: Az üzenet egyedi azonosítója
+          schema:
+            type: string
+          required: true
+        - name: correlationId
+          in: header
+          description: Üzenetek összekapcsolását biztosító egyedi azonosító.
+          schema:
+            type: string
+      x-generator-comment: >-
+        Operation return type:
+        getBiztositottiJogviszonyFoglalkoztatoAdatStatuszResponseBody
+      responses:
+        '200':
+          $ref: >-
+            #/components/responses/getBiztositottiJogviszonyFoglalkoztatoAdatStatuszResponseBody
+    parameters:
+      - name: requestId
+        in: path
+        required: true
+        description: A lekérezés egyedi azonosítója Path parameterkent letrehozva!
+        schema:
+          type: string
+components:
+  requestBodies: {}
+  responses:
+    getBiztositottiJogviszonyFoglalkoztatoAdatStatuszResponseBody:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: >-
+              #/components/schemas/GetBiztositottiJogviszonyFoglalkoztatoAdatStatuszResponseType
+    getOsszesitettAdoszamlaResponseBody:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GetOsszesitettAdoszamlaResponseType'
+    getTetelesAdoszamlaResponseBody:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GetTetelesAdoszamlaResponseType'
+    getHianyzoBevallasResponseBody:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GetHianyzoBevallasResponseType'
+    getKoztartozasEgyenlegResponseBody:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GetKoztartozasEgyenlegResponseType'
+    getBiztositottiJogviszonyFoglalkoztatoAdatResponseBody:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: >-
+              #/components/schemas/GetBiztositottiJogviszonyFoglalkoztatoAdatResponseType
+  schemas:
+    BaseResponseType:
+      type: object
+      properties:
+        resultMessage:
+          description: Válaszüzenet
+          type: string
+    VanEloremutatoTetel:
+      type: string
+      enum:
+        - IGEN
+        - NEM
+    Osszesitettadoszamla:
+      type: object
+      properties:
+        ugyfelOsszesen:
+          description: Ügyfél összesen (a könyvelt tételek összege)
+          type: number
+        konyveletlenOsszesen:
+          description: A könyveletlen tételek összege
+          type: number
+        adozoiTartozas:
+          description: Adózói tartozás (a tartozást mutató adónemek összesített egyenlege)
+          type: number
+        adozoiTulfizetes:
+          description: >-
+            Adózói túlfizetés(a túlfizetést mutató adónemek összesített
+            egyenlege)
+          type: number
+        vanEloremutatoTetel:
+          $ref: '#/components/schemas/VanEloremutatoTetel'
+    EgyenlegMinosites:
+      type: string
+      enum:
+        - EGYENLEG
+        - TARTOZAS
+        - TULFIZETES
+    GetOsszesitettAdoszamlaResponseType:
+      allOf:
+        - $ref: '#/components/schemas/BaseResponseType'
+        - type: object
+          properties:
+            resultCode:
+              $ref: '#/components/schemas/GetOsszesitettAdoszamlaResult'
+            osszesitettAdoszamla:
+              $ref: '#/components/schemas/Osszesitettadoszamla'
+    KodLista:
+      type: object
+      properties:
+        nev:
+          description: Kódlista neve
+          type: string
+        kodListaElem:
+          type: array
+          items:
+            $ref: '#/components/schemas/KodListaElem'
+      required:
+        - nev
+    KonyvelesreUzenet:
+      type: object
+      properties:
+        kod:
+          description: Kód
+          type: string
+        szoveg:
+          description: Szöveg
+          type: string
+      required:
+        - kod
+        - szoveg
+    GetOsszesitettAdoszamlaResult:
+      type: string
+      enum:
+        - SIKERES
+        - EGYEB_HIBA
+        - ADAT_NEM_ERHETO_EL
+        - NINCS_JOGOSULTSAG
+        - JOGOSULTSAG_ELLENORZES_PROBLEMA
+        - ERVENYTELEN_ADOALANY_AZONOSITO
+        - ERVENYTELEN_ALAIRAS
+    Deviza:
+      type: object
+      properties:
+        osszeg:
+          description: Összeg devizában
+          type: number
+        devizanem:
+          description: Devizanem
+          type: string
+        arfolyam:
+          description: Árfolyam
+          type: string
+      required:
+        - osszeg
+        - devizanem
+        - arfolyam
+    KonyvelesreVaroTetel:
+      type: object
+      properties:
+        barkod:
+          description: Vonalkód (bárkód)
+          type: string
+        bizonylatSzama:
+          description: Bizonylat száma
+          type: string
+        ellenszamlaKod:
+          description: >-
+            Ellenszámla kódja, ahonnan jön a befizetés, vagy ahová megy a
+            kiutalás. A kód a CodeList struktúrában található.
+          type: string
+        hatarozatszam:
+          description: Határozat száma
+          type: string
+        kozlemeny:
+          description: A befizetés közlemény rovata
+          type: string
+        osszeg:
+          description: Összeg
+          type: number
+        teteltipus:
+          description: Befizetés típusa
+          type: string
+        tranzakcioIdopont:
+          description: Befizetés időpontja
+          type: string
+          format: date-time
+      required:
+        - osszeg
+        - tranzakcioIdopont
+    Bejelentes2007ElottiKategoria:
+      type: string
+      enum:
+        - NEM_20070101_ELOTTI_BEJELENTES
+        - BEJELENTES_20070101_ELOTTI
+    Adonem:
+      type: object
+      properties:
+        kod:
+          description: Adónemkód
+          type: string
+        megnevezes:
+          description: Adónem megnevezése
+          type: string
+        szamlaszam:
+          description: Adónem számlaszáma
+          type: string
+        kotelezettsegOsszesen:
+          description: Kötelezettség összesen
+          type: number
+        penzforgalomOsszesen:
+          description: Pénzforgalom oldali könyvelt tételek összesen
+          type: number
+        konyvelesreVaroOsszesen:
+          description: Könyveletlen tételek összesen
+          type: number
+        konyvelesreVaroTetel:
+          type: array
+          items:
+            $ref: '#/components/schemas/KonyvelesreVaroTetel'
+        tetel:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tetel'
+        konyvelesreUzenet:
+          $ref: '#/components/schemas/KonyvelesreUzenet'
+        adonemEgyenleg:
+          $ref: '#/components/schemas/Egyenleg'
+    MindOsszesen:
+      type: object
+      properties:
+        tartozas:
+          description: Tartozás
+          type: number
+        tulfizetes:
+          description: Túlfizetés
+          type: number
+        egyenleg:
+          $ref: '#/components/schemas/Egyenleg'
+        letetiEgyenleg:
+          $ref: '#/components/schemas/Egyenleg'
+      required:
+        - tartozas
+        - tulfizetes
+    GetBiztositottiJogviszonyFoglalkoztatoAdatStatuszResult:
+      type: string
+      enum:
+        - SIKERES
+        - JOGOSULTSAG_ELLENORZES_PROBLEMA
+        - ERVENYTELEN_LEKERDEZES_AZONOSITO
+        - FOLYAMATBAN
+        - EGYEB_HIBA
+        - NINCS_JOGOSULTSAG
+        - ERVENYTELEN_ALAIRAS
+        - ERVENYTELEN_POZICIO
+        - FOGLALKOZTATO_NEM_TALALHATO
+        - NINCS_BEJELENTETT_JOGVISZONY
+        - NINCS_BENYUJTOTT_ADATLAP
+        - NINCS_ADAT
+    AdatlapStatusz:
+      type: string
+      enum:
+        - HIBAS
+        - FELDOLGOZOTT
+    Adozo:
+      type: object
+      properties:
+        adoalanyAzonosito:
+          description: >-
+            A lekérdezett adózó adóalanyazonosítója: adószám, vagy adóazonosító
+            jel
+          type: string
+        nev:
+          description: Adózó neve
+          type: string
+        cim:
+          description: Adózó címe
+          type: string
+        konyvelesiAzonosito:
+          description: 'Könyvelési azonosító: adószám, vagy adóazonosító jel'
+          type: string
+        idoszak:
+          description: Lekérdezett időszak
+          type: string
+        lekerdezesIdopontja:
+          description: Lekérdezés időpontja
+          type: string
+          format: date-time
+        vpid:
+          description: Vámazonosító
+          type: string
+      required:
+        - adoalanyAzonosito
+        - nev
+        - cim
+        - konyvelesiAzonosito
+        - idoszak
+        - lekerdezesIdopontja
+    Egyenleg:
+      type: object
+      properties:
+        osszeg:
+          description: Az egyenleg összege
+          type: number
+        minosites:
+          $ref: '#/components/schemas/EgyenlegMinosites'
+      required:
+        - osszeg
+        - minosites
+    GetTetelesAdoszamlaResponseType:
+      allOf:
+        - $ref: '#/components/schemas/BaseResponseType'
+        - type: object
+          properties:
+            resultCode:
+              $ref: '#/components/schemas/GetTetelesAdoszamlaResult'
+            tetelesAdoszamla:
+              $ref: '#/components/schemas/TetelesAdoszamla'
+    KodListaElem:
+      type: object
+      properties:
+        kod:
+          description: Kódlista elem kódja
+          type: string
+        ertek:
+          description: Kódlista elem értéke
+          type: string
+      required:
+        - kod
+    Tetel:
+      type: object
+      properties:
+        aladonem:
+          description: Aladónem
+          type: string
+        ellenszamlaKod:
+          description: >-
+            Ellenszámla kódja, ahonnan jön a befizetés, vagy ahová megy a
+            kiutalás. A kód a CodeList struktúrában található.
+          type: string
+        esedekessegiDatum:
+          description: Esedékesség dátuma
+          type: string
+          format: date
+        kotelezettsegAtvezetveForrasKod:
+          description: >-
+            Kötelezettség átvezetett tétel esetében a forrás adóalany kódja. A
+            kód a CodeList struktúrában található.
+          type: string
+        teljesitesiDatum:
+          description: Pénzforgalmi tétel teljesítési dátum
+          type: string
+          format: date
+        megnevezes:
+          description: A tétel típusának neve
+          type: string
+        tipus:
+          description: Pénzforgalmi tétel típus kódja
+          type: string
+        kotelezettseg:
+          description: Kötelezettség
+          type: number
+        penzforgalomAtvezetveForrasKod:
+          description: >-
+            Pénzforgalom átvezetett tétel esetében a forrás adóalany kódja. A
+            kód a CodeList struktúrában található.
+          type: string
+        penzforgalom:
+          $ref: '#/components/schemas/Penzforgalom'
+    GetBiztositottiJogviszonyFoglalkoztatoAdatResponseType:
+      allOf:
+        - $ref: '#/components/schemas/BaseResponseType'
+        - type: object
+          properties:
+            foglalkoztatottak:
+              type: array
+              items:
+                $ref: '#/components/schemas/BiztositottiJogviszonyFoglalkoztatoAdatai'
+            resultCode:
+              $ref: >-
+                #/components/schemas/GetBiztositottiJogviszonyFoglalkoztatoAdatResult
+            requestData:
+              $ref: '#/components/schemas/RequestData'
+    GetBiztositottiJogviszonyFoglalkoztatoAdatStatuszResponseType:
+      allOf:
+        - $ref: '#/components/schemas/BaseResponseType'
+        - type: object
+          properties:
+            requestData:
+              $ref: '#/components/schemas/RequestData'
+            resultCode:
+              $ref: >-
+                #/components/schemas/GetBiztositottiJogviszonyFoglalkoztatoAdatStatuszResult
+            foglalkoztatottak:
+              type: array
+              items:
+                $ref: '#/components/schemas/BiztositottiJogviszonyFoglalkoztatoAdatai'
+    GetTetelesAdoszamlaResult:
+      type: string
+      enum:
+        - SIKERES
+        - EGYEB_HIBA
+        - ADAT_NEM_ERHETO_EL
+        - NINCS_JOGOSULTSAG
+        - JOGOSULTSAG_ELLENORZES_PROBLEMA
+        - ERVENYTELEN_ADOALANY_AZONOSITO
+        - ERVENYTELEN_ALAIRAS
+        - ERVENYTELEN_TETEL_TIPUS
+    Penzforgalom:
+      type: object
+      properties:
+        osszeg:
+          description: Összeg
+          type: number
+        deviza:
+          $ref: '#/components/schemas/Deviza'
+      required:
+        - osszeg
+    TetelesAdoszamla:
+      type: object
+      properties:
+        bhtlUzenet:
+          description: Behajthatatlan tételekről szakmai üzenet
+          type: string
+        kodLista:
+          type: array
+          items:
+            $ref: '#/components/schemas/KodLista'
+        adozo:
+          $ref: '#/components/schemas/Adozo'
+        mindOsszesen:
+          $ref: '#/components/schemas/MindOsszesen'
+        adonem:
+          type: array
+          items:
+            $ref: '#/components/schemas/Adonem'
+    GetBiztositottiJogviszonyFoglalkoztatoAdatResult:
+      type: string
+      enum:
+        - SIKERES
+        - JOGOSULTSAG_ELLENORZES_PROBLEMA
+        - ERVENYTELEN_ADOALANY_AZONOSITO
+        - FOLYAMATBAN
+        - EGYEB_HIBA
+        - NINCS_JOGOSULTSAG
+        - ERVENYTELEN_ALAIRAS
+        - ERVENYTELEN_JOGVISZONY_TIPUS
+        - TUL_SOK_KERES
+        - FOGLALKOZTATO_NEM_TALALHATO
+        - NINCS_BEJELENTETT_JOGVISZONY
+        - NINCS_BENYUJTOTT_ADATLAP
+        - NINCS_ADAT
+    RequestData:
+      type: object
+      properties:
+        pageNumber:
+          description: >-
+            Annak a lapnak a száma, ahonnan az adatok  lekérdezése indul a
+            lapméretnek megfelelő adatmennyiséggel. A kezdő lapszám a nulla.
+          type: integer
+          format: int32
+        numberOfElements:
+          description: A visszaadott elemek száma.
+          type: integer
+          format: int32
+        numberOfAllElements:
+          description: Az összes elem száma.
+          type: integer
+          format: int32
+        requestId:
+          description: Lekérdezés egyedi azonosítója
+          type: string
+        timeOfRequest:
+          description: >-
+            Az adatok lekérdezésének időpontja. Erre az időpontra vonatkozó
+            állapotot tükröznek az adatok.
+          type: string
+          format: date-time
+    AdoazonositoKepzesKereseKategoria:
+      type: string
+      enum:
+        - NEM_ADOAZONOSITO_KEPZES_KERESE
+        - ADOAZONOSITO_KEPZES_KERESE
+    Bejelentes:
+      type: object
+      properties:
+        bejelentesIdopontja:
+          description: Bejelentés időpontja
+          type: string
+          format: date-time
+        bejelentesJellege:
+          description: Bejelentés jellege
+          type: string
+        tajSzam:
+          description: TAJ szám
+          type: string
+        adatlapIktatoszama:
+          description: Adatlap iktatószáma
+          type: string
+        adatlapTipusa:
+          description: Adatlap típusa
+          type: string
+        potlapSzama:
+          description: Pótlap száma és sorszáma
+          type: string
+        beerkezesDatuma:
+          description: 'Beérkezés dátuma '
+          type: string
+          format: date
+        alairoNeve:
+          description: Aláíró neve
+          type: string
+        elozoAdatlapIktatoszama:
+          description: Előző adatlap iktatószáma
+          type: string
+        tobbMunkavallalo:
+          description: >-
+            Több munkáltató által létesített munkaviszony miatti bejelentést
+            jelölt
+          type: string
+        kizarolagTovabbiFoglalkoztato:
+          description: Kizárólag a további foglalkoztatóknál van változást jelölt
+          type: string
+        jogelodNeve:
+          description: Jogelőd neve
+          type: string
+        jogelodMegalakulasanakNapja:
+          description: Jogelőd megalakulásának napja
+          type: string
+          format: date
+        jogutodlasNapja:
+          description: Jogutódlás napja
+          type: string
+          format: date
+        szuletesiNev:
+          description: Születési név
+          type: string
+        anyjaNeve:
+          description: Anyja neve
+          type: string
+        szuletesiDatumHely:
+          description: Születési dátum, születési hely
+          type: string
+        cim:
+          description: Cím
+          type: string
+        szuletesiOrszagKodNev:
+          description: Születési országkód és neve
+          type: string
+        allampolgarsagKodNev:
+          description: Állampolgárság kód és megnevezése
+          type: string
+        nagycsaladosKedvezmeny:
+          description: 'A három vagy több gyermeket nevelő munkaerőpiacra lépő nők után '
+          type: string
+        korabbiBiztositasiJogviszonyKezdete:
+          description: Korábbi biztosítási jogviszony kezdete
+          type: string
+          format: date
+        korabbiBiztositasiJogviszonyVege:
+          description: Korábbi biztosítási jogviszony vége
+          type: string
+          format: date
+        korabbiBiztositasiJogviszonyKodNev:
+          description: Korábbi biztosítási jogviszony kódja és megnevezése
+          type: string
+        korabbiFeor08KodNev:
+          description: Korábbi FEOR-08 kódja és megnevezése
+          type: string
+        korabbiFeor93KodNev:
+          description: Korábbi FEOR-93 kódja és megnevezése
+          type: string
+        korabbiHetiMunkaorakSzama:
+          description: Korábbi heti munkaórák száma
+          type: string
+        korabbiSzunetelesKezdete:
+          description: Korábbi szünetelés kezdete
+          type: string
+          format: date
+        korabbiSzunetelesVege:
+          description: Korábbi szünetelés vége
+          type: string
+          format: date
+        korabbiValtozasHatalyDatuma:
+          description: Korábbi változás hatály dátuma
+          type: string
+          format: date
+        bejelentesJogutodlasMiatt:
+          $ref: '#/components/schemas/BejelentesJogutodlasMiattKategoria'
+        hatosagiJelzesAlapjanJavitottNyomtatvany:
+          $ref: >-
+            #/components/schemas/HatosagiJelzesAlapjanJavitottNyomtatvanyBenyujtasaKategoria
+        jogelodAdoszama:
+          $ref: '#/components/schemas/AdozoReferencia'
+        ismeteltBejelentesAdoszamMegszerzes:
+          $ref: >-
+            #/components/schemas/IsmeteltBejelentesAdoszamMegszerzesetKovetoenKategoria
+        bejelentes2007Elotti:
+          $ref: '#/components/schemas/Bejelentes2007ElottiKategoria'
+        elotarsasagkentAdoszammalRendelkezes:
+          $ref: '#/components/schemas/ElotarsasagkentAdoszammalRendelkezesKategoria'
+        adoszammalNemRendElotarsasagBejelentes:
+          $ref: '#/components/schemas/AdoszammalNemRendElotarsasagBejelentesKategoria'
+        adoazonositoKepzesKerese:
+          $ref: '#/components/schemas/AdoazonositoKepzesKereseKategoria'
+        adatlapStatusz:
+          $ref: '#/components/schemas/AdatlapStatusz'
+        jogelodnelVisszamenolegesKorrekcioLehet:
+          $ref: >-
+            #/components/schemas/JogelodnelVisszamenolegesKorrekcioLehetsegesKategoria
+        tovabbiFoglalkoztato:
+          type: array
+          items:
+            $ref: '#/components/schemas/TovabbiFoglalkoztato'
+    BiztositottiJogviszonyFoglalkoztatoAdatai:
+      type: object
+      properties:
+        munkavallaloNeve:
+          description: munkavállaló neve
+          type: string
+        hetiOra:
+          type: array
+          items:
+            $ref: '#/components/schemas/HetiOra'
+        munkavallaloAdoazonositoJele:
+          $ref: '#/components/schemas/AdozoReferencia'
+        feor:
+          type: array
+          items:
+            $ref: '#/components/schemas/Feor'
+        jogviszonyAlapadatok:
+          $ref: '#/components/schemas/JogviszonyAlapadatok'
+        bejelentes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Bejelentes'
+        szuneteltetes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Szuneteltetes'
+    HatosagiJelzesAlapjanJavitottNyomtatvanyBenyujtasaKategoria:
+      type: string
+      enum:
+        - NEM_HATOSAGI_JELZES_ALAPJAN_JAVITOTT_NYOMTATVANY
+        - HATOSAGI_JELZES_ALAPJAN_JAVITOTT_NYOMTATVANY
+    AdoszammalNemRendElotarsasagBejelentesKategoria:
+      type: string
+      enum:
+        - NEM_ADOSZAMMAL_NEM_REND_ELOTARSASAG_BEJELENT
+        - ADOSZAMMAL_NEM_REND_ELOTARSASAG_BEJELENT
+    AdozoReferencia:
+      type: object
+      properties:
+        adoalanyAzonosito:
+          description: >-
+            Adóalany azonosító (AAazon): az adószám első 8 számjegye, vagy az
+            adóazonosító jel.
+          type: string
+      required:
+        - adoalanyAzonosito
+    BejelentesJogutodlasMiattKategoria:
+      type: string
+      enum:
+        - BEJELENTES_JOGUTODLAS_MIATT
+        - NEM_BEJELENTES_JOGUTODLAS_MIATT
+    BiztositottiJogviszonyFoglalkoztatottAdatai:
+      type: object
+      properties:
+        foglalkoztatoNeve:
+          description: Foglalkoztató neve
+          type: string
+        tajSzam:
+          description: TAJ szám
+          type: string
+        feor:
+          type: array
+          items:
+            $ref: '#/components/schemas/Feor'
+        jogviszonyAlapadatok:
+          $ref: '#/components/schemas/JogviszonyAlapadatok'
+        hetiOra:
+          type: array
+          items:
+            $ref: '#/components/schemas/HetiOra'
+        szuneteltetes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Szuneteltetes'
+        tovabbiFoglalkoztato:
+          type: array
+          items:
+            $ref: '#/components/schemas/TovabbiFoglalkoztato'
+        foglalkoztatoAdoalanyAzonositoja:
+          $ref: '#/components/schemas/AdozoReferencia'
+    ElotarsasagkentAdoszammalRendelkezesKategoria:
+      type: string
+      enum:
+        - ELOTARSASAG_ADOSZAMMAL
+        - NEM_ELOTARSASAG_ADOSZAMMAL
+    JogviszonyAlapadatok:
+      type: object
+      properties:
+        jogviszonyKezdete:
+          description: Jogviszony kezdete
+          type: string
+          format: date
+        jogviszonyVege:
+          description: Jogviszony vége
+          type: string
+          format: date
+        jogviszonyKodMegnevezes:
+          description: Jogviszony kódja és megnevezése
+          type: string
+    GetHianyzoBevallasResult:
+      type: string
+      enum:
+        - SIKERES
+        - EGYEB_HIBA
+        - NINCS_ADAT
+        - NINCS_JOGOSULTSAG
+        - JOGOSULTSAG_ELLENORZES_PROBLEMA
+        - ERVENYTELEN_ADOALANY_AZONOSITO
+        - ERVENYTELEN_ALAIRAS
+    Feor:
+      type: object
+      properties:
+        feorKod:
+          description: <b>FEOR kód </b>
+          type: string
+        feorMegnevezes:
+          description: FEOR megnevezés
+          type: string
+        feorErvenyessegKezdete:
+          description: FEOR érvényesség kezdete
+          type: string
+          format: date
+    GetHianyzoBevallasResponseType:
+      allOf:
+        - $ref: '#/components/schemas/BaseResponseType'
+        - type: object
+          properties:
+            adoalanyAzonosito:
+              description: >-
+                A lekérdezett adózó adóalany azonosítója. . Adóalany azonosító:
+                az adószám első 8 számjegye, vagy az adóazonosító jel.
+              type: string
+            resultCode:
+              $ref: '#/components/schemas/GetHianyzoBevallasResult'
+            hianyzoBevallas:
+              type: array
+              items:
+                $ref: '#/components/schemas/HianyzoBevallas'
+      required:
+        - adoalanyAzonosito
+    HetiOra:
+      type: object
+      properties:
+        hetiMunkaora:
+          description: Heti munkaóra
+          type: integer
+          format: int32
+        hetiMunkaoraKezdete:
+          description: Heti munkaóra kezdete
+          type: string
+          format: date
+    IsmeteltBejelentesAdoszamMegszerzesetKovetoenKategoria:
+      type: string
+      enum:
+        - NEM_ISMETELT_BEJELENTES_ADOSZAM_MEGSZERZESET_KOVETOEN
+        - ISMETELT_BEJELENTES_ADOSZAM_MEGSZERZESET_KOVETOEN
+    Szuneteltetes:
+      type: object
+      properties:
+        szuneteltetesKezdete:
+          description: ''
+          type: string
+          format: date
+        szuneteltetesVege:
+          description: ''
+          type: string
+          format: date
+    TovabbiFoglalkoztato:
+      type: object
+      properties:
+        munkaltatoNeve:
+          description: Munkáltató neve
+          type: string
+        munkaltatoSzekhelye:
+          description: Munkáltató székhelye
+          type: string
+        jogviszonyKezdete:
+          description: Jogviszony kezdete
+          type: string
+          format: date
+        jogviszonyVege:
+          description: Jogviszony vége
+          type: string
+          format: date
+        munkaltatoAdoalanyAzonositoja:
+          $ref: '#/components/schemas/AdozoReferencia'
+    JogelodnelVisszamenolegesKorrekcioLehetsegesKategoria:
+      type: string
+      enum:
+        - NEM_JOGELODNEL_VISSZAMENOLEGES_KORREKCIO
+        - JOGELODNEL_VISSZAMENOLEGES_KORREKCIO
+    KoztartozasEgyenleg:
+      type: object
+      properties:
+        osszesBefizetes:
+          description: Összes befizetés
+          type: number
+        osszesEloiras:
+          description: Összes előírás
+          type: number
+        osszesJovairas:
+          description: Összes jóváírás
+          type: number
+        osszesVisszafizetes:
+          description: Összes visszafizetés
+          type: number
+        osszesJogcimTeljesFennalloHatralek:
+          description: Összes jogcím teljes fennálló hátralék
+          type: number
+        jogcimBontas:
+          type: array
+          items:
+            $ref: '#/components/schemas/JogcimBontas'
+      required:
+        - osszesBefizetes
+        - osszesEloiras
+        - osszesJovairas
+        - osszesVisszafizetes
+        - osszesJogcimTeljesFennalloHatralek
+    HianyzoBevallas:
+      type: object
+      properties:
+        bevallasMegnevezes:
+          description: Hiányzó bevallás neve
+          type: string
+        bevallasTipus:
+          description: Hiányzó bevallás típusa
+          type: string
+        bevallasAzonosito:
+          description: Hiányzó bevallás azonosítója
+          type: string
+        bevallasIdoszak:
+          description: >-
+            Hiányzó bevallás időszaka (év/időszak száma {havi, vagy negyedéves
+            bevallásnál}/időszak típusa {pl. hó, negyedév, év}) visszaadott
+            érték pontos jelölése: éves időszak esetén az év utolsó két
+            számjegye, pl. 21-es évi bevallás éves időszaka: 21, negyedéves
+            időszakoknál: év utolsó két számjegye és a negyedév sorszáma, pl.
+            21-es év 3. negyedév jelölése: 213, havi gyakoriság esetén év utolsó
+            két számjegye és a hónap sorszáma két számjeggyel, pl. 21-es év
+            februári időszak: 2102
+          type: string
+        eredetiEsedekesseg:
+          description: Eredet esedékesség dátuma
+          type: string
+          format: date
+      required:
+        - bevallasMegnevezes
+        - bevallasTipus
+        - bevallasIdoszak
+        - eredetiEsedekesseg
+    GetKoztartozasEgyenlegResponseType:
+      allOf:
+        - $ref: '#/components/schemas/BaseResponseType'
+        - type: object
+          properties:
+            koztartozasEgyenleg:
+              $ref: '#/components/schemas/KoztartozasEgyenleg'
+            resultCode:
+              $ref: '#/components/schemas/GetKoztartozasEgyenlegResult'
+    GetKoztartozasEgyenlegResult:
+      type: string
+      enum:
+        - SIKERES
+        - EGYEB_HIBA
+        - NINCS_ADAT
+        - NINCS_JOGOSULTSAG
+        - JOGOSULTSAG_ELLENORZES_PROBLEMA
+        - ERVENYTELEN_ADOALANY_AZONOSITO
+        - ERVENYTELEN_ALAIRAS
+        - LEKERDEZES_NEM_TELJESITHETO
+    JogcimBontas:
+      type: object
+      properties:
+        befizetes:
+          description: Befizetés a jogcímen
+          type: number
+        eloiras:
+          description: Előírás a jogcímen
+          type: number
+        jovairas:
+          description: Jóváírás a jogcímen
+          type: number
+        visszafizetes:
+          description: Visszafizetés a jogcímen
+          type: number
+        fennalloHatralek:
+          description: A jogcímen fennálló hátralék
+          type: number
+        elnevezes:
+          description: Jogcím elnevezése
+          type: string
+        kod:
+          description: Jogcím kódja
+          type: string
+      required:
+        - befizetes
+        - eloiras
+        - jovairas
+        - visszafizetes
+        - fennalloHatralek
+        - elnevezes
+        - kod
+tags:
+  - name: AdozoService
+    description: ' Az Adózó service csomagba tartozo OAS elemek'
+servers: [
+  {
+    "url": https://m2m.nav.gov.hu/rest-api/1.0/,
+    "description": Éles környezet szolgáltatás végpont
+  },
+  {
+    "url": https://m2m-dev.nav.gov.hu/rest-api/1.0/,
+    "description": Fejlesztői teszt célú szolgáltatás végpont
+  }
+]
+security:
+  - bearerAuth: []

@@ -1,0 +1,66 @@
+<?xml  version='1.0' encoding='utf-8' ?>
+<xs:schema targetNamespace="https://soap.api.nav.gov.hu/definitions/services/1.0/adozo/local" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:loc="https://soap.api.nav.gov.hu/definitions/services/1.0/adozo/local" xmlns:msg_common="https://soap.api.nav.gov.hu/definitions/messages/1.0/common" xmlns:msg_adozo="https://soap.api.nav.gov.hu/definitions/messages/1.0/adozo">
+	<xs:import namespace="https://soap.api.nav.gov.hu/definitions/messages/1.0/adozo" schemaLocation="../../messages/1.0/adozo.xsd"/>
+	<xs:import namespace="https://soap.api.nav.gov.hu/definitions/messages/1.0/common" schemaLocation="../../messages/1.0/common.xsd"/>
+	<xs:element name="GetBiztositottiJogviszonyFoglalkoztatoAdatRequestElem" type="msg_adozo:GetBiztositottiJogviszonyFoglalkoztatoAdatRequestType">
+		<xs:annotation>
+			<xs:documentation>'getBiztositottiJogviszonyFoglalkoztatoAdat' operation bemeneti paraméterét definiáló XSD element. </xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="GetBiztositottiJogviszonyFoglalkoztatoAdatResponseElem" type="msg_adozo:GetBiztositottiJogviszonyFoglalkoztatoAdatResponseType">
+		<xs:annotation>
+			<xs:documentation>'getBiztositottiJogviszonyFoglalkoztatoAdat' operation visszatérési értéket definiáló XSD element. </xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="GetBiztositottiJogviszonyFoglalkoztatoAdatStatuszRequestElem" type="msg_adozo:GetBiztositottiJogviszonyFoglalkoztatoAdatStatuszRequestType">
+		<xs:annotation>
+			<xs:documentation>'getBiztositottiJogviszonyFoglalkoztatoAdatStatusz' operation bemeneti paraméterét definiáló XSD element. </xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="GetBiztositottiJogviszonyFoglalkoztatoAdatStatuszResponseElem" type="msg_adozo:GetBiztositottiJogviszonyFoglalkoztatoAdatStatuszResponseType">
+		<xs:annotation>
+			<xs:documentation>'getBiztositottiJogviszonyFoglalkoztatoAdatStatusz' operation visszatérési értéket definiáló XSD element. </xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="GetHianyzoBevallasRequestElem" type="msg_adozo:GetHianyzoBevallasRequestType">
+		<xs:annotation>
+			<xs:documentation>'getHianyzoBevallas' operation bemeneti paraméterét definiáló XSD element. </xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="GetHianyzoBevallasResponseElem" type="msg_adozo:GetHianyzoBevallasResponseType">
+		<xs:annotation>
+			<xs:documentation>'getHianyzoBevallas' operation visszatérési értéket definiáló XSD element. </xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="GetKoztartozasEgyenlegResponseElem" type="msg_adozo:GetKoztartozasEgyenlegResponseType">
+		<xs:annotation>
+			<xs:documentation>'getKoztartozasEgyenleg' operation visszatérési értéket definiáló XSD element. </xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="GetKoztartozasEgyenlegResquestElem" type="msg_adozo:GetKoztartozasEgyenlegResquestType">
+		<xs:annotation>
+			<xs:documentation>'getKoztartozasEgyenleg' operation bemeneti paraméterét definiáló XSD element. </xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="GetOsszesitettAdoszamlaRequestElem" type="msg_adozo:GetOsszesitettAdoszamlaRequestType">
+		<xs:annotation>
+			<xs:documentation>'getOsszesitettAdoszamla' operation bemeneti paraméterét definiáló XSD element. </xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="GetOsszesitettAdoszamlaResponseElem" type="msg_adozo:GetOsszesitettAdoszamlaResponseType">
+		<xs:annotation>
+			<xs:documentation>'getOsszesitettAdoszamla' operation visszatérési értéket definiáló XSD element. </xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="GetTetelesAdoszamlaRequestElem" type="msg_adozo:GetTetelesAdoszamlaRequestType">
+		<xs:annotation>
+			<xs:documentation>'getTetelesAdoszamla' operation bemeneti paraméterét definiáló XSD element. </xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="GetTetelesAdoszamlaResponseElem" type="msg_adozo:GetTetelesAdoszamlaResponseType">
+		<xs:annotation>
+			<xs:documentation>'getTetelesAdoszamla' operation visszatérési értéket definiáló XSD element. </xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="NAVm2mSoapHeader" type="msg_common:NAVm2mSoapHeader"/>
+</xs:schema>

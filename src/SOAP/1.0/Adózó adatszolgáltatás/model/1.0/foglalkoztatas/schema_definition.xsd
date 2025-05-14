@@ -1,0 +1,469 @@
+<?xml  version='1.0' encoding='utf-8' ?>
+<xs:schema targetNamespace="https://soap.api.nav.gov.hu/definitions/model/1.0/foglalkoztatas" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:foglalkoztatas10="https://soap.api.nav.gov.hu/definitions/model/1.0/foglalkoztatas">
+	<xs:simpleType name="AdatlapStatusz">
+		<xs:annotation>
+			<xs:documentation>Adatlap státusz</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="HIBAS"/>
+			<xs:enumeration value="FELDOLGOZOTT"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="AdoazonositoKepzesKereseKategoria">
+		<xs:annotation>
+			<xs:documentation>Adóazonosító képzés kérése, lehetséges értékek: ADOAZONOSITO_KEPZES_KERESE, NEM_ADOAZONOSITO_KEPZES_KERESE</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NEM_ADOAZONOSITO_KEPZES_KERESE"/>
+			<xs:enumeration value="ADOAZONOSITO_KEPZES_KERESE"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="AdoszammalNemRendElotarsasagBejelentesKategoria">
+		<xs:annotation>
+			<xs:documentation>Adószámmal nem rend. előtársaság változást/bejelentést törlést jelent be, lehetséges értékek: ADOSZAMMAL_NEM_REND_ELOTARSASAG_BEJELENT, NEM_ADOSZAMMAL_NEM_REND_ELOTARSASAG_BEJELENT</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NEM_ADOSZAMMAL_NEM_REND_ELOTARSASAG_BEJELENT"/>
+			<xs:enumeration value="ADOSZAMMAL_NEM_REND_ELOTARSASAG_BEJELENT"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Bejelentes2007ElottiKategoria">
+		<xs:annotation>
+			<xs:documentation>A bejelentés 2007.01.01 előtti, lehetséges értékek: 20070101_ELOTTI_BEJELENTES, NEM_20070101_ELOTTI_BEJELENTES</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NEM_20070101_ELOTTI_BEJELENTES"/>
+			<xs:enumeration value="BEJELENTES_20070101_ELOTTI"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="BejelentesJogutodlasMiattKategoria">
+		<xs:annotation>
+			<xs:documentation>Bejelentés jogutódlás miatt, lehetséges értékek: BEJELENTES_JOGUTODLAS_MIATT, NEM_BEJELENTES_JOGUTODLAS_MIATT</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="BEJELENTES_JOGUTODLAS_MIATT"/>
+			<xs:enumeration value="NEM_BEJELENTES_JOGUTODLAS_MIATT"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ElotarsasagkentAdoszammalRendelkezesKategoria">
+		<xs:annotation>
+			<xs:documentation>Előtársaságként adószámmal nem rendelkezem, lehetséges értékek: ELOTARSASAG_ADOSZAMMAL, NEM_ELOTARSASAG_ADOSZAMMAL</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="ELOTARSASAG_ADOSZAMMAL"/>
+			<xs:enumeration value="NEM_ELOTARSASAG_ADOSZAMMAL"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="HatosagiJelzesAlapjanJavitottNyomtatvanyBenyujtasaKategoria">
+		<xs:annotation>
+			<xs:documentation>Hatósági jelzés alapján javított nyomtatvány benyújtása, lehetséges értékek: HATOSAGI_JELZES_ALAPJAN_JAVITOTT_NYOMTATVANY, NEM_HATOSAGI_JELZES_ALAPJAN_JAVITOTT_NYOMTATVANY</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NEM_HATOSAGI_JELZES_ALAPJAN_JAVITOTT_NYOMTATVANY"/>
+			<xs:enumeration value="HATOSAGI_JELZES_ALAPJAN_JAVITOTT_NYOMTATVANY"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="IsmeteltBejelentesAdoszamMegszerzesetKovetoenKategoria">
+		<xs:annotation>
+			<xs:documentation>Ismételt bejelentés adószám megszerzését követően, lehetséges értékek: ISMETELT_BEJELENTES_ADOSZAM_MEGSZERZESET_KOVETOEN, NEM_ISMETELT_BEJELENTES_ADOSZAM_MEGSZERZESET_KOVETOEN</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NEM_ISMETELT_BEJELENTES_ADOSZAM_MEGSZERZESET_KOVETOEN"/>
+			<xs:enumeration value="ISMETELT_BEJELENTES_ADOSZAM_MEGSZERZESET_KOVETOEN"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="JogelodnelVisszamenolegesKorrekcioLehetsegesKategoria">
+		<xs:annotation>
+			<xs:documentation>Jogelődnél visszamenőleges korrekció, lehetséges értékek: JOGELODNEL_VISSZAMENOLEGES_KORREKCIO, NEM_JOGELODNEL_VISSZAMENOLEGES_KORREKCIO</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NEM_JOGELODNEL_VISSZAMENOLEGES_KORREKCIO"/>
+			<xs:enumeration value="JOGELODNEL_VISSZAMENOLEGES_KORREKCIO"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="AdozoReferencia">
+		<xs:annotation>
+			<xs:documentation>Az adózó referenciája, mely akkor használatos, ha nem kívánjuk a teljes adózó entitást közlekedtetni.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="adoalanyAzonosito" type="xs:string" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Adóalany azonosító (AAazon): az adószám első 8 számjegye, vagy az adóazonosító jel.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Bejelentes">
+		<xs:sequence>
+			<xs:element name="adatlapIktatoszama" type="xs:string" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Adatlap iktatószáma</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="adatlapTipusa" type="xs:string" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Adatlap típusa</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="alairoNeve" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Aláíró neve</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="allampolgarsagKodNev" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Állampolgárság kód és megnevezése</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="anyjaNeve" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Anyja neve</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="beerkezesDatuma" type="xs:date" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Beérkezés dátuma </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="bejelentesIdopontja" type="xs:dateTime" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Bejelentés időpontja</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="bejelentesJellege" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Bejelentés jellege</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="cim" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Cím</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="elozoAdatlapIktatoszama" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Előző adatlap iktatószáma</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="jogelodMegalakulasanakNapja" type="xs:date" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Jogelőd megalakulásának napja</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="jogelodNeve" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Jogelőd neve</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="jogutodlasNapja" type="xs:date" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Jogutódlás napja</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="kizarolagTovabbiFoglalkoztato" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Kizárólag a további foglalkoztatóknál van változást jelölt</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="korabbiBiztositasiJogviszonyKezdete" type="xs:date" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Korábbi biztosítási jogviszony kezdete</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="korabbiBiztositasiJogviszonyKodNev" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Korábbi biztosítási jogviszony kódja és megnevezése</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="korabbiBiztositasiJogviszonyVege" type="xs:date" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Korábbi biztosítási jogviszony vége</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="korabbiFeor08KodNev" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Korábbi FEOR-08 kódja és megnevezése</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="korabbiFeor93KodNev" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Korábbi FEOR-93 kódja és megnevezése</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="korabbiHetiMunkaorakSzama" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Korábbi heti munkaórák száma</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="korabbiSzunetelesKezdete" type="xs:date" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Korábbi szünetelés kezdete</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="korabbiSzunetelesVege" type="xs:date" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Korábbi szünetelés vége</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="korabbiValtozasHatalyDatuma" type="xs:date" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Korábbi változás hatály dátuma</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="nagycsaladosKedvezmeny" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>A három vagy több gyermeket nevelő munkaerőpiacra lépő nők után </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="potlapSzama" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Pótlap száma és sorszáma</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="szuletesiDatumHely" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Születési dátum, születési hely</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="szuletesiNev" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Születési név</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="szuletesiOrszagKodNev" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Születési országkód és neve</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="tajSzam" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>TAJ szám</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="tobbMunkavallalo" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Több munkáltató által létesített munkaviszony miatti bejelentést jelölt</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="adatlapStatusz" type="foglalkoztatas10:AdatlapStatusz" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>adatlap státusz</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="adoazonositoKepzesKerese" type="foglalkoztatas10:AdoazonositoKepzesKereseKategoria" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Adóazonosító képzés kérése</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="adoszammalNemRendElotarsasagBejelentes" type="foglalkoztatas10:AdoszammalNemRendElotarsasagBejelentesKategoria" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Adószámmal nem rend. előtársaság változást/bejelentést törlést jelent be</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="jogelodAdoszama" type="foglalkoztatas10:AdozoReferencia" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>jogelőd adószáma</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="bejelentes2007Elotti" type="foglalkoztatas10:Bejelentes2007ElottiKategoria" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>A bejelentés 2007.01.01 előtti</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="bejelentesJogutodlasMiatt" type="foglalkoztatas10:BejelentesJogutodlasMiattKategoria" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Bejelentés jogutódlás miatt</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="elotarsasagkentAdoszammalRendelkezes" type="foglalkoztatas10:ElotarsasagkentAdoszammalRendelkezesKategoria" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Előtársaságként adószámmal nem rendelkezem</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="hatosagiJelzesAlapjanJavitottNyomtatvany" type="foglalkoztatas10:HatosagiJelzesAlapjanJavitottNyomtatvanyBenyujtasaKategoria" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Hatósági jelzés alapján javított nyomtatvány benyújtása</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ismeteltBejelentesAdoszamMegszerzes" type="foglalkoztatas10:IsmeteltBejelentesAdoszamMegszerzesetKovetoenKategoria" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Ismételt bejelentés adószám megszerzését követően</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="jogelodnelVisszamenolegesKorrekcioLehet" type="foglalkoztatas10:JogelodnelVisszamenolegesKorrekcioLehetsegesKategoria" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Jogelődnél visszamenőleges korrekció</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="tovabbiFoglalkoztato" type="foglalkoztatas10:TovabbiFoglalkoztato" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>további foglalkoztató</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="BiztositottiJogviszonyFoglalkoztatoAdatai">
+		<xs:annotation>
+			<xs:documentation>Itt a foglalkoztatottak (bejelentéseik) adatai kerülnek meghatározásra a foglalkoztatói adatátadáshoz.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="munkavallaloNeve" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>munkavállaló neve</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="munkavallaloAdoazonositoJele" type="foglalkoztatas10:AdozoReferencia" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>munkavállaló adóazonosító jele</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="bejelentes" type="foglalkoztatas10:Bejelentes" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="feor" type="foglalkoztatas10:Feor" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>feor</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="hetiOra" type="foglalkoztatas10:HetiOra" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>heti óra</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="jogviszonyAlapadatok" type="foglalkoztatas10:JogviszonyAlapadatok" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>jogviszony alapadatok</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="szuneteltetes" type="foglalkoztatas10:Szuneteltetes" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>szüneteltetés</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="BiztositottiJogviszonyFoglalkoztatottAdatai">
+		<xs:sequence>
+			<xs:element name="foglalkoztatoNeve" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Foglalkoztató neve</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="tajSzam" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>TAJ szám</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="foglalkoztatoAdoalanyAzonositoja" type="foglalkoztatas10:AdozoReferencia" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Foglalkoztató adóazonosító jele vagy adószáma</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="feor" type="foglalkoztatas10:Feor" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="hetiOra" type="foglalkoztatas10:HetiOra" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="jogviszonyAlapadatok" type="foglalkoztatas10:JogviszonyAlapadatok" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>jogviszony alapadatok</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="szuneteltetes" type="foglalkoztatas10:Szuneteltetes" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>szüneteltetés</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="tovabbiFoglalkoztato" type="foglalkoztatas10:TovabbiFoglalkoztato" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>további foglalkoztató</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Feor">
+		<xs:sequence>
+			<xs:element name="feorErvenyessegKezdete" type="xs:date" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>FEOR érvényesség kezdete</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="feorKod" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>FEOR kód </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="feorMegnevezes" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>FEOR megnevezés</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="HetiOra">
+		<xs:sequence>
+			<xs:element name="hetiMunkaora" type="xs:int" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Heti munkaóra</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="hetiMunkaoraKezdete" type="xs:date" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Heti munkaóra kezdete</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="JogviszonyAlapadatok">
+		<xs:sequence>
+			<xs:element name="jogviszonyKezdete" type="xs:date" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Jogviszony kezdete</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="jogviszonyKodMegnevezes" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Jogviszony kódja és megnevezése</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="jogviszonyVege" type="xs:date" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Jogviszony vége</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Szuneteltetes">
+		<xs:annotation>
+			<xs:documentation>Szüneteltetés</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="szuneteltetesKezdete" type="xs:date" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="szuneteltetesVege" type="xs:date" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="TovabbiFoglalkoztato">
+		<xs:sequence>
+			<xs:element name="jogviszonyKezdete" type="xs:date" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Jogviszony kezdete</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="jogviszonyVege" type="xs:date" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Jogviszony vége</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="munkaltatoNeve" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Munkáltató neve</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="munkaltatoSzekhelye" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Munkáltató székhelye</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="munkaltatoAdoalanyAzonositoja" type="foglalkoztatas10:AdozoReferencia" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Munkáltató adóalany azonosítója</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

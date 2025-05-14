@@ -1,0 +1,307 @@
+<?xml  version='1.0' encoding='utf-8' ?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" name="Adozo" targetNamespace="https://soap.api.nav.gov.hu/definitions/services/1.0/adozo" xmlns="https://soap.api.nav.gov.hu/definitions/services/1.0/adozo" xmlns:local="https://soap.api.nav.gov.hu/definitions/services/1.0/adozo/local" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
+	<wsdl:types>
+		<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="https://soap.api.nav.gov.hu/definitions/services/1.0/adozo/local" xmlns:loc="https://soap.api.nav.gov.hu/definitions/services/1.0/adozo/local" xmlns:msg_common="https://soap.api.nav.gov.hu/definitions/messages/1.0/common" xmlns:msg_adozo="https://soap.api.nav.gov.hu/definitions/messages/1.0/adozo">
+			<xs:import namespace="https://soap.api.nav.gov.hu/definitions/messages/1.0/adozo" schemaLocation="../../messages/1.0/adozo.xsd"/>
+			<xs:import namespace="https://soap.api.nav.gov.hu/definitions/messages/1.0/common" schemaLocation="../../messages/1.0/common.xsd"/>
+			<xs:element name="GetBiztositottiJogviszonyFoglalkoztatoAdatRequestElem" type="msg_adozo:GetBiztositottiJogviszonyFoglalkoztatoAdatRequestType">
+				<xs:annotation>
+					<xs:documentation>'getBiztositottiJogviszonyFoglalkoztatoAdat' operation bemeneti paraméterét definiáló XSD element. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="GetBiztositottiJogviszonyFoglalkoztatoAdatResponseElem" type="msg_adozo:GetBiztositottiJogviszonyFoglalkoztatoAdatResponseType">
+				<xs:annotation>
+					<xs:documentation>'getBiztositottiJogviszonyFoglalkoztatoAdat' operation visszatérési értéket definiáló XSD element. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="GetBiztositottiJogviszonyFoglalkoztatoAdatStatuszRequestElem" type="msg_adozo:GetBiztositottiJogviszonyFoglalkoztatoAdatStatuszRequestType">
+				<xs:annotation>
+					<xs:documentation>'getBiztositottiJogviszonyFoglalkoztatoAdatStatusz' operation bemeneti paraméterét definiáló XSD element. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="GetBiztositottiJogviszonyFoglalkoztatoAdatStatuszResponseElem" type="msg_adozo:GetBiztositottiJogviszonyFoglalkoztatoAdatStatuszResponseType">
+				<xs:annotation>
+					<xs:documentation>'getBiztositottiJogviszonyFoglalkoztatoAdatStatusz' operation visszatérési értéket definiáló XSD element. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="GetHianyzoBevallasRequestElem" type="msg_adozo:GetHianyzoBevallasRequestType">
+				<xs:annotation>
+					<xs:documentation>'getHianyzoBevallas' operation bemeneti paraméterét definiáló XSD element. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="GetHianyzoBevallasResponseElem" type="msg_adozo:GetHianyzoBevallasResponseType">
+				<xs:annotation>
+					<xs:documentation>'getHianyzoBevallas' operation visszatérési értéket definiáló XSD element. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="GetKoztartozasEgyenlegResponseElem" type="msg_adozo:GetKoztartozasEgyenlegResponseType">
+				<xs:annotation>
+					<xs:documentation>'getKoztartozasEgyenleg' operation visszatérési értéket definiáló XSD element. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="GetKoztartozasEgyenlegResquestElem" type="msg_adozo:GetKoztartozasEgyenlegResquestType">
+				<xs:annotation>
+					<xs:documentation>'getKoztartozasEgyenleg' operation bemeneti paraméterét definiáló XSD element. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="GetOsszesitettAdoszamlaRequestElem" type="msg_adozo:GetOsszesitettAdoszamlaRequestType">
+				<xs:annotation>
+					<xs:documentation>'getOsszesitettAdoszamla' operation bemeneti paraméterét definiáló XSD element. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="GetOsszesitettAdoszamlaResponseElem" type="msg_adozo:GetOsszesitettAdoszamlaResponseType">
+				<xs:annotation>
+					<xs:documentation>'getOsszesitettAdoszamla' operation visszatérési értéket definiáló XSD element. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="GetTetelesAdoszamlaRequestElem" type="msg_adozo:GetTetelesAdoszamlaRequestType">
+				<xs:annotation>
+					<xs:documentation>'getTetelesAdoszamla' operation bemeneti paraméterét definiáló XSD element. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="GetTetelesAdoszamlaResponseElem" type="msg_adozo:GetTetelesAdoszamlaResponseType">
+				<xs:annotation>
+					<xs:documentation>'getTetelesAdoszamla' operation visszatérési értéket definiáló XSD element. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="NAVm2mSoapHeader" type="msg_common:NAVm2mSoapHeader"/>
+		</xs:schema>
+	</wsdl:types>
+	<wsdl:message name="getOsszesitettAdoszamlaRequest">
+		<wsdl:part name="in" element="local:GetOsszesitettAdoszamlaRequestElem">
+			<wsdl:documentation> Az üzenet payload-ot hordozó message part. </wsdl:documentation>
+		</wsdl:part>
+		<wsdl:part name="navSoapHeader" element="local:NAVm2mSoapHeader">
+			<wsdl:documentation>NAV SOAP Header message part</wsdl:documentation>
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getOsszesitettAdoszamlaResponse">
+		<wsdl:part name="returnValue" element="local:GetOsszesitettAdoszamlaResponseElem">
+			<wsdl:documentation>A message part tényleges tartalma a 'GetOsszesitettAdoszamlaResponseType' típusban van meghatározva. </wsdl:documentation>
+		</wsdl:part>
+		<wsdl:part name="navSoapHeader" element="local:NAVm2mSoapHeader">
+			<wsdl:documentation>NAV SOAP Header message part</wsdl:documentation>
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getKoztartozasEgyenlegResponse">
+		<wsdl:part name="returnValue" element="local:GetKoztartozasEgyenlegResponseElem">
+			<wsdl:documentation>A message part tényleges tartalma a 'GetKoztartozasEgyenlegResponseType' típusban van meghatározva. </wsdl:documentation>
+		</wsdl:part>
+		<wsdl:part name="navSoapHeader" element="local:NAVm2mSoapHeader">
+			<wsdl:documentation>NAV SOAP Header message part</wsdl:documentation>
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getKoztartozasEgyenlegRequest">
+		<wsdl:part name="in" element="local:GetKoztartozasEgyenlegResquestElem">
+			<wsdl:documentation> Az üzenet payload-ot hordozó message part. </wsdl:documentation>
+		</wsdl:part>
+		<wsdl:part name="navSoapHeader" element="local:NAVm2mSoapHeader">
+			<wsdl:documentation>NAV SOAP Header message part</wsdl:documentation>
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getHianyzoBevallasRequest">
+		<wsdl:part name="in" element="local:GetHianyzoBevallasRequestElem">
+			<wsdl:documentation> Az üzenet payload-ot hordozó message part. </wsdl:documentation>
+		</wsdl:part>
+		<wsdl:part name="navSoapHeader" element="local:NAVm2mSoapHeader">
+			<wsdl:documentation>NAV SOAP Header message part</wsdl:documentation>
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getTetelesAdoszamlaRequest">
+		<wsdl:part name="in" element="local:GetTetelesAdoszamlaRequestElem">
+			<wsdl:documentation> Az üzenet payload-ot hordozó message part. </wsdl:documentation>
+		</wsdl:part>
+		<wsdl:part name="navSoapHeader" element="local:NAVm2mSoapHeader">
+			<wsdl:documentation>NAV SOAP Header message part</wsdl:documentation>
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getTetelesAdoszamlaResponse">
+		<wsdl:part name="returnValue" element="local:GetTetelesAdoszamlaResponseElem">
+			<wsdl:documentation>A message part tényleges tartalma a 'GetTetelesAdoszamlaResponseType' típusban van meghatározva. </wsdl:documentation>
+		</wsdl:part>
+		<wsdl:part name="navSoapHeader" element="local:NAVm2mSoapHeader">
+			<wsdl:documentation>NAV SOAP Header message part</wsdl:documentation>
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getHianyzoBevallasResponse">
+		<wsdl:part name="returnValue" element="local:GetHianyzoBevallasResponseElem">
+			<wsdl:documentation>A message part tényleges tartalma a 'GetHianyzoBevallasResponseType' típusban van meghatározva. </wsdl:documentation>
+		</wsdl:part>
+		<wsdl:part name="navSoapHeader" element="local:NAVm2mSoapHeader">
+			<wsdl:documentation>NAV SOAP Header message part</wsdl:documentation>
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getBiztositottiJogviszonyFoglalkoztatoAdatRequest">
+		<wsdl:part name="in" element="local:GetBiztositottiJogviszonyFoglalkoztatoAdatRequestElem">
+			<wsdl:documentation> Az üzenet payload-ot hordozó message part. </wsdl:documentation>
+		</wsdl:part>
+		<wsdl:part name="navSoapHeader" element="local:NAVm2mSoapHeader">
+			<wsdl:documentation>NAV SOAP Header message part</wsdl:documentation>
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getBiztositottiJogviszonyFoglalkoztatoAdatResponse">
+		<wsdl:part name="returnValue" element="local:GetBiztositottiJogviszonyFoglalkoztatoAdatResponseElem">
+			<wsdl:documentation>A message part tényleges tartalma a 'GetBiztositottiJogviszonyFoglalkoztatoAdatResponseType' típusban van meghatározva. </wsdl:documentation>
+		</wsdl:part>
+		<wsdl:part name="navSoapHeader" element="local:NAVm2mSoapHeader">
+			<wsdl:documentation>NAV SOAP Header message part</wsdl:documentation>
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getBiztositottiJogviszonyFoglalkoztatoAdatStatuszRequest">
+		<wsdl:part name="in" element="local:GetBiztositottiJogviszonyFoglalkoztatoAdatStatuszRequestElem">
+			<wsdl:documentation> Az üzenet payload-ot hordozó message part. </wsdl:documentation>
+		</wsdl:part>
+		<wsdl:part name="navSoapHeader" element="local:NAVm2mSoapHeader">
+			<wsdl:documentation>NAV SOAP Header message part</wsdl:documentation>
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getBiztositottiJogviszonyFoglalkoztatoAdatStatuszResponse">
+		<wsdl:part name="returnValue" element="local:GetBiztositottiJogviszonyFoglalkoztatoAdatStatuszResponseElem">
+			<wsdl:documentation>A message part tényleges tartalma a 'GetBiztositottiJogviszonyFoglalkoztatoAdatStatuszResponseType' típusban van meghatározva. </wsdl:documentation>
+		</wsdl:part>
+		<wsdl:part name="navSoapHeader" element="local:NAVm2mSoapHeader">
+			<wsdl:documentation>NAV SOAP Header message part</wsdl:documentation>
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:portType name="Adozo">
+		<wsdl:operation name="getBiztositottiJogviszonyFoglalkoztatoAdat">
+			<wsdl:input name="getBiztositottiJogviszonyFoglalkoztatoAdatRequestRequest" message="getBiztositottiJogviszonyFoglalkoztatoAdatRequest">
+				<wsdl:documentation>Bemenő header és body adatok a(z) getBiztositottiJogviszonyFoglalkoztatoAdat mûvelethez.</wsdl:documentation>
+			</wsdl:input>
+			<wsdl:output name="getBiztositottiJogviszonyFoglalkoztatoAdatRequestResponse" message="getBiztositottiJogviszonyFoglalkoztatoAdatResponse">
+				<wsdl:documentation>Kimenő header és body adatok a(z) getBiztositottiJogviszonyFoglalkoztatoAdat mûvelethez.</wsdl:documentation>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getHianyzoBevallas">
+			<wsdl:input name="getHianyzoBevallasRequestRequest" message="getHianyzoBevallasRequest">
+				<wsdl:documentation>Bemenő header és body adatok a(z) getHianyzoBevallas mûvelethez.</wsdl:documentation>
+			</wsdl:input>
+			<wsdl:output name="getHianyzoBevallasRequestResponse" message="getHianyzoBevallasResponse">
+				<wsdl:documentation>Kimenő header és body adatok a(z) getHianyzoBevallas mûvelethez.</wsdl:documentation>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getBiztositottiJogviszonyFoglalkoztatoAdatStatusz">
+			<wsdl:input name="getBiztositottiJogviszonyFoglalkoztatoAdatStatuszRequestRequest" message="getBiztositottiJogviszonyFoglalkoztatoAdatStatuszRequest">
+				<wsdl:documentation>Bemenő header és body adatok a(z) getBiztositottiJogviszonyFoglalkoztatoAdatStatusz mûvelethez.</wsdl:documentation>
+			</wsdl:input>
+			<wsdl:output name="getBiztositottiJogviszonyFoglalkoztatoAdatStatuszRequestResponse" message="getBiztositottiJogviszonyFoglalkoztatoAdatStatuszResponse">
+				<wsdl:documentation>Kimenő header és body adatok a(z) getBiztositottiJogviszonyFoglalkoztatoAdatStatusz mûvelethez.</wsdl:documentation>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getKoztartozasEgyenleg">
+			<wsdl:input name="getKoztartozasEgyenlegRequestRequest" message="getKoztartozasEgyenlegRequest">
+				<wsdl:documentation>Bemenő header és body adatok a(z) getKoztartozasEgyenleg mûvelethez.</wsdl:documentation>
+			</wsdl:input>
+			<wsdl:output name="getKoztartozasEgyenlegRequestResponse" message="getKoztartozasEgyenlegResponse">
+				<wsdl:documentation>Kimenő header és body adatok a(z) getKoztartozasEgyenleg mûvelethez.</wsdl:documentation>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getOsszesitettAdoszamla">
+			<wsdl:input name="getOsszesitettAdoszamlaRequestRequest" message="getOsszesitettAdoszamlaRequest">
+				<wsdl:documentation>Bemenő header és body adatok a(z) getOsszesitettAdoszamla mûvelethez.</wsdl:documentation>
+			</wsdl:input>
+			<wsdl:output name="getOsszesitettAdoszamlaRequestResponse" message="getOsszesitettAdoszamlaResponse">
+				<wsdl:documentation>Kimenő header és body adatok a(z) getOsszesitettAdoszamla mûvelethez.</wsdl:documentation>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getTetelesAdoszamla">
+			<wsdl:input name="getTetelesAdoszamlaRequestRequest" message="getTetelesAdoszamlaRequest">
+				<wsdl:documentation>Bemenő header és body adatok a(z) getTetelesAdoszamla mûvelethez.</wsdl:documentation>
+			</wsdl:input>
+			<wsdl:output name="getTetelesAdoszamlaRequestResponse" message="getTetelesAdoszamlaResponse">
+				<wsdl:documentation>Kimenő header és body adatok a(z) getTetelesAdoszamla mûvelethez.</wsdl:documentation>
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="Adozo" type="Adozo">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="getBiztositottiJogviszonyFoglalkoztatoAdat">
+			<soap:operation soapAction="https://soap.api.nav.gov.hu/definitions/services/1.0/adozo#getBiztositottiJogviszonyFoglalkoztatoAdat" style="document"/>
+			<wsdl:input name="getBiztositottiJogviszonyFoglalkoztatoAdatRequestRequest">
+				<wsdl:documentation>Bemenő header és body adatok a(z) getBiztositottiJogviszonyFoglalkoztatoAdat mûvelethez.</wsdl:documentation>
+				<soap:body parts="in" use="literal"/>
+				<soap:header message="getBiztositottiJogviszonyFoglalkoztatoAdatRequest" part="navSoapHeader" use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="getBiztositottiJogviszonyFoglalkoztatoAdatRequestResponse">
+				<wsdl:documentation>Kimenő header és body adatok a(z) getBiztositottiJogviszonyFoglalkoztatoAdat mûvelethez.</wsdl:documentation>
+				<soap:body parts="returnValue" use="literal"/>
+				<soap:header message="getBiztositottiJogviszonyFoglalkoztatoAdatResponse" part="navSoapHeader" use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getHianyzoBevallas">
+			<soap:operation soapAction="https://soap.api.nav.gov.hu/definitions/services/1.0/adozo#getHianyzoBevallas" style="document"/>
+			<wsdl:input name="getHianyzoBevallasRequestRequest">
+				<wsdl:documentation>Bemenő header és body adatok a(z) getHianyzoBevallas mûvelethez.</wsdl:documentation>
+				<soap:body parts="in" use="literal"/>
+				<soap:header message="getHianyzoBevallasRequest" part="navSoapHeader" use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="getHianyzoBevallasRequestResponse">
+				<wsdl:documentation>Kimenő header és body adatok a(z) getHianyzoBevallas mûvelethez.</wsdl:documentation>
+				<soap:body parts="returnValue" use="literal"/>
+				<soap:header message="getHianyzoBevallasResponse" part="navSoapHeader" use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getOsszesitettAdoszamla">
+			<soap:operation soapAction="https://soap.api.nav.gov.hu/definitions/services/1.0/adozo#getOsszesitettAdoszamla" style="document"/>
+			<wsdl:input name="getOsszesitettAdoszamlaRequestRequest">
+				<wsdl:documentation>Bemenő header és body adatok a(z) getOsszesitettAdoszamla mûvelethez.</wsdl:documentation>
+				<soap:body parts="in" use="literal"/>
+				<soap:header message="getOsszesitettAdoszamlaRequest" part="navSoapHeader" use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="getOsszesitettAdoszamlaRequestResponse">
+				<wsdl:documentation>Kimenő header és body adatok a(z) getOsszesitettAdoszamla mûvelethez.</wsdl:documentation>
+				<soap:body parts="returnValue" use="literal"/>
+				<soap:header message="getOsszesitettAdoszamlaResponse" part="navSoapHeader" use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getTetelesAdoszamla">
+			<soap:operation soapAction="https://soap.api.nav.gov.hu/definitions/services/1.0/adozo#getTetelesAdoszamla" style="document"/>
+			<wsdl:input name="getTetelesAdoszamlaRequestRequest">
+				<wsdl:documentation>Bemenő header és body adatok a(z) getTetelesAdoszamla mûvelethez.</wsdl:documentation>
+				<soap:body parts="in" use="literal"/>
+				<soap:header message="getTetelesAdoszamlaRequest" part="navSoapHeader" use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="getTetelesAdoszamlaRequestResponse">
+				<wsdl:documentation>Kimenő header és body adatok a(z) getTetelesAdoszamla mûvelethez.</wsdl:documentation>
+				<soap:body parts="returnValue" use="literal"/>
+				<soap:header message="getTetelesAdoszamlaResponse" part="navSoapHeader" use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getBiztositottiJogviszonyFoglalkoztatoAdatStatusz">
+			<soap:operation soapAction="https://soap.api.nav.gov.hu/definitions/services/1.0/adozo#getBiztositottiJogviszonyFoglalkoztatoAdatStatusz" style="document"/>
+			<wsdl:input name="getBiztositottiJogviszonyFoglalkoztatoAdatStatuszRequestRequest">
+				<wsdl:documentation>Bemenő header és body adatok a(z) getBiztositottiJogviszonyFoglalkoztatoAdatStatusz mûvelethez.</wsdl:documentation>
+				<soap:body parts="in" use="literal"/>
+				<soap:header message="getBiztositottiJogviszonyFoglalkoztatoAdatStatuszRequest" part="navSoapHeader" use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="getBiztositottiJogviszonyFoglalkoztatoAdatStatuszRequestResponse">
+				<wsdl:documentation>Kimenő header és body adatok a(z) getBiztositottiJogviszonyFoglalkoztatoAdatStatusz mûvelethez.</wsdl:documentation>
+				<soap:body parts="returnValue" use="literal"/>
+				<soap:header message="getBiztositottiJogviszonyFoglalkoztatoAdatStatuszResponse" part="navSoapHeader" use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getKoztartozasEgyenleg">
+			<soap:operation soapAction="https://soap.api.nav.gov.hu/definitions/services/1.0/adozo#getKoztartozasEgyenleg" style="document"/>
+			<wsdl:input name="getKoztartozasEgyenlegRequestRequest">
+				<wsdl:documentation>Bemenő header és body adatok a(z) getKoztartozasEgyenleg mûvelethez.</wsdl:documentation>
+				<soap:body parts="in" use="literal"/>
+				<soap:header message="getKoztartozasEgyenlegRequest" part="navSoapHeader" use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="getKoztartozasEgyenlegRequestResponse">
+				<wsdl:documentation>Kimenő header és body adatok a(z) getKoztartozasEgyenleg mûvelethez.</wsdl:documentation>
+				<soap:body parts="returnValue" use="literal"/>
+				<soap:header message="getKoztartozasEgyenlegResponse" part="navSoapHeader" use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="Adozo">
+		<wsdl:port name="Adozo" binding="Adozo">
+			<wsdl:documentation>Éles környezeti szolgáltatás végpont</wsdl:documentation>
+			<soap:address location="https://m2m.nav.gov.hu/soap-api/1.0/document"/>
+		</wsdl:port>
+		<wsdl:port name="AdozoDev" binding="Adozo">
+			<wsdl:documentation>Fejlesztői teszt célú szolgáltatás végpont</wsdl:documentation>
+			<soap:address location="https://m2m-dev.nav.gov.hu/soap-api/1.0/document"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>
