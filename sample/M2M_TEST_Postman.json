@@ -13,7 +13,7 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"//pm.collectionVariables.set('access_token', pm.response.json().accessToken);"
+							"pm.collectionVariables.set('access_token', pm.response.json().accessToken);"
 						],
 						"type": "text/javascript",
 						"packages": {}
