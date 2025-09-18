@@ -662,9 +662,9 @@ NO: A könyvelésre váró tételek nélkül számolja az eredményt.</xs:docume
 							<xs:documentation>Válaszkód</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="requestData" type="RequestData" minOccurs="0" maxOccurs="1">
+					<xs:element name="requestData" type="RequestData" minOccurs="1" maxOccurs="1">
 						<xs:annotation>
-							<xs:documentation>Lekérdezés adatai. Csak SIKERES, vagy FOLYAMATBAN státusz esetén kitöltött.</xs:documentation>
+							<xs:documentation>Lekérdezés adatai. </xs:documentation>
 						</xs:annotation>
 					</xs:element>
 				</xs:sequence>
@@ -959,6 +959,11 @@ NO: A könyvelésre váró tételek nélkül számolja az eredményt.</xs:docume
 					<xs:documentation>Bizonylat száma</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="ellenszamla" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Ellenszámla , ahonnan jön a befizetés, vagy ahová megy a kiutalás. Az ellenszamlaKod kódolatlan értéke.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="ellenszamlaKod" type="xs:string" minOccurs="0" maxOccurs="1">
 				<xs:annotation>
 					<xs:documentation>Ellenszámla kódja, ahonnan jön a befizetés, vagy ahová megy a kiutalás</xs:documentation>
@@ -981,7 +986,12 @@ NO: A könyvelésre váró tételek nélkül számolja az eredményt.</xs:docume
 			</xs:element>
 			<xs:element name="teteltipus" type="xs:string" minOccurs="0" maxOccurs="1">
 				<xs:annotation>
-					<xs:documentation>Befizetés típusa</xs:documentation>
+					<xs:documentation>Pénzforgalmi tétel típus kódja. A kód a KodLista struktúrában található.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="teteltipusKodolatlan" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Pénzforgalmi tétel típus. A teteltipus kódolatlan értéke.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="tranzakcioIdopont" type="xs:dateTime" minOccurs="1" maxOccurs="1">
@@ -1115,7 +1125,7 @@ NO: A könyvelésre váró tételek nélkül számolja az eredményt.</xs:docume
 	</xs:complexType>
 	<xs:complexType name="Tetel">
 		<xs:annotation>
-			<xs:documentation>Adónem tétel</xs:documentation>
+			<xs:documentation>Adónem tétel adatok</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="aladonem" type="xs:string" minOccurs="0" maxOccurs="1">
@@ -1123,9 +1133,15 @@ NO: A könyvelésre váró tételek nélkül számolja az eredményt.</xs:docume
 					<xs:documentation>Aladónem</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="ellenszamla" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Ellenszámla , ahonnan jön a befizetés, vagy ahová megy a kiutalás. &#xD;
+Az ellenszamlaKod kódolatlan értéke.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="ellenszamlaKod" type="xs:string" minOccurs="0" maxOccurs="1">
 				<xs:annotation>
-					<xs:documentation>Ellenszámla kódja, ahonnan jön a befizetés, vagy ahová megy a kiutalás</xs:documentation>
+					<xs:documentation>Ellenszámla kódja, ahonnan jön a befizetés, vagy ahová megy a kiutalás. A kód a KodLista struktúrában található.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="esedekessegiDatum" type="xs:date" minOccurs="0" maxOccurs="1">
@@ -1138,9 +1154,14 @@ NO: A könyvelésre váró tételek nélkül számolja az eredményt.</xs:docume
 					<xs:documentation>Kötelezettség</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="kotelezettsegAtvezetveForras" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Kötelezettség átvezetett tétel esetében a forrás adóalany. A kotelezettsegAtvezetveForrasKod kódolatlan értéke.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="kotelezettsegAtvezetveForrasKod" type="xs:string" minOccurs="0" maxOccurs="1">
 				<xs:annotation>
-					<xs:documentation>Kötelezettség átvezetett tétel esetében a forrás adóalany kódja</xs:documentation>
+					<xs:documentation>Kötelezettség átvezetett tétel esetében a forrás adóalany kódja. A kód a KodLista struktúrában található.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="megnevezes" type="xs:string" minOccurs="0" maxOccurs="1">
@@ -1148,9 +1169,14 @@ NO: A könyvelésre váró tételek nélkül számolja az eredményt.</xs:docume
 					<xs:documentation>A tétel típusának neve</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="penzforgalmAtvezetveForras" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Pénzforgalom átvezetett tétel esetében a forrás adóalany. A penzforgalomAtvezetveForrasKod kódolatlan értéke.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="penzforgalmAtvezetveForrasKod" type="xs:string" minOccurs="0" maxOccurs="1">
 				<xs:annotation>
-					<xs:documentation>Pénzforgalom átvezetett tétel esetében a forrás adóalany kódja</xs:documentation>
+					<xs:documentation>Pénzforgalom átvezetett tétel esetében a forrás adóalany kódja. A kód a KodLista struktúrában található.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="teljesitesiDatum" type="xs:date" minOccurs="0" maxOccurs="1">
@@ -1160,7 +1186,12 @@ NO: A könyvelésre váró tételek nélkül számolja az eredményt.</xs:docume
 			</xs:element>
 			<xs:element name="tipus" type="xs:string" minOccurs="0" maxOccurs="1">
 				<xs:annotation>
-					<xs:documentation>Pénzforgalmi tétel típus kódja</xs:documentation>
+					<xs:documentation>Pénzforgalmi tétel típus kódja. A kód a KodLista struktúrában található.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="tipusKodolatlan" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Pénzforgalmi tétel típus. A tipus kódolatlan értéke.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="penzforgalom" type="Penzforgalom" minOccurs="0" maxOccurs="1">

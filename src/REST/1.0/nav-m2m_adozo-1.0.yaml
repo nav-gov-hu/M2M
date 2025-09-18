@@ -497,6 +497,11 @@ components:
         bizonylatSzama:
           description: Bizonylat száma
           type: string
+        ellenszamla:
+          description: >-
+            Ellenszámla , ahonnan jön a befizetés, vagy ahová megy a kiutalás.
+            Az ellenszamlaKod kódolatlan értéke.
+          type: string
         ellenszamlaKod:
           description: >-
             Ellenszámla kódja, ahonnan jön a befizetés, vagy ahová megy a
@@ -512,7 +517,14 @@ components:
           description: Összeg
           type: number
         teteltipus:
-          description: Befizetés típusa
+          description: >-
+            Pénzforgalmi tétel típus.
+            A teteltipus kódolatlan értéke.
+          type: string
+        teteltipusKodolatlan:
+          description: >-
+            Pénzforgalmi tétel típus kódja.
+            A kód a KodLista struktúrában található.
           type: string
         tranzakcioIdopont:
           description: Befizetés időpontja
@@ -666,6 +678,11 @@ components:
         aladonem:
           description: Aladónem
           type: string
+        ellenszamla:
+          description: >-
+            Ellenszámla, ahonnan jön a befizetés, vagy ahová megy a
+            kiutalás. Az ellenszamlaKod kódolatlan értéke.
+          type: string
         ellenszamlaKod:
           description: >-
             Ellenszámla kódja, ahonnan jön a befizetés, vagy ahová megy a
@@ -675,28 +692,44 @@ components:
           description: Esedékesség dátuma
           type: string
           format: date
+        kotelezettseg:
+          description: Kötelezettség
+          type: number
+        kotelezettsegAtvezetveForras:
+          description: >-
+            Kötelezettség átvezetett tétel esetében a forrás adóalany. 
+            A kotelezettsegAtvezetveForrasKod kódolatlan értéke.
+          type: string
         kotelezettsegAtvezetveForrasKod:
           description: >-
             Kötelezettség átvezetett tétel esetében a forrás adóalany kódja. A
+            kód a CodeList struktúrában található.
+          type: string
+        megnevezes:
+          description: A tétel típusának neve
+          type: string
+        penzforgalomAtvezetveForras:
+          description: >-
+            Pénzforgalom átvezetett tétel esetében a forrás adóalany.
+            A penzforgalomAtvezetveForrasKod kódolatlan értéke.
+          type: string
+        penzforgalomAtvezetveForrasKod:
+          description: >-
+            Pénzforgalom átvezetett tétel esetében a forrás adóalany kódja. A
             kód a CodeList struktúrában található.
           type: string
         teljesitesiDatum:
           description: Pénzforgalmi tétel teljesítési dátum
           type: string
           format: date
-        megnevezes:
-          description: A tétel típusának neve
-          type: string
         tipus:
-          description: Pénzforgalmi tétel típus kódja
-          type: string
-        kotelezettseg:
-          description: Kötelezettség
-          type: number
-        penzforgalomAtvezetveForrasKod:
           description: >-
-            Pénzforgalom átvezetett tétel esetében a forrás adóalany kódja. A
+            Pénzforgalmi tétel típus kódja. A
             kód a CodeList struktúrában található.
+          type: string
+        tipusKodolatlan:
+          description: >-
+            Pénzforgalmi tétel típus kódja.A tipus kódolatlan értéke.
           type: string
         penzforgalom:
           $ref: '#/components/schemas/Penzforgalom'
