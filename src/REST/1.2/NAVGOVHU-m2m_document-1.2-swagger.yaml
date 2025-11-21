@@ -105,7 +105,7 @@ paths:
           type: string
 components:
   securitySchemes:
-    BearerAuth:
+    bearerAuth:
       type: http
       scheme: bearer
   requestBodies:

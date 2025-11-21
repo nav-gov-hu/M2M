@@ -173,7 +173,7 @@ paths:
     parameters: []
 components:
   securitySchemes:
-    BearerAuth:
+    bearerAuth:
       type: http
       scheme: bearer
   requestBodies:

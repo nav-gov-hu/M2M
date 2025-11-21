@@ -352,6 +352,10 @@ paths:
         schema:
           type: string
 components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
   requestBodies: {}
   responses:
     getBiztositottiJogviszonyFoglalkoztatoAdatStatuszResponseBody:
