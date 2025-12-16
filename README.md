@@ -13,8 +13,8 @@ A tárhelyet a meghirdetett véleményezési időszakokon kívül is fenntartjuk
 ## API leírók elérhetősége SwaggerHub-on
 
 A publikált interfészek leírófájljai vizuális megjelenítéssel a SwaggerHub-on is elérhetőek. Ezek szinkronban vannak az src/REST mappában elérhető yaml fájlokkal.\
-[Common-API](https://app.swaggerhub.com/apis/NAVGOVHU/m2m_common/1.0) \
-[Document-API](https://app.swaggerhub.com/apis/NAVGOVHU/m2m_document/1.0)
+[Common-API](https://app.swaggerhub.com/apis/NAVGOVHU/m2m_common) \
+[Document-API](https://app.swaggerhub.com/apis/NAVGOVHU/m2m_document)
 
 ## Észrevételek, ötletek megosztása
 
