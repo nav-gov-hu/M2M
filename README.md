@@ -29,7 +29,7 @@ A NAV fenntartja a jogot, hogy az általános etikettet vagy jó ízlést sért�
 
 ## Gyakran ismételt kérdések
 
-Külün dokumentumban érhető el itt a Github-on: [GYIK](https://github.com/nav-gov-hu/M2M/raw/refs/heads/main/docs/M2M_GYIK.docx)
+Az általános érdeklődésre számottartó kérdések folyamatosan bővülő listája elérhető a következő wiki oldalon: [Kérdések és válaszok](https://github.com/nav-gov-hu/M2M/wiki/K%C3%A9rd%C3%A9sek-%C3%A9s-v%C3%A1laszok)
 
 ## Éles beküldéssel kapcsolatos problémák bejelentése
 
