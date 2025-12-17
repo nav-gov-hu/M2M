@@ -1,0 +1,26 @@
+<?xml  version='1.0' encoding='utf-8' ?>
+<xs:schema targetNamespace="https://soap.api.nav.gov.hu/definitions/services/1.0/bizonylat/local" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:loc="https://soap.api.nav.gov.hu/definitions/services/1.0/bizonylat/local" xmlns:msg_common="https://soap.api.nav.gov.hu/definitions/messages/1.0/common" xmlns:msg_bizonylat="https://soap.api.nav.gov.hu/definitions/messages/1.0/bizonylat">
+	<xs:import namespace="https://soap.api.nav.gov.hu/definitions/messages/1.0/bizonylat" schemaLocation="../../messages/1.0/bizonylat.xsd"/>
+	<xs:import namespace="https://soap.api.nav.gov.hu/definitions/messages/1.0/common" schemaLocation="../../messages/1.0/common.xsd"/>
+	<xs:element name="BizonylatBekuldesRequestElem" type="msg_bizonylat:BizonylatBekuldesRequestType">
+		<xs:annotation>
+			<xs:documentation>'bizonylatBekuldes' operation bemeneti paraméterét definiáló XSD element. </xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="BizonylatBekuldesResponseElem" type="msg_bizonylat:BizonylatBekuldesResponseType">
+		<xs:annotation>
+			<xs:documentation>'bizonylatBekuldes' operation visszatérési értéket definiáló XSD element. </xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="BizonylatStatuszLekerdezesRequestElem" type="msg_bizonylat:BizonylatStatuszLekerdezesRequestType">
+		<xs:annotation>
+			<xs:documentation>'bizonylatStatuszLekerdezes' operation bemeneti paraméterét definiáló XSD element. </xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="BizonylatStatuszLekerdezesResponseElem" type="msg_bizonylat:BizonylatStatuszLekerdezesResponseType">
+		<xs:annotation>
+			<xs:documentation>'bizonylatStatuszLekerdezes' operation visszatérési értéket definiáló XSD element. </xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="NAVm2mSoapHeader" type="msg_common:NAVm2mSoapHeader"/>
+</xs:schema>
