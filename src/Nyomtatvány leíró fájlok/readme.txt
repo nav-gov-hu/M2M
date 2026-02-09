@@ -1,0 +1,1 @@
+Ide lesznek előzetesen publikálva az új Bizonylat API-hoz tartozó Schema és XPATH szabály fájlok.
