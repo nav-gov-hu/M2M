@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<DocumentRules xmlns="https://soap.api.nav.gov.hu/external/webnyk/nyomtatvanyinfo/1.0" documentId="NAV_PMT25MEG">
+    <Form formId="NAV_PMT25MEG">
+        <Elem name="Field_0A0001C002A" type="FIELD">
+            <Rules>
+                <Rule ruleId="2">
+                    <Xpath>//Block_120001[(not(if ( (true())) then true() else (false())))]/map{'path':if(FieldGroup_120002/Field_0A0001C002A) then fn:path(FieldGroup_120002/Field_0A0001C002A) else concat(fn:path(//Form_NAV_PMT25MEG), '/Block_120001/FieldGroup_120002/Field_0A0001C002A'),'severity':'ERROR','ruleId':'2','errorCode':'2','fieldId':'Field_0A0001C002A','message':'tiltéstöröl ( pmt_iktsz2 =  i  , #13 pmt_iktsz4  ) (Hibakód=&lt;2/&gt;)'}</Xpath>
+                    <RuleType>VALIDITY_RULE</RuleType>
+                    <Severity>ERROR</Severity>
+                </Rule>
+                <Rule ruleId="100005">
+                    <Xpath>//Block_120001[(not(if ( boolean((//Block_120001/FieldGroup_120002/Field_0A0001C002A/text()))) then true() else (false())))]/map{'path':if(FieldGroup_120002/Field_0A0001C002A) then fn:path(FieldGroup_120002/Field_0A0001C002A) else concat(fn:path(//Form_NAV_PMT25MEG), '/Block_120001/FieldGroup_120002/Field_0A0001C002A'),'severity':'ERROR','ruleId':'100005','errorCode':'m001','fieldId':'Field_0A0001C002A','message':'A mező kötelezően kitöltendő! (Hibakód=&lt;m001&gt;)'}</Xpath>
+                    <RuleType>VALIDITY_RULE</RuleType>
+                    <Severity>ERROR</Severity>
+                </Rule>
+            </Rules>
+        </Elem>
+        <Elem name="Field_0A0001D001A" type="FIELD">
+            <Rules>
+                <Rule ruleId="100007">
+                    <Xpath>//Block_120001[(not(if ( boolean((//Block_120001/FieldGroup_120002/Field_0A0001D001A/text()))) then true() else (false())))]/map{'path':if(FieldGroup_120002/Field_0A0001D001A) then fn:path(FieldGroup_120002/Field_0A0001D001A) else concat(fn:path(//Form_NAV_PMT25MEG), '/Block_120001/FieldGroup_120002/Field_0A0001D001A'),'severity':'ERROR','ruleId':'100007','errorCode':'m001','fieldId':'Field_0A0001D001A','message':'A mező kötelezően kitöltendő! (Hibakód=&lt;m001&gt;)'}</Xpath>
+                    <RuleType>VALIDITY_RULE</RuleType>
+                    <Severity>ERROR</Severity>
+                </Rule>
+            </Rules>
+        </Elem>
+        <Elem name="Field_0A0001C003A" type="FIELD">
+            <Rules>
+                <Rule ruleId="3">
+                    <Xpath>//Block_120001[(not(if ( (number(string-length((//Block_120001/FieldGroup_120002/Field_0A0001C003A/text()))) = number(4))) then true() else (false())))]/map{'path':if(FieldGroup_120002/Field_0A0001C003A) then fn:path(FieldGroup_120002/Field_0A0001C003A) else concat(fn:path(//Form_NAV_PMT25MEG), '/Block_120001/FieldGroup_120002/Field_0A0001C003A'),'severity':'CRITICAL','ruleId':'3','errorCode':'3','fieldId':'Field_0A0001C003A','message':'Teljes hosszon kitöltendő! (Hibakód=&lt;3&gt;)'}</Xpath>
+                    <RuleType>VALIDITY_RULE</RuleType>
+                    <Severity>CRITICAL</Severity>
+                </Rule>
+                <Rule ruleId="100004">
+                    <Xpath>//Block_120001[(not(if ( boolean((//Block_120001/FieldGroup_120002/Field_0A0001C003A/text()))) then true() else (false())))]/map{'path':if(FieldGroup_120002/Field_0A0001C003A) then fn:path(FieldGroup_120002/Field_0A0001C003A) else concat(fn:path(//Form_NAV_PMT25MEG), '/Block_120001/FieldGroup_120002/Field_0A0001C003A'),'severity':'ERROR','ruleId':'100004','errorCode':'m001','fieldId':'Field_0A0001C003A','message':'A mező kötelezően kitöltendő! (Hibakód=&lt;m001&gt;)'}</Xpath>
+                    <RuleType>VALIDITY_RULE</RuleType>
+                    <Severity>ERROR</Severity>
+                </Rule>
+            </Rules>
+        </Elem>
+        <Elem name="Field_0A0001E001A" type="FIELD">
+            <Rules>
+                <Rule ruleId="100008">
+                    <Xpath>//Block_120001[(not(if ( boolean((//Block_120001/FieldGroup_120002/Field_0A0001E001A/text()))) then true() else (false())))]/map{'path':if(FieldGroup_120002/Field_0A0001E001A) then fn:path(FieldGroup_120002/Field_0A0001E001A) else concat(fn:path(//Form_NAV_PMT25MEG), '/Block_120001/FieldGroup_120002/Field_0A0001E001A'),'severity':'ERROR','ruleId':'100008','errorCode':'m001','fieldId':'Field_0A0001E001A','message':'A mező kötelezően kitöltendő! (Hibakód=&lt;m001&gt;)'}</Xpath>
+                    <RuleType>VALIDITY_RULE</RuleType>
+                    <Severity>ERROR</Severity>
+                </Rule>
+            </Rules>
+        </Elem>
+        <Elem name="Field_0A0001C004A" type="FIELD">
+            <Rules>
+                <Rule ruleId="4">
+                    <Xpath>//Block_120001[(not(if ( (not(((//Block_120001/FieldGroup_120002/Field_0A0001C002A/text()) != 'i'))) or (number(string-length((//Block_120001/FieldGroup_120002/Field_0A0001C004A/text()))) = number(3))) then true() else (false())))]/map{'path':if(FieldGroup_120002/Field_0A0001C004A) then fn:path(FieldGroup_120002/Field_0A0001C004A) else concat(fn:path(//Form_NAV_PMT25MEG), '/Block_120001/FieldGroup_120002/Field_0A0001C004A'),'severity':'CRITICAL','ruleId':'4','errorCode':'4','fieldId':'Field_0A0001C004A','message':'Teljes hosszon kitöltendő! (Hibakód=&lt;4&gt;)'}</Xpath>
+                    <RuleType>VALIDITY_RULE</RuleType>
+                    <Severity>CRITICAL</Severity>
+                </Rule>
+                <Rule ruleId="5">
+                    <Xpath>//Block_120001[(not(if ( (not(((//Block_120001/FieldGroup_120002/Field_0A0001C002A/text()) != 'i'))) or boolean((//Block_120001/FieldGroup_120002/Field_0A0001C004A/text()))) then true() else (false())))]/map{'path':if(FieldGroup_120002/Field_0A0001C004A) then fn:path(FieldGroup_120002/Field_0A0001C004A) else concat(fn:path(//Form_NAV_PMT25MEG), '/Block_120001/FieldGroup_120002/Field_0A0001C004A'),'severity':'CRITICAL','ruleId':'5','errorCode':'5','fieldId':'Field_0A0001C004A','message':'Kitöltendő! (Hibakód=&lt;5&gt;)'}</Xpath>
+                    <RuleType>VALIDITY_RULE</RuleType>
+                    <Severity>CRITICAL</Severity>
+                </Rule>
+            </Rules>
+        </Elem>
+        <Elem name="Field_0A0001C005A" type="FIELD">
+            <Rules>
+                <Rule ruleId="6">
+                    <Xpath>//Block_120001[(not(if ( (number(string-length((//Block_120001/FieldGroup_120002/Field_0A0001C005A/text()))) = number(5))) then true() else (false())))]/map{'path':if(FieldGroup_120002/Field_0A0001C005A) then fn:path(FieldGroup_120002/Field_0A0001C005A) else concat(fn:path(//Form_NAV_PMT25MEG), '/Block_120001/FieldGroup_120002/Field_0A0001C005A'),'severity':'CRITICAL','ruleId':'6','errorCode':'6','fieldId':'Field_0A0001C005A','message':'Teljes hosszon kitöltendő! (Hibakód=&lt;6&gt;)'}</Xpath>
+                    <RuleType>VALIDITY_RULE</RuleType>
+                    <Severity>CRITICAL</Severity>
+                </Rule>
+                <Rule ruleId="100006">
+                    <Xpath>//Block_120001[(not(if ( boolean((//Block_120001/FieldGroup_120002/Field_0A0001C005A/text()))) then true() else (false())))]/map{'path':if(FieldGroup_120002/Field_0A0001C005A) then fn:path(FieldGroup_120002/Field_0A0001C005A) else concat(fn:path(//Form_NAV_PMT25MEG), '/Block_120001/FieldGroup_120002/Field_0A0001C005A'),'severity':'ERROR','ruleId':'100006','errorCode':'m001','fieldId':'Field_0A0001C005A','message':'A mező kötelezően kitöltendő! (Hibakód=&lt;m001&gt;)'}</Xpath>
+                    <RuleType>VALIDITY_RULE</RuleType>
+                    <Severity>ERROR</Severity>
+                </Rule>
+            </Rules>
+        </Elem>
+        <Elem name="Field_0A0001E003A" type="FIELD">
+            <Rules>
+                <Rule ruleId="100009">
+                    <Xpath>//Block_120001[(not(if ( not(empty(xs:decimal(//Block_120001/FieldGroup_120002/Field_0A0001E003A/text())))) then true() else (false())))]/map{'path':if(FieldGroup_120002/Field_0A0001E003A) then fn:path(FieldGroup_120002/Field_0A0001E003A) else concat(fn:path(//Form_NAV_PMT25MEG), '/Block_120001/FieldGroup_120002/Field_0A0001E003A'),'severity':'ERROR','ruleId':'100009','errorCode':'m001','fieldId':'Field_0A0001E003A','message':'A mező kötelezően kitöltendő! (Hibakód=&lt;m001&gt;)'}</Xpath>
+                    <RuleType>VALIDITY_RULE</RuleType>
+                    <Severity>ERROR</Severity>
+                </Rule>
+            </Rules>
+        </Elem>
+        <Elem name="Field_form" type="FORM">
+            <Rules>
+                <Rule ruleId="8">
+                    <Xpath>if((not(not(empty(xs:decimal(//Block_120001/FieldGroup_120002/Field_0A0001E003A/text()))))) or (number(xs:decimal(//Block_120001/FieldGroup_120002/Field_0A0001E003A/text())) = number((if(//csatolmanydb/text()) then //csatolmanydb else 0)))) then nil else map{'path':'','ruleId':'8','severity':'CRITICAL','errorCode':'8','fieldId':'Field_form','message':'A mellékletek száma nem egyezik meg a csatolt mellékletek #13számával! Kérem ellenőrizze! (Hibakód=&lt;8&gt;)'}</Xpath>
+                    <RuleType>VALIDITY_RULE</RuleType>
+                    <Severity>CRITICAL</Severity>
+                </Rule>
+            </Rules>
+        </Elem>
+        <Elem name="Field_0A0001C001A" type="FIELD">
+            <Rules>
+                <Rule ruleId="V1">
+                    <Xpath>let $result := //Block_120001 ! (let $raw := '60400', $getRealZero := $raw , $compare := FieldGroup_120002/Field_0A0001C001A return if ((empty($getRealZero) and not(empty($compare))) or (empty($compare) and not(empty($getRealZero))) or $getRealZero != $compare) then map {'path': if(FieldGroup_120002/Field_0A0001C001A) then fn:path(FieldGroup_120002/Field_0A0001C001A) else concat(fn:path(//Form_NAV_PMT25MEG), '/Block_120001/FieldGroup_120002/Field_0A0001C001A'), 'severity': 'ERROR','ruleId': '1','errorCode':'1','fieldId': 'Field_0A0001C001A','message': concat('Eltér a mező értéke a számított értéktől! Jelenlegi érték: ',$compare,' számított érték: ',$getRealZero)} else () ) return $result</Xpath>
+                    <RuleType>VALUECALC_VALIDITY_RULE</RuleType>
+                    <Severity>ERROR</Severity>
+                </Rule>
+                <Rule ruleId="1">
+                    <Xpath>let $result := //Block_120001 ! (let $raw := '60400', $getRealZero := $raw return [map { 'path': if(FieldGroup_120002/Field_0A0001C001A) then fn:path(FieldGroup_120002/Field_0A0001C001A) else concat(fn:path(//Form_NAV_PMT25MEG), '/Block_120001/FieldGroup_120002/Field_0A0001C001A'), 'value': $getRealZero }] ) return $result</Xpath>
+                    <RuleType>VALUECALC_RULE</RuleType>
+                    <Severity>ERROR</Severity>
+                </Rule>
+            </Rules>
+        </Elem>
+        <Orders>
+            <AllFieldCalcsOrder>
+                <OrderedElem>0A0001C001A</OrderedElem>
+            </AllFieldCalcsOrder>
+        </Orders>
+    </Form>
+</DocumentRules>

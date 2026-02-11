@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2025 rel. 2 (x64) (https://www.altova.com) by Szász Gergely (Piller Informatikai Kft.) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning" xmlns:tns="https://api.nav.gov.hu/definitions/form_xsd_metaschema/1.0" targetNamespace="https://api.nav.gov.hu/definitions/form_xsd_metaschema/1.0" elementFormDefault="qualified" attributeFormDefault="unqualified" vc:minVersion="1.1">
+	<xs:annotation>
+		<xs:documentation>Ez a séma az .enyk fájlok alapján képzett bizonylat leíró sémák metasémája, vagyis a bizonylat leíró sémák általános, elvi szerkezetét írja le. A bizonylat leíró sémákban az egyes xsd:element mezőkön megadott meta:metatype attribútum mutatja meg, hogy az adott elem melyik metatípusba tartozik, vagyis mi az elvi szerkezete. Fontos, hogy a bizonylatot leíró xsd ezzel a sémával szemben nem validálható, mivel annak a tényleges (fizikai) szerkezetét a http://www.w3.org/2001/XMLSchema séma írja le. Ez a metaséma a logikai szerkezetet írja le, ami az értelmezést segíti elsősorban.</xs:documentation>
+	</xs:annotation>
+	<xs:element name="Document" type="tns:DocMetaType">
+		<xs:annotation>
+			<xs:documentation>Minden esetben kell, hogy legyen egy DocMetaType metatípusú root elem.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="DocMetaType">
+		<xs:annotation>
+			<xs:documentation>A dokumentum egészét leíró típus</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Form" type="tns:FormMetaType" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Egy részbizonylatból képzett elem, mely tartalmazza a menüket (blokkokat) és csatolmnyokat</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="Name" use="required">
+			<xs:annotation>
+				<xs:documentation>Az adott elem neve, Doc_[DOCINFO/@id] formájú.</xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:pattern value="Doc_\w+"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="Type" use="required">
+			<xs:annotation>
+				<xs:documentation>Az elem szerkezetét ténylegesen megadó típus. Neve: [elemnév]_Type</xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:pattern value="Doc_\w+_Type"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="FormMetaType">
+		<xs:annotation>
+			<xs:documentation>A dokumentumban szereplő részbizonylatot leíró típus</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Block" type="tns:BlockMetaType" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>A részbizonylat menüiből képzett elem, szerkezete a menü tartalma alapján kerül összeállításra.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Attachment" type="tns:AttachmentMetaType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Az adott részbizonylathoz meghatározott csatolmányfajta. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="Name" use="required">
+			<xs:annotation>
+				<xs:documentation>Az adott Form (részbizonylat) elem neve, Form_[FORM/@name] formájú.</xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:pattern value="Form_\w+"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="Type" use="required">
+			<xs:annotation>
+				<xs:documentation>Az elem szerkezetét ténylegesen megadó típus. Neve: [elemnév]_Type</xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:pattern value="Form_\w+_Type"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="BlockMetaType">
+		<xs:annotation>
+			<xs:documentation>A Blokk_* elemeket leíró metatípus</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="FieldGroup" type="tns:FieldGroupMetaType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>A menüben hivatkozott FieldGroup alapján képzett elem. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Chain" type="tns:ChainMetaType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>A menüben hivatkozott lánc (láncba tartozó FieldGroup vagy SpecDynGroup/Header) alapján képzett elem</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Block" type="tns:BlockMetaType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>a menü alá tartozó almenük</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="Name" use="required">
+			<xs:annotation>
+				<xs:documentation>Az adott elem neve, Block_[MENU/@id] formájú.</xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:pattern value="Block_[0-9]+"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="Type" use="required">
+			<xs:annotation>
+				<xs:documentation>Az elem szerkezetét ténylegesen megadó típus. Neve: [elemnév]_Type</xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:pattern value="Block_[0-9]+_Type"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="ChainMetaType">
+		<xs:annotation>
+			<xs:documentation>A Chain_* elemeket leíró metatípus</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="sdgID" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Ha a lánc SpecDynGroup-ból van képezve, akkor az adott SDG ID-ja (az XSD-ben attribútumként létrehozva)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Chain_header" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>A lánc egyedi ("nem ismétlődő") elemeit összegyűjtő elem. Akkor jön létre, ha van alatta legalább egy FieldGroup.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="FieldGroup" type="tns:FieldGroupMetaType" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>A láncban hivatkozott FieldGroup alapján képzett elem.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Chain_elem" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>A lánc normál, ismétlődő elemeit tartalmazó elem.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="FieldGroup" type="tns:FieldGroupMetaType" minOccurs="0" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>A láncban hivatkozott FieldGroup alapján képzett elem.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="Chain" type="tns:ChainMetaType" minOccurs="0" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>"Láncban lánc", a láncba befoglalt láncból képzett elem. (SpecDynGroup/Detail alapján)</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="Name" use="required">
+			<xs:annotation>
+				<xs:documentation>Az adott elem neve, Chain_[chain_id] formájú.</xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:pattern value="Chain_[0-9]+"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="Type" use="required">
+			<xs:annotation>
+				<xs:documentation>Az elem szerkezetét ténylegesen megadó típus. Neve: [elemnév]_Type</xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:pattern value="Chain_[0-9]+_Type"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="FieldGroupMetaType">
+		<xs:annotation>
+			<xs:documentation>A FieldGroup_* elemeket leíró metatípus</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Field" type="tns:FieldMetaType" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Egy mező értékét tartalmazó elem. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="Name" use="required">
+			<xs:annotation>
+				<xs:documentation>Az adott elem  neve, FieldGroup_[id|fid] formájú.</xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:pattern value="FieldGroup_[0-9]+"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="Type" use="required">
+			<xs:annotation>
+				<xs:documentation>Az elem szerkezetét ténylegesen megadó típus. Neve: [elemnév]_Type</xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:pattern value="FieldGroup_[0-9]+_Type"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="FieldMetaType">
+		<xs:annotation>
+			<xs:documentation>A Field _* elemeket leíró metatípus</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="Name" use="required">
+			<xs:annotation>
+				<xs:documentation>Az adott elem neve, Field_[id|fid] formájú.</xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:pattern value="Field_[0-9]+"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="Type" use="required">
+			<xs:annotation>
+				<xs:documentation>Az adott elem típusa enyk típus alapján, xsd simple type amin restiction alkalmazható</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="AttachmentMetaType">
+		<xs:annotation>
+			<xs:documentation>Egy részbizonylathoz definiált csatolmányfajtát leíró típus</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="Name" use="required">
+			<xs:annotation>
+				<xs:documentation>Az adott csatolmányfajta neve, Attachment_[id] formájú.</xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:pattern value="Attachment_[0-9]+"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="Type" use="required" fixed="common:AttachmentType">
+			<xs:annotation>
+				<xs:documentation>Az attachment adatszerkezetet leíró típus, minden esetben pontosan: common:AttachmentType</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Cardinality" use="required">
+			<xs:annotation>
+				<xs:documentation>Megadja az adott csatolmánytípus számosságát, hogy hányat lehet belőle felvenni (minOccurs és maxOccurs attribútumokban)</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:attribute name="metaType">
+		<xs:annotation>
+			<xs:documentation>A generált XSD-ben ezzel az attribútummal jelöljük meg, hogy milyen metatípusnak felel meg az adott elem. </xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:pattern value="\w+"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:attribute>
+</xs:schema>
