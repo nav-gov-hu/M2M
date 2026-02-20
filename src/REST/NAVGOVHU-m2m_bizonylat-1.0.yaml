@@ -1,222 +1,265 @@
 openapi: 3.0.0
 info:
   title: NavM2mBizonylat
-  description: OpenAPI Document NAV M2M Bizonylat szolgáltatáshoz.
-  version: "1.0"
-servers:
-- url: https://m2m-dev.nav.gov.hu/rest-api/1.0/
-  description: Fejlesztői célú szolgáltatás végpont. A szolgáltatások ezen a végponton nem valós tartalommal kerülnek megvalósításra!
-security:
-- bearerAuth: []
-tags:
-- name: BizonylatService
-  description: ' A Bizonylat service csomagba tartozo OAS elemek'
+  description: 'OpenAPI Document NAV M2M Bizonylat szolgáltatáshoz.'
+  version: '1.0'
 paths:
   /NavM2mBizonylat/bizonylatService/Bizonylat/{ugyAzonosito}:
     get:
       tags:
-      - BizonylatService
+        - BizonylatService
       summary: Bizonylat.getBizonylat
-      description: " (Letrehozva a Bizonylat.getBizonylat(messageId: char, correlationId: char, ugyAzonosito: char):GetBizonylatResponseType operation-bol.)"
+      description: ' (Letrehozva a Bizonylat.getBizonylat(messageId: char, correlationId: char, ugyAzonosito: char):GetBizonylatResponseType operation-bol.)'
       operationId: getBizonylat
       parameters:
+        - name: messageId
+          in: header
+          description: Az üzenet egyedi azonosítója
+          schema:
+            type: string
+          required: true
+        - name: correlationId
+          in: header
+          description: Üzenetek összekapcsolását biztosító egyedi azonosító.
+          schema:
+            type: string
+      x-generator-comment: 'Operation return type: getBizonylatResponseBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/getBizonylatResponseBody'
+    parameters:
       - name: ugyAzonosito
         in: path
-        description: "Az ügy(bizonylatbeküldés) egyedi azonosítója, amnek a státusza le lesz kérdezbe Path parameterkent letrehozva!"
         required: true
+        description: >-
+          Az ügy(bizonylatbeküldés) egyedi azonosítója, amnek a státusza le lesz
+          kérdezbe Path parameterkent letrehozva!
         schema:
           type: string
-      - name: messageId
-        in: header
-        description: Az üzenet egyedi azonosítója
-        required: true
-        schema:
-          type: string
-      - name: correlationId
-        in: header
-        description: Üzenetek összekapcsolását biztosító egyedi azonosító.
-        required: false
-        schema:
-          type: string
-      responses:
-        "200":
-          $ref: "#/components/responses/getBizonylatResponseBody"
-      x-generator-comment: "Operation return type: getBizonylatResponseBody"
   /NavM2mBizonylat/bizonylatService/Bizonylat:
     post:
       tags:
-      - BizonylatService
+        - BizonylatService
       summary: Bizonylat.createBizonylat
-      description: "A bizonylat létrehozását és validálását biztosító művelet. Visszaadja a bizonylat státuszát és a validációs hibákat. (Letrehozva a Bizonylat.createBizonylat(messageId: char, correlationId: char, requestData: CreateBizonylatRequestType):CreateBizonylatResponseType operation-bol.)"
+      description: >-
+        A bizonylat létrehozását és validálását biztosító művelet. Visszaadja a
+        bizonylat státuszát és a validációs hibákat. (Letrehozva a
+        Bizonylat.createBizonylat(messageId: char, correlationId: char,
+        requestData: CreateBizonylatRequestType):CreateBizonylatResponseType
+        operation-bol.)
       operationId: createBizonylat
-      parameters:
-      - name: messageId
-        in: header
-        description: Az üzenet egyedi azonosítója
-        required: true
-        schema:
-          type: string
-      - name: correlationId
-        in: header
-        description: Üzenetek összekapcsolását biztosító egyedi azonosító.
-        required: false
-        schema:
-          type: string
       requestBody:
-        $ref: "#/components/requestBodies/createBizonylatRequestBody"
+        $ref: '#/components/requestBodies/createBizonylatRequestBody'
+      parameters:
+        - name: messageId
+          in: header
+          description: Az üzenet egyedi azonosítója
+          schema:
+            type: string
+          required: true
+        - name: correlationId
+          in: header
+          description: Üzenetek összekapcsolását biztosító egyedi azonosító.
+          schema:
+            type: string
+      x-generator-comment: 'Operation return type: createBizonylatResponseBody'
       responses:
-        "200":
-          $ref: "#/components/responses/createBizonylatResponseBody"
-      x-generator-comment: "Operation return type: createBizonylatResponseBody"
+        '200':
+          $ref: '#/components/responses/createBizonylatResponseBody'
+    parameters: []
 components:
-  schemas:
-    CreateBizonylatResult:
-      type: string
-      enum:
-      - ERVENYTELEN_ALAIRAS
-      - SIKERES
-      - ERVENYTELEN_BIZONYLAT_TIPUS
-      - ERVENYTELEN_BIZONYLAT_VERZIO
-      - NEM_TAMOGATOTT_TOMORITES
-      - HIBAS_TOMORITES
-      - VIRUSOS_FAJL
-      - NINCS_JOGOSULTSAG_BIZONYLATTIPUSHOZ
-      - NINCS_JOGOSULTSAG_ADOZOHOZ
-      - ERVENYTELEN_ADOZO
-      - ERVENYTELEN_BEKULDO
-      - EGYEB_HIBA
-      - SIKERTELEN_VALIDACIO
-      - EREVENYTELEN_KODOLAS
-      - ERVENYTELEN_KARAKTER
-      - SIKERTELEN_BEKULDES
-      - NEM_TALALHATO_CSATOLMANY
-      - VALASZ_TAROLO_NEM_ENGEDELYEZETT
-    GetBizonylatResponseType:
-      allOf:
-      - $ref: "#/components/schemas/BizonylatResponseType"
-      - type: object
-        properties:
-          resultCode:
-            $ref: "#/components/schemas/GetBizonylatResult"
-    GetBizonylatResult:
-      type: string
-      enum:
-      - SIKERES
-      - NEMLETEZO_UGY_AZONOSITO
-      - EGYEB_HIBA
-    BeadasiTanusitvany:
-      required:
-      - befogadasIdopontja
-      - tanusitvany
-      type: object
-      properties:
-        befogadasIdopontja:
-          type: string
-          description: A befogadás időpontja
-          format: date-time
-        tanusitvany:
-          type: string
-          description: "A befogadási a tanúsítvány. A tanúsítvány mező az elején pontosvesszővel elválasztva tartalmazza azokat az adatokat, amelyekből képezve lett. A végére kerül a maga a tanúsítvány base64 kódolva."
-    Tomorites:
-      type: string
-      enum:
-      - GZIP
-    BizonylatStatusz:
-      type: string
-      enum:
-      - VALIDACIO_ALATT
-      - SIKERESEN_VALIDALT
-      - VALIDACIOS_HIBA
-      - SIKERTELEN_BEKULDES
-      - SIKERTELEN_ELOELLENORZES
-      - BEKULDES_ALATT
-      - SIKERESEN_BEKULDVE
-    BaseResponseType:
-      type: object
-      properties:
-        resultMessage:
-          type: string
-          description: Válaszüzenet
-    createBizonylatRequestBodyType:
-      type: object
-      properties:
-        requestData:
-          $ref: "#/components/schemas/CreateBizonylatRequestType"
-    CreateBizonylatResponseType:
-      required:
-      - ugyAzonosito
-      allOf:
-      - $ref: "#/components/schemas/BizonylatResponseType"
-      - type: object
-        properties:
-          ugyAzonosito:
-            type: string
-            description: Az ügy egyedi azonosítója. Ezzel lehet lekérdezni beküldést köveően a státuszt.
-          resultCode:
-            $ref: "#/components/schemas/CreateBizonylatResult"
-    BizonylatResponseType:
-      allOf:
-      - $ref: "#/components/schemas/BaseResponseType"
-      - type: object
-        properties:
-          erkeztetesiSzam:
-            type: string
-            description: Sikeres beküldés esetén az érkeztetési szám.
-          validaciosHibak:
-            type: string
-            description: Hibákat megállapító validáció esetén a hibákat tartalmazó xml fájl bzip2-vel tömörítve. Az xml a hibalista.xsd-vel dolgozható fel.
-            format: byte
-          beadasiTanusitvany:
-            $ref: "#/components/schemas/BeadasiTanusitvany"
-          bizonylatStatusz:
-            $ref: "#/components/schemas/BizonylatStatusz"
-    CreateBizonylatRequestType:
-      required:
-      - bizonylatTipus
-      - bizonylatVerzio
-      - bizonylatXml
-      - signature
-      type: object
-      properties:
-        bizonylatTipus:
-          type: string
-          description: A bizonylat típusa
-        bizonylatVerzio:
-          type: string
-          description: A bizonylat verziószáma
-        bizonylatXml:
-          type: string
-          description: "A bizonylat file base 64 kódolással. A tomorites paraméter adja, meg, hogy tömörtett volt-e a fájl, és ha igen, akkor milyen módon, mielőtt kódolva lett."
-        signature:
-          type: string
-          description: Aláírás
-        validaciosTanusitvany:
-          type: string
-          description: "Annak a tanúsítványa, hogy a beküldött bizonylat már validálva lett. Ha létezik ilyen tanúsítvány, akkor a bizonylat a beküldés során már nem lesz validálva. Gyorsabban lefut a művelet, ami szinkronválaszt ad. A tanúsítvány mező az elején pontosvesszővel elválasztva tartalmazza azokat az adatokat, amelyekből képezve lett. A végére kerül a maga a tanúsítvány base64 kódolva."
-        tomorites:
-          $ref: "#/components/schemas/Tomorites"
-  responses:
-    createBizonylatResponseBody:
-      description: ""
-      content:
-        application/json:
-          schema:
-            $ref: "#/components/schemas/CreateBizonylatResponseType"
-    getBizonylatResponseBody:
-      description: ""
-      content:
-        application/json:
-          schema:
-            $ref: "#/components/schemas/GetBizonylatResponseType"
-  requestBodies:
-    createBizonylatRequestBody:
-      description: ""
-      content:
-        application/json:
-          schema:
-            $ref: "#/components/schemas/createBizonylatRequestBodyType"
-      required: true
   securitySchemes:
     bearerAuth:
       type: http
       scheme: bearer
+  requestBodies:
+    createBizonylatRequestBody:
+      description: ''
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/createBizonylatRequestBodyType'
+  responses:
+    createBizonylatResponseBody:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CreateBizonylatResponseType'
+    getBizonylatResponseBody:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GetBizonylatResponseType'
+  schemas:
+    CreateBizonylatResult:
+      type: string
+      enum:
+        - ERVENYTELEN_ALAIRAS
+        - SIKERES
+        - ERVENYTELEN_BIZONYLAT_TIPUS
+        - ERVENYTELEN_BIZONYLAT_VERZIO
+        - HIBAS_TOMORITES
+        - VIRUSOS_FAJL
+        - NINCS_JOGOSULTSAG_BIZONYLATTIPUSHOZ
+        - NINCS_JOGOSULTSAG_ADOZOHOZ
+        - ERVENYTELEN_ADOZO
+        - ERVENYTELEN_BEKULDO
+        - EGYEB_HIBA
+        - SIKERTELEN_VALIDACIO
+        - EREVENYTELEN_KODOLAS
+        - ERVENYTELEN_KARAKTER
+        - SIKERTELEN_BEKULDES
+        - HIBAS_CSATOLMANY_MERET
+        - NEM_TALALHATO_CSATOLMANY
+        - NEM_XSD_VALID_XML
+    GetBizonylatResponseType:
+      allOf:
+        - $ref: '#/components/schemas/BizonylatResponseType'
+        - type: object
+          properties:
+            resultCode:
+              $ref: '#/components/schemas/GetBizonylatResult'
+    GetBizonylatResult:
+      type: string
+      enum:
+        - SIKERES
+        - NEMLETEZO_UGY_AZONOSITO
+        - EGYEB_HIBA
+    BeadasiTanusitvany:
+      type: object
+      properties:
+        befogadasIdopontja:
+          description: A befogadás időpontja
+          type: string
+          format: date-time
+        tanusitvany:
+          description: >-
+            A befogadási a tanúsítvány. A tanúsítvány mező az elején
+            pontosvesszővel elválasztva tartalmazza azokat az adatokat,
+            amelyekből képezve lett. A végére kerül a maga a tanúsítvány base64
+            kódolva.
+          type: string
+      required:
+        - befogadasIdopontja
+        - tanusitvany
+    Tomorites:
+      type: string
+      enum:
+        - GZIP
+    BizonylatStatusz:
+      type: string
+      enum:
+        - VALIDACIO_ALATT
+        - SIKERESEN_VALIDALT
+        - VALIDACIOS_HIBA
+        - SIKERTELEN_BEKULDES
+        - SIKERTELEN_ELOELLENORZES
+        - BEKULDES_ALATT
+        - SIKERESEN_BEKULDVE
+    BaseResponseType:
+      type: object
+      properties:
+        resultMessage:
+          description: Válaszüzenet
+          type: string
+    createBizonylatRequestBodyType:
+      type: object
+      properties:
+        requestData:
+          $ref: '#/components/schemas/CreateBizonylatRequestType'
+      required:
+        - requestData
+    CreateBizonylatResponseType:
+      allOf:
+        - $ref: '#/components/schemas/BizonylatResponseType'
+        - type: object
+          properties:
+            ugyAzonosito:
+              description: >-
+                Az ügy egyedi azonosítója. Ezzel lehet lekérdezni beküldést
+                köveően a státuszt.
+              type: string
+            resultCode:
+              $ref: '#/components/schemas/CreateBizonylatResult'
+      required:
+        - ugyAzonosito
+    BizonylatResponseType:
+      allOf:
+        - $ref: '#/components/schemas/BaseResponseType'
+        - type: object
+          properties:
+            erkeztetesiSzam:
+              description: Érkeztetési szám
+              type: string
+            megjegyzes:
+              description: >-
+                A bizonylathoz fűzhető megjegyzés, ami megadása esetén bekerül a
+                nyugtába, hasonlóan az ÁNYK-s működéshez.
+              type: string
+            validaciosHibak:
+              description: >-
+                Hibákat megállapító validáció esetén a hibákat tartalmazó xml
+                fájl bzip2-vel tömörítve. Az xml a hibalista.xsd-vel dolgozható
+                fel.
+              type: string
+              format: byte
+            beadasiTanusitvany:
+              $ref: '#/components/schemas/BeadasiTanusitvany'
+            bizonylatStatusz:
+              $ref: '#/components/schemas/BizonylatStatusz'
+    CreateBizonylatRequestType:
+      type: object
+      properties:
+        bizonylatTipus:
+          description: A bizonylat típusa
+          type: string
+        bizonylatVerzio:
+          description: A bizonylat verziószáma
+          type: string
+          pattern: ^[A-Za-z0-9.\-_]{1,10}$
+        bizonylatXml:
+          description: >-
+            A bizonylat file base 64 kódolással. A tomorites paraméter adja,
+            meg, hogy tömörtett volt-e a fájl, és ha igen, akkor milyen módon,
+            mielőtt kódolva lett.
+          type: string
+        megjegyzes:
+          description: >-
+            A bizonylathoz fűzhető megjegyzés, ami megadása esetén bekerül a
+            nyugtába, hasonlóan az ÁNYK-s működéshez.
+          type: string
+        signature:
+          description: Aláírás
+          type: string
+        validaciosTanusitvany:
+          description: >-
+            Annak a tanúsítványa, hogy a beküldött bizonylat már validálva lett.
+            Ha létezik ilyen tanúsítvány, akkor a bizonylat a beküldés során már
+            nem lesz validálva. Gyorsabban lefut a művelet, ami szinkronválaszt
+            ad. A tanúsítvány mező az elején pontosvesszővel elválasztva
+            tartalmazza azokat az adatokat, amelyekből képezve lett. A végére
+            kerül a maga a tanúsítvány base64 kódolva.
+          type: string
+        tomorites:
+          $ref: '#/components/schemas/Tomorites'
+      required:
+        - bizonylatTipus
+        - bizonylatVerzio
+        - bizonylatXml
+        - signature
+tags:
+  - name: BizonylatService
+    description: ' A Bizonylat service csomagba tartozo OAS elemek'
+
+servers: [
+  {
+    "url": https://m2m-dev.nav.gov.hu/rest-api/1.0/,
+    "description": "Fejlesztői célú szolgáltatás végpont. A szolgáltatások ezen a végponton nem valós tartalommal kerülnek megvalósításra!"
+  }
+]
+
+security:
+  - bearerAuth: []

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Doc_ELMDIJ xmlns="https://soap.api.nav.gov.hu/definitions/model/2.0/PEI/ELMDIJ/v0.1"
+            xmlns:common="https://soap.api.nav.gov.hu/definitions/model/2.0/common/v0.1"
+            xmlns:enm="https://soap.api.nav.gov.hu/definitions/model/2.0/altalanos_enum/v0.1"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="https://soap.api.nav.gov.hu/definitions/model/2.0/PEI/ELMDIJ/v0.1 file:NAV_ELMDIJ_6_0.xsd">
+   <Form_ELMDIJ xmlns="">
+      <Block_120001>
+         <FieldGroup_120002>
+            <Field_0A0001E001A>25929801206</Field_0A0001E001A>
+            <Field_0A0001E003A>AA5904930</Field_0A0001E003A>
+            <Field_0A0001E006A>Tavaszi Nagyerdő Kft.</Field_0A0001E006A>
+         </FieldGroup_120002>
+         <FieldGroup_120003>
+            <Field_0A0001E007A>Nagy Evelin</Field_0A0001E007A>
+            <Field_0A0001E008A>06305551234</Field_0A0001E008A>
+         </FieldGroup_120003>
+         <FieldGroup_120006>
+            <Field_0A0001F001A>2025-01-01</Field_0A0001F001A>
+            <Field_0A0001F002A>2025-12-31</Field_0A0001F002A>
+            <Field_0A0001F009A>1</Field_0A0001F009A>
+         </FieldGroup_120006>
+      </Block_120001>
+      <Block_120022>
+         <FieldGroup_120023>
+            <Field_0B0001C0005BA>191</Field_0B0001C0005BA>
+            <Field_0B0001C0004BA>192</Field_0B0001C0004BA>
+            <Field_0B0001C0001BA>383</Field_0B0001C0001BA>
+            <Field_0B0001C0001AA>382872</Field_0B0001C0001AA>
+         </FieldGroup_120023>
+      </Block_120022>
+   </Form_ELMDIJ>
+</Doc_ELMDIJ>

@@ -11,6 +11,7 @@
 
     <modules>
         <module>common-api</module>
+        <module>bizonylat-api</module>
         <module>m2m-client</module>
     </modules>
 

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ELMDIJ_report xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../ELMDIJ_XSD_XPATH/elmdij_flat.xsd">
+	<adozo_neve>Tavaszi Nagyerdő Kft.</adozo_neve>
+	<adoszam>25929801206</adoszam>
+	<felir_azonosito>AA5904930</felir_azonosito>
+	<ugyintezo_nev>Nagy Evelin</ugyintezo_nev>
+	<ugyintezo_tel>06305551234</ugyintezo_tel>
+	<kezdet_datum>2025-01-01</kezdet_datum>
+	<veg_datum>2025-12-31</veg_datum>
+	<jogszabaly>Éltv. 47/B§ (3)</jogszabaly>
+	<adoalap>382872</adoalap>
+	<szamitott_ado>383</szamitott_ado>
+	<ado1>192</ado1>
+	<ado2>191</ado2>
+</ELMDIJ_report>
+
+

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hibalista:Hibalista xmlns:array="http://www.w3.org/2005/xpath-functions/array"
+                     xmlns:hibalista="https://soap.api.nav.gov.hu/external/webnyk/webhibalista/1.0">
+   <BizonylatEllenorzes>
+      <Bizonylatresz formId="NAV_PMT25_0.17" elemindex="1">
+         <Azonositas>
+            <Munkavallalo>
+               <Nev>Teszt Elek</Nev>
+               <Adoazonosito>1234567890</Adoazonosito>
+            </Munkavallalo>
+         </Azonositas>
+         <Hibak/>
+      </Bizonylatresz>
+   </BizonylatEllenorzes>
+</hibalista:Hibalista>

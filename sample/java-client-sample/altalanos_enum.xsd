@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- edited with XMLSpy v2025 rel. 2 (x64) (https://www.altova.com) by Szász Gergely (Piller Informatikai Kft.) -->
+<!-- 
+FIGYELEM!
+
+Ez az XSD állomány, a benne foglalt információk, a benne szereplő szabályok semmilyen tekintetben nem tekinthető 
+késznek vagy véglegesnek!
+
+Célja mindössze az, hogy arra mutasson korai példát, hogy várhatóan milyen módon kerül majd az egyes nyomtatványok
+szerkezete XSD sémákban publikálásra kerülni. Az állományok közzététele a szoftverfejlesztők felkészülését támogatja, 
+nem specifikáció!
+-->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="https://soap.api.nav.gov.hu/definitions/model/2.0/altalanos_enum/v0.1" targetNamespace="https://soap.api.nav.gov.hu/definitions/model/2.0/altalanos_enum/v0.1">
 	<xs:simpleType name="altalanos_adonemkod_1">
 		<xs:restriction base="xs:string">

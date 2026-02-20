@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns2:Doc_NAV_PMT25 xmlns:ns2="https://soap.api.nav.gov.hu/definitions/model/2.0/PEI/NAV_PMT25/v0.1">
+    <Form_NAV_PMT25>
+        <Block_120001>
+            <FieldGroup_120334>
+                <Field_0A0001F002A>2026-02-09</Field_0A0001F002A>
+                <Field_0A0001F001A>TESZT00</Field_0A0001F001A>
+                <Field_0A0001F003A>1500</Field_0A0001F003A>
+                <Field_0A0001C001A>BENCSIK PÁLNÉ</Field_0A0001C001A>
+                <Field_0A0001C002A>40000004141</Field_0A0001C002A>
+                <Field_0A0001C003A>Biztosítási szolgáltató</Field_0A0001C003A>
+                <Field_0A0001E002A>HU</Field_0A0001E002A>
+                <Field_0A0001E001A>Észlelő szervezet</Field_0A0001E001A>
+                <Field_0A0001E003A>1055</Field_0A0001E003A>
+                <Field_0A0001E004A>Budapest</Field_0A0001E004A>
+                <Field_0A0001E006A>Közterület neve</Field_0A0001E006A>
+                <Field_0A0001E007A>utca</Field_0A0001E007A>
+                <Field_0A0001E005A>05</Field_0A0001E005A>
+                <Field_0A0001E008A>1</Field_0A0001E008A>
+                <Field_0A0001D001A>Kijelölt személy neve</Field_0A0001D001A>
+                <Field_0A0001D002A>Kijelölt személy beosztása</Field_0A0001D002A>
+                <Field_0A0001D003A>00000000</Field_0A0001D003A>
+                <Field_0A0001D004A>00000000</Field_0A0001D004A>
+                <Field_0A0001D005A>teszt@teszt.hu</Field_0A0001D005A>
+                <Field_0A0001G001A>Pénzmosásra utaló adat, tény, körülmény</Field_0A0001G001A>
+                <Field_0A0001H001A>Nem</Field_0A0001H001A>
+                <Field_0A0001I001A>Üzleti kapcsolat</Field_0A0001I001A>
+                <Field_0A0001I002A>Nem</Field_0A0001I002A>
+                <Field_0B0001B003A>Alacsony</Field_0B0001B003A>
+                <Field_0B0001B001A>Nem</Field_0B0001B001A>
+                <Field_0B0001C001A>Nem</Field_0B0001C001A>
+                <Field_0B0001D001A>Tényállás. Tényállás. Tényállás. Tényállás. Tényállás.</Field_0B0001D001A>
+                <Field_0B0001E001A>Nem</Field_0B0001E001A>
+                <Field_0B0001F001A>0</Field_0B0001F001A>
+                <Field_0B0001G001A>Nem</Field_0B0001G001A>
+                <Field_0C0001B019A>true</Field_0C0001B019A>
+            </FieldGroup_120334>
+        </Block_120001>
+        <Block_120215>
+            <FieldGroup_120988>
+                <Field_0F0001B001A>Természetes személy</Field_0F0001B001A>
+                <Field_0F0001B002A>Saját nevében</Field_0F0001B002A>
+            </FieldGroup_120988>
+            <Chain_120222>
+                <Chain_header>
+                    <FieldGroup_120225>
+                        <Field_0G0001B043A>Nem</Field_0G0001B043A>
+                        <Field_0G0001B046A>teszt@teszt.hu</Field_0G0001B046A>
+                        <Field_0G0001B047A>000000000</Field_0G0001B047A>
+                    </FieldGroup_120225>
+                    <FieldGroup_120223>
+                        <Field_0G0001B013A>HU</Field_0G0001B013A>
+                        <Field_0G0001B004A>Születési családnév</Field_0G0001B004A>
+                        <Field_0G0001B014A>1108</Field_0G0001B014A>
+                        <Field_0G0001B015A>Budapest</Field_0G0001B015A>
+                        <Field_0G0001B017A>Közterület</Field_0G0001B017A>
+                        <Field_0G0001B018A>utca</Field_0G0001B018A>
+                        <Field_0G0001B016A>10</Field_0G0001B016A>
+                        <Field_0G0001B019A>1</Field_0G0001B019A>
+                        <Field_0G0001B003A>Utónév</Field_0G0001B003A>
+                        <Field_0G0001B002A>Családinév</Field_0G0001B002A>
+                        <Field_0G0001B007A>Budapest</Field_0G0001B007A>
+                        <Field_0G0001B006A>1991-02-19</Field_0G0001B006A>
+                        <Field_0G0001B008A>Anyja neve</Field_0G0001B008A>
+                        <Field_0G0001B009A>HU</Field_0G0001B009A>
+                        <Field_0G0001B012A>Férfi</Field_0G0001B012A>
+                        <Field_0G0001B005A>Születési utónév</Field_0G0001B005A>
+                    </FieldGroup_120223>
+                </Chain_header>
+                <Chain_elem>
+                    <FieldGroup_120224>
+                        <Field_0G0001B023A>Személyi igazolvány</Field_0G0001B023A>
+                        <Field_0G0001B024A>0000aa</Field_0G0001B024A>
+                    </FieldGroup_120224>
+                </Chain_elem>
+            </Chain_120222>
+            <Chain_120945>
+                <Chain_elem>
+                    <FieldGroup_120949>
+                        <Field_0IXXXXB003A>Családi név</Field_0IXXXXB003A>
+                        <Field_0IXXXXB004A>Utónév</Field_0IXXXXB004A>
+                        <Field_0IXXXXB005A>Születési családi név</Field_0IXXXXB005A>
+                        <Field_0IXXXXB008A>Budapest</Field_0IXXXXB008A>
+                        <Field_0IXXXXB007A>1991-02-19</Field_0IXXXXB007A>
+                        <Field_0IXXXXB009A>Anyja neve</Field_0IXXXXB009A>
+                        <Field_0IXXXXB013A>HU</Field_0IXXXXB013A>
+                        <Field_0IXXXXB016A>HU</Field_0IXXXXB016A>
+                        <Field_0IXXXXB019A>10</Field_0IXXXXB019A>
+                        <Field_0IXXXXB020A>Közterület</Field_0IXXXXB020A>
+                        <Field_0IXXXXB021A>utca</Field_0IXXXXB021A>
+                        <Field_0IXXXXB023A>1</Field_0IXXXXB023A>
+                        <Field_0IXXXXB027A>Nem</Field_0IXXXXB027A>
+                        <Field_0IXXXXB010A>Férfi</Field_0IXXXXB010A>
+                        <Field_0IXXXXB006A>Születési utónév</Field_0IXXXXB006A>
+                        <Field_0IXXXXB011A>1108</Field_0IXXXXB011A>
+                        <Field_0IXXXXB012A>Budapest</Field_0IXXXXB012A>
+                    </FieldGroup_120949>
+                </Chain_elem>
+            </Chain_120945>
+        </Block_120215>
+        <Block_120137>
+            <FieldGroup_120926>
+                <Field_0L0001B002A>Teszt befektetési egységekhez kötött</Field_0L0001B002A>
+                <Field_0L0001B003A>2025-12-21</Field_0L0001B003A>
+                <Field_0L0001B001A>Igen</Field_0L0001B001A>
+            </FieldGroup_120926>
+            <Chain_120927>
+                <Chain_elem>
+                    <FieldGroup_120928>
+                        <Field_0MXXXXB002A>Természetes személy</Field_0MXXXXB002A>
+                        <Field_0MXXXXB004A>Családinév</Field_0MXXXXB004A>
+                        <Field_0MXXXXB005A>Utónév</Field_0MXXXXB005A>
+                        <Field_0MXXXXB007A>Nem</Field_0MXXXXB007A>
+                    </FieldGroup_120928>
+                </Chain_elem>
+            </Chain_120927>
+            <Chain_120929>
+                <Chain_elem>
+                    <FieldGroup_120930>
+                        <Field_0MXXXXB010A>Természetes személy</Field_0MXXXXB010A>
+                        <Field_0MXXXXB012A>Családinév</Field_0MXXXXB012A>
+                        <Field_0MXXXXB013A>Utónév</Field_0MXXXXB013A>
+                        <Field_0MXXXXB015A>Nem</Field_0MXXXXB015A>
+                    </FieldGroup_120930>
+                </Chain_elem>
+            </Chain_120929>
+            <Chain_120933>
+                <Chain_elem>
+                    <FieldGroup_120934>
+                        <Field_0MXXXXC001A>2000000</Field_0MXXXXC001A>
+                        <Field_0MXXXXC002A>HUF</Field_0MXXXXC002A>
+                        <Field_0MXXXXC005A>Budapest</Field_0MXXXXC005A>
+                        <Field_0MXXXXC006A>2025-12-21</Field_0MXXXXC006A>
+                        <Field_0MXXXXC007A>átutalás</Field_0MXXXXC007A>
+                        <Field_0MXXXXC003A>00000000000000000000</Field_0MXXXXC003A>
+                    </FieldGroup_120934>
+                </Chain_elem>
+            </Chain_120933>
+        </Block_120137>
+        <Attachment_1>
+            <fileId>6cb0b2e6-bdd5-49fb-8dbb-28fd572e72f8</fileId>
+            <fileName>teszt.xml</fileName>
+            <fileSize>147</fileSize>
+        </Attachment_1>
+    </Form_NAV_PMT25>
+</ns2:Doc_NAV_PMT25>

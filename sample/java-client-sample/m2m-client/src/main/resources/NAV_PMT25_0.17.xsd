@@ -6,13 +6,12 @@
         xmlns:tns="https://soap.api.nav.gov.hu/definitions/model/2.0/PEI/NAV_PMT25/v0.1"
         xmlns:xs="http://www.w3.org/2001/XMLSchema"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        targetNamespace="https://soap.api.nav.gov.hu/definitions/model/2.0/PEI/NAV_PMT25/v0.1">
+        targetNamespace="https://soap.api.nav.gov.hu/definitions/model/2.0/PEI/NAV_PMT25/v0.1"
+        xsi:schemaLocation="https://api.nav.gov.hu/definitions/form_xsd_metaschema/1.0 form_xsd_metaschema.xsd">
    <import namespace="https://soap.api.nav.gov.hu/definitions/model/2.0/common/v0.1"
            schemaLocation="common.xsd"/>
    <import namespace="https://soap.api.nav.gov.hu/definitions/model/2.0/altalanos_enum/v0.1"
            schemaLocation="altalanos_enum.xsd"/>
-   <import namespace="https://api.nav.gov.hu/definitions/form_xsd_metaschema/1.0"
-           schemaLocation="form_xsd_metaschema.xsd"/>
    <element name="Doc_NAV_PMT25"
             type="tns:Doc_NAV_PMT25_Type"
             meta:metaType="DocMetaType">

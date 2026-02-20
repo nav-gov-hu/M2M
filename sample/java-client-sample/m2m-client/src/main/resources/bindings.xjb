@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<jaxb:bindings version="1.0" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+    xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    jaxb:extensionBindingPrefixes="xjc">
+
+    <jaxb:globalBindings>
+        <xjc:simple />
+        <xjc:serializable uid="-1" />
+        <jaxb:javaType name="java.time.LocalDate" xmlType="xs:date"
+            parseMethod="com.example.demo.util.LocalDateAdapter.parse"
+            printMethod="com.example.demo.util.LocalDateAdapter.print" />
+    </jaxb:globalBindings>
+</jaxb:bindings>

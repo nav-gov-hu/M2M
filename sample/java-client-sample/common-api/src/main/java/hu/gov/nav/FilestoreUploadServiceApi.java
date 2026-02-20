@@ -93,7 +93,7 @@ public class FilestoreUploadServiceApi {
          };
         final List<MediaType> accept = commonApiClient.selectHeaderAccept(accepts);
         final String[] contentTypes = { 
-            "*/*"
+            "application/octet-stream"
          };
         final MediaType contentType = commonApiClient.selectHeaderContentType(contentTypes);
 

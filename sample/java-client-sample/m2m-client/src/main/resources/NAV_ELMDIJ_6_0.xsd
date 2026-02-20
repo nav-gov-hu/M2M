@@ -1,0 +1,997 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:enm="https://soap.api.nav.gov.hu/definitions/model/2.0/altalanos_enum/v0.1" xmlns:tns="https://soap.api.nav.gov.hu/definitions/model/2.0/PEI/ELMDIJ/v0.1" xmlns:meta="https://api.nav.gov.hu/definitions/form_xsd_metaschema/1.0" xmlns:common="https://soap.api.nav.gov.hu/definitions/model/2.0/common/v0.1" targetNamespace="https://soap.api.nav.gov.hu/definitions/model/2.0/PEI/ELMDIJ/v0.1" xsi:schemaLocation="https://api.nav.gov.hu/definitions/form_xsd_metaschema/1.0 form_xsd_metaschema.xsd">
+	<import namespace="https://soap.api.nav.gov.hu/definitions/model/2.0/common/v0.1" schemaLocation="common.xsd"/>
+	<import namespace="https://soap.api.nav.gov.hu/definitions/model/2.0/altalanos_enum/v0.1" schemaLocation="altalanos_enum.xsd"/>
+	<element name="Doc_ELMDIJ" type="tns:Doc_ELMDIJ_Type" meta:metaType="DocMetaType">
+		<annotation>
+			<documentation>Bevallás élelmiszerlánc felügyeleti díjról</documentation>
+		</annotation>
+	</element>
+	<simpleType name="Enum_0A0001F006A">
+		<annotation>
+			<documentation>Enum értékek </documentation>
+		</annotation>
+		<restriction base="xs:string">
+			<enumeration value="O"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="Enum_0A0001F009A">
+		<annotation>
+			<documentation>Enum értékek </documentation>
+		</annotation>
+		<restriction base="xs:string">
+			<enumeration value="1"/>
+			<enumeration value="2"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="Enum_0A0001F007A">
+		<annotation>
+			<documentation>Enum értékek </documentation>
+		</annotation>
+		<restriction base="xs:string">
+			<enumeration value="A"/>
+			<enumeration value="B"/>
+			<enumeration value="E"/>
+			<enumeration value="K"/>
+			<enumeration value="M"/>
+			<enumeration value="D"/>
+			<enumeration value="F"/>
+			<enumeration value="V"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="Enum_0A0001F008A">
+		<annotation>
+			<documentation>Enum értékek </documentation>
+		</annotation>
+		<restriction base="xs:string">
+			<enumeration value="1"/>
+			<enumeration value="2"/>
+			<enumeration value="3"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="Enum_0DXXXXC0001AA">
+		<annotation>
+			<documentation>Enum értékek </documentation>
+		</annotation>
+		<restriction base="xs:string">
+			<enumeration value="215"/>
+			<enumeration value="421"/>
+		</restriction>
+	</simpleType>
+	<complexType name="Doc_ELMDIJ_Type">
+		<annotation>
+			<documentation>A teljes bizonylat szerkezetet leíró típus</documentation>
+		</annotation>
+		<sequence>
+			<element name="Form_ELMDIJ" type="tns:Form_ELMDIJ_Type" minOccurs="1" maxOccurs="1" meta:metaType="FormMetaType">
+				<annotation>
+					<documentation>ELMDIJ részbizonylat</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="Form_ELMDIJ_Type">
+		<annotation>
+			<documentation>A teljes nyomtatvány ELMDIJ részbiztonylatának szerkezetét leíró típus.</documentation>
+		</annotation>
+		<sequence>
+			<element name="Block_120001" type="tns:Block_120001_Type" minOccurs="0" meta:metaType="BlockMetaType">
+				<annotation>
+					<documentation>Azonosító adatok</documentation>
+				</annotation>
+			</element>
+			<element name="Block_120022" type="tns:Block_120022_Type" minOccurs="0" meta:metaType="BlockMetaType">
+				<annotation>
+					<documentation>Élelmiszerlánc felügyeleti díj megállapítása</documentation>
+				</annotation>
+			</element>
+			<element name="Block_120026" type="tns:Block_120026_Type" minOccurs="0" meta:metaType="BlockMetaType">
+				<annotation>
+					<documentation>Önellenőrzés</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="Block_120001_Type">
+		<annotation>
+			<documentation>Azonosító adatok</documentation>
+		</annotation>
+		<sequence>
+			<element name="FieldGroup_120002" type="tns:FieldGroup_120002_Type" minOccurs="0" meta:metaType="FieldGroupMetaType">
+				<annotation>
+					<documentation>Adózó adatai</documentation>
+				</annotation>
+			</element>
+			<element name="FieldGroup_120003" type="tns:FieldGroup_120003_Type" minOccurs="0" meta:metaType="FieldGroupMetaType">
+				<annotation>
+					<documentation>Ügyintéző adatai</documentation>
+				</annotation>
+			</element>
+			<element name="FieldGroup_120007" type="tns:FieldGroup_120007_Type" minOccurs="0" meta:metaType="FieldGroupMetaType">
+				<annotation>
+					<documentation>Bevallást kitöltő adatai</documentation>
+				</annotation>
+			</element>
+			<element name="FieldGroup_120006" type="tns:FieldGroup_120006_Type" minOccurs="0" meta:metaType="FieldGroupMetaType">
+				<annotation>
+					<documentation>Bevallás jellemzői</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="Block_120022_Type">
+		<annotation>
+			<documentation>Élelmiszerlánc felügyeleti díj megállapítása</documentation>
+		</annotation>
+		<sequence>
+			<element name="FieldGroup_120023" type="tns:FieldGroup_120023_Type" minOccurs="0" meta:metaType="FieldGroupMetaType">
+				<annotation>
+					<documentation>Élelmiszerlánc felügyeleti díj megállapítása (Adónemkód 421)</documentation>
+				</annotation>
+			</element>
+			<element name="Chain_120056" type="tns:Chain_120056_Type" minOccurs="0" meta:metaType="ChainMetaType">
+				<annotation>
+					<documentation>Az alábbi termelői szerveződések / adózók vállalták át felügyeleti díjfizetési kötelezettségemet</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="Block_120026_Type">
+		<annotation>
+			<documentation>Önellenőrzés</documentation>
+		</annotation>
+		<sequence>
+			<element name="FieldGroup_120027" type="tns:FieldGroup_120027_Type" minOccurs="0" meta:metaType="FieldGroupMetaType">
+				<annotation>
+					<documentation>Ismételt önellenőrzés</documentation>
+				</annotation>
+			</element>
+			<element name="FieldGroup_120029" type="tns:FieldGroup_120029_Type" minOccurs="0" meta:metaType="FieldGroupMetaType">
+				<annotation>
+					<documentation>Élelmiszerlánc felügyeleti díj (Adónemkód 421)</documentation>
+				</annotation>
+			</element>
+			<element name="FieldGroup_120034" type="tns:FieldGroup_120034_Type" minOccurs="0" meta:metaType="FieldGroupMetaType">
+				<annotation>
+					<documentation>Önellenőrzési pótlék összege (Adónemkód 215)</documentation>
+				</annotation>
+			</element>
+			<element name="FieldGroup_120035" type="tns:FieldGroup_120035_Type" minOccurs="0" meta:metaType="FieldGroupMetaType">
+				<annotation>
+					<documentation>Korábbi élelmiszerlánc felügyeleti díj-önellenőrzési pótlékjának összege</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="Chain_120056_Type">
+		<annotation>
+			<documentation>Az alábbi termelői szerveződések / adózók vállalták át felügyeleti díjfizetési kötelezettségemet</documentation>
+		</annotation>
+		<sequence>
+			<element name="Chain_elem" maxOccurs="5">
+				<annotation>
+					<documentation>Lánc ismétlődő elemei</documentation>
+				</annotation>
+				<complexType>
+					<sequence>
+						<element name="FieldGroup_120057" type="tns:FieldGroup_120057_Type" minOccurs="1" meta:metaType="FieldGroupMetaType">
+							<annotation>
+								<documentation>Az alábbi termelői szerveződések / adózók vállalták át felügyeleti díjfizetési kötelezettségemet</documentation>
+							</annotation>
+						</element>
+					</sequence>
+				</complexType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="FieldGroup_120002_Type">
+		<annotation>
+			<documentation>Adózó adatai</documentation>
+		</annotation>
+		<sequence>
+			<element name="Field_0A0001E001A" minOccurs="0" meta:metaType="FieldMetaType">
+				<annotation>
+					<documentation>Adószám (adózó_adószám)</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="11"/>
+						<pattern value="[0-9]+"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="Field_0A0001E002A" minOccurs="0" meta:metaType="FieldMetaType">
+				<annotation>
+					<documentation>Adóazonosító jel (adózó_adóazonosító_jele)</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="10"/>
+						<pattern value="[0-9]+"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="Field_0A0001E005A" minOccurs="0" meta:metaType="FieldMetaType">
+				<annotation>
+					<documentation>Jogelőd adószáma (jogelőd_adószám)</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="11"/>
+						<pattern value="[0-9]+"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="Field_0A0001E003A" minOccurs="0" meta:metaType="FieldMetaType">
+				<annotation>
+					<documentation>FELIR azonosító (FELIR_szám)</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="9"/>
+						<pattern value="[A-Z0-9]+"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="Field_0A0001E006A" minOccurs="0" meta:metaType="FieldMetaType">
+				<annotation>
+					<documentation>Név (adózó_név)</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="80"/>
+						<pattern value="\P{C}+"/>
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="FieldGroup_120003_Type">
+		<annotation>
+			<documentation>Ügyintéző adatai</documentation>
+		</annotation>
+		<sequence>
+			<element name="Field_0A0001E007A" minOccurs="0" meta:metaType="FieldMetaType">
+				<annotation>
+					<documentation>Név (ügyintéző_neve)</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="80"/>
+						<pattern value="\P{C}+"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="Field_0A0001E008A" minOccurs="0" meta:metaType="FieldMetaType">
+				<annotation>
+					<documentation>Telefonszám (ügyintéző_telefon)</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="40"/>
+						<pattern value="\P{C}+"/>
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="FieldGroup_120007_Type">
+		<annotation>
+			<documentation>Bevallást kitöltő adatai</documentation>
+		</annotation>
+		<sequence>
+			<element name="Field_0A0001G004A" minOccurs="0" meta:metaType="FieldMetaType">
+				<annotation>
+					<documentation>Név (adótanácsadó_neve)</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="80"/>
+						<pattern value="\P{C}+"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="Field_0A0001G006A" minOccurs="0" meta:metaType="FieldMetaType">
+				<annotation>
+					<documentation>Adóazonosító szám (adótanácsadó_adóazonosító)</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="11"/>
+						<pattern value="[0-9]+"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="Field_0A0001G008A" minOccurs="0" meta:metaType="FieldMetaType">
+				<annotation>
+					<documentation>Igazolvány szám (adótanácsadó_bizonyítvány)</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="40"/>
+						<pattern value="\P{C}+"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="Field_0A0001G003A" minOccurs="0" type="xs:boolean" meta:metaType="FieldMetaType">
+				<annotation>
+					<documentation>Állami adó- és vámhatósághoz bejelentett, a bevallás#aláírására jogosult állandó meghatalmazott jelölése (állandó_meghatalmazás)</documentation>
+				</annotation>
+			</element>
+			<element name="Field_0A0001G005A" minOccurs="0" type="xs:boolean" meta:metaType="FieldMetaType">
+				<annotation>
+					<documentation>Eseti meghatalmazás csatolásának jelölése (eseti_meghatalmazás)</documentation>
+				</annotation>
+			</element>
+			<element name="Field_0A0001G007A" minOccurs="0" type="xs:boolean" meta:metaType="FieldMetaType">
+				<annotation>
+					<documentation>Állami adó- és vámhatósághoz bejelentett#pénzügyi képviselő jelölése (pénzügyi_képviselő)</documentation>
+				</annotation>
+			</element>
+			<element name="Field_0A0001G010A" minOccurs="0" meta:metaType="FieldMetaType">
+				<annotation>
+					<documentation>Neve (meghatalmazott_név)</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="80"/>
+						<pattern value="\P{C}+"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="Field_0A0001G011A" minOccurs="0" meta:metaType="FieldMetaType">
+				<annotation>
+					<documentation>Adóazonosító#száma (meghatalmazott_azon)</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="11"/>
+						<pattern value="[0-9]+"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="Field_0A0001G009A" minOccurs="0" type="xs:boolean" meta:metaType="FieldMetaType">
+				<annotation>
+					<documentation>Állami adó- és vámhatósághoz bejelentett#törvényes képviselő jelölése (törvényes_képviselő)</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="FieldGroup_120006_Type">
+		<annotation>
+			<documentation>Bevallás jellemzői</documentation>
+		</annotation>
+		<sequence>
+			<element name="Field_0A0001E004A" minOccurs="0" meta:metaType="FieldMetaType">
+				<annotation>
+					<documentation>Hibásnak minősített bevallás vonalkódja (vonalkód)</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="10"/>
+						<pattern value="[0-9]+"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="Field_0A0001F001A" minOccurs="0" type="xs:date" meta:metaType="FieldMetaType">
+				<annotation>
+					<documentation>Kezdete (bevtól)</documentation>
+				</annotation>
+			</element>
+			<element name="Field_0A0001F002A" minOccurs="0" type="xs:date" meta:metaType="FieldMetaType">
+				<annotation>
+					<documentation>Vége (bevig)</documentation>
+				</annotation>
+			</element>
+			<element name="Field_0A0001F006A" minOccurs="0" type="tns:Enum_0A0001F006A" meta:metaType="FieldMetaType">
+				<annotation>
+					<documentation>Bevallás jellege (bev_jelleg)</documentation>
+				</annotation>
+			</element>
+			<element name="Field_0A0001F009A" minOccurs="0" type="tns:Enum_0A0001F009A" meta:metaType="FieldMetaType">
+				<annotation>
+					<documentation>Adómat az alábbi jogszabályhely alapján állapítom meg (ado_megall_jogsz)</documentation>
+				</annotation>
+			</element>
+			<element name="Field_0A0001F007A" minOccurs="0" type="tns:Enum_0A0001F007A" meta:metaType="FieldMetaType">
+				<annotation>
+					<documentation>Típusa (bev_tipus)</documentation>
+				</annotation>
+			</element>
+			<element name="Field_0A0001F008A" minOccurs="0" type="tns:Enum_0A0001F008A" meta:metaType="FieldMetaType">
+				<annotation>
+					<documentation>Fajtája (bev_fajta)</documentation>
+				</annotation>
+			</element>
+			<element name="Field_0A0001F010A" minOccurs="0" type="tns:Enum_0A0001F009A" meta:metaType="FieldMetaType">
+				<annotation>
+					<documentation>Az Éltv. 47/B. § (9) bekezdése alapján elsődlegesen végső fogyasztónak értékesítő  mikrovállalkozásnak / kistermelőnek#vagy kisvállalkozásnak minősülök. (mikro_kisterm)</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="FieldGroup_120023_Type">
+		<annotation>
+			<documentation>Élelmiszerlánc felügyeleti díj megállapítása (Adónemkód 421)</documentation>
+		</annotation>
+		<sequence>
+			<element name="Field_0B0001C0005BA" minOccurs="0" meta:metaType="FieldMetaType">
+				<annotation>
+					<documentation>Adó  (E Ft-ban) ([ELMDIJ_01]B5)</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="10"/>
+						<pattern value="[0-9]+"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="Field_0B0001C0004BA" minOccurs="0" meta:metaType="FieldMetaType">
+				<annotation>
+					<documentation>Adó  (E Ft-ban) ([ELMDIJ_01]B4)</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="10"/>
+						<pattern value="[0-9]+"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="Field_0B0001C0003BA" minOccurs="0" meta:metaType="FieldMetaType">
+				<annotation>
+					<documentation>Adó  (E Ft-ban) ([ELMDIJ_01]B3)</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="10"/>
+						<pattern value="[0-9]+"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="Field_0B0001C0002BA" minOccurs="0" meta:metaType="FieldMetaType">
+				<annotation>
+					<documentation>Adó  (E Ft-ban) ([ELMDIJ_01]B2)</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="10"/>
+						<pattern value="[0-9]+"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="Field_0B0001C0001BA" minOccurs="0" meta:metaType="FieldMetaType">
+				<annotation>
+					<documentation>Adó  (E Ft-ban) ([ELMDIJ_01]B1)</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="10"/>
+						<pattern value="[0-9]+"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="Field_0B0001C0001AA" minOccurs="0" meta:metaType="FieldMetaType">
+				<annotation>
+					<documentation>Adóalap (E Ft-ban) ([ELMDIJ_01]A1)</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="10"/>
+						<pattern value="[0-9]+"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="Field_0B0001C50000A" minOccurs="0" meta:metaType="FieldMetaType">
+				<annotation>
+					<documentation>Adóalap (E Ft-ban) ([ELMDIJ_01]A6)</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="10"/>
+						<pattern value="[0-9]+"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="Field_0B0001C50001A" minOccurs="0" meta:metaType="FieldMetaType">
+				<annotation>
+					<documentation>Adóalap (E Ft-ban) ([ELMDIJ_01]A101)</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="10"/>
+						<pattern value="[0-9]+"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="Field_0B0001C50002A" minOccurs="0" meta:metaType="FieldMetaType">
+				<annotation>
+					<documentation>Adóalap (E Ft-ban) ([ELMDIJ_01]A102)</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="10"/>
+						<pattern value="[0-9]+"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="Field_0B0001C50003A" minOccurs="0" meta:metaType="FieldMetaType">
+				<annotation>
+					<documentation>Érintett adózók száma (fő) ([ELMDIJ_01]C102)</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="3"/>
+						<pattern value="[0-9]+"/>
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="FieldGroup_120027_Type">
+		<annotation>
+			<documentation>Ismételt önellenőrzés</documentation>
+		</annotation>
+		<sequence>
+			<element name="Field_0C0001C001A" minOccurs="0" type="xs:boolean" meta:metaType="FieldMetaType">
+				<annotation>
+					<documentation>Ismételt önellenőrzés jelölése (x) (ism_önelllenőrzés)</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="FieldGroup_120029_Type">
+		<annotation>
+			<documentation>Élelmiszerlánc felügyeleti díj (Adónemkód 421)</documentation>
+		</annotation>
+		<sequence>
+			<element name="Field_0C0001D0001CA" minOccurs="0" meta:metaType="FieldMetaType">
+				<annotation>
+					<documentation>Különbözet ezer Ft-ban (+/-) ([ONELL]C1)</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="12"/>
+						<pattern value="[0-9+-]+"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="Field_0C0001D0001BA" minOccurs="0" meta:metaType="FieldMetaType">
+				<annotation>
+					<documentation>Módosított összeg ezer Ft-ban ([ONELL]B1)</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="12"/>
+						<pattern value="[0-9]+"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="Field_0C0001D0001AA" minOccurs="0" meta:metaType="FieldMetaType">
+				<annotation>
+					<documentation>Eredeti összeg ezer Ft-ban ([ONELL]A1)</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="12"/>
+						<pattern value="[0-9]+"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="Field_0C0001D0003CA" minOccurs="0" meta:metaType="FieldMetaType">
+				<annotation>
+					<documentation>Különbözet ezer Ft-ban (+/-) ([ONELL]C3)</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="12"/>
+						<pattern value="[0-9+-]+"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="Field_0C0001D0003BA" minOccurs="0" meta:metaType="FieldMetaType">
+				<annotation>
+					<documentation>Módosított összeg ezer Ft-ban (+/-) ([ONELL]B3)</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="12"/>
+						<pattern value="[0-9+-]+"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="Field_0C0001D0003AA" minOccurs="0" meta:metaType="FieldMetaType">
+				<annotation>
+					<documentation>Eredeti összeg ezer Ft-ban (+/-) ([ONELL]A3)</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="12"/>
+						<pattern value="[0-9+-]+"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="Field_0C0001D0002BA" minOccurs="0" meta:metaType="FieldMetaType">
+				<annotation>
+					<documentation>Módosított összeg ezer Ft-ban ([ONELL]B2)</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="12"/>
+						<pattern value="[0-9]+"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="Field_0C0001D0002AA" minOccurs="0" meta:metaType="FieldMetaType">
+				<annotation>
+					<documentation>Eredeti összeg ezer Ft-ban ([ONELL]A2)</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="12"/>
+						<pattern value="[0-9]+"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="Field_0C0001D0002CA" minOccurs="0" meta:metaType="FieldMetaType">
+				<annotation>
+					<documentation>Különbözet ezer Ft-ban (+/-) ([ONELL]C2)</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="12"/>
+						<pattern value="[0-9+-]+"/>
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="FieldGroup_120034_Type">
+		<annotation>
+			<documentation>Önellenőrzési pótlék összege (Adónemkód 215)</documentation>
+		</annotation>
+		<sequence>
+			<element name="Field_0C0001E0004BA" minOccurs="0" meta:metaType="FieldMetaType">
+				<annotation>
+					<documentation>Összege (ezer Ft-ban) ([ONELL]B4)</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="12"/>
+						<pattern value="[0-9]+"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="Field_0C0001E0004AA" minOccurs="0" meta:metaType="FieldMetaType">
+				<annotation>
+					<documentation>Eredeti összeg ezer Ft-ban (+/-) ([ONELL]A4)</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="12"/>
+						<pattern value="[0-9+-]+"/>
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="FieldGroup_120035_Type">
+		<annotation>
+			<documentation>Korábbi élelmiszerlánc felügyeleti díj-önellenőrzési pótlékjának összege</documentation>
+		</annotation>
+		<sequence>
+			<element name="Field_0C0001F0005BA" minOccurs="0" meta:metaType="FieldMetaType">
+				<annotation>
+					<documentation>Módosított összeg ezer Ft-ban (+/-) ([ONELL]B5)</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="12"/>
+						<pattern value="[0-9+-]+"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="Field_0C0001F0005AA" minOccurs="0" meta:metaType="FieldMetaType">
+				<annotation>
+					<documentation>Eredeti összeg ezer Ft-ban (+/-) ([ONELL]A5)</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="12"/>
+						<pattern value="[0-9+-]+"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="Field_0C0001F0006BA" minOccurs="0" meta:metaType="FieldMetaType">
+				<annotation>
+					<documentation>Módosított összeg ezer Ft-ban ([ONELL]B6)</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="12"/>
+						<pattern value="[0-9]+"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="Field_0C0001F0006AA" minOccurs="0" meta:metaType="FieldMetaType">
+				<annotation>
+					<documentation>Eredeti összeg ezer Ft-ban ([ONELL]A6)</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="12"/>
+						<pattern value="[0-9]+"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="Field_0C0001F0006CA" minOccurs="0" meta:metaType="FieldMetaType">
+				<annotation>
+					<documentation>Különbözet ezer Ft-ban (+/-) ([ONELL]C6)</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="12"/>
+						<pattern value="[0-9+-]+"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="Field_0C0001F0005CA" minOccurs="0" meta:metaType="FieldMetaType">
+				<annotation>
+					<documentation>Különbözet ezer Ft-ban (+/-) ([ONELL]C5)</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="12"/>
+						<pattern value="[0-9+-]+"/>
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="FieldGroup_120042_Type">
+		<annotation>
+			<documentation>Fejléc</documentation>
+		</annotation>
+		<sequence>
+			<element name="Field_0A0001E001A" minOccurs="0" meta:metaType="FieldMetaType">
+				<annotation>
+					<documentation>Adószám (adózó_adószám)</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="11"/>
+						<pattern value="[0-9]+"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="Field_0A0001E002A" minOccurs="0" meta:metaType="FieldMetaType">
+				<annotation>
+					<documentation>Adóazonosító jel (adózó_adóazonosító_jele)</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="10"/>
+						<pattern value="[0-9]+"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="Field_0A0001E005A" minOccurs="0" meta:metaType="FieldMetaType">
+				<annotation>
+					<documentation>Jogelőd adószáma (jogelőd_adószám)</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="11"/>
+						<pattern value="[0-9]+"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="Field_0A0001E006A" minOccurs="0" meta:metaType="FieldMetaType">
+				<annotation>
+					<documentation>Név (adózó_név)</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="80"/>
+						<pattern value="\P{C}+"/>
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="FieldGroup_120043_Type">
+		<annotation>
+			<documentation>Egyenlegek</documentation>
+		</annotation>
+		<sequence>
+			<element name="Field_0A0001A001A" minOccurs="0" meta:metaType="FieldMetaType">
+				<annotation>
+					<documentation>Befizetendő élelmiszerlánc felügyeleti díj (Egyenleg_421_befizetendo)</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="50"/>
+						<pattern value="[0-9+-]+"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="Field_0A0001A002A" minOccurs="0" meta:metaType="FieldMetaType">
+				<annotation>
+					<documentation>Visszaigényelhető élelmiszerlánc felügyeleti díj (Egyenleg_421_visszaigenyelheto)</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="50"/>
+						<pattern value="[0-9+-]+"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="Field_0A0001A003A" minOccurs="0" meta:metaType="FieldMetaType">
+				<annotation>
+					<documentation>Befizetendő önellenőrzési pótlék (Egyenleg_215_befizetendo)</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="50"/>
+						<pattern value="[0-9+-]+"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="Field_0A0001A004A" minOccurs="0" meta:metaType="FieldMetaType">
+				<annotation>
+					<documentation>Visszaigényelhető önellenőrzési pótlék (Egyenleg_215_visszaigenyelheto)</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="50"/>
+						<pattern value="[0-9+-]+"/>
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="FieldGroup_120057_Type">
+		<annotation>
+			<documentation>Az alábbi termelői szerveződések / adózók vállalták át felügyeleti díjfizetési kötelezettségemet</documentation>
+		</annotation>
+		<sequence>
+			<element name="Field_0B0001D50004A" minOccurs="0" meta:metaType="FieldMetaType">
+				<annotation>
+					<documentation>Átvállaló által átvállalt#nettó árbevétel#(ezer Ft-ban) ([ELMDIJ_01]B21)</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="10"/>
+						<pattern value="[0-9]+"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="Field_0B0001D50007A" minOccurs="0" meta:metaType="FieldMetaType">
+				<annotation>
+					<documentation>Átvállaló adószáma ([ELMDIJ_01]A21)</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="11"/>
+						<pattern value="[0-9]+"/>
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="FieldGroup_120058_Type">
+		<annotation>
+			<documentation>Mezőcsoport</documentation>
+		</annotation>
+		<sequence>
+			<element name="Field_0B0001D50006A" minOccurs="0" meta:metaType="FieldMetaType">
+				<annotation>
+					<documentation> ([ELMDIJ_01]B22)</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="10"/>
+						<pattern value="[0-9]+"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="Field_0B0001D50008A" minOccurs="0" meta:metaType="FieldMetaType">
+				<annotation>
+					<documentation> ([ELMDIJ_01]A22)</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="11"/>
+						<pattern value="[0-9]+"/>
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="FieldGroup_120059_Type">
+		<annotation>
+			<documentation>Mezőcsoport</documentation>
+		</annotation>
+		<sequence>
+			<element name="Field_0B0001D50005A" minOccurs="0" meta:metaType="FieldMetaType">
+				<annotation>
+					<documentation> ([ELMDIJ_01]B23)</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="10"/>
+						<pattern value="[0-9]+"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="Field_0B0001D50009A" minOccurs="0" meta:metaType="FieldMetaType">
+				<annotation>
+					<documentation> ([ELMDIJ_01]A23)</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="11"/>
+						<pattern value="[0-9]+"/>
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="FieldGroup_120060_Type">
+		<annotation>
+			<documentation>Mezőcsoport</documentation>
+		</annotation>
+		<sequence>
+			<element name="Field_0B0001D50010A" minOccurs="0" meta:metaType="FieldMetaType">
+				<annotation>
+					<documentation> ([ELMDIJ_01]A24)</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="11"/>
+						<pattern value="[0-9]+"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="Field_0B0001D50012A" minOccurs="0" meta:metaType="FieldMetaType">
+				<annotation>
+					<documentation> ([ELMDIJ_01]B24)</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="10"/>
+						<pattern value="[0-9]+"/>
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="FieldGroup_120061_Type">
+		<annotation>
+			<documentation>Mezőcsoport</documentation>
+		</annotation>
+		<sequence>
+			<element name="Field_0B0001D50011A" minOccurs="0" meta:metaType="FieldMetaType">
+				<annotation>
+					<documentation> ([ELMDIJ_01]A25)</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="11"/>
+						<pattern value="[0-9]+"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="Field_0B0001D50013A" minOccurs="0" meta:metaType="FieldMetaType">
+				<annotation>
+					<documentation> ([ELMDIJ_01]B25)</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="10"/>
+						<pattern value="[0-9]+"/>
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+</schema>

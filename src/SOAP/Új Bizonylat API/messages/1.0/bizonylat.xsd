@@ -1,197 +1,212 @@
 <?xml  version='1.0' encoding='utf-8' ?>
 <xs:schema targetNamespace="https://soap.api.nav.gov.hu/definitions/messages/1.0/bizonylat" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="https://soap.api.nav.gov.hu/definitions/messages/1.0/bizonylat" xmlns:msg_bizonylat="https://soap.api.nav.gov.hu/definitions/messages/1.0/bizonylat" xmlns:msg_common="https://soap.api.nav.gov.hu/definitions/messages/1.0/common">
-	<xs:import namespace="https://soap.api.nav.gov.hu/definitions/messages/1.0/common" schemaLocation="../../messages/1.0/common.xsd"/>
-	<xs:simpleType name="BizonylatStatusz">
-		<xs:annotation>
-			<xs:documentation>A bizonylat lehetséges státuszai</xs:documentation>
-		</xs:annotation>
-		<xs:restriction base="xs:string">
-			<xs:enumeration value="VALIDACIO_ALATT"/>
-			<xs:enumeration value="SIKERESEN_VALIDALT"/>
-			<xs:enumeration value="VALIDACIOS_HIBA"/>
-			<xs:enumeration value="SIKERTELEN_BEKULDES"/>
-			<xs:enumeration value="SIKERTELEN_ELOELLENORZES"/>
-			<xs:enumeration value="BEKULDES_ALATT"/>
-			<xs:enumeration value="SIKERESEN_BEKULDVE"/>
-		</xs:restriction>
-	</xs:simpleType>
-	<xs:simpleType name="CreateBizonylatResult">
-		<xs:annotation>
-			<xs:documentation>A bizonylatbeküldés lehetséges eredményei.</xs:documentation>
-		</xs:annotation>
-		<xs:restriction base="xs:string">
-			<xs:enumeration value="ERVENYTELEN_ALAIRAS"/>
-			<xs:enumeration value="SIKERES"/>
-			<xs:enumeration value="ERVENYTELEN_BIZONYLAT_TIPUS"/>
-			<xs:enumeration value="ERVENYTELEN_BIZONYLAT_VERZIO"/>
-			<xs:enumeration value="NEM_TAMOGATOTT_TOMORITES"/>
-			<xs:enumeration value="HIBAS_TOMORITES"/>
-			<xs:enumeration value="VIRUSOS_FAJL"/>
-			<xs:enumeration value="NINCS_JOGOSULTSAG_BIZONYLATTIPUSHOZ"/>
-			<xs:enumeration value="NINCS_JOGOSULTSAG_ADOZOHOZ"/>
-			<xs:enumeration value="ERVENYTELEN_ADOZO"/>
-			<xs:enumeration value="ERVENYTELEN_BEKULDO"/>
-			<xs:enumeration value="EGYEB_HIBA"/>
-			<xs:enumeration value="SIKERTELEN_VALIDACIO"/>
-			<xs:enumeration value="EREVENYTELEN_KODOLAS"/>
-			<xs:enumeration value="ERVENYTELEN_KARAKTER"/>
-			<xs:enumeration value="SIKERTELEN_BEKULDES"/>
-			<xs:enumeration value="NEM_TALALHATO_CSATOLMANY"/>
-			<xs:enumeration value="VALASZ_TAROLO_NEM_ENGEDELYEZETT"/>
-		</xs:restriction>
-	</xs:simpleType>
-	<xs:simpleType name="GetBizonylatResult">
-		<xs:annotation>
-			<xs:documentation>A bizonylat státuszlekérdezés lehetséges eredményei.</xs:documentation>
-		</xs:annotation>
-		<xs:restriction base="xs:string">
-			<xs:enumeration value="SIKERES"/>
-			<xs:enumeration value="NEMLETEZO_UGY_AZONOSITO"/>
-			<xs:enumeration value="EGYEB_HIBA"/>
-		</xs:restriction>
-	</xs:simpleType>
-	<xs:simpleType name="Tomorites">
-		<xs:annotation>
-			<xs:documentation>A tömörítés módja.</xs:documentation>
-		</xs:annotation>
-		<xs:restriction base="xs:string">
-			<xs:enumeration value="GZIP"/>
-		</xs:restriction>
-	</xs:simpleType>
-	<xs:complexType name="BeadasiTanusitvany">
-		<xs:annotation>
-			<xs:documentation>A bizonylat beogadsának tanúsítványa</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="befogadasIdopontja" type="xs:dateTime" minOccurs="1" maxOccurs="1">
-				<xs:annotation>
-					<xs:documentation>A befogadás időpontja</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="tanusitvany" type="xs:string" minOccurs="1" maxOccurs="1">
-				<xs:annotation>
-					<xs:documentation>A befogadási a tanúsítvány.&#xD;
-A tanúsítvány mező az elején pontosvesszővel elválasztva tartalmazza azokat az adatokat, amelyekből képezve lett. A végére kerül a maga a tanúsítvány base64 kódolva.</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
-	<xs:complexType name="BizonylatBekuldesRequestType">
-		<xs:annotation>
-			<xs:documentation>A bizonylat létrehozás kérésekor az üzenet body-ban található adatok.</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="bizonylatTipus" type="xs:string" minOccurs="1" maxOccurs="1">
-				<xs:annotation>
-					<xs:documentation>A bizonylat típusa</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="bizonylatVerzio" type="xs:string" minOccurs="1" maxOccurs="1">
-				<xs:annotation>
-					<xs:documentation>A bizonylat verziószáma</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="bizonylatXml" type="xs:string" minOccurs="1" maxOccurs="1">
-				<xs:annotation>
-					<xs:documentation>A bizonylat file base 64 kódolással. A tomorites paraméter adja, meg, hogy tömörtett volt-e a fájl, és ha igen, akkor milyen módon, mielőtt kódolva lett.</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="signature" type="xs:string" minOccurs="1" maxOccurs="1">
-				<xs:annotation>
-					<xs:documentation>Aláírás</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="validaciosTanusitvany" type="xs:string" minOccurs="0" maxOccurs="1">
-				<xs:annotation>
-					<xs:documentation>Annak a tanúsítványa, hogy a beküldött bizonylat már validálva lett. Ha létezik ilyen tanúsítvány, akkor a bizonylat a beküldés során már nem lesz validálva. Gyorsabban lefut a művelet, ami szinkronválaszt ad.&#xD;
-A tanúsítvány mező az elején pontosvesszővel elválasztva tartalmazza azokat az adatokat, amelyekből képezve lett. A végére kerül a maga a tanúsítvány base64 kódolva.</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="tomorites" type="Tomorites" minOccurs="0" maxOccurs="1">
-				<xs:annotation>
-					<xs:documentation>A bizonylatfájl tömörítésének módja a base64 kódolás előtt. </xs:documentation>
-				</xs:annotation>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
-	<xs:complexType name="BizonylatBekuldesResponseType">
-		<xs:annotation>
-			<xs:documentation>A bizonylat létrehozás válasz üzenet body-jában található adatok.</xs:documentation>
-		</xs:annotation>
-		<xs:complexContent>
-			<xs:extension base="BizonylatResponseType">
-				<xs:sequence>
-					<xs:element name="ugyAzonosito" type="xs:string" minOccurs="1" maxOccurs="1">
-						<xs:annotation>
-							<xs:documentation>Az ügy egyedi azonosítója. Ezzel lehet lekérdezni beküldést köveően a státuszt.</xs:documentation>
-						</xs:annotation>
-					</xs:element>
-					<xs:element name="resultCode" type="CreateBizonylatResult" minOccurs="1" maxOccurs="1">
-						<xs:annotation>
-							<xs:documentation>Válaszkód</xs:documentation>
-						</xs:annotation>
-					</xs:element>
-				</xs:sequence>
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
-	<xs:complexType name="BizonylatResponseType">
-		<xs:annotation>
-			<xs:documentation>A bizonylat válaszok közös adatai</xs:documentation>
-		</xs:annotation>
-		<xs:complexContent>
-			<xs:extension base="msg_common:BaseResponseType">
-				<xs:sequence>
-					<xs:element name="erkeztetesiSzam" type="xs:string" minOccurs="0" maxOccurs="1">
-						<xs:annotation>
-							<xs:documentation>Sikeres beküldés esetén az érkeztetési szám.</xs:documentation>
-						</xs:annotation>
-					</xs:element>
-					<xs:element name="validaciosHibak" type="xs:base64Binary" minOccurs="0" maxOccurs="1">
-						<xs:annotation>
-							<xs:documentation>Hibákat megállapító validáció esetén a hibákat tartalmazó xml fájl bzip2-vel tömörítve. Az xml a hibalista.xsd-vel dolgozható fel.</xs:documentation>
-						</xs:annotation>
-					</xs:element>
-					<xs:element name="beadasiTanusitvany" type="BeadasiTanusitvany" minOccurs="0" maxOccurs="1">
-						<xs:annotation>
-							<xs:documentation>A bizonylat beadásának tanúsítványa</xs:documentation>
-						</xs:annotation>
-					</xs:element>
-					<xs:element name="bizonylatStatusz" type="BizonylatStatusz" minOccurs="0" maxOccurs="1">
-						<xs:annotation>
-							<xs:documentation>A bizonylat státusza</xs:documentation>
-						</xs:annotation>
-					</xs:element>
-				</xs:sequence>
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
-	<xs:complexType name="BizonylatStatuszLekerdezesRequestType">
-		<xs:annotation>
-			<xs:documentation>A bizonylat státusz lekérdezéskor az üzenet body-ban található adatok.</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="ugyAzonosito" type="xs:string" minOccurs="1" maxOccurs="1">
-				<xs:annotation>
-					<xs:documentation>Az  ügy egyedi azonosítója, amit a bizonylatbekuldes művelet adott vissza. Ezzel lehet lekérdezni beküldést követően a státuszt.</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
-	<xs:complexType name="BizonylatStatuszLekerdezesResponseType">
-		<xs:annotation>
-			<xs:documentation>A bizonylat lekérdezés válasz üzenet body-jában található adatok.</xs:documentation>
-		</xs:annotation>
-		<xs:complexContent>
-			<xs:extension base="BizonylatResponseType">
-				<xs:sequence>
-					<xs:element name="resultCode" type="GetBizonylatResult" minOccurs="1" maxOccurs="1">
-						<xs:annotation>
-							<xs:documentation>Válaszkód</xs:documentation>
-						</xs:annotation>
-					</xs:element>
-				</xs:sequence>
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
+    <xs:import namespace="https://soap.api.nav.gov.hu/definitions/messages/1.0/common" schemaLocation="../../messages/1.0/common.xsd"/>
+    <xs:simpleType name="BizonylatStatusz">
+        <xs:annotation>
+            <xs:documentation>A bizonylat lehetséges státuszai</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="VALIDACIO_ALATT"/>
+            <xs:enumeration value="SIKERESEN_VALIDALT"/>
+            <xs:enumeration value="VALIDACIOS_HIBA"/>
+            <xs:enumeration value="SIKERTELEN_BEKULDES"/>
+            <xs:enumeration value="SIKERTELEN_ELOELLENORZES"/>
+            <xs:enumeration value="BEKULDES_ALATT"/>
+            <xs:enumeration value="SIKERESEN_BEKULDVE"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="CreateBizonylatResult">
+        <xs:annotation>
+            <xs:documentation>A bizonylatbeküldés lehetséges eredményei.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="ERVENYTELEN_ALAIRAS"/>
+            <xs:enumeration value="SIKERES"/>
+            <xs:enumeration value="ERVENYTELEN_BIZONYLAT_TIPUS"/>
+            <xs:enumeration value="ERVENYTELEN_BIZONYLAT_VERZIO"/>
+            <xs:enumeration value="HIBAS_TOMORITES"/>
+            <xs:enumeration value="VIRUSOS_FAJL"/>
+            <xs:enumeration value="NINCS_JOGOSULTSAG_BIZONYLATTIPUSHOZ"/>
+            <xs:enumeration value="NINCS_JOGOSULTSAG_ADOZOHOZ"/>
+            <xs:enumeration value="ERVENYTELEN_ADOZO"/>
+            <xs:enumeration value="ERVENYTELEN_BEKULDO"/>
+            <xs:enumeration value="EGYEB_HIBA"/>
+            <xs:enumeration value="SIKERTELEN_VALIDACIO"/>
+            <xs:enumeration value="EREVENYTELEN_KODOLAS"/>
+            <xs:enumeration value="ERVENYTELEN_KARAKTER"/>
+            <xs:enumeration value="SIKERTELEN_BEKULDES"/>
+            <xs:enumeration value="HIBAS_CSATOLMANY_MERET"/>
+            <xs:enumeration value="NEM_TALALHATO_CSATOLMANY"/>
+            <xs:enumeration value="NEM_XSD_VALID_XML"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="GetBizonylatResult">
+        <xs:annotation>
+            <xs:documentation>A bizonylat státuszlekérdezés lehetséges eredményei.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="SIKERES"/>
+            <xs:enumeration value="NEMLETEZO_UGY_AZONOSITO"/>
+            <xs:enumeration value="EGYEB_HIBA"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="Tomorites">
+        <xs:annotation>
+            <xs:documentation>A tömörítés módja.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="GZIP"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:complexType name="BeadasiTanusitvany">
+        <xs:annotation>
+            <xs:documentation>A bizonylat beogadsának tanúsítványa</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="befogadasIdopontja" type="xs:dateTime" minOccurs="1" maxOccurs="1">
+                <xs:annotation>
+                    <xs:documentation>A befogadás időpontja</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="tanusitvany" type="xs:string" minOccurs="1" maxOccurs="1">
+                <xs:annotation>
+                    <xs:documentation>A befogadási a tanúsítvány.&#xD;
+                        A tanúsítvány mező az elején pontosvesszővel elválasztva tartalmazza azokat az adatokat, amelyekből képezve lett. A végére kerül a maga a tanúsítvány base64 kódolva.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="BizonylatBekuldesRequestType">
+        <xs:annotation>
+            <xs:documentation>A bizonylat létrehozás kérésekor az üzenet body-ban található adatok.</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="bizonylatTipus" type="xs:string" minOccurs="1" maxOccurs="1">
+                <xs:annotation>
+                    <xs:documentation>A bizonylat típusa</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="bizonylatVerzio" minOccurs="1" maxOccurs="1">
+                <xs:annotation>
+                    <xs:documentation>A bizonylat verziószáma</xs:documentation>
+                </xs:annotation>
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:pattern value="^[A-Za-z0-9.\\-_]{1,10}$"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="bizonylatXml" type="xs:string" minOccurs="1" maxOccurs="1">
+                <xs:annotation>
+                    <xs:documentation>A bizonylat file base 64 kódolással. A tomorites paraméter adja, meg, hogy tömörtett volt-e a fájl, és ha igen, akkor milyen módon, mielőtt kódolva lett.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="megjegyzes" type="xs:string" minOccurs="0" maxOccurs="1">
+                <xs:annotation>
+                    <xs:documentation>A bizonylathoz fűzhető megjegyzés, ami megadása esetén bekerül a nyugtába, hasonlóan az ÁNYK-s működéshez.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="signature" type="xs:string" minOccurs="1" maxOccurs="1">
+                <xs:annotation>
+                    <xs:documentation>Aláírás</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="validaciosTanusitvany" type="xs:string" minOccurs="0" maxOccurs="1">
+                <xs:annotation>
+                    <xs:documentation>Annak a tanúsítványa, hogy a beküldött bizonylat már validálva lett. Ha létezik ilyen tanúsítvány, akkor a bizonylat a beküldés során már nem lesz validálva. Gyorsabban lefut a művelet, ami szinkronválaszt ad.&#xD;
+                        A tanúsítvány mező az elején pontosvesszővel elválasztva tartalmazza azokat az adatokat, amelyekből képezve lett. A végére kerül a maga a tanúsítvány base64 kódolva.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="tomorites" type="Tomorites" minOccurs="0" maxOccurs="1">
+                <xs:annotation>
+                    <xs:documentation>A bizonylatfájl tömörítésének módja a base64 kódolás előtt. </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="BizonylatBekuldesResponseType">
+        <xs:annotation>
+            <xs:documentation>A bizonylat létrehozás válasz üzenet body-jában található adatok.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="BizonylatResponseType">
+                <xs:sequence>
+                    <xs:element name="ugyAzonosito" type="xs:string" minOccurs="1" maxOccurs="1">
+                        <xs:annotation>
+                            <xs:documentation>Az ügy egyedi azonosítója. Ezzel lehet lekérdezni beküldést köveően a státuszt.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="resultCode" type="CreateBizonylatResult" minOccurs="1" maxOccurs="1">
+                        <xs:annotation>
+                            <xs:documentation>Válaszkód</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="BizonylatResponseType">
+        <xs:annotation>
+            <xs:documentation>A bizonylat válaszok közös adatai</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="msg_common:BaseResponseType">
+                <xs:sequence>
+                    <xs:element name="erkeztetesiSzam" type="xs:string" minOccurs="0" maxOccurs="1">
+                        <xs:annotation>
+                            <xs:documentation>Sikeres beküldés esetén az érkeztetési szám.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="megjegyzes" type="xs:string" minOccurs="0" maxOccurs="1">
+                        <xs:annotation>
+                            <xs:documentation>A bizonylathoz fűzhető megjegyzés, ami megadása esetén bekerül a nyugtába, hasonlóan az ÁNYK-s működéshez.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="validaciosHibak" type="xs:base64Binary" minOccurs="0" maxOccurs="1">
+                        <xs:annotation>
+                            <xs:documentation>Hibákat megállapító validáció esetén a hibákat tartalmazó xml fájl bzip2-vel tömörítve. Az xml a hibalista.xsd-vel dolgozható fel.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="beadasiTanusitvany" type="BeadasiTanusitvany" minOccurs="0" maxOccurs="1">
+                        <xs:annotation>
+                            <xs:documentation>A bizonylat beadásának tanúsítványa</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="bizonylatStatusz" type="BizonylatStatusz" minOccurs="0" maxOccurs="1">
+                        <xs:annotation>
+                            <xs:documentation>A bizonylat státusza</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="BizonylatStatuszLekerdezesRequestType">
+        <xs:annotation>
+            <xs:documentation>A bizonylat státusz lekérdezéskor az üzenet body-ban található adatok.</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="ugyAzonosito" type="xs:string" minOccurs="1" maxOccurs="1">
+                <xs:annotation>
+                    <xs:documentation>Az  ügy egyedi azonosítója, amit a bizonylatbekuldes művelet adott vissza. Ezzel lehet lekérdezni beküldést követően a státuszt.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="BizonylatStatuszLekerdezesResponseType">
+        <xs:annotation>
+            <xs:documentation>A bizonylat lekérdezés válasz üzenet body-jában található adatok.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="BizonylatResponseType">
+                <xs:sequence>
+                    <xs:element name="resultCode" type="GetBizonylatResult" minOccurs="1" maxOccurs="1">
+                        <xs:annotation>
+                            <xs:documentation>Válaszkód</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
 </xs:schema>
