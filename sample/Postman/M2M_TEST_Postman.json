@@ -267,7 +267,7 @@
 				"body": {
 					"mode": "file",
 					"file": {
-						"src": "/C:/Users/budai.kiss.tamas/Desktop/25T34.xml"
+						"src": "/C:/T34.xml"
 					}
 				},
 				"url": {
@@ -352,7 +352,7 @@
 				"body": {
 					"mode": "file",
 					"file": {
-						"src": "/C:/Users/budai.kiss.tamas/Desktop/obj.xlsx"
+						"src": "/C:/obj.xlsx"
 					}
 				},
 				"url": {
@@ -692,7 +692,7 @@
 				"body": {
 					"mode": "file",
 					"file": {
-						"src": "/C:/Users/budai.kiss.tamas/Desktop/teszt_2308_bevfeld.xml"
+						"src": "/C:/T34.xml"
 					}
 				},
 				"url": {
@@ -777,7 +777,7 @@
 				"body": {
 					"mode": "file",
 					"file": {
-						"src": "/C:/Users/budai.kiss.tamas/Desktop/obj.xlsx"
+						"src": "/C:/obj.xlsx"
 					}
 				},
 				"url": {

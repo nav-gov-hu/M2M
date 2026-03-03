@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+  <nyomtatvanyok xmlns="http://www.apeh.hu/abev/nyomtatvanyok/2005/01">
+  <abev>
+    <hibakszama>0</hibakszama>
+    <hash>da5da378049da2e809dded4fbc198f672e74cadf</hash>
+    <programverzio>v.3.47.0</programverzio>
+  </abev>
+  <nyomtatvany>
+    <nyomtatvanyinformacio>
+      <nyomtatvanyazonosito>T34</nyomtatvanyazonosito>
+      <nyomtatvanyverzio>1.0</nyomtatvanyverzio>
+      <adozo>
+        <nev>Galvan Éva</nev>
+        <adoazonosito>8311125651</adoazonosito>
+      </adozo>
+        <megjegyzes>Form-os megjegyzés</megjegyzes>
+    </nyomtatvanyinformacio>
+    <mezok>
+      <mezo eazon="0A0001E002A">I</mezo>
+      <mezo eazon="0A0001E003A">8311125651</mezo>
+      <mezo eazon="0A0001E008A">3</mezo>
+      <mezo eazon="0A0001E011A">MAGYARORSZÁG</mezo>
+      <mezo eazon="0A0001E014A">Galvan</mezo>
+      <mezo eazon="0A0001E016A">Éva</mezo>
+      <mezo eazon="0A0001E021A">ÉVA</mezo>
+      <mezo eazon="0A0001E023A">éva</mezo>
+      <mezo eazon="0A0001E026A">SZEKSZÁRD</mezo>
+      <mezo eazon="0A0001E028A">Eger</mezo>
+      <mezo eazon="0A0001E030A">19700101</mezo>
+      <mezo eazon="0A0001E033A">ILDIKÓ</mezo>
+      <mezo eazon="0A0001E035A">7815</mezo>
+      <mezo eazon="0A0001E036A">HARKÁNY</mezo>
+      <mezo eazon="0A0001E037A">U</mezo>
+      <mezo eazon="0A0001E038A">3045</mezo>
+      <mezo eazon="0A0001E039A">Bér</mezo>
+      <mezo eazon="0A0001E040A">fwddwfdwf</mezo>
+      <mezo eazon="0A0001E041A">utca</mezo>
+      <mezo eazon="0A0001E042A">1</mezo>
+      <mezo eazon="0B0001F001A">X</mezo>
+      <mezo eazon="0B0001G001A">Eger</mezo>
+      <mezo eazon="0B0001G002A">20260225</mezo>
+      <mezo eazon="0B0001G003A">Éva</mezo>
+    </mezok>
+  </nyomtatvany>
+</nyomtatvanyok>
