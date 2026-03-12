@@ -263,7 +263,7 @@
 					}
 				],
 				"url": {
-					"raw": "{{agw_server}}/rest-api/1.0/NavM2mAdozo/adozoService/TetelesAdoszamla/26892920?signature={{signature}}&adonemKodok=101&tetelTipus=KONYVELT_ES_KONYVELESRE_VARO&idoszakVege=2025-03-13",
+					"raw": "{{agw_server}}/rest-api/1.0/NavM2mAdozo/adozoService/TetelesAdoszamla/12380880?signature={{signature}}&adonemKodok=101&tetelTipus=KONYVELT_ES_KONYVELESRE_VARO&idoszakVege=2025-03-13",
 					"host": [
 						"{{agw_server}}"
 					],
