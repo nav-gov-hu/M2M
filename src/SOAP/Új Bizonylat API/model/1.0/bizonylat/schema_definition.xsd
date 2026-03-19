@@ -1,0 +1,300 @@
+<?xml  version='1.0' encoding='utf-8' ?>
+<xs:schema targetNamespace="https://soap.api.nav.gov.hu/definitions/model/1.0/bizonylat" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:bizonylat10="https://soap.api.nav.gov.hu/definitions/model/1.0/bizonylat">
+	<xs:simpleType name="BizonylatBekuldesKeresAdatokBizonylatTipusType">
+		<xs:annotation>
+			<xs:documentation>Generated Simple Type for attribute bizonylat típus of class Bizonylat beküldés kérés adatok</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="100"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="BizonylatBekuldesKeresAdatokBizonylatVerzioType">
+		<xs:annotation>
+			<xs:documentation>Generated Simple Type for attribute bizonylat verzió of class Bizonylat beküldés kérés adatok</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[A-Za-z0-9.\-_]{1,10}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="BizonylatBekuldesKeresAdatokMegjegyzesType">
+		<xs:annotation>
+			<xs:documentation>Generated Simple Type for attribute megjegyzés of class Bizonylat beküldés kérés adatok</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="2000"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="BizonylatBekuldesKeresAdatokSignatureType">
+		<xs:annotation>
+			<xs:documentation>Generated Simple Type for attribute signature of class Bizonylat beküldés kérés adatok</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="200"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="BizonylatBekuldesKeresAdatokValidaciosTanusitvanyType">
+		<xs:annotation>
+			<xs:documentation>Generated Simple Type for attribute validációs tanúsítvány of class Bizonylat beküldés kérés adatok</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="500"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="BizonylatBekuldesValaszAdatokUgyAzonositoType">
+		<xs:annotation>
+			<xs:documentation>Generated Simple Type for attribute ügy azonosító of class Bizonylat beküldés válasz adatok</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="100"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="BizonylatresponsetypeErkeztetesiszamType">
+		<xs:annotation>
+			<xs:documentation>Generated Simple Type for attribute erkeztetesiSzam of class BizonylatResponseType</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="100"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="BizonylatresponsetypeMegjegyzesType">
+		<xs:annotation>
+			<xs:documentation>Generated Simple Type for attribute megjegyzés of class BizonylatResponseType</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="2000"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="BizonylatStatusz">
+		<xs:annotation>
+			<xs:documentation>A bizonylat lehetséges státuszai&#xD;
+A bizonylat lehetséges státuszai.&#xD;
+VALIDACIO_ALATT - A bizonylat validációja még folyamatban van.&#xD;
+SIKERESEN_VALIDALT - A bizonylat validációja sikeresen megtörtént. Nincs a beküldést akadályozó hiba.&#xD;
+VALIDACIOS_HIBA - A validáció olyan hibát talált, ami miatt a bizonylat nem küldhető be.&#xD;
+SIKERTELEN_BEKULDES - A bizonylatot nem sikerült továbbítani a feldolgozó rendszerhez.&#xD;
+SIKERTELEN_ELOELLENORZES - A bizonylat előellenörzés során hiba merült fel.&#xD;
+BEKULDES_ALATT - A bizonylat el lett küldve a feldolgozó rendszer felé.&#xD;
+SIKERESEN_BEKULDVE - A bizonylat sikeresen be lett küldve a feldolgozó rendszerhez. </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="VALIDACIO_ALATT"/>
+			<xs:enumeration value="SIKERESEN_VALIDALT"/>
+			<xs:enumeration value="VALIDACIOS_HIBA"/>
+			<xs:enumeration value="SIKERTELEN_BEKULDES"/>
+			<xs:enumeration value="SIKERTELEN_ELOELLENORZES"/>
+			<xs:enumeration value="BEKULDES_ALATT"/>
+			<xs:enumeration value="SIKERESEN_BEKULDVE"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="BizonylatStatuszLekerdezesKeresAdatokUgyAzonositoType">
+		<xs:annotation>
+			<xs:documentation>Generated Simple Type for attribute ügy azonosító of class Bizonylat státusz lekérdezés kérés adatok</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="100"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CreateBizonylatResult">
+		<xs:annotation>
+			<xs:documentation>A bizonylatbeküldés lehetséges eredményei.&#xD;
+ERVENYTELEN_ALAIRAS - A művelet végrehajtásához küldött aláírás érvénytelen.&#xD;
+SIKERES - A bizonylatbeküldés sikeresen megtörtént.&#xD;
+ERVENYTELEN_BIZONYLAT_TIPUS - A bizonylattípus nem küldhető be.&#xD;
+ERVENYTELEN_BIZONYLAT_VERZIO - A bizonylatverzió nem küldhető be.&#xD;
+HIBAS_TOMORITES - A beküldött fájl tömörítése hibás.&#xD;
+VIRUSOS_FAJL - A csatolmányok között található vírussal fertőzött.&#xD;
+NINCS_JOGOSULTSAG_BIZONYLATTIPUSHOZ - A bizonylattípus beküldése  az ÜPO regisztrációsfelületen megadott beállítások alapján nem engedélyezett.&#xD;
+NINCS_JOGOSULTSAGA_A_BEKULDONEK - Az EKNYI beállítások alapján a beküldőnek nincs jogosultsága beküldeni a bizonylatot az azon szereplő adózó nevében.&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+UNSUCCESSFUL_VALIDATION - A validáció valamilyen hiba miatt nem tudott lefutni.&#xD;
+INVALID_SENDER - Érvénytelen beküldő&#xD;
+INVALID_TAXPAYER - Érvénytelen adózó&#xD;
+SENDER_HAS_NO_RIGHT - A beküldőnek nincs jogosultsága a bizonylat beküldésére az adózó nevében.&#xD;
+INVALID_DOCUMENT_TYPE - A bizonylattípus nem küldhető be.&#xD;
+INVALID_DOCUMENT_VERSION - A bizonylatverzió nem küldhető be.&#xD;
+FILE_CONTAINS_VIRUS - A bizonylatfájl, vagy annak csatolmánya vírusos.&#xD;
+ERVENYTELEN_ADOZO - A megadott adózó nem létezik.&#xD;
+ERVENYTELEN_BEKULDO - A megadott beküldő nem letezik.&#xD;
+EGYEB_HIBA - Egyéb hiba történt.&#xD;
+SIKERTELEN_VALIDACIO -  Bizonylat validációja során olyan hibát talált a rendszer, ami alapján nem küldhető be.&#xD;
+EREVENYTELEN_KODOLAS - A bizonylat nem UTF8 kódolású.&#xD;
+ERVENYTELEN_KARAKTER - a bizonylat érvénytelen(nem UTF8) karaktereket tartalmat.&#xD;
+SIKERTELEN_BEKULDES - A bizonylatot nem sikerült beküldeni a feldolgozó rendszerhez.&#xD;
+HIBAS_CSATOLMANY_MERET - A bizonylat nem megfelelő méretű csatolmányt tartalmaz.&#xD;
+NEM_TALALHATO_CSATOLMANY - A bizonylat csatolmánya nem található meg a fájltárolóban.&#xD;
+NEM_XSD_VALID_XML - A bizonylat xml felépítése nem felel meg az xsd sémának.&#xD;
+HIBAS_XML_FORMATUM - A bizonylat felépítése nem felel meg a szabványos xml formátumnak.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="ERVENYTELEN_ALAIRAS"/>
+			<xs:enumeration value="SIKERES"/>
+			<xs:enumeration value="ERVENYTELEN_BIZONYLAT_TIPUS"/>
+			<xs:enumeration value="ERVENYTELEN_BIZONYLAT_VERZIO"/>
+			<xs:enumeration value="HIBAS_TOMORITES"/>
+			<xs:enumeration value="VIRUSOS_FAJL"/>
+			<xs:enumeration value="NINCS_JOGOSULTSAG_BIZONYLATTIPUSHOZ"/>
+			<xs:enumeration value="NINCS_JOGOSULTSAGA_A_BEKULDONEK"/>
+			<xs:enumeration value="ERVENYTELEN_ADOZO"/>
+			<xs:enumeration value="ERVENYTELEN_BEKULDO"/>
+			<xs:enumeration value="EGYEB_HIBA"/>
+			<xs:enumeration value="SIKERTELEN_VALIDACIO"/>
+			<xs:enumeration value="ERVENYTELEN_KODOLAS"/>
+			<xs:enumeration value="ERVENYTELEN_KARAKTER"/>
+			<xs:enumeration value="SIKERTELEN_BEKULDES"/>
+			<xs:enumeration value="HIBAS_CSATOLMANY_MERET"/>
+			<xs:enumeration value="NEM_TALALHATO_CSATOLMANY"/>
+			<xs:enumeration value="NEM_XSD_VALID_XML"/>
+			<xs:enumeration value="HIBAS_XML_FORMATUM"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="GetBizonylatResult">
+		<xs:annotation>
+			<xs:documentation>A bizonylat státuszlekérdezés lehetséges eredményei.&#xD;
+A bizonylat státuszlekérdezés lehetséges eredményei.&#xD;
+SIKERES - A bizonylat státuszlekérdezés sikeresen megtörtént&#xD;
+NEMLETEZO_UGY_AZONOSITO - A lekérdezésben megadott ügyazonosító nem létezik.&#xD;
+EGYEB_HIBA - Egyéb hiba történt.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="SIKERES"/>
+			<xs:enumeration value="NEMLETEZO_UGY_AZONOSITO"/>
+			<xs:enumeration value="EGYEB_HIBA"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Tomorites">
+		<xs:annotation>
+			<xs:documentation>A tömörítés módja. Jelenleg csak a GZIP támogatott.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="GZIP"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="BizonylatBekuldesKeresAdatok">
+		<xs:annotation>
+			<xs:documentation>A bizonylat létrehozás kérésekor az üzenet body-ban található adatok.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="bizonylatXml" type="xs:base64Binary" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>A bizonylat file base 64 kódolással. A tomorites paraméter adja, meg, hogy tömörtett volt-e a fájl, és ha igen, akkor milyen módon, mielőtt kódolva lett.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="bizonylatTipus" type="bizonylat10:BizonylatBekuldesKeresAdatokBizonylatTipusType" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>A bizonylat típusa</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="bizonylatVerzio" type="bizonylat10:BizonylatBekuldesKeresAdatokBizonylatVerzioType" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>A bizonylat verziószáma</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="megjegyzes" type="bizonylat10:BizonylatBekuldesKeresAdatokMegjegyzesType" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>A bizonylathoz fűzhető megjegyzés, ami megadása esetén bekerül a nyugtába, hasonlóan az ÁNYK-s működéshez.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="signature" type="bizonylat10:BizonylatBekuldesKeresAdatokSignatureType" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Aláírás.  A műveletfüggő érték a bizonylat xml SHA256 hashelt értéke.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="validaciosTanusitvany" type="bizonylat10:BizonylatBekuldesKeresAdatokValidaciosTanusitvanyType" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Annak a tanúsítványa, hogy a beküldött bizonylat már validálva lett. Ha létezik ilyen tanúsítvány, akkor a bizonylat a beküldés során már nem lesz validálva. Gyorsabban lefut a művelet, ami szinkronválaszt ad.&#xD;
+A tanúsítvány mező az elején pontosvesszővel elválasztva tartalmazza azokat az adatokat, amelyekből képezve lett. A végére kerül a maga a tanúsítvány base64 kódolva.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="tomorites" type="bizonylat10:Tomorites" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>A bizonylatfájl tömörítésének módja a base64 kódolás előtt. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="BizonylatBekuldesValaszAdatok">
+		<xs:annotation>
+			<xs:documentation>A bizonylat létrehozás válasz üzenet body-jában található adatok.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="bizonylat10:BizonylatResponseType">
+				<xs:sequence>
+					<xs:element name="ugyAzonosito" type="bizonylat10:BizonylatBekuldesValaszAdatokUgyAzonositoType" minOccurs="1" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>Az ügy egyedi azonosítója. Ezzel lehet lekérdezni beküldést köveően a státuszt.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="resultCode" type="bizonylat10:CreateBizonylatResult" minOccurs="1" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>Válaszkód</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="BizonylatResponseType">
+		<xs:annotation>
+			<xs:documentation>A bizonylat válaszok közös adatai</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="befogadasIdopontja" type="xs:dateTime" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>A befogadás időpontja</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="validaciosHibak" type="xs:base64Binary" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Hibákat megállapító validáció esetén a hibákat tartalmazó xml fájl bzip2-vel tömörítve. Az xml a hibalista.xsd-vel dolgozható fel.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="erkeztetesiSzam" type="bizonylat10:BizonylatresponsetypeErkeztetesiszamType" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Sikeres beküldés esetén az érkeztetési szám.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="megjegyzes" type="bizonylat10:BizonylatresponsetypeMegjegyzesType" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>A bizonylathoz fűzhető megjegyzés, ami megadása esetén bekerül a nyugtába, hasonlóan az ÁNYK-s működéshez.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="bizonylatStatusz" type="bizonylat10:BizonylatStatusz" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>A bizonylat státusza</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="BizonylatStatuszLekerdezesKeresAdatok">
+		<xs:annotation>
+			<xs:documentation>A bizonylat státusz lekérdezéskor az üzenet body-ban található adatok.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="ugyAzonosito" type="bizonylat10:BizonylatStatuszLekerdezesKeresAdatokUgyAzonositoType" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Az  ügy egyedi azonosítója, amit a bizonylatbekuldes művelet adott vissza. Ezzel lehet lekérdezni beküldést követően a státuszt.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="BizonylatStatuszLekerdezesValaszAdatok">
+		<xs:annotation>
+			<xs:documentation>A bizonylat lekérdezés válasz üzenet body-jában található adatok.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="bizonylat10:BizonylatResponseType">
+				<xs:sequence>
+					<xs:element name="resultcode" type="bizonylat10:GetBizonylatResult" minOccurs="1" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>Válaszkód</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+</xs:schema>
