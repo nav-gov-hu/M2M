@@ -22,6 +22,26 @@
 			<xs:documentation>'getBiztositottiJogviszonyFoglalkoztatoAdatStatusz' operation visszatérési értéket definiáló XSD element. </xs:documentation>
 		</xs:annotation>
 	</xs:element>
+	<xs:element name="GetEgyszerusitettFoglalkoztatasFoglalkoztatottListaRequestElem" type="msg_adozo:GetEgyszerusitettFoglalkoztatasFoglalkoztatottListaRequestType">
+		<xs:annotation>
+			<xs:documentation>'getEgyszerusitettFoglalkoztatasFoglalkoztatottLista' operation bemeneti paraméterét definiáló XSD element. </xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="GetEgyszerusitettFoglalkoztatasFoglalkoztatottListaResponseElem" type="msg_adozo:GetEgyszerusitettFoglalkoztatasFoglalkoztatottListaResponseType">
+		<xs:annotation>
+			<xs:documentation>'getEgyszerusitettFoglalkoztatasFoglalkoztatottLista' operation visszatérési értéket definiáló XSD element. </xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="GetEgyszerusitettFoglalkoztatasRequestElem" type="msg_adozo:GetEgyszerusitettFoglalkoztatasRequestType">
+		<xs:annotation>
+			<xs:documentation>'getEgyszerusitettFoglalkoztatas' operation bemeneti paraméterét definiáló XSD element. </xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="GetEgyszerusitettFoglalkoztatasResponseElem" type="msg_adozo:GetEgyszerusitettFoglalkoztatasResponseType">
+		<xs:annotation>
+			<xs:documentation>'getEgyszerusitettFoglalkoztatas' operation visszatérési értéket definiáló XSD element. </xs:documentation>
+		</xs:annotation>
+	</xs:element>
 	<xs:element name="GetHianyzoBevallasRequestElem" type="msg_adozo:GetHianyzoBevallasRequestType">
 		<xs:annotation>
 			<xs:documentation>'getHianyzoBevallas' operation bemeneti paraméterét definiáló XSD element. </xs:documentation>
@@ -40,6 +60,16 @@
 	<xs:element name="GetKoztartozasEgyenlegResquestElem" type="msg_adozo:GetKoztartozasEgyenlegResquestType">
 		<xs:annotation>
 			<xs:documentation>'getKoztartozasEgyenleg' operation bemeneti paraméterét definiáló XSD element. </xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="GetKoztartozasMentessegRequestElem" type="msg_adozo:GetKoztartozasMentessegRequestType">
+		<xs:annotation>
+			<xs:documentation>'getKoztartozasMentesseg' operation bemeneti paraméterét definiáló XSD element. </xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="GetKoztartozasMentessegResponseElem" type="msg_adozo:GetKoztartozasMentessegResponseType">
+		<xs:annotation>
+			<xs:documentation>'getKoztartozasMentesseg' operation visszatérési értéket definiáló XSD element. </xs:documentation>
 		</xs:annotation>
 	</xs:element>
 	<xs:element name="GetOsszesitettAdoszamlaRequestElem" type="msg_adozo:GetOsszesitettAdoszamlaRequestType">

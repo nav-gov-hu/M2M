@@ -1,0 +1,326 @@
+<?xml  version='1.0' encoding='utf-8' ?>
+<xs:schema targetNamespace="https://soap.api.nav.gov.hu/definitions/model/1.0/foglalkoztatas/egyszerusitettfoglalkoztatas" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:foglalkoztatas_egyszerusitettfoglalkoztatas10="https://soap.api.nav.gov.hu/definitions/model/1.0/foglalkoztatas/egyszerusitettfoglalkoztatas">
+	<xs:simpleType name="EgyszerusitettfoglalkoztatasfoglalkoztatottlistalekerdezeskeresFoglalkoztatoadoalanyazonositojaType">
+		<xs:annotation>
+			<xs:documentation>Generated Simple Type for attribute foglalkoztatoAdoalanyazonositoja of class EgyszerusitettFoglalkoztatasFoglalkoztatottListaLekerdezesKeres</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[0-9]{8}|[0-9]{10}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="EgyszerusitettfoglalkoztataslekerdezeskeresFoglalkoztatottadoazonositojeleType">
+		<xs:annotation>
+			<xs:documentation>Generated Simple Type for attribute foglalkoztatottAdoazonositoJele of class EgyszerusitettFoglalkoztatasLekerdezesKeres</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[0-9]{10}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="EgyszerusitettfoglalkoztataslekerdezeskeresFoglalkoztatottneveType">
+		<xs:annotation>
+			<xs:documentation>Generated Simple Type for attribute foglalkoztatottNeve of class EgyszerusitettFoglalkoztatasLekerdezesKeres</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="200"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="EgyszerusitettfoglalkoztataslekerdezeskeresFoglalkoztatotttajszamaType">
+		<xs:annotation>
+			<xs:documentation>Generated Simple Type for attribute foglalkoztatottTajSzama of class EgyszerusitettFoglalkoztatasLekerdezesKeres</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[0-9]{9}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="FoglalkoztatottAdoazonositojelType">
+		<xs:annotation>
+			<xs:documentation>Generated Simple Type for attribute adoazonositoJel of class Foglalkoztatott</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[0-9]{10}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="FoglalkoztatottMasholBiztositott">
+		<xs:annotation>
+			<xs:documentation>Az értéke IGEN, ha a foglalkoztatott Magyarországon biztosított, egyébként NEM.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="IGEN"/>
+			<xs:enumeration value="NEM"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="FoglalkoztatottNevType">
+		<xs:annotation>
+			<xs:documentation>Generated Simple Type for attribute nev of class Foglalkoztatott</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="200"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="FoglalkoztatottTajszamType">
+		<xs:annotation>
+			<xs:documentation>Generated Simple Type for attribute tajSzam of class Foglalkoztatott</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[0-9]{9}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="GetEgyszerusitettFoglalkoztatasFoglalkoztatottListaResult">
+		<xs:annotation>
+			<xs:documentation>A getEgyszerusitettFoglalkoztatasFoglalkoztatottLista művelet válaszkódjai:&#xD;
+SIKERES: A művelet sikeresen végrehajtásra került. Ettől függetlenül a hibalista tartalmazhat hibaüzeneteket.&#xD;
+FOGLALKOZTATO_NEM_TALALHATO: A megadott foglalkoztató nem található.&#xD;
+TARGYEVRE_VONATKOZO_LEKERDEZES_NEM_TAMOGATOTT: A megadott tárgyévre vonatkozóan nem végezhető lekérdezés.&#xD;
+ERVENYTELEN_ALAIRAS: A művelet meghívásakor megadott aláírás nem érvényes.&#xD;
+EGYEB_HIBA: Egyéb hiba történt, amire vonatkozóan a válaszüzenet ad pontosabb információt.&#xD;
+JOGOSULTSAG_ELLENORZES_PROBLEMA: A jogosultságvizsgálat nem érhető el.&#xD;
+NINCS_JOGOSULTSAG: A lekérdezőnek nincs jogosultsága a lekérdzett adózó adataihoz.&#xD;
+ERVENYTELEN_ADOALANY_AZONOSITO: Érvénytelen adóalany azonosító</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="SIKERES"/>
+			<xs:enumeration value="FOGLALKOZTATO_NEM_TALALHATO"/>
+			<xs:enumeration value="EGYEB_HIBA"/>
+			<xs:enumeration value="TARGYEVRE_VONATKOZO_LEKERDEZES_NEM_TAMOGATOTT"/>
+			<xs:enumeration value="ERVENYTELEN_ALAIRAS"/>
+			<xs:enumeration value="NINCS_JOGOSULTSAG"/>
+			<xs:enumeration value="JOGOSULTSAG_ELLENORZES_PROBLEMA"/>
+			<xs:enumeration value="ERVENYTELEN_ADOALANY_AZONOSITO"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="GetEgyszerusitettFoglalkoztatasResult">
+		<xs:annotation>
+			<xs:documentation>A getEgyszerusitettFoglalkoztatas művelet válaszkódjai&#xD;
+SIKERES: A művelet sikeresen végrehajtásra került. Ettől függetlenül a hibalista tartalmazhat hibaüzeneteket.&#xD;
+FOGLALKOZTATOTT_NEM_TALALHATO: A megadott foglalkoztatott nem található.&#xD;
+ERVENYTELEN_ALAIRAS: A művelet meghívásakor megadott aláírás nem érvényes.&#xD;
+EGYEB_HIBA: Egyéb hiba történt, amire vonatkozóan a válaszüzenet ad pentosabb információt.&#xD;
+JOGOSULTSAG_ELLENORZES_PROBLEMA: A jogosultságvizsgálat nem érhető el.&#xD;
+NINCS_JOGOSULTSAG: A lekérdezőnek nincs jogosultsága a lekérdzett adózó adataihoz.&#xD;
+ERVENYTELEN_ADOALANY_AZONOSITO: Érvénytelen adóalany azonosító</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="SIKERES"/>
+			<xs:enumeration value="FOGLALKOZTATOTT_NEM_TALALHATO"/>
+			<xs:enumeration value="EGYEB_HIBA"/>
+			<xs:enumeration value="ERVENYTELEN_ALAIRAS"/>
+			<xs:enumeration value="NINCS_JOGOSULTSAG"/>
+			<xs:enumeration value="JOGOSULTSAG_ELLENORZES_PROBLEMA"/>
+			<xs:enumeration value="ERVENYTELEN_ADOALANY_AZONOSITO"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="HibaHibakodType">
+		<xs:annotation>
+			<xs:documentation>Generated Simple Type for attribute hibaKod of class Hiba</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="100"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="HibaHibaleirasType">
+		<xs:annotation>
+			<xs:documentation>Generated Simple Type for attribute hibaLeiras of class Hiba</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="2000"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="EgyszerusitettFoglalkoztatasFoglalkoztatottListaLekerdezesKeres">
+		<xs:annotation>
+			<xs:documentation>A egyszerűsített foglalkoztatás lekérdezéskor a kérés üzenet body-ban található adatok.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="targyev" type="xs:int" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Az év, amire a lekérdezés vonatkozik</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="foglalkoztatoAdoalanyazonositoja" type="foglalkoztatas_egyszerusitettfoglalkoztatas10:EgyszerusitettfoglalkoztatasfoglalkoztatottlistalekerdezeskeresFoglalkoztatoadoalanyazonositojaType" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>A foglakoztató adószámának törzsszám része, vagy adóazonosító jel</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="EgyszerusitettFoglalkoztatasFoglalkoztatottListalekerdezesValasz">
+		<xs:annotation>
+			<xs:documentation>A egyszerűsített foglalkoztatás foglalkoztatott lista lekérdezéskor a válasz üzenet body-ban található adatok.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="foglalkoztatott" type="foglalkoztatas_egyszerusitettfoglalkoztatas10:Foglalkoztatott" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Foglalkoztatott adatai</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="resultCode" type="foglalkoztatas_egyszerusitettfoglalkoztatas10:GetEgyszerusitettFoglalkoztatasFoglalkoztatottListaResult" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Válaszkód</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="EgyszerusitettFoglalkoztatasLekerdezesKeres">
+		<xs:annotation>
+			<xs:documentation>A egyszerűsített foglalkoztatás foglalkoztatott lista lekérdezéskor a kérés üzenet body-ban található adatok.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="foglalkoztatottAdoazonositoJele" type="foglalkoztatas_egyszerusitettfoglalkoztatas10:EgyszerusitettfoglalkoztataslekerdezeskeresFoglalkoztatottadoazonositojeleType" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>A fogalalkoztatott adóazonosító jele</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="foglalkoztatottNeve" type="foglalkoztatas_egyszerusitettfoglalkoztatas10:EgyszerusitettfoglalkoztataslekerdezeskeresFoglalkoztatottneveType" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>A foglalkoztatott neve</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="foglalkoztatottTajSzama" type="foglalkoztatas_egyszerusitettfoglalkoztatas10:EgyszerusitettfoglalkoztataslekerdezeskeresFoglalkoztatotttajszamaType" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>A foglalkoztatott TAJ száma. Akkor kötelező megadni, ha Magíarországon biztosított.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="foglalkoztatottMasholBiztositott" type="foglalkoztatas_egyszerusitettfoglalkoztatas10:FoglalkoztatottMasholBiztositott" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Az értéke IGEN, ha a foglalkoztatott Magyarországon biztosított, egyébként NEM.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="EgyszerusitettFoglalkoztatasLekerdezesValasz">
+		<xs:annotation>
+			<xs:documentation>A egyszerűsített foglalkoztatás lekérdezéskor a válasz üzenet body-ban található adatok.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="felhasznalhatoNapok" type="foglalkoztatas_egyszerusitettfoglalkoztatas10:FelhasznalhatoNapok" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Felhasználható napok</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="felhasznaltNapok" type="foglalkoztatas_egyszerusitettfoglalkoztatas10:FelhasznaltNapok" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Felhasznált napok</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="resultCode" type="foglalkoztatas_egyszerusitettfoglalkoztatas10:GetEgyszerusitettFoglalkoztatasResult" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Válaszkód</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="hibaLista" type="foglalkoztatas_egyszerusitettfoglalkoztatas10:HibaLista" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Egyszerűsített foglalkoztatás bejelentés ellenőrzés során talált hibák listája</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="FelhasznalhatoNapok">
+		<xs:annotation>
+			<xs:documentation>Felhasználható napok</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="mezogazdasag" type="xs:int" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Azt mutatja meg, hogy az adott tárgyévben az adózó hány napot lehet még foglalkoztatva mezőgazdasági idénymunkára egyszerűsített foglalkoztatási munkaviszonyban az Efo tv. 1.§ (4a) bekezdés szerinti 120 nap feletti 90 napjából</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="osszes" type="xs:int" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Azt mutatja meg, hogy az adott tárgyévben az adózó hány napot lehet még foglalkoztatva egyszerűsített foglalkoztatási munkaviszonyban az Efo tv. 1.§ (4) bekezdés szerinti 120 napjából</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="FelhasznaltNapok">
+		<xs:annotation>
+			<xs:documentation>Felhasznált napok</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="alkalmi" type="xs:int" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Azt mutatja meg, hogy az adott tárgyévben az adózó hány napot volt foglalkoztatva egyszerűsített foglalkoztatási munkaviszonyban alkalmi munka jellegben</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="filmipar" type="xs:int" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Azt mutatja meg, hogy az adott tárgyévben az adózó hány napot volt foglalkoztatva egyszerűsített foglalkoztatási munkaviszonyban filmipari statiszta jellegben</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="mezogazdasag" type="xs:int" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Azt mutatja meg, hogy az adott tárgyévben az adózó hány napot volt foglalkoztatva egyszerűsített foglalkoztatási munkaviszonyban mezőgazdasági idénymunka jellegben</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="osszes" type="xs:int" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Azt mutatja meg, hogy az adott tárgyévben az adózó hány napot volt foglalkoztatva egyszerűsített foglalkoztatási munkaviszonyban összesen mezőgazdasági idénymunka, turisztikai idénymunka, alkalmi munka és filmipari statiszta viszonyban </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="turisztika" type="xs:int" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Azt mutatja meg, hogy az adott tárgyévben az adózó hány napot volt foglalkoztatva egyszerűsített foglalkoztatási munkaviszonyban turisztikai idénymunka jellegben</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Foglalkoztatott">
+		<xs:annotation>
+			<xs:documentation>Foglalkoztatott adatai</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="felhasznalhatoNapok" type="foglalkoztatas_egyszerusitettfoglalkoztatas10:FelhasznalhatoNapok" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Felhasználható napok</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="felhasznaltNapok" type="foglalkoztatas_egyszerusitettfoglalkoztatas10:FelhasznaltNapok" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Felhasznált napok</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="adoazonositoJel" type="foglalkoztatas_egyszerusitettfoglalkoztatas10:FoglalkoztatottAdoazonositojelType" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Adóazonosító jel</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="nev" type="foglalkoztatas_egyszerusitettfoglalkoztatas10:FoglalkoztatottNevType" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Név</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="tajSzam" type="foglalkoztatas_egyszerusitettfoglalkoztatas10:FoglalkoztatottTajszamType" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>TAJ szám</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Hiba">
+		<xs:annotation>
+			<xs:documentation>Egyszerűsített foglalkoztatás bejelentés ellenőrzés során talált hiba adatai</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="hibaKod" type="foglalkoztatas_egyszerusitettfoglalkoztatas10:HibaHibakodType" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>A hiba kódja</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="hibaLeiras" type="foglalkoztatas_egyszerusitettfoglalkoztatas10:HibaHibaleirasType" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>A hiba leírása</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="HibaLista">
+		<xs:annotation>
+			<xs:documentation>Egyszerűsített foglalkoztatás bejelentés ellenőrzés során talált hibák listája</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="hiba" type="foglalkoztatas_egyszerusitettfoglalkoztatas10:Hiba" minOccurs="1" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Egyszerűsített foglalkoztatás bejelentés ellenőrzés során talált hiba adatai</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

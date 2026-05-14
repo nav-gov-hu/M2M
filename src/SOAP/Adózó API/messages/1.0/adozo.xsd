@@ -1,7 +1,8 @@
 <?xml  version='1.0' encoding='utf-8' ?>
-<xs:schema targetNamespace="https://soap.api.nav.gov.hu/definitions/messages/1.0/adozo" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="https://soap.api.nav.gov.hu/definitions/messages/1.0/adozo" xmlns:msg_adozo="https://soap.api.nav.gov.hu/definitions/messages/1.0/adozo" xmlns:msg_common="https://soap.api.nav.gov.hu/definitions/messages/1.0/common" xmlns:foglalkoztatas10="https://soap.api.nav.gov.hu/definitions/model/1.0/foglalkoztatas">
+<xs:schema targetNamespace="https://soap.api.nav.gov.hu/definitions/messages/1.0/adozo" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="https://soap.api.nav.gov.hu/definitions/messages/1.0/adozo" xmlns:msg_adozo="https://soap.api.nav.gov.hu/definitions/messages/1.0/adozo" xmlns:foglalkoztatas_egyszerusitettfoglalkoztatas10="https://soap.api.nav.gov.hu/definitions/model/1.0/foglalkoztatas/egyszerusitettfoglalkoztatas" xmlns:msg_common="https://soap.api.nav.gov.hu/definitions/messages/1.0/common" xmlns:foglalkoztatas10="https://soap.api.nav.gov.hu/definitions/model/1.0/foglalkoztatas">
 	<xs:import namespace="https://soap.api.nav.gov.hu/definitions/model/1.0/foglalkoztatas" schemaLocation="../../model/1.0/foglalkoztatas/schema_definition.xsd"/>
 	<xs:import namespace="https://soap.api.nav.gov.hu/definitions/messages/1.0/common" schemaLocation="../../messages/1.0/common.xsd"/>
+	<xs:import namespace="https://soap.api.nav.gov.hu/definitions/model/1.0/foglalkoztatas/egyszerusitettfoglalkoztatas" schemaLocation="../../model/1.0/foglalkoztatas/egyszerusitettfoglalkoztatas/schema_definition.xsd"/>
 	<xs:complexType name="Deviza">
 		<xs:annotation>
 			<xs:documentation>Deviza összeg</xs:documentation>
@@ -270,6 +271,38 @@
 			</xs:enumeration>
 		</xs:restriction>
 	</xs:simpleType>
+	<xs:simpleType name="GetKoztartozasmentessegResult">
+		<xs:annotation>
+			<xs:documentation>getKoztartozasMentesseg művelet válaszkódjai.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="SIKERES">
+				<xs:annotation>
+					<xs:documentation>Sikeres művelet.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EGYEB_HIBA">
+				<xs:annotation>
+					<xs:documentation>Hiba lépett fel az adatok lekérdezése közben.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NINCS_ADAT">
+				<xs:annotation>
+					<xs:documentation>A kiválasztott adózóra vonatkozóan nincs rendelkezésre álló adat. </xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ERVENYTELEN_ADOALANY_AZONOSITO">
+				<xs:annotation>
+					<xs:documentation>Érvénytelen adóalany azonosító</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ERVENYTELEN_ALAIRAS">
+				<xs:annotation>
+					<xs:documentation>Érvénytelen aláírás</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
 	<xs:simpleType name="GetOsszesitettAdoszamlaResult">
 		<xs:annotation>
 			<xs:documentation>getOsszesitettAdoszamla művelet válaszkódjai.</xs:documentation>
@@ -374,6 +407,24 @@
 					<xs:documentation>nyitott</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="KomaMinosites">
+		<xs:annotation>
+			<xs:documentation>Megfelel az adózó a KOMA felvételi feltételeinek?</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="IGEN"/>
+			<xs:enumeration value="NEM"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="KomaSzereples">
+		<xs:annotation>
+			<xs:documentation>Szerepel az adózó a KOMA-ban?</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="IGEN"/>
+			<xs:enumeration value="NEM"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:complexType name="Penzforgalom">
@@ -662,9 +713,61 @@ NO: A könyvelésre váró tételek nélkül számolja az eredményt.</xs:docume
 							<xs:documentation>Válaszkód</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="requestData" type="RequestData" minOccurs="1" maxOccurs="1">
+					<xs:element name="requestData" type="RequestData" minOccurs="0" maxOccurs="1">
 						<xs:annotation>
 							<xs:documentation>Lekérdezés adatai. </xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="GetEgyszerusitettFoglalkoztatasFoglalkoztatottListaRequestType">
+		<xs:complexContent>
+			<xs:extension base="foglalkoztatas_egyszerusitettfoglalkoztatas10:EgyszerusitettFoglalkoztatasFoglalkoztatottListaLekerdezesKeres">
+				<xs:sequence>
+					<xs:element name="signature" type="xs:string" minOccurs="1" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>Aláírás</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="GetEgyszerusitettFoglalkoztatasFoglalkoztatottListaResponseType">
+		<xs:complexContent>
+			<xs:extension base="foglalkoztatas_egyszerusitettfoglalkoztatas10:EgyszerusitettFoglalkoztatasFoglalkoztatottListalekerdezesValasz">
+				<xs:sequence>
+					<xs:element name="resultMessage" type="xs:string" minOccurs="0" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>Válaszüzenet</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="GetEgyszerusitettFoglalkoztatasRequestType">
+		<xs:complexContent>
+			<xs:extension base="foglalkoztatas_egyszerusitettfoglalkoztatas10:EgyszerusitettFoglalkoztatasLekerdezesKeres">
+				<xs:sequence>
+					<xs:element name="signature" type="xs:string" minOccurs="1" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>Aláírás</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="GetEgyszerusitettFoglalkoztatasResponseType">
+		<xs:complexContent>
+			<xs:extension base="foglalkoztatas_egyszerusitettfoglalkoztatas10:EgyszerusitettFoglalkoztatasLekerdezesValasz">
+				<xs:sequence>
+					<xs:element name="resultMessage" type="xs:string" minOccurs="0" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>Válaszüzenet</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 				</xs:sequence>
@@ -732,6 +835,36 @@ NO: A könyvelésre váró tételek nélkül számolja az eredményt.</xs:docume
 		<xs:complexContent>
 			<xs:extension base="AdozoLekerdezesBaseRequestType">
 				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="GetKoztartozasMentessegRequestType">
+		<xs:complexContent>
+			<xs:extension base="AdozoLekerdezesBaseRequestType">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="GetKoztartozasMentessegResponseType">
+		<xs:complexContent>
+			<xs:extension base="msg_common:BaseResponseType">
+				<xs:sequence>
+					<xs:element name="resultCode" type="GetKoztartozasmentessegResult" minOccurs="1" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>Válaszkód</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="komaMinosites" type="KomaMinosites" minOccurs="0" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>Megfelel az adózó a KOMA felvételi feltételeinek?</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="komaSzereples" type="KomaSzereples" minOccurs="0" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>Szerepel az adózó a KOMA-ban?</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
@@ -1135,8 +1268,7 @@ NO: A könyvelésre váró tételek nélkül számolja az eredményt.</xs:docume
 			</xs:element>
 			<xs:element name="ellenszamla" type="xs:string" minOccurs="0" maxOccurs="1">
 				<xs:annotation>
-					<xs:documentation>Ellenszámla , ahonnan jön a befizetés, vagy ahová megy a kiutalás. &#xD;
-Az ellenszamlaKod kódolatlan értéke.</xs:documentation>
+					<xs:documentation>Ellenszámla , ahonnan jön a befizetés, vagy ahová megy a kiutalás. Az ellenszamlaKod kódolatlan értéke.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="ellenszamlaKod" type="xs:string" minOccurs="0" maxOccurs="1">

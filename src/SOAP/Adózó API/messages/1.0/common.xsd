@@ -1,5 +1,5 @@
-<?xml  version='1.0' encoding='utf-8' ?>
-<xs:schema targetNamespace="https://soap.api.nav.gov.hu/definitions/messages/1.0/common" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="https://soap.api.nav.gov.hu/definitions/messages/1.0/common" xmlns:msg_common="https://soap.api.nav.gov.hu/definitions/messages/1.0/common">
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="https://soap.api.nav.gov.hu/definitions/messages/1.0/common" xmlns:msg_common="https://soap.api.nav.gov.hu/definitions/messages/1.0/common" targetNamespace="https://soap.api.nav.gov.hu/definitions/messages/1.0/common">
 	<xs:complexType name="BaseResponseType">
 		<xs:annotation>
 			<xs:documentation>Általános válasz adatok</xs:documentation>
@@ -17,15 +17,27 @@
 			<xs:documentation>Általános kérés adatok</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="correlationId" type="xs:string" minOccurs="0" maxOccurs="1">
+			<xs:element name="correlationId" minOccurs="0" maxOccurs="1">
 				<xs:annotation>
 					<xs:documentation>Egyedi kapcsolat azonosító</xs:documentation>
 				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="36"/>
+						<xs:minLength value="36"/>
+					</xs:restriction>
+				</xs:simpleType>
 			</xs:element>
-			<xs:element name="messageId" type="xs:string" minOccurs="1" maxOccurs="1">
+			<xs:element name="messageId" minOccurs="1" maxOccurs="1">
 				<xs:annotation>
 					<xs:documentation>Az üzenet egyedi azonosítója</xs:documentation>
 				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="36"/>
+						<xs:minLength value="36"/>
+					</xs:restriction>
+				</xs:simpleType>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
