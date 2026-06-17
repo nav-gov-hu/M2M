@@ -81,7 +81,7 @@ public class M2mApiService {
         generateXml(); //ELMDIJ
         generateXmlFromJava(form, uploadAttachment()); //PMT25
         isValid(form);
-        validateXml(form);
+        validateXml(formName, formVersion);
         createBizonylat(formName, formVersion);
     }
 
@@ -182,7 +182,7 @@ public class M2mApiService {
 
     }
 
-    private void validateXml(String formName) throws SaxonApiException, JAXBException, IOException {
+    private void validateXml(String formName, String formVersion) throws SaxonApiException, JAXBException, IOException {
         Processor processor = new Processor(false);
         XsltCompiler compiler = processor.newXsltCompiler();
         XsltExecutable stylesheet = compiler.compile(new StreamSource(Objects.requireNonNull(classLoader.getResourceAsStream("full_check.xsl"))));
@@ -192,8 +192,9 @@ public class M2mApiService {
         Xslt30Transformer transformer30 = stylesheet.load30();
         Map<QName, XdmValue> parameters = new HashMap<>();
         parameters.put(new QName("form-name"), new XdmAtomicValue(formName));
+        parameters.put(new QName("form-version"), new XdmAtomicValue(formVersion));
         transformer30.setStylesheetParameters(parameters);
-        transformer30.transform(new StreamSource(new File("output/" + formName+".xml")), out);
+        transformer30.transform(new StreamSource(new File("output/" + formName+"_"+formVersion+".xml")), out);
 
         logger.info(formName + " xml bizonylat validáiójának eredménye: \n" + Files.readString(Paths.get("output/errorList.xml")));
 
