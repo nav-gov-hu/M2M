@@ -1,115 +1,308 @@
 <?xml  version='1.0' encoding='utf-8' ?>
 <wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" name="Bizonylat" targetNamespace="https://soap.api.nav.gov.hu/definitions/services/1.0/bizonylat" xmlns="https://soap.api.nav.gov.hu/definitions/services/1.0/bizonylat" xmlns:local="https://soap.api.nav.gov.hu/definitions/services/1.0/bizonylat/local" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
-	<wsdl:types>
-		<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="https://soap.api.nav.gov.hu/definitions/services/1.0/bizonylat/local" xmlns:loc="https://soap.api.nav.gov.hu/definitions/services/1.0/bizonylat/local" xmlns:msg_common="https://soap.api.nav.gov.hu/definitions/messages/1.0/common" xmlns:msg_bizonylat="https://soap.api.nav.gov.hu/definitions/messages/1.0/bizonylat">
-			<xs:import namespace="https://soap.api.nav.gov.hu/definitions/messages/1.0/bizonylat" schemaLocation="../../messages/1.0/bizonylat.xsd"/>
-			<xs:import namespace="https://soap.api.nav.gov.hu/definitions/messages/1.0/common" schemaLocation="../../messages/1.0/common.xsd"/>
-			<xs:element name="BizonylatBekuldesRequestElem" type="msg_bizonylat:BizonylatBekuldesRequestType">
-				<xs:annotation>
-					<xs:documentation>'bizonylatBekuldes' operation bemeneti paraméterét definiáló XSD element. </xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="BizonylatBekuldesResponseElem" type="msg_bizonylat:BizonylatBekuldesResponseType">
-				<xs:annotation>
-					<xs:documentation>'bizonylatBekuldes' operation visszatérési értéket definiáló XSD element. </xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="BizonylatStatuszLekerdezesRequestElem" type="msg_bizonylat:BizonylatStatuszLekerdezesRequestType">
-				<xs:annotation>
-					<xs:documentation>'bizonylatStatuszLekerdezes' operation bemeneti paraméterét definiáló XSD element. </xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="BizonylatStatuszLekerdezesResponseElem" type="msg_bizonylat:BizonylatStatuszLekerdezesResponseType">
-				<xs:annotation>
-					<xs:documentation>'bizonylatStatuszLekerdezes' operation visszatérési értéket definiáló XSD element. </xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="NAVm2mSoapHeader" type="msg_common:NAVm2mSoapHeader"/>
-		</xs:schema>
-	</wsdl:types>
-	<wsdl:message name="bizonylatBekuldesResponse">
-		<wsdl:part name="navSoapHeader" element="local:NAVm2mSoapHeader">
-			<wsdl:documentation>NAV SOAP Header message part</wsdl:documentation>
-		</wsdl:part>
-		<wsdl:part name="returnValue" element="local:BizonylatBekuldesResponseElem">
-			<wsdl:documentation>A message part tényleges tartalma a 'BizonylatBekuldesResponseType' típusban van meghatározva. </wsdl:documentation>
-		</wsdl:part>
-	</wsdl:message>
-	<wsdl:message name="bizonylatStatuszLekerdezesRequest">
-		<wsdl:part name="in" element="local:BizonylatStatuszLekerdezesRequestElem">
-			<wsdl:documentation> Az üzenet payload-ot hordozó message part. </wsdl:documentation>
-		</wsdl:part>
-		<wsdl:part name="navSoapHeader" element="local:NAVm2mSoapHeader">
-			<wsdl:documentation>NAV SOAP Header message part</wsdl:documentation>
-		</wsdl:part>
-	</wsdl:message>
-	<wsdl:message name="bizonylatStatuszLekerdezesResponse">
-		<wsdl:part name="navSoapHeader" element="local:NAVm2mSoapHeader">
-			<wsdl:documentation>NAV SOAP Header message part</wsdl:documentation>
-		</wsdl:part>
-		<wsdl:part name="returnValue" element="local:BizonylatStatuszLekerdezesResponseElem">
-			<wsdl:documentation>A message part tényleges tartalma a 'BizonylatStatuszLekerdezesResponseType' típusban van meghatározva. </wsdl:documentation>
-		</wsdl:part>
-	</wsdl:message>
-	<wsdl:message name="bizonylatBekuldesRequest">
-		<wsdl:part name="in" element="local:BizonylatBekuldesRequestElem">
-			<wsdl:documentation> Az üzenet payload-ot hordozó message part. </wsdl:documentation>
-		</wsdl:part>
-		<wsdl:part name="navSoapHeader" element="local:NAVm2mSoapHeader">
-			<wsdl:documentation>NAV SOAP Header message part</wsdl:documentation>
-		</wsdl:part>
-	</wsdl:message>
-	<wsdl:portType name="Bizonylat">
-		<wsdl:operation name="bizonylatBekuldes">
-			<wsdl:input name="bizonylatBekuldesRequestRequest" message="bizonylatBekuldesRequest">
-				<wsdl:documentation>Bemenő header és body adatok a(z) bizonylatBekuldes mûvelethez.</wsdl:documentation>
-			</wsdl:input>
-			<wsdl:output name="bizonylatBekuldesRequestResponse" message="bizonylatBekuldesResponse">
-				<wsdl:documentation>Kimenő header és body adatok a(z) bizonylatBekuldes mûvelethez.</wsdl:documentation>
-			</wsdl:output>
-		</wsdl:operation>
-		<wsdl:operation name="bizonylatStatuszLekerdezes">
-			<wsdl:input name="bizonylatStatuszLekerdezesRequestRequest" message="bizonylatStatuszLekerdezesRequest">
-				<wsdl:documentation>Bemenő header és body adatok a(z) bizonylatStatuszLekerdezes mûvelethez.</wsdl:documentation>
-			</wsdl:input>
-			<wsdl:output name="bizonylatStatuszLekerdezesRequestResponse" message="bizonylatStatuszLekerdezesResponse">
-				<wsdl:documentation>Kimenő header és body adatok a(z) bizonylatStatuszLekerdezes mûvelethez.</wsdl:documentation>
-			</wsdl:output>
-		</wsdl:operation>
-	</wsdl:portType>
-	<wsdl:binding name="Bizonylat" type="Bizonylat">
-		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
-		<wsdl:operation name="bizonylatBekuldes">
-			<soap:operation soapAction="https://soap.api.nav.gov.hu/definitions/services/1.0/bizonylat#bizonylatBekuldes" style="document"/>
-			<wsdl:input name="bizonylatBekuldesRequestRequest">
-				<wsdl:documentation>Bemenő header és body adatok a(z) bizonylatBekuldes mûvelethez.</wsdl:documentation>
-				<soap:body parts="in" use="literal"/>
-				<soap:header message="bizonylatBekuldesRequest" part="navSoapHeader" use="literal"/>
-			</wsdl:input>
-			<wsdl:output name="bizonylatBekuldesRequestResponse">
-				<wsdl:documentation>Kimenő header és body adatok a(z) bizonylatBekuldes mûvelethez.</wsdl:documentation>
-				<soap:body parts="returnValue" use="literal"/>
-				<soap:header message="bizonylatBekuldesResponse" part="navSoapHeader" use="literal"/>
-			</wsdl:output>
-		</wsdl:operation>
-		<wsdl:operation name="bizonylatStatuszLekerdezes">
-			<soap:operation soapAction="https://soap.api.nav.gov.hu/definitions/services/1.0/bizonylat#bizonylatStatuszLekerdezes" style="document"/>
-			<wsdl:input name="bizonylatStatuszLekerdezesRequestRequest">
-				<wsdl:documentation>Bemenő header és body adatok a(z) bizonylatStatuszLekerdezes mûvelethez.</wsdl:documentation>
-				<soap:body parts="in" use="literal"/>
-				<soap:header message="bizonylatStatuszLekerdezesRequest" part="navSoapHeader" use="literal"/>
-			</wsdl:input>
-			<wsdl:output name="bizonylatStatuszLekerdezesRequestResponse">
-				<wsdl:documentation>Kimenő header és body adatok a(z) bizonylatStatuszLekerdezes mûvelethez.</wsdl:documentation>
-				<soap:body parts="returnValue" use="literal"/>
-				<soap:header message="bizonylatStatuszLekerdezesResponse" part="navSoapHeader" use="literal"/>
-			</wsdl:output>
-		</wsdl:operation>
-	</wsdl:binding>
+    <wsdl:types>
+        <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="https://soap.api.nav.gov.hu/definitions/services/1.0/bizonylat/local" xmlns:loc="https://soap.api.nav.gov.hu/definitions/services/1.0/bizonylat/local" xmlns:msg_common="https://soap.api.nav.gov.hu/definitions/messages/1.0/common" xmlns:msg_bizonylat="https://soap.api.nav.gov.hu/definitions/messages/1.0/bizonylat">
+            <xs:import namespace="https://soap.api.nav.gov.hu/definitions/messages/1.0/bizonylat" schemaLocation="../../messages/1.0/bizonylat.xsd"/>
+            <xs:import namespace="https://soap.api.nav.gov.hu/definitions/messages/1.0/common" schemaLocation="../../messages/1.0/common.xsd"/>
+            <xs:element name="BizonylatBekuldesRequestElem" type="msg_bizonylat:BizonylatBekuldesRequestType">
+                <xs:annotation>
+                    <xs:documentation>'bizonylatBekuldes' operation bemeneti paraméterét definiáló XSD element. </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="BizonylatBekuldesResponseElem" type="msg_bizonylat:BizonylatBekuldesResponseType">
+                <xs:annotation>
+                    <xs:documentation>'bizonylatBekuldes' operation visszatérési értéket definiáló XSD element. </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="BizonylatKalkulacioRequestElem" type="msg_bizonylat:BizonylatKalkulacioRequestType">
+                <xs:annotation>
+                    <xs:documentation>'bizonylatKalkulacio' operation bemeneti paraméterét definiáló XSD element. </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="BizonylatKalkulacioResponseElem" type="msg_bizonylat:BizonylatKalkulacioResponseType">
+                <xs:annotation>
+                    <xs:documentation>'bizonylatKalkulacio' operation visszatérési értéket definiáló XSD element. </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="BizonylatKalkulacioStatuszLekerdezesRequestElem" type="msg_bizonylat:BizonylatKalkulacioStatuszLekerdezesRequestType">
+                <xs:annotation>
+                    <xs:documentation>'bizonylatKalkulacioStatuszLekerdezes' operation bemeneti paraméterét definiáló XSD element. </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="BizonylatKalkulacioStatuszLekerdezesResponseElem" type="msg_bizonylat:BizonylatKalkulacioStatuszLekerdezesResponseType">
+                <xs:annotation>
+                    <xs:documentation>'bizonylatKalkulacioStatuszLekerdezes' operation visszatérési értéket definiáló XSD element. </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="BizonylatStatuszLekerdezesRequestElem" type="msg_bizonylat:BizonylatStatuszLekerdezesRequestType">
+                <xs:annotation>
+                    <xs:documentation>'bizonylatStatuszLekerdezes' operation bemeneti paraméterét definiáló XSD element. </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="BizonylatStatuszLekerdezesResponseElem" type="msg_bizonylat:BizonylatStatuszLekerdezesResponseType">
+                <xs:annotation>
+                    <xs:documentation>'bizonylatStatuszLekerdezes' operation visszatérési értéket definiáló XSD element. </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="BizonylatValidacioRequestElem" type="msg_bizonylat:BizonylatValidacioRequestType">
+                <xs:annotation>
+                    <xs:documentation>'bizonylatValidacio' operation bemeneti paraméterét definiáló XSD element. </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="BizonylatValidacioResponseElem" type="msg_bizonylat:BizonylatValidacioResponseType">
+                <xs:annotation>
+                    <xs:documentation>'bizonylatValidacio' operation visszatérési értéket definiáló XSD element. </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="BizonylatValidacioStatuszLekerdezesRequestElem" type="msg_bizonylat:BizonylatValidacioStatuszLekerdezesRequestType">
+                <xs:annotation>
+                    <xs:documentation>'bizonylatValidacioStatuszLekerdezes' operation bemeneti paraméterét definiáló XSD element. </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="BizonylatValidacioStatuszLekerdezesResponseElem" type="msg_bizonylat:BizonylatValidacioStatuszLekerdezesResponseType">
+                <xs:annotation>
+                    <xs:documentation>'bizonylatValidacioStatuszLekerdezes' operation visszatérési értéket definiáló XSD element. </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="NAVm2mSoapHeader" type="msg_common:NAVm2mSoapHeader"/>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="bizonylatBekuldesResponse">
+        <wsdl:part name="navSoapHeader" element="local:NAVm2mSoapHeader">
+            <wsdl:documentation>NAV SOAP Header message part</wsdl:documentation>
+        </wsdl:part>
+        <wsdl:part name="returnValue" element="local:BizonylatBekuldesResponseElem">
+            <wsdl:documentation>A message part tényleges tartalma a 'BizonylatBekuldesResponseType' típusban van meghatározva. </wsdl:documentation>
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="bizonylatStatuszLekerdezesRequest">
+        <wsdl:part name="in" element="local:BizonylatStatuszLekerdezesRequestElem">
+            <wsdl:documentation> Az üzenet payload-ot hordozó message part. </wsdl:documentation>
+        </wsdl:part>
+        <wsdl:part name="navSoapHeader" element="local:NAVm2mSoapHeader">
+            <wsdl:documentation>NAV SOAP Header message part</wsdl:documentation>
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="bizonylatStatuszLekerdezesResponse">
+        <wsdl:part name="navSoapHeader" element="local:NAVm2mSoapHeader">
+            <wsdl:documentation>NAV SOAP Header message part</wsdl:documentation>
+        </wsdl:part>
+        <wsdl:part name="returnValue" element="local:BizonylatStatuszLekerdezesResponseElem">
+            <wsdl:documentation>A message part tényleges tartalma a 'BizonylatStatuszLekerdezesResponseType' típusban van meghatározva. </wsdl:documentation>
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="bizonylatBekuldesRequest">
+        <wsdl:part name="in" element="local:BizonylatBekuldesRequestElem">
+            <wsdl:documentation> Az üzenet payload-ot hordozó message part. </wsdl:documentation>
+        </wsdl:part>
+        <wsdl:part name="navSoapHeader" element="local:NAVm2mSoapHeader">
+            <wsdl:documentation>NAV SOAP Header message part</wsdl:documentation>
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="bizonylatKalkulacioRequest">
+        <wsdl:part name="in" element="local:BizonylatKalkulacioRequestElem">
+            <wsdl:documentation> Az üzenet payload-ot hordozó message part. </wsdl:documentation>
+        </wsdl:part>
+        <wsdl:part name="navSoapHeader" element="local:NAVm2mSoapHeader">
+            <wsdl:documentation>NAV SOAP Header message part</wsdl:documentation>
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="bizonylatKalkulacioResponse">
+        <wsdl:part name="navSoapHeader" element="local:NAVm2mSoapHeader">
+            <wsdl:documentation>NAV SOAP Header message part</wsdl:documentation>
+        </wsdl:part>
+        <wsdl:part name="returnValue" element="local:BizonylatKalkulacioResponseElem">
+            <wsdl:documentation>A message part tényleges tartalma a 'BizonylatKalkulacioResponseType' típusban van meghatározva. </wsdl:documentation>
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="bizonylatKalkulacioStatuszLekerdezesRequest">
+        <wsdl:part name="in" element="local:BizonylatKalkulacioStatuszLekerdezesRequestElem">
+            <wsdl:documentation> Az üzenet payload-ot hordozó message part. </wsdl:documentation>
+        </wsdl:part>
+        <wsdl:part name="navSoapHeader" element="local:NAVm2mSoapHeader">
+            <wsdl:documentation>NAV SOAP Header message part</wsdl:documentation>
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="bizonylatKalkulacioStatuszLekerdezesResponse">
+        <wsdl:part name="navSoapHeader" element="local:NAVm2mSoapHeader">
+            <wsdl:documentation>NAV SOAP Header message part</wsdl:documentation>
+        </wsdl:part>
+        <wsdl:part name="returnValue" element="local:BizonylatKalkulacioStatuszLekerdezesResponseElem">
+            <wsdl:documentation>A message part tényleges tartalma a 'BizonylatKalkulacioStatuszLekerdezesResponseType' típusban van meghatározva. </wsdl:documentation>
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="bizonylatValidacioRequest">
+        <wsdl:part name="in" element="local:BizonylatValidacioRequestElem">
+            <wsdl:documentation> Az üzenet payload-ot hordozó message part. </wsdl:documentation>
+        </wsdl:part>
+        <wsdl:part name="navSoapHeader" element="local:NAVm2mSoapHeader">
+            <wsdl:documentation>NAV SOAP Header message part</wsdl:documentation>
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="bizonylatValidacioResponse">
+        <wsdl:part name="navSoapHeader" element="local:NAVm2mSoapHeader">
+            <wsdl:documentation>NAV SOAP Header message part</wsdl:documentation>
+        </wsdl:part>
+        <wsdl:part name="returnValue" element="local:BizonylatValidacioResponseElem">
+            <wsdl:documentation>A message part tényleges tartalma a 'BizonylatValidacioResponseType' típusban van meghatározva. </wsdl:documentation>
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="bizonylatValidacioStatuszLekerdezesResponse">
+        <wsdl:part name="navSoapHeader" element="local:NAVm2mSoapHeader">
+            <wsdl:documentation>NAV SOAP Header message part</wsdl:documentation>
+        </wsdl:part>
+        <wsdl:part name="returnValue" element="local:BizonylatValidacioStatuszLekerdezesResponseElem">
+            <wsdl:documentation>A message part tényleges tartalma a 'BizonylatValidacioStatuszLekerdezesResponseType' típusban van meghatározva. </wsdl:documentation>
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="bizonylatValidacioStatuszLekerdezesRequest">
+        <wsdl:part name="in" element="local:BizonylatValidacioStatuszLekerdezesRequestElem">
+            <wsdl:documentation> Az üzenet payload-ot hordozó message part. </wsdl:documentation>
+        </wsdl:part>
+        <wsdl:part name="navSoapHeader" element="local:NAVm2mSoapHeader">
+            <wsdl:documentation>NAV SOAP Header message part</wsdl:documentation>
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:portType name="Bizonylat">
+        <wsdl:operation name="bizonylatBekuldes">
+            <wsdl:input name="bizonylatBekuldesRequestRequest" message="bizonylatBekuldesRequest">
+                <wsdl:documentation>Bemenő header és body adatok a(z) bizonylatBekuldes mûvelethez.</wsdl:documentation>
+            </wsdl:input>
+            <wsdl:output name="bizonylatBekuldesRequestResponse" message="bizonylatBekuldesResponse">
+                <wsdl:documentation>Kimenő header és body adatok a(z) bizonylatBekuldes mûvelethez.</wsdl:documentation>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="bizonylatStatuszLekerdezes">
+            <wsdl:input name="bizonylatStatuszLekerdezesRequestRequest" message="bizonylatStatuszLekerdezesRequest">
+                <wsdl:documentation>Bemenő header és body adatok a(z) bizonylatStatuszLekerdezes mûvelethez.</wsdl:documentation>
+            </wsdl:input>
+            <wsdl:output name="bizonylatStatuszLekerdezesRequestResponse" message="bizonylatStatuszLekerdezesResponse">
+                <wsdl:documentation>Kimenő header és body adatok a(z) bizonylatStatuszLekerdezes mûvelethez.</wsdl:documentation>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="bizonylatKalkulacio">
+            <wsdl:input name="bizonylatKalkulacioRequestRequest" message="bizonylatKalkulacioRequest">
+                <wsdl:documentation>Bemenő header és body adatok a(z) bizonylatKalkulacio mûvelethez.</wsdl:documentation>
+            </wsdl:input>
+            <wsdl:output name="bizonylatKalkulacioRequestResponse" message="bizonylatKalkulacioResponse">
+                <wsdl:documentation>Kimenő header és body adatok a(z) bizonylatKalkulacio mûvelethez.</wsdl:documentation>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="bizonylatValidacioStatuszLekerdezes">
+            <wsdl:input name="bizonylatValidacioStatuszLekerdezesRequestRequest" message="bizonylatValidacioStatuszLekerdezesRequest">
+                <wsdl:documentation>Bemenő header és body adatok a(z) bizonylatValidacioStatuszLekerdezes mûvelethez.</wsdl:documentation>
+            </wsdl:input>
+            <wsdl:output name="bizonylatValidacioStatuszLekerdezesRequestResponse" message="bizonylatValidacioStatuszLekerdezesResponse">
+                <wsdl:documentation>Kimenő header és body adatok a(z) bizonylatValidacioStatuszLekerdezes mûvelethez.</wsdl:documentation>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="bizonylatKalkulacioStatuszLekerdezes">
+            <wsdl:input name="bizonylatKalkulacioStatuszLekerdezesRequestRequest" message="bizonylatKalkulacioStatuszLekerdezesRequest">
+                <wsdl:documentation>Bemenő header és body adatok a(z) bizonylatKalkulacioStatuszLekerdezes mûvelethez.</wsdl:documentation>
+            </wsdl:input>
+            <wsdl:output name="bizonylatKalkulacioStatuszLekerdezesRequestResponse" message="bizonylatKalkulacioStatuszLekerdezesResponse">
+                <wsdl:documentation>Kimenő header és body adatok a(z) bizonylatKalkulacioStatuszLekerdezes mûvelethez.</wsdl:documentation>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="bizonylatValidacio">
+            <wsdl:input name="bizonylatValidacioRequestRequest" message="bizonylatValidacioRequest">
+                <wsdl:documentation>Bemenő header és body adatok a(z) bizonylatValidacio mûvelethez.</wsdl:documentation>
+            </wsdl:input>
+            <wsdl:output name="bizonylatValidacioRequestResponse" message="bizonylatValidacioResponse">
+                <wsdl:documentation>Kimenő header és body adatok a(z) bizonylatValidacio mûvelethez.</wsdl:documentation>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="Bizonylat" type="Bizonylat">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="bizonylatValidacio">
+            <soap:operation soapAction="https://soap.api.nav.gov.hu/definitions/services/1.0/bizonylat#bizonylatValidacio" style="document"/>
+            <wsdl:input name="bizonylatValidacioRequestRequest">
+                <wsdl:documentation>Bemenő header és body adatok a(z) bizonylatValidacio mûvelethez.</wsdl:documentation>
+                <soap:body parts="in" use="literal"/>
+                <soap:header message="bizonylatValidacioRequest" part="navSoapHeader" use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="bizonylatValidacioRequestResponse">
+                <wsdl:documentation>Kimenő header és body adatok a(z) bizonylatValidacio mûvelethez.</wsdl:documentation>
+                <soap:body parts="returnValue" use="literal"/>
+                <soap:header message="bizonylatValidacioResponse" part="navSoapHeader" use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="bizonylatKalkulacioStatuszLekerdezes">
+            <soap:operation soapAction="https://soap.api.nav.gov.hu/definitions/services/1.0/bizonylat#bizonylatKalkulacioStatuszLekerdezes" style="document"/>
+            <wsdl:input name="bizonylatKalkulacioStatuszLekerdezesRequestRequest">
+                <wsdl:documentation>Bemenő header és body adatok a(z) bizonylatKalkulacioStatuszLekerdezes mûvelethez.</wsdl:documentation>
+                <soap:body parts="in" use="literal"/>
+                <soap:header message="bizonylatKalkulacioStatuszLekerdezesRequest" part="navSoapHeader" use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="bizonylatKalkulacioStatuszLekerdezesRequestResponse">
+                <wsdl:documentation>Kimenő header és body adatok a(z) bizonylatKalkulacioStatuszLekerdezes mûvelethez.</wsdl:documentation>
+                <soap:body parts="returnValue" use="literal"/>
+                <soap:header message="bizonylatKalkulacioStatuszLekerdezesResponse" part="navSoapHeader" use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="bizonylatStatuszLekerdezes">
+            <soap:operation soapAction="https://soap.api.nav.gov.hu/definitions/services/1.0/bizonylat#bizonylatStatuszLekerdezes" style="document"/>
+            <wsdl:input name="bizonylatStatuszLekerdezesRequestRequest">
+                <wsdl:documentation>Bemenő header és body adatok a(z) bizonylatStatuszLekerdezes mûvelethez.</wsdl:documentation>
+                <soap:body parts="in" use="literal"/>
+                <soap:header message="bizonylatStatuszLekerdezesRequest" part="navSoapHeader" use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="bizonylatStatuszLekerdezesRequestResponse">
+                <wsdl:documentation>Kimenő header és body adatok a(z) bizonylatStatuszLekerdezes mûvelethez.</wsdl:documentation>
+                <soap:body parts="returnValue" use="literal"/>
+                <soap:header message="bizonylatStatuszLekerdezesResponse" part="navSoapHeader" use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="bizonylatBekuldes">
+            <soap:operation soapAction="https://soap.api.nav.gov.hu/definitions/services/1.0/bizonylat#bizonylatBekuldes" style="document"/>
+            <wsdl:input name="bizonylatBekuldesRequestRequest">
+                <wsdl:documentation>Bemenő header és body adatok a(z) bizonylatBekuldes mûvelethez.</wsdl:documentation>
+                <soap:body parts="in" use="literal"/>
+                <soap:header message="bizonylatBekuldesRequest" part="navSoapHeader" use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="bizonylatBekuldesRequestResponse">
+                <wsdl:documentation>Kimenő header és body adatok a(z) bizonylatBekuldes mûvelethez.</wsdl:documentation>
+                <soap:body parts="returnValue" use="literal"/>
+                <soap:header message="bizonylatBekuldesResponse" part="navSoapHeader" use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="bizonylatKalkulacio">
+            <soap:operation soapAction="https://soap.api.nav.gov.hu/definitions/services/1.0/bizonylat#bizonylatKalkulacio" style="document"/>
+            <wsdl:input name="bizonylatKalkulacioRequestRequest">
+                <wsdl:documentation>Bemenő header és body adatok a(z) bizonylatKalkulacio mûvelethez.</wsdl:documentation>
+                <soap:body parts="in" use="literal"/>
+                <soap:header message="bizonylatKalkulacioRequest" part="navSoapHeader" use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="bizonylatKalkulacioRequestResponse">
+                <wsdl:documentation>Kimenő header és body adatok a(z) bizonylatKalkulacio mûvelethez.</wsdl:documentation>
+                <soap:body parts="returnValue" use="literal"/>
+                <soap:header message="bizonylatKalkulacioResponse" part="navSoapHeader" use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="bizonylatValidacioStatuszLekerdezes">
+            <soap:operation soapAction="https://soap.api.nav.gov.hu/definitions/services/1.0/bizonylat#bizonylatValidacioStatuszLekerdezes" style="document"/>
+            <wsdl:input name="bizonylatValidacioStatuszLekerdezesRequestRequest">
+                <wsdl:documentation>Bemenő header és body adatok a(z) bizonylatValidacioStatuszLekerdezes mûvelethez.</wsdl:documentation>
+                <soap:body parts="in" use="literal"/>
+                <soap:header message="bizonylatValidacioStatuszLekerdezesRequest" part="navSoapHeader" use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="bizonylatValidacioStatuszLekerdezesRequestResponse">
+                <wsdl:documentation>Kimenő header és body adatok a(z) bizonylatValidacioStatuszLekerdezes mûvelethez.</wsdl:documentation>
+                <soap:body parts="returnValue" use="literal"/>
+                <soap:header message="bizonylatValidacioStatuszLekerdezesResponse" part="navSoapHeader" use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
     <wsdl:service name="Bizonylat">
+        <wsdl:documentation>Bizonylat szolgáltatás végpontok megadása.</wsdl:documentation>
+        <wsdl:port name="Bizonylat" binding="Bizonylat">
+            <wsdl:documentation>Éles  szolgáltatás végpont.</wsdl:documentation>
+            <soap:address location="https://m2m.nav.gov.hu/soap-api/bizonylat"/>
+        </wsdl:port>
         <wsdl:port name="BizonylatDev" binding="Bizonylat">
-            <wsdl:documentation>Fejlesztői célú szolgáltatás végpont - A szolgáltatások ezen a környezeten mock válaszokat küldenek</wsdl:documentation>
-            <soap:address location="https://m2m-dev.nav.gov.hu/soap-api/1.0/bizonylat"/>
+            <wsdl:documentation>Tesztelői célú szolgáltatás végpont. A szolgáltatások csökkentett (teszt) funkcionalitással működnek!</wsdl:documentation>
+            <soap:address location="https://m2m-dev.nav.gov.hu/soap-api/bizonylat"/>
         </wsdl:port>
     </wsdl:service>
 </wsdl:definitions>
