@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tns:Doc_T1042E xmlns:common="https://soap.api.nav.gov.hu/definitions/model/2.0/common/1.0"
+                xmlns:meta="https://api.nav.gov.hu/definitions/form_xsd_metaschema/1.0"
+                xmlns:tns="https://soap.api.nav.gov.hu/definitions/model/2.0/T1042E/1.0"
+                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                xsi:schemaLocation="https://soap.api.nav.gov.hu/definitions/model/2.0/T1042E/1.0 T1042E.xsd https://api.nav.gov.hu/definitions/form_xsd_metaschema/1.0 form_xsd_metaschema.xsd https://soap.api.nav.gov.hu/definitions/model/2.0/common/1.0 common.xsd">
+   <Form_T1042E>
+      <Block_120002>
+         <FieldGroup_120003>
+            <Field_0A0001C001A>18637771112</Field_0A0001C001A>
+         </FieldGroup_120003>
+      </Block_120002>
+      <Block_120006>
+         <Chain_120013>
+            <Chain_elem>
+               <FieldGroup_120014>
+                  <Field_0BXXXXC0001AA>Csizmadia Mariann</Field_0BXXXXC0001AA>
+                  <Field_0BXXXXC0002AA>83417435656565656565663</Field_0BXXXXC0002AA>
+                  <Field_0BXXXXC0004AA>true</Field_0BXXXXC0004AA>
+                  <Field_0BXXXXD0005AA>U</Field_0BXXXXD0005AA>
+                  <Field_0BXXXXD0008AA>03</Field_0BXXXXD0008AA>
+                  <Field_0BXXXXD0009AA>2026-07-09</Field_0BXXXXD0009AA>
+                  <Field_0BXXXXD0010AA>1</Field_0BXXXXD0010AA>
+               </FieldGroup_120014>
+            </Chain_elem>
+            <Chain_elem>
+               <FieldGroup_120014>
+                  <Field_0BXXXXC0001AA>Csomai Szabina</Field_0BXXXXC0001AA>
+                  <Field_0BXXXXC0002AA>8447002225</Field_0BXXXXC0002AA>
+                  <Field_0BXXXXC0004AA>true</Field_0BXXXXC0004AA>
+                  <Field_0BXXXXD0005AA>U</Field_0BXXXXD0005AA>
+                  <Field_0BXXXXD0008AA>05</Field_0BXXXXD0008AA>
+                  <Field_0BXXXXD0009AA>2026-07-09</Field_0BXXXXD0009AA>
+                  <Field_0BXXXXD0010AA>2</Field_0BXXXXD0010AA>
+               </FieldGroup_120014>
+            </Chain_elem>
+         </Chain_120013>
+      </Block_120006>
+   </Form_T1042E>
+</tns:Doc_T1042E>

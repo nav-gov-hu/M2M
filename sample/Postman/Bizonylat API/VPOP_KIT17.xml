@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tns:Doc_VPOP_KIT17 xmlns:tns="https://soap.api.nav.gov.hu/definitions/model/2.0/VPOP_KIT17/1.9">
+   <Form_VPOP_KIT17>
+      <Block_120001>
+         <FieldGroup_120002>
+            <Field_0A0001C001A>A12345678</Field_0A0001C001A>
+            <Field_0A0001C002A>2026-03-23</Field_0A0001C002A>
+            <Field_0A0001C003A>1000</Field_0A0001C003A>
+            <Field_0A0001C004A>Kit. 12. § vagyoni befagyasztás alóli mentesítés</Field_0A0001C004A>
+            <Field_0A0001C005A>ejelentőnél alkalmazott bejelentés azonosítószám és  bejelentés alapjául szolgáló körülmény részletes leírása befagyasztás ellen</Field_0A0001C005A>
+            <Field_0A0001C006A>Jogi személy</Field_0A0001C006A>
+         </FieldGroup_120002>
+         <FieldGroup_120004>
+            <Field_0A0001D001A>Kit szerinti szolgáltató</Field_0A0001D001A>
+            <Field_0A0001D002A>Mike Bank</Field_0A0001D002A>
+            <Field_0A0001D003A>Lucifer László</Field_0A0001D003A>
+            <Field_0A0001D004A>12353605564</Field_0A0001D004A>
+         </FieldGroup_120004>
+      </Block_120001>
+      <Block_120010>
+         <FieldGroup_120022>
+            <Field_0C0001B001A>Mike Bank</Field_0C0001B001A>
+            <Field_0C0001B002A>12353605564</Field_0C0001B002A>
+            <Field_0C0001B003A>Betéti társaság</Field_0C0001B003A>
+            <Field_0C0001B005A>01.11</Field_0C0001B005A>
+            <Field_0C0001B006A>HU</Field_0C0001B006A>
+            <Field_0C0001B007A>3300</Field_0C0001B007A>
+            <Field_0C0001B008A>Eger</Field_0C0001B008A>
+            <Field_0C0001B010A>Virág</Field_0C0001B010A>
+            <Field_0C0001B011A>út</Field_0C0001B011A>
+            <Field_0C0001B012A>10</Field_0C0001B012A>
+            <Field_0C0001B0001DA>Nyilvántartásba vételi okirat</Field_0C0001B0001DA>
+            <Field_0C0001B0001FA>qw123456</Field_0C0001B0001FA>
+         </FieldGroup_120022>
+      </Block_120010>
+      <Block_120021>
+         <Chain_120038>
+            <Chain_elem>
+               <FieldGroup_120029>
+                  <Field_0DXXXXB001A>1</Field_0DXXXXB001A>
+                  <Field_0DXXXXB003A>Lucifer</Field_0DXXXXB003A>
+                  <Field_0DXXXXB004A>László</Field_0DXXXXB004A>
+                  <Field_0DXXXXB005A>Lucifer László</Field_0DXXXXB005A>
+                  <Field_0DXXXXB006A>Budapest</Field_0DXXXXB006A>
+                  <Field_0DXXXXB007A>1960-01-01</Field_0DXXXXB007A>
+                  <Field_0DXXXXB008A>Lucifer László</Field_0DXXXXB008A>
+                  <Field_0DXXXXB009A>HU</Field_0DXXXXB009A>
+                  <Field_0DXXXXB011A>HU</Field_0DXXXXB011A>
+                  <Field_0DXXXXB012A>3300</Field_0DXXXXB012A>
+                  <Field_0DXXXXB013A>Eger</Field_0DXXXXB013A>
+                  <Field_0DXXXXB015A>Virág</Field_0DXXXXB015A>
+                  <Field_0DXXXXB016A>tér</Field_0DXXXXB016A>
+                  <Field_0DXXXXB017A>1</Field_0DXXXXB017A>
+                  <Field_0DXXXXB021A>100</Field_0DXXXXB021A>
+               </FieldGroup_120029>
+            </Chain_elem>
+         </Chain_120038>
+      </Block_120021>
+      <Block_120036>
+         <FieldGroup_120037>
+            <Field_0F0001B001A>Vagyon nincs, de akkor sincs ha 50 karaktert kell leírnom</Field_0F0001B001A>
+         </FieldGroup_120037>
+      </Block_120036>
+      <Block_120041>
+         <Chain_120084>
+            <Chain_elem>
+               <FieldGroup_120042>
+                  <Field_0GXXXXB00501A>1</Field_0GXXXXB00501A>
+                  <Field_0GXXXXB0001AA>11111111-22222222</Field_0GXXXXB0001AA>
+                  <Field_0GXXXXB0001BA>HUF</Field_0GXXXXB0001BA>
+                  <Field_0GXXXXB0001CA>2000-01-01</Field_0GXXXXB0001CA>
+                  <Field_0GXXXXB0001EA>Ide se akarok írni</Field_0GXXXXB0001EA>
+               </FieldGroup_120042>
+            </Chain_elem>
+         </Chain_120084>
+      </Block_120041>
+   </Form_VPOP_KIT17>
+</tns:Doc_VPOP_KIT17>

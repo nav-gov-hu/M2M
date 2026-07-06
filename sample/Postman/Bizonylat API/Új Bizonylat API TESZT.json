@@ -1,0 +1,901 @@
+{
+  "info": {
+    "_postman_id": "d285a42d-8506-4022-8242-2cbc1c751e84",
+    "name": "Bizonylat API TESZT",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "6870063"
+  },
+  "item": [
+    {
+      "name": "getToken",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.collectionVariables.set('access_token', pm.response.json().accessToken);"
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        },
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "messageId",
+            "value": "{{message_id}}",
+            "type": "text"
+          },
+          {
+            "key": "correlationId",
+            "value": "{{$randomUUID}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"requestData\": {\r\n    \"clientId\": \"{{client}}\",\r\n    \"clientSecret\": \"{{client_secret}}\",\r\n    \"password\": \"{{password}}\",\r\n    \"username\": \"{{user}}\"\r\n  }\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{agw_server}}/rest-api/1.1/NavM2mCommon/tokenService/Token",
+          "host": [
+            "{{agw_server}}"
+          ],
+          "path": [
+            "rest-api",
+            "1.1",
+            "NavM2mCommon",
+            "tokenService",
+            "Token"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "createBizonylat T1042E",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "const cryptoJs = require('crypto-js');\r",
+              "var timestamp = new Date().toISOString().replace(/[^\\d]/g, '').substring(0,14);\r",
+              "var message_id = pm.collectionVariables.get('message_id');\r",
+              "var signature_key_first_part = pm.collectionVariables.get('signature_key_first_part');\r",
+              "var signature_key_second_part = pm.collectionVariables.get('signature_key_second_part');\r",
+              "var xml_hash = pm.collectionVariables.get(\"T1042E_hibatlan_hash\");\r",
+              "var toSign = message_id+timestamp+xml_hash+signature_key_first_part+signature_key_second_part;\r",
+              "console.log(toSign);\r",
+              "var signature = cryptoJs.SHA256(toSign).toString(cryptoJs.enc.Base64).toUpperCase();\r",
+              "pm.collectionVariables.set(\"signature\", signature);\r",
+              "console.log(signature);"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.collectionVariables.set('ugyAzonosito', pm.response.json().ugyAzonosito);"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}"
+          },
+          {
+            "key": "messageId",
+            "value": "{{message_id}}"
+          },
+          {
+            "key": "correlationId",
+            "value": "{{$randomUUID}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"requestData\": {\r\n    \"bizonylatTipus\": \"T1042E\",\r\n    \"bizonylatVerzio\": \"1.0\",\r\n    \"bizonylatXml\": \"{{T1042E_hibatlan_base64}}\",\r\n    \"signature\": \"{{signature}}\"\r\n  }\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{agw_server}}/rest-api/1.0/NavM2mBizonylat/bizonylatService/Bizonylat",
+          "host": [
+            "{{agw_server}}"
+          ],
+          "path": [
+            "rest-api",
+            "1.0",
+            "NavM2mBizonylat",
+            "bizonylatService",
+            "Bizonylat"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "createBizonylat T1042E hibás",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "const cryptoJs = require('crypto-js');\r",
+              "var timestamp = new Date().toISOString().replace(/[^\\d]/g, '').substring(0,14);\r",
+              "var message_id = pm.collectionVariables.get('message_id');\r",
+              "var signature_key_first_part = pm.collectionVariables.get('signature_key_first_part');\r",
+              "var signature_key_second_part = pm.collectionVariables.get('signature_key_second_part');\r",
+              "var xml_hash = pm.collectionVariables.get(\"T1042E_stop_hash\");\r",
+              "var toSign = message_id+timestamp+xml_hash+signature_key_first_part+signature_key_second_part;\r",
+              "console.log(toSign);\r",
+              "var signature = cryptoJs.SHA256(toSign).toString(cryptoJs.enc.Base64).toUpperCase();\r",
+              "pm.collectionVariables.set(\"signature\", signature);\r",
+              "console.log(signature);"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.collectionVariables.set('ugyAzonosito', pm.response.json().ugyAzonosito);"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}"
+          },
+          {
+            "key": "messageId",
+            "value": "{{message_id}}"
+          },
+          {
+            "key": "correlationId",
+            "value": "{{$randomUUID}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"requestData\": {\r\n    \"bizonylatTipus\": \"T1042E\",\r\n    \"bizonylatVerzio\": \"1.0\",\r\n    \"bizonylatXml\": \"{{T1042E_stop_base64}}\",\r\n    \"signature\": \"{{signature}}\"\r\n  }\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{agw_server}}/rest-api/1.0/NavM2mBizonylat/bizonylatService/Bizonylat",
+          "host": [
+            "{{agw_server}}"
+          ],
+          "path": [
+            "rest-api",
+            "1.0",
+            "NavM2mBizonylat",
+            "bizonylatService",
+            "Bizonylat"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "createBizonylat KIT17",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "const cryptoJs = require('crypto-js');\r",
+              "var timestamp = new Date().toISOString().replace(/[^\\d]/g, '').substring(0,14);\r",
+              "var message_id = pm.collectionVariables.get('message_id');\r",
+              "var signature_key_first_part = pm.collectionVariables.get('signature_key_first_part');\r",
+              "var signature_key_second_part = pm.collectionVariables.get('signature_key_second_part');\r",
+              "var xml_hash = pm.collectionVariables.get(\"kit17_hash\");\r",
+              "var toSign = message_id+timestamp+xml_hash+signature_key_first_part+signature_key_second_part;\r",
+              "console.log(toSign);\r",
+              "var signature = cryptoJs.SHA256(toSign).toString(cryptoJs.enc.Base64).toUpperCase();\r",
+              "pm.collectionVariables.set(\"signature\", signature);\r",
+              "console.log(signature);"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.collectionVariables.set('ugyAzonosito', pm.response.json().ugyAzonosito);"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}"
+          },
+          {
+            "key": "messageId",
+            "value": "{{message_id}}"
+          },
+          {
+            "key": "correlationId",
+            "value": "{{$randomUUID}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"requestData\": {\r\n    \"bizonylatTipus\": \"VPOP_KIT17\",\r\n    \"bizonylatVerzio\": \"1.9\",\r\n    \"bizonylatXml\": \"{{kit17_base64}}\",\r\n    \"signature\": \"{{signature}}\"\r\n  }\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{agw_server}}/rest-api/1.0/NavM2mBizonylat/bizonylatService/Bizonylat",
+          "host": [
+            "{{agw_server}}"
+          ],
+          "path": [
+            "rest-api",
+            "1.0",
+            "NavM2mBizonylat",
+            "bizonylatService",
+            "Bizonylat"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "getBizonylat",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "const cryptoJs = require('crypto-js');\r",
+              "var timestamp = new Date().toISOString().replace(/[^\\d]/g, '').substring(0,14);\r",
+              "var message_id = pm.collectionVariables.get('message_id');\r",
+              "var signature_key_first_part = pm.collectionVariables.get('signature_key_first_part');\r",
+              "var signature_key_second_part = pm.collectionVariables.get('signature_key_second_part');\r",
+              "var toSign = message_id+timestamp+signature_key_first_part+signature_key_second_part;\r",
+              "console.log(toSign);\r",
+              "var signature = cryptoJs.SHA256(toSign).toString(cryptoJs.enc.Base64).toUpperCase();\r",
+              "pm.collectionVariables.set(\"signature\", signature);\r",
+              "console.log(signature);"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}"
+          },
+          {
+            "key": "messageId",
+            "value": "{{message_id}}"
+          },
+          {
+            "key": "correlationId",
+            "value": "{{$randomUUID}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{agw_server}}/rest-api/1.0/NavM2mBizonylat/bizonylatService/Bizonylat/{{ugyAzonosito}}",
+          "host": [
+            "{{agw_server}}"
+          ],
+          "path": [
+            "rest-api",
+            "1.0",
+            "NavM2mBizonylat",
+            "bizonylatService",
+            "Bizonylat",
+            "{{ugyAzonosito}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "createValidacio T1042E",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "const cryptoJs = require('crypto-js');\r",
+              "var timestamp = new Date().toISOString().replace(/[^\\d]/g, '').substring(0,14);\r",
+              "var message_id = pm.collectionVariables.get('message_id');\r",
+              "var signature_key_first_part = pm.collectionVariables.get('signature_key_first_part');\r",
+              "var signature_key_second_part = pm.collectionVariables.get('signature_key_second_part');\r",
+              "var xml_hash = pm.collectionVariables.get(\"T1042E_continue_hash\");\r",
+              "var toSign = message_id+timestamp+xml_hash+signature_key_first_part+signature_key_second_part;\r",
+              "console.log(toSign);\r",
+              "var signature = cryptoJs.SHA256(toSign).toString(cryptoJs.enc.Base64).toUpperCase();\r",
+              "pm.collectionVariables.set(\"signature\", signature);\r",
+              "console.log(signature);"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.collectionVariables.set('ugyAzonosito', pm.response.json().ugyAzonosito);\r",
+              "pm.collectionVariables.set('validaciosTanusitvany', pm.response.json().validaciosTanusitvany);"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}"
+          },
+          {
+            "key": "messageId",
+            "value": "{{message_id}}"
+          },
+          {
+            "key": "correlationId",
+            "value": "{{$randomUUID}}",
+            "type": "text",
+            "disabled": true
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"requestData\": {\r\n    \"bizonylatTipus\": \"T1042E\",\r\n    \"bizonylatVerzio\": \"1.0\",\r\n    \"bizonylatXml\": \"{{T1042E_continue_base64}}\",\r\n    \"signature\": \"{{signature}}\"\r\n  }\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{agw_server}}/rest-api/1.0/NavM2mBizonylat/bizonylatService/Validacio",
+          "host": [
+            "{{agw_server}}"
+          ],
+          "path": [
+            "rest-api",
+            "1.0",
+            "NavM2mBizonylat",
+            "bizonylatService",
+            "Validacio"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "beküldés T1042E",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "const cryptoJs = require('crypto-js');\r",
+              "var timestamp = new Date().toISOString().replace(/[^\\d]/g, '').substring(0,14);\r",
+              "var message_id = pm.collectionVariables.get('message_id');\r",
+              "var signature_key_first_part = pm.collectionVariables.get('signature_key_first_part');\r",
+              "var signature_key_second_part = pm.collectionVariables.get('signature_key_second_part');\r",
+              "var xml_hash = pm.collectionVariables.get(\"T1042E_continue_hash\");\r",
+              "var toSign = message_id+timestamp+xml_hash+signature_key_first_part+signature_key_second_part;\r",
+              "console.log(toSign);\r",
+              "var signature = cryptoJs.SHA256(toSign).toString(cryptoJs.enc.Base64).toUpperCase();\r",
+              "pm.collectionVariables.set(\"signature\", signature);\r",
+              "console.log(signature);"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.collectionVariables.set('ugyAzonosito', pm.response.json().ugyAzonosito);"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}"
+          },
+          {
+            "key": "messageId",
+            "value": "{{message_id}}"
+          },
+          {
+            "key": "correlationId",
+            "value": "{{$randomUUID}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"requestData\": {\r\n    \"bizonylatTipus\": \"T1042E\",\r\n    \"bizonylatVerzio\": \"1.0\",\r\n    \"bizonylatXml\": \"{{T1042E_continue_base64}}\",\r\n    \"signature\": \"{{signature}}\",\r\n    \"validaciosTanusitvany\": \"{{validaciosTanusitvany}}\"\r\n  }\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{agw_server}}/rest-api/1.0/NavM2mBizonylat/bizonylatService/Bizonylat",
+          "host": [
+            "{{agw_server}}"
+          ],
+          "path": [
+            "rest-api",
+            "1.0",
+            "NavM2mBizonylat",
+            "bizonylatService",
+            "Bizonylat"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "getValidacio",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "const cryptoJs = require('crypto-js');\r",
+              "var timestamp = new Date().toISOString().replace(/[^\\d]/g, '').substring(0,14);\r",
+              "var message_id = pm.collectionVariables.get('message_id');\r",
+              "var signature_key_first_part = pm.collectionVariables.get('signature_key_first_part');\r",
+              "var signature_key_second_part = pm.collectionVariables.get('signature_key_second_part');\r",
+              "var xml_hash = pm.collectionVariables.get(\"xml_hash\");\r",
+              "var toSign = message_id+timestamp+xml_hash+signature_key_first_part+signature_key_second_part;\r",
+              "console.log(toSign);\r",
+              "var signature = cryptoJs.SHA256(toSign).toString(cryptoJs.enc.Base64).toUpperCase();\r",
+              "pm.collectionVariables.set(\"signature\", signature);\r",
+              "console.log(signature);"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.collectionVariables.set('ugyAzonosito', pm.response.json().ugyAzonosito);"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}"
+          },
+          {
+            "key": "messageId",
+            "value": "{{message_id}}"
+          },
+          {
+            "key": "correlationId",
+            "value": "{{$randomUUID}}",
+            "type": "text",
+            "disabled": true
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"requestData\": {\r\n    \"bizonylatTipus\": \"NAV_PMT25\",\r\n    \"bizonylatVerzio\": \"0.24\",\r\n    \"bizonylatXml\": \"{{xml_base64}}\",\r\n    \"signature\": \"{{signature}}\"\r\n  }\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{agw_server}}/rest-api/1.0/NavM2mBizonylat/bizonylatService/Validacio/{{ugyAzonosito}}",
+          "host": [
+            "{{agw_server}}"
+          ],
+          "path": [
+            "rest-api",
+            "1.0",
+            "NavM2mBizonylat",
+            "bizonylatService",
+            "Validacio",
+            "{{ugyAzonosito}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "createKalkulacio PMT25",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "const cryptoJs = require('crypto-js');\r",
+              "var timestamp = new Date().toISOString().replace(/[^\\d]/g, '').substring(0,14);\r",
+              "var message_id = pm.collectionVariables.get('message_id');\r",
+              "var signature_key_first_part = pm.collectionVariables.get('signature_key_first_part');\r",
+              "var signature_key_second_part = pm.collectionVariables.get('signature_key_second_part');\r",
+              "var xml_hash = pm.collectionVariables.get(\"pmt25_hash\");\r",
+              "var toSign = message_id+timestamp+xml_hash+signature_key_first_part+signature_key_second_part;\r",
+              "console.log(toSign);\r",
+              "var signature = cryptoJs.SHA256(toSign).toString(cryptoJs.enc.Base64).toUpperCase();\r",
+              "pm.collectionVariables.set(\"signature\", signature);\r",
+              "console.log(signature);"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.collectionVariables.set('ugyAzonosito', pm.response.json().ugyAzonosito);"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}"
+          },
+          {
+            "key": "messageId",
+            "value": "{{message_id}}"
+          },
+          {
+            "key": "correlationId",
+            "value": "{{$randomUUID}}",
+            "type": "text",
+            "disabled": true
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"requestData\": {\r\n    \"bizonylatTipus\": \"NAV_PMT25\",\r\n    \"bizonylatVerzio\": \"0.24\",\r\n    \"bizonylatXml\": \"{{pmt25_base64}}\",\r\n    \"signature\": \"{{signature}}\"\r\n  }\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{agw_server}}/rest-api/1.0/NavM2mBizonylat/bizonylatService/Kalkulacio",
+          "host": [
+            "{{agw_server}}"
+          ],
+          "path": [
+            "rest-api",
+            "1.0",
+            "NavM2mBizonylat",
+            "bizonylatService",
+            "Kalkulacio"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "getKalkulacio",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "const cryptoJs = require('crypto-js');\r",
+              "var timestamp = new Date().toISOString().replace(/[^\\d]/g, '').substring(0,14);\r",
+              "var message_id = pm.collectionVariables.get('message_id');\r",
+              "var signature_key_first_part = pm.collectionVariables.get('signature_key_first_part');\r",
+              "var signature_key_second_part = pm.collectionVariables.get('signature_key_second_part');\r",
+              "var xml_hash = pm.collectionVariables.get(\"xml_hash\");\r",
+              "var toSign = message_id+timestamp+xml_hash+signature_key_first_part+signature_key_second_part;\r",
+              "console.log(toSign);\r",
+              "var signature = cryptoJs.SHA256(toSign).toString(cryptoJs.enc.Base64).toUpperCase();\r",
+              "pm.collectionVariables.set(\"signature\", signature);\r",
+              "console.log(signature);"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.collectionVariables.set('ugyAzonosito', pm.response.json().ugyAzonosito);"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{access_token}}"
+          },
+          {
+            "key": "messageId",
+            "value": "{{message_id}}"
+          },
+          {
+            "key": "correlationId",
+            "value": "{{$randomUUID}}",
+            "type": "text",
+            "disabled": true
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"requestData\": {\r\n    \"bizonylatTipus\": \"NAV_PMT25\",\r\n    \"bizonylatVerzio\": \"0.24\",\r\n    \"bizonylatXml\": \"{{xml_base64}}\",\r\n    \"signature\": \"{{signature}}\"\r\n  }\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{agw_server}}/rest-api/1.0/NavM2mBizonylat/bizonylatService/Kalkulacio/{{ugyAzonosito}}",
+          "host": [
+            "{{agw_server}}"
+          ],
+          "path": [
+            "rest-api",
+            "1.0",
+            "NavM2mBizonylat",
+            "bizonylatService",
+            "Kalkulacio",
+            "{{ugyAzonosito}}"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "agw_server",
+      "value": "https://m2m-dev.nav.gov.hu"
+    },
+    {
+      "key": "user",
+      "value": ""
+    },
+    {
+      "key": "password",
+      "value": ""
+    },
+    {
+      "key": "client",
+      "value": ""
+    },
+    {
+      "key": "client_secret",
+      "value": ""
+    },
+    {
+      "key": "signature_key_second_part",
+      "value": ""
+    },
+    {
+      "key": "signature_key_first_part",
+      "value": ""
+    },
+    {
+      "key": "access_token",
+      "value": ""
+    },
+    {
+      "key": "timestamp",
+      "value": ""
+    },
+    {
+      "key": "signature",
+      "value": ""
+    },
+    {
+      "key": "message_id",
+      "value": "4fe488ca-2275-11ef-9262-0242ac120003"
+    },
+    {
+      "key": "request_id",
+      "value": ""
+    },
+    {
+      "key": "ugyAzonosito",
+      "value": ""
+    },
+    {
+      "key": "validaciosTanusitvany",
+      "value": ""
+    },
+    {
+      "key": "T1042E_hibatlan_hash",
+      "value": "7837ac564068864738013c05af47afbe00d1b6800f86d847e1dd020d56f54ae7"
+    },
+    {
+      "key": "T1042E_hibatlan_base64",
+      "value": "PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHRuczpEb2NfVDEwNDJFIHhtbG5zOmNvbW1vbj0iaHR0cHM6Ly9zb2FwLmFwaS5uYXYuZ292Lmh1L2RlZmluaXRpb25zL21vZGVsLzIuMC9jb21tb24vMS4wIgogICAgICAgICAgICAgICAgeG1sbnM6bWV0YT0iaHR0cHM6Ly9hcGkubmF2Lmdvdi5odS9kZWZpbml0aW9ucy9mb3JtX3hzZF9tZXRhc2NoZW1hLzEuMCIKICAgICAgICAgICAgICAgIHhtbG5zOnRucz0iaHR0cHM6Ly9zb2FwLmFwaS5uYXYuZ292Lmh1L2RlZmluaXRpb25zL21vZGVsLzIuMC9UMTA0MkUvMS4wIgogICAgICAgICAgICAgICAgeG1sbnM6eHNpPSJodHRwOi8vd3d3LnczLm9yZy8yMDAxL1hNTFNjaGVtYS1pbnN0YW5jZSIKICAgICAgICAgICAgICAgIHhzaTpzY2hlbWFMb2NhdGlvbj0iaHR0cHM6Ly9zb2FwLmFwaS5uYXYuZ292Lmh1L2RlZmluaXRpb25zL21vZGVsLzIuMC9UMTA0MkUvMS4wIFQxMDQyRS54c2QgaHR0cHM6Ly9hcGkubmF2Lmdvdi5odS9kZWZpbml0aW9ucy9mb3JtX3hzZF9tZXRhc2NoZW1hLzEuMCBmb3JtX3hzZF9tZXRhc2NoZW1hLnhzZCBodHRwczovL3NvYXAuYXBpLm5hdi5nb3YuaHUvZGVmaW5pdGlvbnMvbW9kZWwvMi4wL2NvbW1vbi8xLjAgY29tbW9uLnhzZCI+CiAgIDxGb3JtX1QxMDQyRT4KICAgICAgPEJsb2NrXzEyMDAwMj4KICAgICAgICAgPEZpZWxkR3JvdXBfMTIwMDAzPgogICAgICAgICAgICA8RmllbGRfMEEwMDAxQzAwMUE+MTg2Mzc3NzExMTI8L0ZpZWxkXzBBMDAwMUMwMDFBPgogICAgICAgICA8L0ZpZWxkR3JvdXBfMTIwMDAzPgogICAgICA8L0Jsb2NrXzEyMDAwMj4KICAgICAgPEJsb2NrXzEyMDAwNj4KICAgICAgICAgPENoYWluXzEyMDAxMz4KICAgICAgICAgICAgPENoYWluX2VsZW0+CiAgICAgICAgICAgICAgIDxGaWVsZEdyb3VwXzEyMDAxND4KICAgICAgICAgICAgICAgICAgPEZpZWxkXzBCWFhYWEMwMDAxQUE+Q3Npem1hZGlhIE1hcmlhbm48L0ZpZWxkXzBCWFhYWEMwMDAxQUE+CiAgICAgICAgICAgICAgICAgIDxGaWVsZF8wQlhYWFhDMDAwMkFBPjgzNDE3NDM2NjM8L0ZpZWxkXzBCWFhYWEMwMDAyQUE+CiAgICAgICAgICAgICAgICAgIDxGaWVsZF8wQlhYWFhDMDAwNEFBPnRydWU8L0ZpZWxkXzBCWFhYWEMwMDA0QUE+CiAgICAgICAgICAgICAgICAgIDxGaWVsZF8wQlhYWFhEMDAwNUFBPlU8L0ZpZWxkXzBCWFhYWEQwMDA1QUE+CiAgICAgICAgICAgICAgICAgIDxGaWVsZF8wQlhYWFhEMDAwOEFBPjAzPC9GaWVsZF8wQlhYWFhEMDAwOEFBPgogICAgICAgICAgICAgICAgICA8RmllbGRfMEJYWFhYRDAwMDlBQT4yMDI2LTA3LTA5PC9GaWVsZF8wQlhYWFhEMDAwOUFBPgogICAgICAgICAgICAgICAgICA8RmllbGRfMEJYWFhYRDAwMTBBQT4xPC9GaWVsZF8wQlhYWFhEMDAxMEFBPgogICAgICAgICAgICAgICA8L0ZpZWxkR3JvdXBfMTIwMDE0PgogICAgICAgICAgICA8L0NoYWluX2VsZW0+CiAgICAgICAgICAgIDxDaGFpbl9lbGVtPgogICAgICAgICAgICAgICA8RmllbGRHcm91cF8xMjAwMTQ+CiAgICAgICAgICAgICAgICAgIDxGaWVsZF8wQlhYWFhDMDAwMUFBPkNzb21haSBTemFiaW5hPC9GaWVsZF8wQlhYWFhDMDAwMUFBPgogICAgICAgICAgICAgICAgICA8RmllbGRfMEJYWFhYQzAwMDJBQT44NDQ3MDAyMjI1PC9GaWVsZF8wQlhYWFhDMDAwMkFBPgogICAgICAgICAgICAgICAgICA8RmllbGRfMEJYWFhYQzAwMDRBQT50cnVlPC9GaWVsZF8wQlhYWFhDMDAwNEFBPgogICAgICAgICAgICAgICAgICA8RmllbGRfMEJYWFhYRDAwMDVBQT5VPC9GaWVsZF8wQlhYWFhEMDAwNUFBPgogICAgICAgICAgICAgICAgICA8RmllbGRfMEJYWFhYRDAwMDhBQT4wNTwvRmllbGRfMEJYWFhYRDAwMDhBQT4KICAgICAgICAgICAgICAgICAgPEZpZWxkXzBCWFhYWEQwMDA5QUE+MjAyNi0wNy0wOTwvRmllbGRfMEJYWFhYRDAwMDlBQT4KICAgICAgICAgICAgICAgICAgPEZpZWxkXzBCWFhYWEQwMDEwQUE+MjwvRmllbGRfMEJYWFhYRDAwMTBBQT4KICAgICAgICAgICAgICAgPC9GaWVsZEdyb3VwXzEyMDAxND4KICAgICAgICAgICAgPC9DaGFpbl9lbGVtPgogICAgICAgICA8L0NoYWluXzEyMDAxMz4KICAgICAgPC9CbG9ja18xMjAwMDY+CiAgICA8QXR0YWNobWVudF8xPgogICAgICA8ZmlsZUlkPmU1MTQwN2M3LWUzYTQtNDEwNS04M2VjLWQwNjIyZjQzNTZlMjwvZmlsZUlkPgogICAgICA8ZmlsZU5hbWU+ZmFqbC5wZGY8L2ZpbGVOYW1lPgogICAgICA8ZmlsZVNpemU+MTMzODQyODwvZmlsZVNpemU+CiAgICA8L0F0dGFjaG1lbnRfMT4KICAgPC9Gb3JtX1QxMDQyRT4KPC90bnM6RG9jX1QxMDQyRT4="
+    },
+    {
+      "key": "kit17_hash",
+      "value": "3e5d0c769b038ce366665fc4c34359eab053334498b9cfcd6f755ed62468a6ba"
+    },
+    {
+      "key": "kit17_base64",
+      "value": "PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHRuczpEb2NfVlBPUF9LSVQxNyB4bWxuczp0bnM9Imh0dHBzOi8vc29hcC5hcGkubmF2Lmdvdi5odS9kZWZpbml0aW9ucy9tb2RlbC8yLjAvVlBPUF9LSVQxNy8xLjkiPgogICA8Rm9ybV9WUE9QX0tJVDE3PgogICAgICA8QmxvY2tfMTIwMDAxPgogICAgICAgICA8RmllbGRHcm91cF8xMjAwMDI+CiAgICAgICAgICAgIDxGaWVsZF8wQTAwMDFDMDAxQT5BMTIzNDU2Nzg8L0ZpZWxkXzBBMDAwMUMwMDFBPgogICAgICAgICAgICA8RmllbGRfMEEwMDAxQzAwMkE+MjAyNi0wMy0yMzwvRmllbGRfMEEwMDAxQzAwMkE+CiAgICAgICAgICAgIDxGaWVsZF8wQTAwMDFDMDAzQT4xMDAwPC9GaWVsZF8wQTAwMDFDMDAzQT4KICAgICAgICAgICAgPEZpZWxkXzBBMDAwMUMwMDRBPktpdC4gMTIuIMKnIHZhZ3lvbmkgYmVmYWd5YXN6dMOhcyBhbMOzbGkgbWVudGVzw610w6lzPC9GaWVsZF8wQTAwMDFDMDA0QT4KICAgICAgICAgICAgPEZpZWxkXzBBMDAwMUMwMDVBPmVqZWxlbnTFkW7DqWwgYWxrYWxtYXpvdHQgYmVqZWxlbnTDqXMgYXpvbm9zw610w7NzesOhbSDDqXMgIGJlamVsZW50w6lzIGFsYXBqw6F1bCBzem9sZ8OhbMOzIGvDtnLDvGxtw6lueSByw6lzemxldGVzIGxlw61yw6FzYSBiZWZhZ3lhc3p0w6FzIGVsbGVuPC9GaWVsZF8wQTAwMDFDMDA1QT4KICAgICAgICAgICAgPEZpZWxkXzBBMDAwMUMwMDZBPkpvZ2kgc3plbcOpbHk8L0ZpZWxkXzBBMDAwMUMwMDZBPgogICAgICAgICA8L0ZpZWxkR3JvdXBfMTIwMDAyPgogICAgICAgICA8RmllbGRHcm91cF8xMjAwMDQ+CiAgICAgICAgICAgIDxGaWVsZF8wQTAwMDFEMDAxQT5LaXQgc3plcmludGkgc3pvbGfDoWx0YXTDszwvRmllbGRfMEEwMDAxRDAwMUE+CiAgICAgICAgICAgIDxGaWVsZF8wQTAwMDFEMDAyQT5NaWtlIEJhbms8L0ZpZWxkXzBBMDAwMUQwMDJBPgogICAgICAgICAgICA8RmllbGRfMEEwMDAxRDAwM0E+THVjaWZlciBMw6FzemzDszwvRmllbGRfMEEwMDAxRDAwM0E+CiAgICAgICAgICAgIDxGaWVsZF8wQTAwMDFEMDA0QT4xMjM1MzYwNTU2NDwvRmllbGRfMEEwMDAxRDAwNEE+CiAgICAgICAgIDwvRmllbGRHcm91cF8xMjAwMDQ+CiAgICAgIDwvQmxvY2tfMTIwMDAxPgogICAgICA8QmxvY2tfMTIwMDEwPgogICAgICAgICA8RmllbGRHcm91cF8xMjAwMjI+CiAgICAgICAgICAgIDxGaWVsZF8wQzAwMDFCMDAxQT5NaWtlIEJhbms8L0ZpZWxkXzBDMDAwMUIwMDFBPgogICAgICAgICAgICA8RmllbGRfMEMwMDAxQjAwMkE+MTIzNTM2MDU1NjQ8L0ZpZWxkXzBDMDAwMUIwMDJBPgogICAgICAgICAgICA8RmllbGRfMEMwMDAxQjAwM0E+QmV0w6l0aSB0w6Fyc2Fzw6FnPC9GaWVsZF8wQzAwMDFCMDAzQT4KICAgICAgICAgICAgPEZpZWxkXzBDMDAwMUIwMDVBPjAxLjExPC9GaWVsZF8wQzAwMDFCMDA1QT4KICAgICAgICAgICAgPEZpZWxkXzBDMDAwMUIwMDZBPkhVPC9GaWVsZF8wQzAwMDFCMDA2QT4KICAgICAgICAgICAgPEZpZWxkXzBDMDAwMUIwMDdBPjMzMDA8L0ZpZWxkXzBDMDAwMUIwMDdBPgogICAgICAgICAgICA8RmllbGRfMEMwMDAxQjAwOEE+RWdlcjwvRmllbGRfMEMwMDAxQjAwOEE+CiAgICAgICAgICAgIDxGaWVsZF8wQzAwMDFCMDEwQT5WaXLDoWc8L0ZpZWxkXzBDMDAwMUIwMTBBPgogICAgICAgICAgICA8RmllbGRfMEMwMDAxQjAxMUE+w7p0PC9GaWVsZF8wQzAwMDFCMDExQT4KICAgICAgICAgICAgPEZpZWxkXzBDMDAwMUIwMTJBPjEwPC9GaWVsZF8wQzAwMDFCMDEyQT4KICAgICAgICAgICAgPEZpZWxkXzBDMDAwMUIwMDAxREE+TnlpbHbDoW50YXJ0w6FzYmEgdsOpdGVsaSBva2lyYXQ8L0ZpZWxkXzBDMDAwMUIwMDAxREE+CiAgICAgICAgICAgIDxGaWVsZF8wQzAwMDFCMDAwMUZBPnF3MTIzNDU2PC9GaWVsZF8wQzAwMDFCMDAwMUZBPgogICAgICAgICA8L0ZpZWxkR3JvdXBfMTIwMDIyPgogICAgICA8L0Jsb2NrXzEyMDAxMD4KICAgICAgPEJsb2NrXzEyMDAyMT4KICAgICAgICAgPENoYWluXzEyMDAzOD4KICAgICAgICAgICAgPENoYWluX2VsZW0+CiAgICAgICAgICAgICAgIDxGaWVsZEdyb3VwXzEyMDAyOT4KICAgICAgICAgICAgICAgICAgPEZpZWxkXzBEWFhYWEIwMDFBPjE8L0ZpZWxkXzBEWFhYWEIwMDFBPgogICAgICAgICAgICAgICAgICA8RmllbGRfMERYWFhYQjAwM0E+THVjaWZlcjwvRmllbGRfMERYWFhYQjAwM0E+CiAgICAgICAgICAgICAgICAgIDxGaWVsZF8wRFhYWFhCMDA0QT5Mw6FzemzDszwvRmllbGRfMERYWFhYQjAwNEE+CiAgICAgICAgICAgICAgICAgIDxGaWVsZF8wRFhYWFhCMDA1QT5MdWNpZmVyIEzDoXN6bMOzPC9GaWVsZF8wRFhYWFhCMDA1QT4KICAgICAgICAgICAgICAgICAgPEZpZWxkXzBEWFhYWEIwMDZBPkJ1ZGFwZXN0PC9GaWVsZF8wRFhYWFhCMDA2QT4KICAgICAgICAgICAgICAgICAgPEZpZWxkXzBEWFhYWEIwMDdBPjE5NjAtMDEtMDE8L0ZpZWxkXzBEWFhYWEIwMDdBPgogICAgICAgICAgICAgICAgICA8RmllbGRfMERYWFhYQjAwOEE+THVjaWZlciBMw6FzemzDszwvRmllbGRfMERYWFhYQjAwOEE+CiAgICAgICAgICAgICAgICAgIDxGaWVsZF8wRFhYWFhCMDA5QT5IVTwvRmllbGRfMERYWFhYQjAwOUE+CiAgICAgICAgICAgICAgICAgIDxGaWVsZF8wRFhYWFhCMDExQT5IVTwvRmllbGRfMERYWFhYQjAxMUE+CiAgICAgICAgICAgICAgICAgIDxGaWVsZF8wRFhYWFhCMDEyQT4zMzAwPC9GaWVsZF8wRFhYWFhCMDEyQT4KICAgICAgICAgICAgICAgICAgPEZpZWxkXzBEWFhYWEIwMTNBPkVnZXI8L0ZpZWxkXzBEWFhYWEIwMTNBPgogICAgICAgICAgICAgICAgICA8RmllbGRfMERYWFhYQjAxNUE+Vmlyw6FnPC9GaWVsZF8wRFhYWFhCMDE1QT4KICAgICAgICAgICAgICAgICAgPEZpZWxkXzBEWFhYWEIwMTZBPnTDqXI8L0ZpZWxkXzBEWFhYWEIwMTZBPgogICAgICAgICAgICAgICAgICA8RmllbGRfMERYWFhYQjAxN0E+MTwvRmllbGRfMERYWFhYQjAxN0E+CiAgICAgICAgICAgICAgICAgIDxGaWVsZF8wRFhYWFhCMDIxQT4xMDA8L0ZpZWxkXzBEWFhYWEIwMjFBPgogICAgICAgICAgICAgICA8L0ZpZWxkR3JvdXBfMTIwMDI5PgogICAgICAgICAgICA8L0NoYWluX2VsZW0+CiAgICAgICAgIDwvQ2hhaW5fMTIwMDM4PgogICAgICA8L0Jsb2NrXzEyMDAyMT4KICAgICAgPEJsb2NrXzEyMDAzNj4KICAgICAgICAgPEZpZWxkR3JvdXBfMTIwMDM3PgogICAgICAgICAgICA8RmllbGRfMEYwMDAxQjAwMUE+VmFneW9uIG5pbmNzLCBkZSBha2tvciBzaW5jcyBoYSA1MCBrYXJha3RlcnQga2VsbCBsZcOtcm5vbTwvRmllbGRfMEYwMDAxQjAwMUE+CiAgICAgICAgIDwvRmllbGRHcm91cF8xMjAwMzc+CiAgICAgIDwvQmxvY2tfMTIwMDM2PgogICAgICA8QmxvY2tfMTIwMDQxPgogICAgICAgICA8Q2hhaW5fMTIwMDg0PgogICAgICAgICAgICA8Q2hhaW5fZWxlbT4KICAgICAgICAgICAgICAgPEZpZWxkR3JvdXBfMTIwMDQyPgogICAgICAgICAgICAgICAgICA8RmllbGRfMEdYWFhYQjAwNTAxQT4xPC9GaWVsZF8wR1hYWFhCMDA1MDFBPgogICAgICAgICAgICAgICAgICA8RmllbGRfMEdYWFhYQjAwMDFBQT4xMTExMTExMS0yMjIyMjIyMjwvRmllbGRfMEdYWFhYQjAwMDFBQT4KICAgICAgICAgICAgICAgICAgPEZpZWxkXzBHWFhYWEIwMDAxQkE+SFVGPC9GaWVsZF8wR1hYWFhCMDAwMUJBPgogICAgICAgICAgICAgICAgICA8RmllbGRfMEdYWFhYQjAwMDFDQT4yMDAwLTAxLTAxPC9GaWVsZF8wR1hYWFhCMDAwMUNBPgogICAgICAgICAgICAgICAgICA8RmllbGRfMEdYWFhYQjAwMDFFQT5JZGUgc2UgYWthcm9rIMOtcm5pPC9GaWVsZF8wR1hYWFhCMDAwMUVBPgogICAgICAgICAgICAgICA8L0ZpZWxkR3JvdXBfMTIwMDQyPgogICAgICAgICAgICA8L0NoYWluX2VsZW0+CiAgICAgICAgIDwvQ2hhaW5fMTIwMDg0PgogICAgICA8L0Jsb2NrXzEyMDA0MT4KICAgPC9Gb3JtX1ZQT1BfS0lUMTc+CjwvdG5zOkRvY19WUE9QX0tJVDE3Pgo="
+    },
+    {
+      "key": "pmt25_base64",
+      "value": "PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHRuczpEb2NfTkFWX1BNVDI1IHhtbG5zOmNvbW1vbj0iaHR0cHM6Ly9zb2FwLmFwaS5uYXYuZ292Lmh1L2RlZmluaXRpb25zL21vZGVsLzIuMC9jb21tb24vMS4wIgogICAgICAgICAgICAgICAgICAgeG1sbnM6bWV0YT0iaHR0cHM6Ly9hcGkubmF2Lmdvdi5odS9kZWZpbml0aW9ucy9mb3JtX3hzZF9tZXRhc2NoZW1hLzEuMCIKICAgICAgICAgICAgICAgICAgIHhtbG5zOnRucz0iaHR0cHM6Ly9zb2FwLmFwaS5uYXYuZ292Lmh1L2RlZmluaXRpb25zL21vZGVsLzIuMC9OQVZfUE1UMjUvMC4yNCIKICAgICAgICAgICAgICAgICAgIHhtbG5zOnhzaT0iaHR0cDovL3d3dy53My5vcmcvMjAwMS9YTUxTY2hlbWEtaW5zdGFuY2UiCiAgICAgICAgICAgICAgICAgICB4c2k6c2NoZW1hTG9jYXRpb249Imh0dHBzOi8vc29hcC5hcGkubmF2Lmdvdi5odS9kZWZpbml0aW9ucy9tb2RlbC8yLjAvTkFWX1BNVDI1LzAuMjQgTkFWX1BNVDI1LnhzZCBodHRwczovL2FwaS5uYXYuZ292Lmh1L2RlZmluaXRpb25zL2Zvcm1feHNkX21ldGFzY2hlbWEvMS4wIGZvcm1feHNkX21ldGFzY2hlbWEueHNkIGh0dHBzOi8vc29hcC5hcGkubmF2Lmdvdi5odS9kZWZpbml0aW9ucy9tb2RlbC8yLjAvY29tbW9uLzEuMCBjb21tb24ueHNkIj4KICAgPEZvcm1fTkFWX1BNVDI1PgogICAgICA8QmxvY2tfMTIwMDAxPgogICAgICAgICA8RmllbGRHcm91cF8xMjAzMzQ+CiAgICAgICAgICAgIDxGaWVsZF8wQTAwMDFDMDAxQT5TVFJVU1NOSUcgS2Z0LiAidi4gYS4iPC9GaWVsZF8wQTAwMDFDMDAxQT4KICAgICAgICAgICAgPEZpZWxkXzBBMDAwMUMwMDJBPjI0MTkxNjU2MjA3PC9GaWVsZF8wQTAwMDFDMDAyQT4KICAgICAgICAgICAgPEZpZWxkXzBBMDAwMUMwMDNBPkJhbmsgcMOpbnp2w6FsdMOhc2kgdGV2w6lrZW55c8OpZyB0ZWtpbnRldMOpYmVuPC9GaWVsZF8wQTAwMDFDMDAzQT4KICAgICAgICAgICAgPEZpZWxkXzBBMDAwMUQwMDFBPktpamVsw7ZsdCBzemVtw6lseTwvRmllbGRfMEEwMDAxRDAwMUE+CiAgICAgICAgICAgIDxGaWVsZF8wQTAwMDFEMDAyQT5LaWplbMO2bHQgYmVvc3p0w6FzPC9GaWVsZF8wQTAwMDFEMDAyQT4KICAgICAgICAgICAgPEZpZWxkXzBBMDAwMUQwMDNBPjIwNTIyNjM2MzwvRmllbGRfMEEwMDAxRDAwM0E+CiAgICAgICAgICAgIDxGaWVsZF8wQTAwMDFEMDA0QT4zNjUyMjY5ODwvRmllbGRfMEEwMDAxRDAwNEE+CiAgICAgICAgICAgIDxGaWVsZF8wQTAwMDFEMDA1QT5raWplbG9sdEBnbWFpbC5jb208L0ZpZWxkXzBBMDAwMUQwMDVBPgogICAgICAgICAgICA8RmllbGRfMEEwMDAxRTAwMUE+w4lzemxlbMWRIHN6ZXJ2ZXpldGkgZWd5c8OpZzwvRmllbGRfMEEwMDAxRTAwMUE+CiAgICAgICAgICAgIDxGaWVsZF8wQTAwMDFFMDAyQT5IVTwvRmllbGRfMEEwMDAxRTAwMkE+CiAgICAgICAgICAgIDxGaWVsZF8wQTAwMDFFMDAzQT4zMzAwPC9GaWVsZF8wQTAwMDFFMDAzQT4KICAgICAgICAgICAgPEZpZWxkXzBBMDAwMUUwMDRBPkVnZXI8L0ZpZWxkXzBBMDAwMUUwMDRBPgogICAgICAgICAgICA8RmllbGRfMEEwMDAxRTAwNkE+U3rDoWxsb2RhPC9GaWVsZF8wQTAwMDFFMDA2QT4KICAgICAgICAgICAgPEZpZWxkXzBBMDAwMUUwMDdBPsO6dDwvRmllbGRfMEEwMDAxRTAwN0E+CiAgICAgICAgICAgIDxGaWVsZF8wQTAwMDFFMDA4QT41PC9GaWVsZF8wQTAwMDFFMDA4QT4KICAgICAgICAgICAgPEZpZWxkXzBBMDAwMUYwMDFBPjAwMDE8L0ZpZWxkXzBBMDAwMUYwMDFBPgogICAgICAgICAgICA8RmllbGRfMEEwMDAxRjAwMkE+MjAyNi0wNS0yNjwvRmllbGRfMEEwMDAxRjAwMkE+CiAgICAgICAgICAgIDxGaWVsZF8wQTAwMDFGMDAzQT4wODAxPC9GaWVsZF8wQTAwMDFGMDAzQT4KICAgICAgICAgICAgPEZpZWxkXzBBMDAwMUcwMDFBPkNzYWzDoXNyYSB2b25hdGtvesOzIHN6dWJqZWt0w612IGJlamVsZW50w6lzPC9GaWVsZF8wQTAwMDFHMDAxQT4KICAgICAgICAgICAgPEZpZWxkXzBBMDAwMUgwMDFBPk5lbTwvRmllbGRfMEEwMDAxSDAwMUE+CiAgICAgICAgICAgIDxGaWVsZF8wQTAwMDFJMDAxQT7DnGd5bGV0aSBtZWdiw616w6FzPC9GaWVsZF8wQTAwMDFJMDAxQT4KICAgICAgICAgICAgPEZpZWxkXzBBMDAwMUkwMDJBPk5lbTwvRmllbGRfMEEwMDAxSTAwMkE+CiAgICAgICAgICAgIDxGaWVsZF8wQjAwMDFDMDAxQT5OZW08L0ZpZWxkXzBCMDAwMUMwMDFBPgogICAgICAgICAgICA8RmllbGRfMEIwMDAxRDAwMUE+VMOpbnnDoWxsw6FzIHLDqXN6bGV0ZXMgbGXDrXLDoXNhIChoYSA5OTkga2FyYWt0ZXJuw6lsIHTDtmJiZXQgc3plcmV0bsOpbmssIGFra29yIGvDvGzDtm4gbWVsbMOpa2xldGJlbiBrZWxsIGNzYXRvbG5pKTwvRmllbGRfMEIwMDAxRDAwMUE+CiAgICAgICAgICAgIDxGaWVsZF8wQjAwMDFFMDAxQT5OZW08L0ZpZWxkXzBCMDAwMUUwMDFBPgogICAgICAgICAgICA8RmllbGRfMEIwMDAxRjAwMUE+MDwvRmllbGRfMEIwMDAxRjAwMUE+CiAgICAgICAgICAgIDxGaWVsZF8wQjAwMDFHMDAxQT5OZW08L0ZpZWxkXzBCMDAwMUcwMDFBPgogICAgICAgICAgICA8RmllbGRfMEMwMDAxQjA1NEE+dHJ1ZTwvRmllbGRfMEMwMDAxQjA1NEE+CiAgICAgICAgIDwvRmllbGRHcm91cF8xMjAzMzQ+CiAgICAgIDwvQmxvY2tfMTIwMDAxPgogICAgICA8QmxvY2tfMTIwMjE1PgogICAgICAgICA8RmllbGRHcm91cF8xMjA5ODg+CiAgICAgICAgICAgIDxGaWVsZF8wRjAwMDFCMDAxQT5Kb2dpIHN6ZW3DqWx5PC9GaWVsZF8wRjAwMDFCMDAxQT4KICAgICAgICAgICAgPEZpZWxkXzBGMDAwMUIwMDJBPlNhasOhdCBuZXbDqWJlbjwvRmllbGRfMEYwMDAxQjAwMkE+CiAgICAgICAgIDwvRmllbGRHcm91cF8xMjA5ODg+CiAgICAgICAgIDxDaGFpbl8xMjAyMzY+CiAgICAgICAgICAgIDxDaGFpbl9lbGVtPgogICAgICAgICAgICAgICA8RmllbGRHcm91cF8xMjAyMzk+CiAgICAgICAgICAgICAgICAgIDxGaWVsZF8wRVhYWFhCMDAwMUFBPjExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExPC9GaWVsZF8wRVhYWFhCMDAwMUFBPgogICAgICAgICAgICAgICAgICA8RmllbGRfMEVYWFhYQjAwMDFCQT5IVUY8L0ZpZWxkXzBFWFhYWEIwMDAxQkE+CiAgICAgICAgICAgICAgICAgIDxGaWVsZF8wRVhYWFhCMDAwMUNBPjIwMjUtMTItMzE8L0ZpZWxkXzBFWFhYWEIwMDAxQ0E+CiAgICAgICAgICAgICAgIDwvRmllbGRHcm91cF8xMjAyMzk+CiAgICAgICAgICAgIDwvQ2hhaW5fZWxlbT4KICAgICAgICAgPC9DaGFpbl8xMjAyMzY+CiAgICAgICAgIDxDaGFpbl8xMjAyNDE+CiAgICAgICAgICAgIDxDaGFpbl9oZWFkZXI+CiAgICAgICAgICAgICAgIDxGaWVsZEdyb3VwXzEyMDI0Mj4KICAgICAgICAgICAgICAgICAgPEZpZWxkXzBHMDAwMUMwMDNBPjEwNzA4NzU0MjQ0PC9GaWVsZF8wRzAwMDFDMDAzQT4KICAgICAgICAgICAgICAgICAgPEZpZWxkXzBHMDAwMUMwMDFBPlBpbGzDqXIgTm9ucHJvZml0IEtmdDwvRmllbGRfMEcwMDAxQzAwMUE+CiAgICAgICAgICAgICAgICAgIDxGaWVsZF8wRzAwMDFDMDAyQT5QaWxsw6lyIEtmdC48L0ZpZWxkXzBHMDAwMUMwMDJBPgogICAgICAgICAgICAgICAgICA8RmllbGRfMEcwMDAxQzAwNEE+S29ybMOhdG9sdCBmZWxlbMWRc3PDqWfFsSB0w6Fyc2Fzw6FnPC9GaWVsZF8wRzAwMDFDMDA0QT4KICAgICAgICAgICAgICAgICAgPEZpZWxkXzBHMDAwMUMwMDZBPjYzPC9GaWVsZF8wRzAwMDFDMDA2QT4KICAgICAgICAgICAgICAgICAgPEZpZWxkXzBHMDAwMUMwMDdBPlN6w6Ftw610w6FzdGVjaG5pa2FpIGluZnJhc3RydWt0w7pyYSwgYWRhdGZlbGRvbGdvesOhcywgdMOhcmhlbHlzem9sZ8OhbHRhdMOhcyDDqXMgZWd5w6liIGluZm9ybcOhY2nDs3Mgc3pvbGfDoWx0YXTDoXNpIHRldsOpa2VueXPDqWdlazwvRmllbGRfMEcwMDAxQzAwN0E+CiAgICAgICAgICAgICAgICAgIDxGaWVsZF8wRzAwMDFDMDA4QT5IVTwvRmllbGRfMEcwMDAxQzAwOEE+CiAgICAgICAgICAgICAgICAgIDxGaWVsZF8wRzAwMDFDMDA5QT4xNjYwPC9GaWVsZF8wRzAwMDFDMDA5QT4KICAgICAgICAgICAgICAgICAgPEZpZWxkXzBHMDAwMUMwMTBBPkJ1ZGFwZXN0PC9GaWVsZF8wRzAwMDFDMDEwQT4KICAgICAgICAgICAgICAgICAgPEZpZWxkXzBHMDAwMUMwMTJBPlbDoWNpPC9GaWVsZF8wRzAwMDFDMDEyQT4KICAgICAgICAgICAgICAgICAgPEZpZWxkXzBHMDAwMUMwMTNBPsO6dDwvRmllbGRfMEcwMDAxQzAxM0E+CiAgICAgICAgICAgICAgICAgIDxGaWVsZF8wRzAwMDFDMDE0QT4xNDQ8L0ZpZWxkXzBHMDAwMUMwMTRBPgogICAgICAgICAgICAgICA8L0ZpZWxkR3JvdXBfMTIwMjQyPgogICAgICAgICAgICA8L0NoYWluX2hlYWRlcj4KICAgICAgICAgICAgPENoYWluX2VsZW0+CiAgICAgICAgICAgICAgIDxGaWVsZEdyb3VwXzEyMDI0Mz4KICAgICAgICAgICAgICAgICAgPEZpZWxkXzBHMDAwMUMwMThBPkPDqWdiw61yw7Nzw6FnaSBiZWplZ3l6w6lzPC9GaWVsZF8wRzAwMDFDMDE4QT4KICAgICAgICAgICAgICAgICAgPEZpZWxkXzBHMDAwMUMwMTlBPjEyMzQ1NjwvRmllbGRfMEcwMDAxQzAxOUE+CiAgICAgICAgICAgICAgIDwvRmllbGRHcm91cF8xMjAyNDM+CiAgICAgICAgICAgIDwvQ2hhaW5fZWxlbT4KICAgICAgICAgPC9DaGFpbl8xMjAyNDE+CiAgICAgICAgIDxDaGFpbl8xMjAzMjAgc2RnSUQ9IjEyMDMxOSI+CiAgICAgICAgICAgIDxDaGFpbl9lbGVtPgogICAgICAgICAgICAgICA8RmllbGRHcm91cF8xMjAzMjE+CiAgICAgICAgICAgICAgICAgIDxGaWVsZF8wSFhYWFhCMDAyQT5SZW5kZWxrZXrDqXNyZSBqb2dvc3VsdDwvRmllbGRfMEhYWFhYQjAwMkE+CiAgICAgICAgICAgICAgICAgIDxGaWVsZF8wSFhYWFhCMDAzQT5OZW08L0ZpZWxkXzBIWFhYWEIwMDNBPgogICAgICAgICAgICAgICAgICA8RmllbGRfMEhYWFhYQzAwMkE+TWVnaGF0YWxtYXpvdHQ8L0ZpZWxkXzBIWFhYWEMwMDJBPgogICAgICAgICAgICAgICAgICA8RmllbGRfMEhYWFhYQzAwM0E+w4Fkw6FtPC9GaWVsZF8wSFhYWFhDMDAzQT4KICAgICAgICAgICAgICAgICAgPEZpZWxkXzBIWFhYWEMwMDRBPlRlcm3DqXN6ZXRlczwvRmllbGRfMEhYWFhYQzAwNEE+CiAgICAgICAgICAgICAgICAgIDxGaWVsZF8wSFhYWFhDMDA1QT7DgWTDoW08L0ZpZWxkXzBIWFhYWEMwMDVBPgogICAgICAgICAgICAgICAgICA8RmllbGRfMEhYWFhYQzAwNkE+MTk2Ni0wNi0wNjwvRmllbGRfMEhYWFhYQzAwNkE+CiAgICAgICAgICAgICAgICAgIDxGaWVsZF8wSFhYWFhDMDA3QT5FZ2VyPC9GaWVsZF8wSFhYWFhDMDA3QT4KICAgICAgICAgICAgICAgICAgPEZpZWxkXzBIWFhYWEMwMDhBPlRlcm3DqXN6ZXRlcyDDiXZhPC9GaWVsZF8wSFhYWFhDMDA4QT4KICAgICAgICAgICAgICAgICAgPEZpZWxkXzBIWFhYWEMwMDlBPkhVPC9GaWVsZF8wSFhYWFhDMDA5QT4KICAgICAgICAgICAgICAgICAgPEZpZWxkXzBIWFhYWEMwMTJBPkbDqXJmaTwvRmllbGRfMEhYWFhYQzAxMkE+CiAgICAgICAgICAgICAgICAgIDxGaWVsZF8wSFhYWFhDMDEzQT5IVTwvRmllbGRfMEhYWFhYQzAxM0E+CiAgICAgICAgICAgICAgICAgIDxGaWVsZF8wSFhYWFhDMDE0QT4zMzAwPC9GaWVsZF8wSFhYWFhDMDE0QT4KICAgICAgICAgICAgICAgICAgPEZpZWxkXzBIWFhYWEMwMTVBPkVnZXI8L0ZpZWxkXzBIWFhYWEMwMTVBPgogICAgICAgICAgICAgICAgICA8RmllbGRfMEhYWFhYQzAxN0E+U3RhZGlvbiA8L0ZpZWxkXzBIWFhYWEMwMTdBPgogICAgICAgICAgICAgICAgICA8RmllbGRfMEhYWFhYQzAxOEE+dXRjYTwvRmllbGRfMEhYWFhYQzAxOEE+CiAgICAgICAgICAgICAgICAgIDxGaWVsZF8wSFhYWFhDMDE5QT4xPC9GaWVsZF8wSFhYWFhDMDE5QT4KICAgICAgICAgICAgICAgPC9GaWVsZEdyb3VwXzEyMDMyMT4KICAgICAgICAgICAgICAgPEZpZWxkR3JvdXBfMTIwMzI1PgogICAgICAgICAgICAgICAgICA8RmllbGRfMEhYWFhYQzA0M0E+TmVtPC9GaWVsZF8wSFhYWFhDMDQzQT4KICAgICAgICAgICAgICAgPC9GaWVsZEdyb3VwXzEyMDMyNT4KICAgICAgICAgICAgICAgPENoYWluXzEyMDMyMj4KICAgICAgICAgICAgICAgICAgPENoYWluX2VsZW0+CiAgICAgICAgICAgICAgICAgICAgIDxGaWVsZEdyb3VwXzEyMDMyMz4KICAgICAgICAgICAgICAgICAgICAgICAgPEZpZWxkXzBIWFhYWEMwMjNBPlN6ZW3DqWx5aSBpZ2F6b2x2w6FueTwvRmllbGRfMEhYWFhYQzAyM0E+CiAgICAgICAgICAgICAgICAgICAgICAgIDxGaWVsZF8wSFhYWFhDMDI0QT40MjAyNThORTwvRmllbGRfMEhYWFhYQzAyNEE+CiAgICAgICAgICAgICAgICAgICAgIDwvRmllbGRHcm91cF8xMjAzMjM+CiAgICAgICAgICAgICAgICAgIDwvQ2hhaW5fZWxlbT4KICAgICAgICAgICAgICAgPC9DaGFpbl8xMjAzMjI+CiAgICAgICAgICAgIDwvQ2hhaW5fZWxlbT4KICAgICAgICAgICAgPENoYWluX2VsZW0+CiAgICAgICAgICAgICAgIDxGaWVsZEdyb3VwXzEyMDMyMT4KICAgICAgICAgICAgICAgICAgPEZpZWxkXzBIWFhYWEIwMDJBPlJlbmRlbGtlesOpc3JlIGpvZ29zdWx0PC9GaWVsZF8wSFhYWFhCMDAyQT4KICAgICAgICAgICAgICAgICAgPEZpZWxkXzBIWFhYWEIwMDNBPk5lbTwvRmllbGRfMEhYWFhYQjAwM0E+CiAgICAgICAgICAgICAgICAgIDxGaWVsZF8wSFhYWFhDMDAyQT5SZW5kZWxrZXrFkTwvRmllbGRfMEhYWFhYQzAwMkE+CiAgICAgICAgICAgICAgICAgIDxGaWVsZF8wSFhYWFhDMDAzQT5QaXN0YTwvRmllbGRfMEhYWFhYQzAwM0E+CiAgICAgICAgICAgICAgICAgIDxGaWVsZF8wSFhYWFhDMDA0QT5OYWd5IDwvRmllbGRfMEhYWFhYQzAwNEE+CiAgICAgICAgICAgICAgICAgIDxGaWVsZF8wSFhYWFhDMDA1QT5QaXN0YTwvRmllbGRfMEhYWFhYQzAwNUE+CiAgICAgICAgICAgICAgICAgIDxGaWVsZF8wSFhYWFhDMDA2QT4xOTY2LTA2LTA2PC9GaWVsZF8wSFhYWFhDMDA2QT4KICAgICAgICAgICAgICAgICAgPEZpZWxkXzBIWFhYWEMwMDdBPkVnZXI8L0ZpZWxkXzBIWFhYWEMwMDdBPgogICAgICAgICAgICAgICAgICA8RmllbGRfMEhYWFhYQzAwOEE+TmFneSBFbWVyZW5jaWE8L0ZpZWxkXzBIWFhYWEMwMDhBPgogICAgICAgICAgICAgICAgICA8RmllbGRfMEhYWFhYQzAwOUE+SFU8L0ZpZWxkXzBIWFhYWEMwMDlBPgogICAgICAgICAgICAgICAgICA8RmllbGRfMEhYWFhYQzAxMkE+RsOpcmZpPC9GaWVsZF8wSFhYWFhDMDEyQT4KICAgICAgICAgICAgICAgICAgPEZpZWxkXzBIWFhYWEMwMTNBPkhVPC9GaWVsZF8wSFhYWFhDMDEzQT4KICAgICAgICAgICAgICAgICAgPEZpZWxkXzBIWFhYWEMwMTRBPjEwMzg8L0ZpZWxkXzBIWFhYWEMwMTRBPgogICAgICAgICAgICAgICAgICA8RmllbGRfMEhYWFhYQzAxNUE+QnVkYXBlc3Q8L0ZpZWxkXzBIWFhYWEMwMTVBPgogICAgICAgICAgICAgICAgICA8RmllbGRfMEhYWFhYQzAxNkE+MDM8L0ZpZWxkXzBIWFhYWEMwMTZBPgogICAgICAgICAgICAgICAgICA8RmllbGRfMEhYWFhYQzAxN0E+U3rDqWwgPC9GaWVsZF8wSFhYWFhDMDE3QT4KICAgICAgICAgICAgICAgICAgPEZpZWxkXzBIWFhYWEMwMThBPnV0Y2E8L0ZpZWxkXzBIWFhYWEMwMThBPgogICAgICAgICAgICAgICAgICA8RmllbGRfMEhYWFhYQzAxOUE+MTwvRmllbGRfMEhYWFhYQzAxOUE+CiAgICAgICAgICAgICAgIDwvRmllbGRHcm91cF8xMjAzMjE+CiAgICAgICAgICAgICAgIDxGaWVsZEdyb3VwXzEyMDMyNT4KICAgICAgICAgICAgICAgICAgPEZpZWxkXzBIWFhYWEMwNDNBPk5lbTwvRmllbGRfMEhYWFhYQzA0M0E+CiAgICAgICAgICAgICAgIDwvRmllbGRHcm91cF8xMjAzMjU+CiAgICAgICAgICAgICAgIDxDaGFpbl8xMjAzMjI+CiAgICAgICAgICAgICAgICAgIDxDaGFpbl9lbGVtPgogICAgICAgICAgICAgICAgICAgICA8RmllbGRHcm91cF8xMjAzMjM+CiAgICAgICAgICAgICAgICAgICAgICAgIDxGaWVsZF8wSFhYWFhDMDIzQT5TemVtw6lseWkgaWdhem9sdsOhbnk8L0ZpZWxkXzBIWFhYWEMwMjNBPgogICAgICAgICAgICAgICAgICAgICAgICA8RmllbGRfMEhYWFhYQzAyNEE+MTIzNDU2TUU8L0ZpZWxkXzBIWFhYWEMwMjRBPgogICAgICAgICAgICAgICAgICAgICA8L0ZpZWxkR3JvdXBfMTIwMzIzPgogICAgICAgICAgICAgICAgICA8L0NoYWluX2VsZW0+CiAgICAgICAgICAgICAgICAgIDxDaGFpbl9lbGVtPgogICAgICAgICAgICAgICAgICAgICA8RmllbGRHcm91cF8xMjAzMjM+CiAgICAgICAgICAgICAgICAgICAgICAgIDxGaWVsZF8wSFhYWFhDMDIzQT5MYWtjw61ta8OhcnR5YTwvRmllbGRfMEhYWFhYQzAyM0E+CiAgICAgICAgICAgICAgICAgICAgICAgIDxGaWVsZF8wSFhYWFhDMDI0QT4xMTEyMjU0Nzg8L0ZpZWxkXzBIWFhYWEMwMjRBPgogICAgICAgICAgICAgICAgICAgICA8L0ZpZWxkR3JvdXBfMTIwMzIzPgogICAgICAgICAgICAgICAgICA8L0NoYWluX2VsZW0+CiAgICAgICAgICAgICAgICAgIDxDaGFpbl9lbGVtPgogICAgICAgICAgICAgICAgICAgICA8RmllbGRHcm91cF8xMjAzMjM+CiAgICAgICAgICAgICAgICAgICAgICAgIDxGaWVsZF8wSFhYWFhDMDIzQT7DmnRsZXbDqWw8L0ZpZWxkXzBIWFhYWEMwMjNBPgogICAgICAgICAgICAgICAgICAgICAgICA8RmllbGRfMEhYWFhYQzAyNEE+MjU0ODk2MzwvRmllbGRfMEhYWFhYQzAyNEE+CiAgICAgICAgICAgICAgICAgICAgIDwvRmllbGRHcm91cF8xMjAzMjM+CiAgICAgICAgICAgICAgICAgIDwvQ2hhaW5fZWxlbT4KICAgICAgICAgICAgICAgPC9DaGFpbl8xMjAzMjI+CiAgICAgICAgICAgIDwvQ2hhaW5fZWxlbT4KICAgICAgICAgICAgPENoYWluX2VsZW0+CiAgICAgICAgICAgICAgIDxGaWVsZEdyb3VwXzEyMDMyMT4KICAgICAgICAgICAgICAgICAgPEZpZWxkXzBIWFhYWEIwMDJBPlJlbmRlbGtlesOpc3JlIGpvZ29zdWx0PC9GaWVsZF8wSFhYWFhCMDAyQT4KICAgICAgICAgICAgICAgICAgPEZpZWxkXzBIWFhYWEIwMDNBPklnZW48L0ZpZWxkXzBIWFhYWEIwMDNBPgogICAgICAgICAgICAgICAgICA8RmllbGRfMEhYWFhYQzAwMkE+UmVuZGVsa2V6xZE8L0ZpZWxkXzBIWFhYWEMwMDJBPgogICAgICAgICAgICAgICAgICA8RmllbGRfMEhYWFhYQzAwM0E+SsOhbm9zPC9GaWVsZF8wSFhYWFhDMDAzQT4KICAgICAgICAgICAgICAgICAgPEZpZWxkXzBIWFhYWEMwMDRBPk5lbWVzPC9GaWVsZF8wSFhYWFhDMDA0QT4KICAgICAgICAgICAgICAgICAgPEZpZWxkXzBIWFhYWEMwMDVBPkrDoW5vczwvRmllbGRfMEhYWFhYQzAwNUE+CiAgICAgICAgICAgICAgICAgIDxGaWVsZF8wSFhYWFhDMDA2QT4xOTgxLTAxLTAxPC9GaWVsZF8wSFhYWFhDMDA2QT4KICAgICAgICAgICAgICAgICAgPEZpZWxkXzBIWFhYWEMwMDdBPkVnZXI8L0ZpZWxkXzBIWFhYWEMwMDdBPgogICAgICAgICAgICAgICAgICA8RmllbGRfMEhYWFhYQzAwOEE+a2lzcyBQaXJvc2thPC9GaWVsZF8wSFhYWFhDMDA4QT4KICAgICAgICAgICAgICAgICAgPEZpZWxkXzBIWFhYWEMwMDlBPkhVPC9GaWVsZF8wSFhYWFhDMDA5QT4KICAgICAgICAgICAgICAgICAgPEZpZWxkXzBIWFhYWEMwMTJBPkbDqXJmaTwvRmllbGRfMEhYWFhYQzAxMkE+CiAgICAgICAgICAgICAgICAgIDxGaWVsZF8wSFhYWFhDMDEzQT5IVTwvRmllbGRfMEhYWFhYQzAxM0E+CiAgICAgICAgICAgICAgICAgIDxGaWVsZF8wSFhYWFhDMDE0QT4xMDM4PC9GaWVsZF8wSFhYWFhDMDE0QT4KICAgICAgICAgICAgICAgICAgPEZpZWxkXzBIWFhYWEMwMTVBPkJ1ZGFwZXN0PC9GaWVsZF8wSFhYWFhDMDE1QT4KICAgICAgICAgICAgICAgICAgPEZpZWxkXzBIWFhYWEMwMTZBPjAzPC9GaWVsZF8wSFhYWFhDMDE2QT4KICAgICAgICAgICAgICAgICAgPEZpZWxkXzBIWFhYWEMwMTdBPkxlaGVsPC9GaWVsZF8wSFhYWFhDMDE3QT4KICAgICAgICAgICAgICAgICAgPEZpZWxkXzBIWFhYWEMwMThBPnV0Y2E8L0ZpZWxkXzBIWFhYWEMwMThBPgogICAgICAgICAgICAgICAgICA8RmllbGRfMEhYWFhYQzAxOUE+MzwvRmllbGRfMEhYWFhYQzAxOUE+CiAgICAgICAgICAgICAgIDwvRmllbGRHcm91cF8xMjAzMjE+CiAgICAgICAgICAgICAgIDxGaWVsZEdyb3VwXzEyMDMyNT4KICAgICAgICAgICAgICAgICAgPEZpZWxkXzBIWFhYWEMwNDNBPk5lbTwvRmllbGRfMEhYWFhYQzA0M0E+CiAgICAgICAgICAgICAgIDwvRmllbGRHcm91cF8xMjAzMjU+CiAgICAgICAgICAgICAgIDxDaGFpbl8xMjAzMjI+CiAgICAgICAgICAgICAgICAgIDxDaGFpbl9lbGVtPgogICAgICAgICAgICAgICAgICAgICA8RmllbGRHcm91cF8xMjAzMjM+CiAgICAgICAgICAgICAgICAgICAgICAgIDxGaWVsZF8wSFhYWFhDMDIzQT5TemVtw6lseWkgaWdhem9sdsOhbnk8L0ZpZWxkXzBIWFhYWEMwMjNBPgogICAgICAgICAgICAgICAgICAgICAgICA8RmllbGRfMEhYWFhYQzAyNEE+NDU2MTIzS0U8L0ZpZWxkXzBIWFhYWEMwMjRBPgogICAgICAgICAgICAgICAgICAgICA8L0ZpZWxkR3JvdXBfMTIwMzIzPgogICAgICAgICAgICAgICAgICA8L0NoYWluX2VsZW0+CiAgICAgICAgICAgICAgIDwvQ2hhaW5fMTIwMzIyPgogICAgICAgICAgICA8L0NoYWluX2VsZW0+CiAgICAgICAgIDwvQ2hhaW5fMTIwMzIwPgogICAgICAgICA8Q2hhaW5fMTIwOTQ1PgogICAgICAgICAgICA8Q2hhaW5fZWxlbT4KICAgICAgICAgICAgICAgPEZpZWxkR3JvdXBfMTIwOTQ5PgogICAgICAgICAgICAgICAgICA8RmllbGRfMElYWFhYQjAwM0E+UmVuZGVsa2V6xZE8L0ZpZWxkXzBJWFhYWEIwMDNBPgogICAgICAgICAgICAgICAgICA8RmllbGRfMElYWFhYQjAwNEE+SsOhbm9zPC9GaWVsZF8wSVhYWFhCMDA0QT4KICAgICAgICAgICAgICAgICAgPEZpZWxkXzBJWFhYWEIwMDVBPk5lbWVzPC9GaWVsZF8wSVhYWFhCMDA1QT4KICAgICAgICAgICAgICAgICAgPEZpZWxkXzBJWFhYWEIwMDZBPkrDoW5vczwvRmllbGRfMElYWFhYQjAwNkE+CiAgICAgICAgICAgICAgICAgIDxGaWVsZF8wSVhYWFhCMDA3QT4xOTgxLTAxLTAxPC9GaWVsZF8wSVhYWFhCMDA3QT4KICAgICAgICAgICAgICAgICAgPEZpZWxkXzBJWFhYWEIwMDhBPkVnZXI8L0ZpZWxkXzBJWFhYWEIwMDhBPgogICAgICAgICAgICAgICAgICA8RmllbGRfMElYWFhYQjAwOUE+a2lzcyBQaXJvc2thPC9GaWVsZF8wSVhYWFhCMDA5QT4KICAgICAgICAgICAgICAgICAgPEZpZWxkXzBJWFhYWEIwMTBBPkbDqXJmaTwvRmllbGRfMElYWFhYQjAxMEE+CiAgICAgICAgICAgICAgICAgIDxGaWVsZF8wSVhYWFhCMDEzQT5IVTwvRmllbGRfMElYWFhYQjAxM0E+CiAgICAgICAgICAgICAgICAgIDxGaWVsZF8wSVhYWFhCMDE2QT5IVTwvRmllbGRfMElYWFhYQjAxNkE+CiAgICAgICAgICAgICAgICAgIDxGaWVsZF8wSVhYWFhCMDExQT4xMDM4PC9GaWVsZF8wSVhYWFhCMDExQT4KICAgICAgICAgICAgICAgICAgPEZpZWxkXzBJWFhYWEIwMTJBPkJ1ZGFwZXN0PC9GaWVsZF8wSVhYWFhCMDEyQT4KICAgICAgICAgICAgICAgICAgPEZpZWxkXzBJWFhYWEIwMTlBPjAzPC9GaWVsZF8wSVhYWFhCMDE5QT4KICAgICAgICAgICAgICAgICAgPEZpZWxkXzBJWFhYWEIwMjBBPkxlaGVsPC9GaWVsZF8wSVhYWFhCMDIwQT4KICAgICAgICAgICAgICAgICAgPEZpZWxkXzBJWFhYWEIwMjFBPnV0Y2E8L0ZpZWxkXzBJWFhYWEIwMjFBPgogICAgICAgICAgICAgICAgICA8RmllbGRfMElYWFhYQjAyM0E+MzwvRmllbGRfMElYWFhYQjAyM0E+CiAgICAgICAgICAgICAgICAgIDxGaWVsZF8wSVhYWFhCMDI3QT5OZW08L0ZpZWxkXzBJWFhYWEIwMjdBPgogICAgICAgICAgICAgICAgICA8RmllbGRfMElYWFhYQjAzM0E+NTA8L0ZpZWxkXzBJWFhYWEIwMzNBPgogICAgICAgICAgICAgICA8L0ZpZWxkR3JvdXBfMTIwOTQ5PgogICAgICAgICAgICA8L0NoYWluX2VsZW0+CiAgICAgICAgICAgIDxDaGFpbl9lbGVtPgogICAgICAgICAgICAgICA8RmllbGRHcm91cF8xMjA5NDk+CiAgICAgICAgICAgICAgICAgIDxGaWVsZF8wSVhYWFhCMDAzQT5QbHVzenR1bGFqPC9GaWVsZF8wSVhYWFhCMDAzQT4KICAgICAgICAgICAgICAgICAgPEZpZWxkXzBJWFhYWEIwMDRBPk1paMOhbHk8L0ZpZWxkXzBJWFhYWEIwMDRBPgogICAgICAgICAgICAgICAgICA8RmllbGRfMElYWFhYQjAwNUE+UGx1c3o8L0ZpZWxkXzBJWFhYWEIwMDVBPgogICAgICAgICAgICAgICAgICA8RmllbGRfMElYWFhYQjAwNkE+TWlow6FseTwvRmllbGRfMElYWFhYQjAwNkE+CiAgICAgICAgICAgICAgICAgIDxGaWVsZF8wSVhYWFhCMDA3QT4xOTY5LTA5LTA5PC9GaWVsZF8wSVhYWFhCMDA3QT4KICAgICAgICAgICAgICAgICAgPEZpZWxkXzBJWFhYWEIwMDhBPkVnZXI8L0ZpZWxkXzBJWFhYWEIwMDhBPgogICAgICAgICAgICAgICAgICA8RmllbGRfMElYWFhYQjAwOUE+S2lzcyBQaXJvc2thPC9GaWVsZF8wSVhYWFhCMDA5QT4KICAgICAgICAgICAgICAgICAgPEZpZWxkXzBJWFhYWEIwMTBBPkbDqXJmaTwvRmllbGRfMElYWFhYQjAxMEE+CiAgICAgICAgICAgICAgICAgIDxGaWVsZF8wSVhYWFhCMDEzQT5IVTwvRmllbGRfMElYWFhYQjAxM0E+CiAgICAgICAgICAgICAgICAgIDxGaWVsZF8wSVhYWFhCMDE2QT5IVTwvRmllbGRfMElYWFhYQjAxNkE+CiAgICAgICAgICAgICAgICAgIDxGaWVsZF8wSVhYWFhCMDE3QT4xMDExPC9GaWVsZF8wSVhYWFhCMDE3QT4KICAgICAgICAgICAgICAgICAgPEZpZWxkXzBJWFhYWEIwMThBPkJ1ZGFwZXN0PC9GaWVsZF8wSVhYWFhCMDE4QT4KICAgICAgICAgICAgICAgICAgPEZpZWxkXzBJWFhYWEIwMjJBPjAxPC9GaWVsZF8wSVhYWFhCMDIyQT4KICAgICAgICAgICAgICAgICAgPEZpZWxkXzBJWFhYWEIwMjBBPkbFkTwvRmllbGRfMElYWFhYQjAyMEE+CiAgICAgICAgICAgICAgICAgIDxGaWVsZF8wSVhYWFhCMDIxQT7DunQ8L0ZpZWxkXzBJWFhYWEIwMjFBPgogICAgICAgICAgICAgICAgICA8RmllbGRfMElYWFhYQjAyM0E+MTwvRmllbGRfMElYWFhYQjAyM0E+CiAgICAgICAgICAgICAgICAgIDxGaWVsZF8wSVhYWFhCMDMwQT5JZ2VuPC9GaWVsZF8wSVhYWFhCMDMwQT4KICAgICAgICAgICAgICAgICAgPEZpZWxkXzBJWFhYWEIwMzFBPlBtdC4gNC4gwqcgKDQpPC9GaWVsZF8wSVhYWFhCMDMxQT4KICAgICAgICAgICAgICAgICAgPEZpZWxkXzBJWFhYWEIwMzJBPmtpZW1lbHQga8O2enN6ZXJlcGzFkXZlbCBrw7Z6ZWxpIGthcGNzb2xhdGJhbiDDoWxsw7MgYsOhcm1lbHkgdGVybcOpc3pldGVzIHN6ZW3DqWx5LCBha2kgYSBQbXQuIDQuIMKnICgyKSBiZWtlemTDqXNiZW4gZW1sw610ZXR0IHN6ZW3DqWxseWVsIGvDtnrDtnNlbiB1Z3lhbmF6b24gam9naSBzemVtw6lseSB2YWd5IGpvZ2kgc3plbcOpbHlpc8OpZ2dlbCBuZW0gcmVuZGVsa2V6xZEgc3plcnZlemV0IHTDqW55bGVnZXMgdHVsYWpkb25vc2E8L0ZpZWxkXzBJWFhYWEIwMzJBPgogICAgICAgICAgICAgICAgICA8RmllbGRfMElYWFhYQjAzM0E+NTA8L0ZpZWxkXzBJWFhYWEIwMzNBPgogICAgICAgICAgICAgICA8L0ZpZWxkR3JvdXBfMTIwOTQ5PgogICAgICAgICAgICA8L0NoYWluX2VsZW0+CiAgICAgICAgIDwvQ2hhaW5fMTIwOTQ1PgogICAgICA8L0Jsb2NrXzEyMDIxNT4KICAgICAgPEJsb2NrXzEyMDEyOT4KICAgICAgICAgPENoYWluXzEyMDEzMD4KICAgICAgICAgICAgPENoYWluX2VsZW0+CiAgICAgICAgICAgICAgIDxGaWVsZEdyb3VwXzEyMDEzMj4KICAgICAgICAgICAgICAgICAgPEZpZWxkXzBLWFhYWEIwMDJBPjIwMjYtMDQtMTQ8L0ZpZWxkXzBLWFhYWEIwMDJBPgogICAgICAgICAgICAgICAgICA8RmllbGRfMEtYWFhYQjAwM0E+MjAwMDAwMDwvRmllbGRfMEtYWFhYQjAwM0E+CiAgICAgICAgICAgICAgICAgIDxGaWVsZF8wS1hYWFhCMDA0QT5IVUY8L0ZpZWxkXzBLWFhYWEIwMDRBPgogICAgICAgICAgICAgICAgICA8RmllbGRfMEtYWFhYQjAwNUE+NTAwMDwvRmllbGRfMEtYWFhYQjAwNUE+CiAgICAgICAgICAgICAgICAgIDxGaWVsZF8wS1hYWFhCMDA2QT5FVVI8L0ZpZWxkXzBLWFhYWEIwMDZBPgogICAgICAgICAgICAgICAgICA8RmllbGRfMEtYWFhYQjAwN0E+SWdlbjwvRmllbGRfMEtYWFhYQjAwN0E+CiAgICAgICAgICAgICAgICAgIDxGaWVsZF8wS1hYWFhCMDA5QT5uZW0gdHVkb2sgbWVnamVneXrDqXN0IMOtcm5pPC9GaWVsZF8wS1hYWFhCMDA5QT4KICAgICAgICAgICAgICAgICAgPEZpZWxkXzBLWFhYWEIwMTBBPkVnZXI8L0ZpZWxkXzBLWFhYWEIwMTBBPgogICAgICAgICAgICAgICAgICA8RmllbGRfMEtYWFhYQjAxMUE+a8Opc3pww6luejwvRmllbGRfMEtYWFhYQjAxMUE+CiAgICAgICAgICAgICAgICAgIDxGaWVsZF8wS1hYWFhCMDEyQT5Qw6luenbDoXRsw7MgS2Z0LjwvRmllbGRfMEtYWFhYQjAxMkE+CiAgICAgICAgICAgICAgIDwvRmllbGRHcm91cF8xMjAxMzI+CiAgICAgICAgICAgIDwvQ2hhaW5fZWxlbT4KICAgICAgICAgICAgPENoYWluX2VsZW0+CiAgICAgICAgICAgICAgIDxGaWVsZEdyb3VwXzEyMDEzMj4KICAgICAgICAgICAgICAgICAgPEZpZWxkXzBLWFhYWEIwMDJBPjIwMjYtMDUtMjU8L0ZpZWxkXzBLWFhYWEIwMDJBPgogICAgICAgICAgICAgICAgICA8RmllbGRfMEtYWFhYQjAwM0E+MjAwMDA8L0ZpZWxkXzBLWFhYWEIwMDNBPgogICAgICAgICAgICAgICAgICA8RmllbGRfMEtYWFhYQjAwNEE+RVVSPC9GaWVsZF8wS1hYWFhCMDA0QT4KICAgICAgICAgICAgICAgICAgPEZpZWxkXzBLWFhYWEIwMDVBPjgwMDAwMDA8L0ZpZWxkXzBLWFhYWEIwMDVBPgogICAgICAgICAgICAgICAgICA8RmllbGRfMEtYWFhYQjAwNkE+SFVGPC9GaWVsZF8wS1hYWFhCMDA2QT4KICAgICAgICAgICAgICAgICAgPEZpZWxkXzBLWFhYWEIwMDdBPklnZW48L0ZpZWxkXzBLWFhYWEIwMDdBPgogICAgICAgICAgICAgICAgICA8RmllbGRfMEtYWFhYQjAwOUE+TmluY3MgdG92w6FiYmkgaW5mb3Jtw6FjacOzPC9GaWVsZF8wS1hYWFhCMDA5QT4KICAgICAgICAgICAgICAgICAgPEZpZWxkXzBLWFhYWEIwMTBBPkJ1ZGFwZXN0PC9GaWVsZF8wS1hYWFhCMDEwQT4KICAgICAgICAgICAgICAgICAgPEZpZWxkXzBLWFhYWEIwMTFBPmJlZml6ZXTDqXM8L0ZpZWxkXzBLWFhYWEIwMTFBPgogICAgICAgICAgICAgICAgICA8RmllbGRfMEtYWFhYQjAxMkE+UMOpbnp2w6FsdMOzIDE8L0ZpZWxkXzBLWFhYWEIwMTJBPgogICAgICAgICAgICAgICA8L0ZpZWxkR3JvdXBfMTIwMTMyPgogICAgICAgICAgICA8L0NoYWluX2VsZW0+CiAgICAgICAgICAgIDxDaGFpbl9lbGVtPgogICAgICAgICAgICAgICA8RmllbGRHcm91cF8xMjAxMzI+CiAgICAgICAgICAgICAgICAgIDxGaWVsZF8wS1hYWFhCMDAyQT4yMDI2LTA1LTI1PC9GaWVsZF8wS1hYWFhCMDAyQT4KICAgICAgICAgICAgICAgICAgPEZpZWxkXzBLWFhYWEIwMDNBPjMwMDAwPC9GaWVsZF8wS1hYWFhCMDAzQT4KICAgICAgICAgICAgICAgICAgPEZpZWxkXzBLWFhYWEIwMDRBPlVTRDwvRmllbGRfMEtYWFhYQjAwNEE+CiAgICAgICAgICAgICAgICAgIDxGaWVsZF8wS1hYWFhCMDA1QT4xMDAwMDAwMDwvRmllbGRfMEtYWFhYQjAwNUE+CiAgICAgICAgICAgICAgICAgIDxGaWVsZF8wS1hYWFhCMDA2QT5IVUY8L0ZpZWxkXzBLWFhYWEIwMDZBPgogICAgICAgICAgICAgICAgICA8RmllbGRfMEtYWFhYQjAwN0E+SWdlbjwvRmllbGRfMEtYWFhYQjAwN0E+CiAgICAgICAgICAgICAgICAgIDxGaWVsZF8wS1hYWFhCMDA5QT5OaW5jcyB0b3bDoWJiaSBpbmZvcm3DoWNpw7M8L0ZpZWxkXzBLWFhYWEIwMDlBPgogICAgICAgICAgICAgICAgICA8RmllbGRfMEtYWFhYQjAxMEE+QnVkYXBlc3Q8L0ZpZWxkXzBLWFhYWEIwMTBBPgogICAgICAgICAgICAgICAgICA8RmllbGRfMEtYWFhYQjAxMUE+YmVmaXpldMOpczwvRmllbGRfMEtYWFhYQjAxMUE+CiAgICAgICAgICAgICAgICAgIDxGaWVsZF8wS1hYWFhCMDEyQT5Qw6luenbDoWx0w7MxPC9GaWVsZF8wS1hYWFhCMDEyQT4KICAgICAgICAgICAgICAgPC9GaWVsZEdyb3VwXzEyMDEzMj4KICAgICAgICAgICAgPC9DaGFpbl9lbGVtPgogICAgICAgICA8L0NoYWluXzEyMDEzMD4KICAgICAgPC9CbG9ja18xMjAxMjk+CiAgICAgIDxCbG9ja18xMjA4MTI+CiAgICAgICAgIDxGaWVsZEdyb3VwXzEyMDgxMz4KICAgICAgICAgICAgPEZpZWxkXzFCMDAwMUIwMDFBPkNzYWzDoXNyYSB1dGFsw7MgbWludMOhemF0PC9GaWVsZF8xQjAwMDFCMDAxQT4KICAgICAgICAgICAgPEZpZWxkXzFCMDAwMUIwMDJBPk5lbSBhem9ub3PDrXRoYXTDszwvRmllbGRfMUIwMDAxQjAwMkE+CiAgICAgICAgIDwvRmllbGRHcm91cF8xMjA4MTM+CiAgICAgICAgIDxDaGFpbl8xMjA4NjM+CiAgICAgICAgICAgIDxDaGFpbl9lbGVtPgogICAgICAgICAgICAgICA8RmllbGRHcm91cF8xMjA4NjQ+CiAgICAgICAgICAgICAgICAgIDxGaWVsZF8xRFhYWFhCMDAyQT5Dc2Fsw6FzYmFuIMOpcmludGV0dDwvRmllbGRfMURYWFhYQjAwMkE+CiAgICAgICAgICAgICAgICAgIDxGaWVsZF8xRFhYWFhCMDAzQT4zMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzM8L0ZpZWxkXzFEWFhYWEIwMDNBPgogICAgICAgICAgICAgICAgICA8RmllbGRfMURYWFhYQjAwNEE+S8Opc3pww6luemJlZml6ZXTDqXM8L0ZpZWxkXzFEWFhYWEIwMDRBPgogICAgICAgICAgICAgICAgICA8RmllbGRfMURYWFhYQjAwNUE+MjAyNi0wNC0xNDwvRmllbGRfMURYWFhYQjAwNUE+CiAgICAgICAgICAgICAgICAgIDxGaWVsZF8xRFhYWFhCMDA2QT4wODAxPC9GaWVsZF8xRFhYWFhCMDA2QT4KICAgICAgICAgICAgICAgICAgPEZpZWxkXzFEWFhYWEIwMDhBPjIwMDAwMDA8L0ZpZWxkXzFEWFhYWEIwMDhBPgogICAgICAgICAgICAgICAgICA8RmllbGRfMURYWFhYQjAwOUE+SFVGPC9GaWVsZF8xRFhYWFhCMDA5QT4KICAgICAgICAgICAgICAgICAgPEZpZWxkXzFEWFhYWEIwMTBBPktpc3MgUGlzdGE8L0ZpZWxkXzFEWFhYWEIwMTBBPgogICAgICAgICAgICAgICAgICA8RmllbGRfMURYWFhYQjAxMkE+SFU8L0ZpZWxkXzFEWFhYWEIwMTJBPgogICAgICAgICAgICAgICA8L0ZpZWxkR3JvdXBfMTIwODY0PgogICAgICAgICAgICA8L0NoYWluX2VsZW0+CiAgICAgICAgICAgIDxDaGFpbl9lbGVtPgogICAgICAgICAgICAgICA8RmllbGRHcm91cF8xMjA4NjQ+CiAgICAgICAgICAgICAgICAgIDxGaWVsZF8xRFhYWFhCMDAyQT5Dc2Fsw6FzYmFuw6lyaW50ZXR0IEzDoXN6bMOzIDwvRmllbGRfMURYWFhYQjAwMkE+CiAgICAgICAgICAgICAgICAgIDxGaWVsZF8xRFhYWFhCMDAzQT4xMTExMTExMTExMTExMTExMTExMTExMTE8L0ZpZWxkXzFEWFhYWEIwMDNBPgogICAgICAgICAgICAgICAgICA8RmllbGRfMURYWFhYQjAwNEE+S8Opc3pww6luemJlZml6ZXTDqXM8L0ZpZWxkXzFEWFhYWEIwMDRBPgogICAgICAgICAgICAgICAgICA8RmllbGRfMURYWFhYQjAwNUE+MjAyNi0wNS0yNTwvRmllbGRfMURYWFhYQjAwNUE+CiAgICAgICAgICAgICAgICAgIDxGaWVsZF8xRFhYWFhCMDA2QT4wODAxPC9GaWVsZF8xRFhYWFhCMDA2QT4KICAgICAgICAgICAgICAgICAgPEZpZWxkXzFEWFhYWEIwMDhBPjEwMDAwMDAwPC9GaWVsZF8xRFhYWFhCMDA4QT4KICAgICAgICAgICAgICAgICAgPEZpZWxkXzFEWFhYWEIwMDlBPkhVRjwvRmllbGRfMURYWFhYQjAwOUE+CiAgICAgICAgICAgICAgICAgIDxGaWVsZF8xRFhYWFhCMDEwQT5LaXNzIFBpc3RhPC9GaWVsZF8xRFhYWFhCMDEwQT4KICAgICAgICAgICAgICAgICAgPEZpZWxkXzFEWFhYWEIwMTJBPkhVPC9GaWVsZF8xRFhYWFhCMDEyQT4KICAgICAgICAgICAgICAgPC9GaWVsZEdyb3VwXzEyMDg2ND4KICAgICAgICAgICAgPC9DaGFpbl9lbGVtPgogICAgICAgICAgICA8Q2hhaW5fZWxlbT4KICAgICAgICAgICAgICAgPEZpZWxkR3JvdXBfMTIwODY0PgogICAgICAgICAgICAgICAgICA8RmllbGRfMURYWFhYQjAwMkE+Q3NhbMOhc2JhbsOpcmludGV0dCDDiXZhPC9GaWVsZF8xRFhYWFhCMDAyQT4KICAgICAgICAgICAgICAgICAgPEZpZWxkXzFEWFhYWEIwMDNBPjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjwvRmllbGRfMURYWFhYQjAwM0E+CiAgICAgICAgICAgICAgICAgIDxGaWVsZF8xRFhYWFhCMDA0QT5Lw6lzenDDqW56YmVmaXpldMOpczwvRmllbGRfMURYWFhYQjAwNEE+CiAgICAgICAgICAgICAgICAgIDxGaWVsZF8xRFhYWFhCMDA1QT4yMDI2LTA1LTI1PC9GaWVsZF8xRFhYWFhCMDA1QT4KICAgICAgICAgICAgICAgICAgPEZpZWxkXzFEWFhYWEIwMDZBPjA4MDE8L0ZpZWxkXzFEWFhYWEIwMDZBPgogICAgICAgICAgICAgICAgICA8RmllbGRfMURYWFhYQjAwOEE+ODAwMDAwMDwvRmllbGRfMURYWFhYQjAwOEE+CiAgICAgICAgICAgICAgICAgIDxGaWVsZF8xRFhYWFhCMDA5QT5IVUY8L0ZpZWxkXzFEWFhYWEIwMDlBPgogICAgICAgICAgICAgICAgICA8RmllbGRfMURYWFhYQjAxMEE+S2lzcyBQaXN0YTwvRmllbGRfMURYWFhYQjAxMEE+CiAgICAgICAgICAgICAgICAgIDxGaWVsZF8xRFhYWFhCMDEyQT5IVTwvRmllbGRfMURYWFhYQjAxMkE+CiAgICAgICAgICAgICAgIDwvRmllbGRHcm91cF8xMjA4NjQ+CiAgICAgICAgICAgIDwvQ2hhaW5fZWxlbT4KICAgICAgICAgPC9DaGFpbl8xMjA4NjM+CiAgICAgICAgIDxDaGFpbl8xMjA4OTc+CiAgICAgICAgICAgIDxDaGFpbl9lbGVtPgogICAgICAgICAgICAgICA8RmllbGRHcm91cF8xMjA4Njc+CiAgICAgICAgICAgICAgICAgIDxGaWVsZF8xRFhYWFhDMDAxQT4xPC9GaWVsZF8xRFhYWFhDMDAxQT4KICAgICAgICAgICAgICAgICAgPEZpZWxkXzFEWFhYWEMwMDhBPk5hZ3kgTGFqb3M8L0ZpZWxkXzFEWFhYWEMwMDhBPgogICAgICAgICAgICAgICAgICA8RmllbGRfMURYWFhYQzAwOUE+S8Opc3pww6luemZlbHbDqXRlbDwvRmllbGRfMURYWFhYQzAwOUE+CiAgICAgICAgICAgICAgICAgIDxGaWVsZF8xRFhYWFhDMDEwQT4yMDI2LTA0LTE0PC9GaWVsZF8xRFhYWFhDMDEwQT4KICAgICAgICAgICAgICAgICAgPEZpZWxkXzFEWFhYWEMwMTFBPjA4MDE8L0ZpZWxkXzFEWFhYWEMwMTFBPgogICAgICAgICAgICAgICAgICA8RmllbGRfMURYWFhYQzAxMkE+MjAwMDAwMDwvRmllbGRfMURYWFhYQzAxMkE+CiAgICAgICAgICAgICAgICAgIDxGaWVsZF8xRFhYWFhDMDEzQT5IVUY8L0ZpZWxkXzFEWFhYWEMwMTNBPgogICAgICAgICAgICAgICAgICA8RmllbGRfMURYWFhYQzAxNUE+SFU8L0ZpZWxkXzFEWFhYWEMwMTVBPgogICAgICAgICAgICAgICAgICA8RmllbGRfMURYWFhYQzAxNkE+SFU8L0ZpZWxkXzFEWFhYWEMwMTZBPgogICAgICAgICAgICAgICAgICA8RmllbGRfMURYWFhYQzAxN0E+MTAxMTwvRmllbGRfMURYWFhYQzAxN0E+CiAgICAgICAgICAgICAgICAgIDxGaWVsZF8xRFhYWFhDMDE4QT5CdWRhcGVzdDwvRmllbGRfMURYWFhYQzAxOEE+CiAgICAgICAgICAgICAgICAgIDxGaWVsZF8xRFhYWFhDMDE5QT4wMTwvRmllbGRfMURYWFhYQzAxOUE+CiAgICAgICAgICAgICAgICAgIDxGaWVsZF8xRFhYWFhDMDIwQT5iw6lrZTwvRmllbGRfMURYWFhYQzAyMEE+CiAgICAgICAgICAgICAgICAgIDxGaWVsZF8xRFhYWFhDMDIxQT7DunQ8L0ZpZWxkXzFEWFhYWEMwMjFBPgogICAgICAgICAgICAgICAgICA8RmllbGRfMURYWFhYQzAyMkE+MTwvRmllbGRfMURYWFhYQzAyMkE+CiAgICAgICAgICAgICAgICAgIDxGaWVsZF8xRFhYWFhDMDIzQT5OZW08L0ZpZWxkXzFEWFhYWEMwMjNBPgogICAgICAgICAgICAgICAgICA8RmllbGRfMURYWFhYQzAyNUE+NTI1MjwvRmllbGRfMURYWFhYQzAyNUE+CiAgICAgICAgICAgICAgIDwvRmllbGRHcm91cF8xMjA4Njc+CiAgICAgICAgICAgIDwvQ2hhaW5fZWxlbT4KICAgICAgICAgPC9DaGFpbl8xMjA4OTc+CiAgICAgIDwvQmxvY2tfMTIwODEyPgogICA8L0Zvcm1fTkFWX1BNVDI1Pgo8L3RuczpEb2NfTkFWX1BNVDI1PgoK"
+    },
+    {
+      "key": "pmt25_hash",
+      "value": "9f8008eb6d753a089e5ee7da43299ff18d58621b75b3e9741f75b55430f8aabe"
+    },
+    {
+      "key": "T1042E_continue_base64",
+      "value": "PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHRuczpEb2NfVDEwNDJFIHhtbG5zOmNvbW1vbj0iaHR0cHM6Ly9zb2FwLmFwaS5uYXYuZ292Lmh1L2RlZmluaXRpb25zL21vZGVsLzIuMC9jb21tb24vMS4wIgogICAgICAgICAgICAgICAgeG1sbnM6bWV0YT0iaHR0cHM6Ly9hcGkubmF2Lmdvdi5odS9kZWZpbml0aW9ucy9mb3JtX3hzZF9tZXRhc2NoZW1hLzEuMCIKICAgICAgICAgICAgICAgIHhtbG5zOnRucz0iaHR0cHM6Ly9zb2FwLmFwaS5uYXYuZ292Lmh1L2RlZmluaXRpb25zL21vZGVsLzIuMC9UMTA0MkUvMS4wIgogICAgICAgICAgICAgICAgeG1sbnM6eHNpPSJodHRwOi8vd3d3LnczLm9yZy8yMDAxL1hNTFNjaGVtYS1pbnN0YW5jZSIKICAgICAgICAgICAgICAgIHhzaTpzY2hlbWFMb2NhdGlvbj0iaHR0cHM6Ly9zb2FwLmFwaS5uYXYuZ292Lmh1L2RlZmluaXRpb25zL21vZGVsLzIuMC9UMTA0MkUvMS4wIFQxMDQyRS54c2QgaHR0cHM6Ly9hcGkubmF2Lmdvdi5odS9kZWZpbml0aW9ucy9mb3JtX3hzZF9tZXRhc2NoZW1hLzEuMCBmb3JtX3hzZF9tZXRhc2NoZW1hLnhzZCBodHRwczovL3NvYXAuYXBpLm5hdi5nb3YuaHUvZGVmaW5pdGlvbnMvbW9kZWwvMi4wL2NvbW1vbi8xLjAgY29tbW9uLnhzZCI+CiAgIDxGb3JtX1QxMDQyRT4KICAgICAgPEJsb2NrXzEyMDAwMj4KICAgICAgICAgPEZpZWxkR3JvdXBfMTIwMDAzPgogICAgICAgICAgICA8RmllbGRfMEEwMDAxQzAwMUE+Njc5Mzc1MTYxMjM8L0ZpZWxkXzBBMDAwMUMwMDFBPgogICAgICAgICAgICA8RmllbGRfMEEwMDAxQzAwNUE+ODQ2MjE1MDQ5MzwvRmllbGRfMEEwMDAxQzAwNUE+CiAgICAgICAgIDwvRmllbGRHcm91cF8xMjAwMDM+CiAgICAgIDwvQmxvY2tfMTIwMDAyPgogICAgICA8QmxvY2tfMTIwMDA2PgogICAgICAgICA8Q2hhaW5fMTIwMDEzPgogICAgICAgICAgICA8Q2hhaW5fZWxlbT4KICAgICAgICAgICAgICAgPEZpZWxkR3JvdXBfMTIwMDE0PgogICAgICAgICAgICAgICAgICA8RmllbGRfMEJYWFhYQzAwMDFBQT5Dc2l6bcOhciBNYXJpYW5uPC9GaWVsZF8wQlhYWFhDMDAwMUFBPgogICAgICAgICAgICAgICAgICA8RmllbGRfMEJYWFhYQzAwMDJBQT44MzQxNzQzNjYzPC9GaWVsZF8wQlhYWFhDMDAwMkFBPgogICAgICAgICAgICAgICAgICA8RmllbGRfMEJYWFhYQzAwMDNCQT4wODI5NDY2NzY8L0ZpZWxkXzBCWFhYWEMwMDAzQkE+CiAgICAgICAgICAgICAgICAgIDxGaWVsZF8wQlhYWFhEMDAwNUFBPlU8L0ZpZWxkXzBCWFhYWEQwMDA1QUE+CiAgICAgICAgICAgICAgICAgIDxGaWVsZF8wQlhYWFhEMDAwOEFBPjAzPC9GaWVsZF8wQlhYWFhEMDAwOEFBPgogICAgICAgICAgICAgICAgICA8RmllbGRfMEJYWFhYRDAwMDlBQT4yMDI2LTA3LTA5PC9GaWVsZF8wQlhYWFhEMDAwOUFBPgogICAgICAgICAgICAgICAgICA8RmllbGRfMEJYWFhYRDAwMTBBQT4xPC9GaWVsZF8wQlhYWFhEMDAxMEFBPgogICAgICAgICAgICAgICA8L0ZpZWxkR3JvdXBfMTIwMDE0PgogICAgICAgICAgICA8L0NoYWluX2VsZW0+CiAgICAgICAgICAgIDxDaGFpbl9lbGVtPgogICAgICAgICAgICAgICA8RmllbGRHcm91cF8xMjAwMTQ+CiAgICAgICAgICAgICAgICAgIDxGaWVsZF8wQlhYWFhDMDAwMUFBPkNzb21haSBTemFiaW5hPC9GaWVsZF8wQlhYWFhDMDAwMUFBPgogICAgICAgICAgICAgICAgICA8RmllbGRfMEJYWFhYQzAwMDJBQT44NDQ3MDAyMjI1PC9GaWVsZF8wQlhYWFhDMDAwMkFBPgogICAgICAgICAgICAgICAgICA8RmllbGRfMEJYWFhYQzAwMDRBQT50cnVlPC9GaWVsZF8wQlhYWFhDMDAwNEFBPgogICAgICAgICAgICAgICAgICA8RmllbGRfMEJYWFhYRDAwMDVBQT5VPC9GaWVsZF8wQlhYWFhEMDAwNUFBPgogICAgICAgICAgICAgICAgICA8RmllbGRfMEJYWFhYRDAwMDhBQT4wNTwvRmllbGRfMEJYWFhYRDAwMDhBQT4KICAgICAgICAgICAgICAgICAgPEZpZWxkXzBCWFhYWEQwMDA5QUE+MjAyNi0wNy0wOTwvRmllbGRfMEJYWFhYRDAwMDlBQT4KICAgICAgICAgICAgICAgICAgPEZpZWxkXzBCWFhYWEQwMDEwQUE+MjwvRmllbGRfMEJYWFhYRDAwMTBBQT4KICAgICAgICAgICAgICAgPC9GaWVsZEdyb3VwXzEyMDAxND4KICAgICAgICAgICAgPC9DaGFpbl9lbGVtPgogICAgICAgICA8L0NoYWluXzEyMDAxMz4KICAgICAgPC9CbG9ja18xMjAwMDY+CiAgIDwvRm9ybV9UMTA0MkU+CjwvdG5zOkRvY19UMTA0MkU+"
+    },
+    {
+      "key": "T1042E_continue_hash",
+      "value": "1a1a083ad5b2e79c4987ee71118adaefb706fe71bbc59d5370e917441ab0fd60"
+    },
+    {
+      "key": "T1042E_stop_base64",
+      "value": "PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHRuczpEb2NfVDEwNDJFIHhtbG5zOmNvbW1vbj0iaHR0cHM6Ly9zb2FwLmFwaS5uYXYuZ292Lmh1L2RlZmluaXRpb25zL21vZGVsLzIuMC9jb21tb24vMS4wIgogICAgICAgICAgICAgICAgeG1sbnM6bWV0YT0iaHR0cHM6Ly9hcGkubmF2Lmdvdi5odS9kZWZpbml0aW9ucy9mb3JtX3hzZF9tZXRhc2NoZW1hLzEuMCIKICAgICAgICAgICAgICAgIHhtbG5zOnRucz0iaHR0cHM6Ly9zb2FwLmFwaS5uYXYuZ292Lmh1L2RlZmluaXRpb25zL21vZGVsLzIuMC9UMTA0MkUvMS4wIgogICAgICAgICAgICAgICAgeG1sbnM6eHNpPSJodHRwOi8vd3d3LnczLm9yZy8yMDAxL1hNTFNjaGVtYS1pbnN0YW5jZSIKICAgICAgICAgICAgICAgIHhzaTpzY2hlbWFMb2NhdGlvbj0iaHR0cHM6Ly9zb2FwLmFwaS5uYXYuZ292Lmh1L2RlZmluaXRpb25zL21vZGVsLzIuMC9UMTA0MkUvMS4wIFQxMDQyRS54c2QgaHR0cHM6Ly9hcGkubmF2Lmdvdi5odS9kZWZpbml0aW9ucy9mb3JtX3hzZF9tZXRhc2NoZW1hLzEuMCBmb3JtX3hzZF9tZXRhc2NoZW1hLnhzZCBodHRwczovL3NvYXAuYXBpLm5hdi5nb3YuaHUvZGVmaW5pdGlvbnMvbW9kZWwvMi4wL2NvbW1vbi8xLjAgY29tbW9uLnhzZCI+CiAgIDxGb3JtX1QxMDQyRT4KICAgICAgPEJsb2NrXzEyMDAwMj4KICAgICAgICAgPEZpZWxkR3JvdXBfMTIwMDAzPgogICAgICAgICAgICA8RmllbGRfMEEwMDAxQzAwMUE+MTg2Mzc3NzExMTI8L0ZpZWxkXzBBMDAwMUMwMDFBPgogICAgICAgICA8L0ZpZWxkR3JvdXBfMTIwMDAzPgogICAgICA8L0Jsb2NrXzEyMDAwMj4KICAgICAgPEJsb2NrXzEyMDAwNj4KICAgICAgICAgPENoYWluXzEyMDAxMz4KICAgICAgICAgICAgPENoYWluX2VsZW0+CiAgICAgICAgICAgICAgIDxGaWVsZEdyb3VwXzEyMDAxND4KICAgICAgICAgICAgICAgICAgPEZpZWxkXzBCWFhYWEMwMDAxQUE+Q3Npem1hZGlhIE1hcmlhbm48L0ZpZWxkXzBCWFhYWEMwMDAxQUE+CiAgICAgICAgICAgICAgICAgIDxGaWVsZF8wQlhYWFhDMDAwMkFBPjgzNDE3NDM1NjU2NTY1NjU2NTY1NjYzPC9GaWVsZF8wQlhYWFhDMDAwMkFBPgogICAgICAgICAgICAgICAgICA8RmllbGRfMEJYWFhYQzAwMDRBQT50cnVlPC9GaWVsZF8wQlhYWFhDMDAwNEFBPgogICAgICAgICAgICAgICAgICA8RmllbGRfMEJYWFhYRDAwMDVBQT5VPC9GaWVsZF8wQlhYWFhEMDAwNUFBPgogICAgICAgICAgICAgICAgICA8RmllbGRfMEJYWFhYRDAwMDhBQT4wMzwvRmllbGRfMEJYWFhYRDAwMDhBQT4KICAgICAgICAgICAgICAgICAgPEZpZWxkXzBCWFhYWEQwMDA5QUE+MjAyNi0wNy0wOTwvRmllbGRfMEJYWFhYRDAwMDlBQT4KICAgICAgICAgICAgICAgICAgPEZpZWxkXzBCWFhYWEQwMDEwQUE+MTwvRmllbGRfMEJYWFhYRDAwMTBBQT4KICAgICAgICAgICAgICAgPC9GaWVsZEdyb3VwXzEyMDAxND4KICAgICAgICAgICAgPC9DaGFpbl9lbGVtPgogICAgICAgICAgICA8Q2hhaW5fZWxlbT4KICAgICAgICAgICAgICAgPEZpZWxkR3JvdXBfMTIwMDE0PgogICAgICAgICAgICAgICAgICA8RmllbGRfMEJYWFhYQzAwMDFBQT5Dc29tYWkgU3phYmluYTwvRmllbGRfMEJYWFhYQzAwMDFBQT4KICAgICAgICAgICAgICAgICAgPEZpZWxkXzBCWFhYWEMwMDAyQUE+ODQ0NzAwMjIyNTwvRmllbGRfMEJYWFhYQzAwMDJBQT4KICAgICAgICAgICAgICAgICAgPEZpZWxkXzBCWFhYWEMwMDA0QUE+dHJ1ZTwvRmllbGRfMEJYWFhYQzAwMDRBQT4KICAgICAgICAgICAgICAgICAgPEZpZWxkXzBCWFhYWEQwMDA1QUE+VTwvRmllbGRfMEJYWFhYRDAwMDVBQT4KICAgICAgICAgICAgICAgICAgPEZpZWxkXzBCWFhYWEQwMDA4QUE+MDU8L0ZpZWxkXzBCWFhYWEQwMDA4QUE+CiAgICAgICAgICAgICAgICAgIDxGaWVsZF8wQlhYWFhEMDAwOUFBPjIwMjYtMDctMDk8L0ZpZWxkXzBCWFhYWEQwMDA5QUE+CiAgICAgICAgICAgICAgICAgIDxGaWVsZF8wQlhYWFhEMDAxMEFBPjI8L0ZpZWxkXzBCWFhYWEQwMDEwQUE+CiAgICAgICAgICAgICAgIDwvRmllbGRHcm91cF8xMjAwMTQ+CiAgICAgICAgICAgIDwvQ2hhaW5fZWxlbT4KICAgICAgICAgPC9DaGFpbl8xMjAwMTM+CiAgICAgIDwvQmxvY2tfMTIwMDA2PgogICA8L0Zvcm1fVDEwNDJFPgo8L3RuczpEb2NfVDEwNDJFPg=="
+    },
+    {
+      "key": "T1042E_stop_hash",
+      "value": "a1c39328066af9cab3cb0a7cb4d957acdd7d918fb8f41a0ef41cfd69c52b0f82"
+    }
+  ]
+}
