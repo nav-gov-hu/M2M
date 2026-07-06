@@ -1,100 +1,100 @@
 <?xml  version='1.0' encoding='utf-8' ?>
 <xs:schema targetNamespace="https://soap.api.nav.gov.hu/definitions/messages/1.0/bizonylat" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="https://soap.api.nav.gov.hu/definitions/messages/1.0/bizonylat" xmlns:msg_bizonylat="https://soap.api.nav.gov.hu/definitions/messages/1.0/bizonylat" xmlns:bizonylat10="https://soap.api.nav.gov.hu/definitions/model/1.0/bizonylat">
-    <xs:import namespace="https://soap.api.nav.gov.hu/definitions/model/1.0/bizonylat" schemaLocation="../../model/1.0/bizonylat/schema_definition.xsd"/>
-    <xs:complexType name="BizonylatBekuldesRequestType">
-        <xs:annotation>
-            <xs:documentation>A bizonylat létrehozás kérésekor az üzenet body-ban található adatok.</xs:documentation>
-        </xs:annotation>
-        <xs:complexContent>
-            <xs:extension base="bizonylat10:BizonylatBekuldesKeresAdatok">
-                <xs:sequence/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-    <xs:complexType name="BizonylatBekuldesResponseType">
-        <xs:annotation>
-            <xs:documentation>A bizonylat létrehozás válasz üzenet body-jában található adatok.</xs:documentation>
-        </xs:annotation>
-        <xs:complexContent>
-            <xs:extension base="bizonylat10:BizonylatBekuldesValaszAdatok">
-                <xs:sequence/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-    <xs:complexType name="BizonylatKalkulacioRequestType">
-        <xs:complexContent>
-            <xs:extension base="bizonylat10:BizonylatKalkulacioKeresAdatok">
-                <xs:sequence/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-    <xs:complexType name="BizonylatKalkulacioResponseType">
-        <xs:complexContent>
-            <xs:extension base="bizonylat10:BizonylatKalkulacioValaszAdatok">
-                <xs:sequence/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-    <xs:complexType name="BizonylatKalkulacioStatuszLekerdezesRequestType">
-        <xs:complexContent>
-            <xs:extension base="bizonylat10:BizonylatKalkulacioStatuszLekerdezesKeresAdatok">
-                <xs:sequence/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-    <xs:complexType name="BizonylatKalkulacioStatuszLekerdezesResponseType">
-        <xs:complexContent>
-            <xs:extension base="bizonylat10:BizonylatKalkulacioStatuszLekredezesValaszAdatok">
-                <xs:sequence/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-    <xs:complexType name="BizonylatStatuszLekerdezesRequestType">
-        <xs:annotation>
-            <xs:documentation>A bizonylat státusz lekérdezéskor az üzenet body-ban található adatok.</xs:documentation>
-        </xs:annotation>
-        <xs:complexContent>
-            <xs:extension base="bizonylat10:BizonylatStatuszLekerdezesKeresAdatok">
-                <xs:sequence/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-    <xs:complexType name="BizonylatStatuszLekerdezesResponseType">
-        <xs:annotation>
-            <xs:documentation>A bizonylat lekérdezés válasz üzenet body-jában található adatok.</xs:documentation>
-        </xs:annotation>
-        <xs:complexContent>
-            <xs:extension base="bizonylat10:BizonylatStatuszLekerdezesValaszAdatok">
-                <xs:sequence/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-    <xs:complexType name="BizonylatValidacioRequestType">
-        <xs:complexContent>
-            <xs:extension base="bizonylat10:BizonylatValidacioKeresAdatok">
-                <xs:sequence/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-    <xs:complexType name="BizonylatValidacioResponseType">
-        <xs:complexContent>
-            <xs:extension base="bizonylat10:BizonylatValidacioValaszAdatok">
-                <xs:sequence/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-    <xs:complexType name="BizonylatValidacioStatuszLekerdezesRequestType">
-        <xs:complexContent>
-            <xs:extension base="bizonylat10:BizonylatValidacioStatuszLekerdezesKeresAdatok">
-                <xs:sequence/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-    <xs:complexType name="BizonylatValidacioStatuszLekerdezesResponseType">
-        <xs:complexContent>
-            <xs:extension base="bizonylat10:BizonylatValidacioStatuszLekerdezesValaszAdatok">
-                <xs:sequence/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
+	<xs:import namespace="https://soap.api.nav.gov.hu/definitions/model/1.0/bizonylat" schemaLocation="../../model/1.0/bizonylat/schema_definition.xsd"/>
+	<xs:complexType name="BizonylatBekuldesRequestType">
+		<xs:annotation>
+			<xs:documentation>A bizonylat létrehozás kérésekor az üzenet body-ban található adatok.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="bizonylat10:BizonylatBekuldesKeresAdatok">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="BizonylatBekuldesResponseType">
+		<xs:annotation>
+			<xs:documentation>A bizonylat létrehozás válasz üzenet body-jában található adatok.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="bizonylat10:BizonylatBekuldesValaszAdatok">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="BizonylatKalkulacioRequestType">
+		<xs:complexContent>
+			<xs:extension base="bizonylat10:BizonylatKalkulacioKeresAdatok">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="BizonylatKalkulacioResponseType">
+		<xs:complexContent>
+			<xs:extension base="bizonylat10:BizonylatKalkulacioValaszAdatok">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="BizonylatKalkulacioStatuszLekerdezesRequestType">
+		<xs:complexContent>
+			<xs:extension base="bizonylat10:BizonylatKalkulacioStatuszLekerdezesKeresAdatok">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="BizonylatKalkulacioStatuszLekerdezesResponseType">
+		<xs:complexContent>
+			<xs:extension base="bizonylat10:BizonylatKalkulacioStatuszLekredezesValaszAdatok">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="BizonylatStatuszLekerdezesRequestType">
+		<xs:annotation>
+			<xs:documentation>A bizonylat státusz lekérdezéskor az üzenet body-ban található adatok.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="bizonylat10:BizonylatStatuszLekerdezesKeresAdatok">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="BizonylatStatuszLekerdezesResponseType">
+		<xs:annotation>
+			<xs:documentation>A bizonylat lekérdezés válasz üzenet body-jában található adatok.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="bizonylat10:BizonylatStatuszLekerdezesValaszAdatok">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="BizonylatValidacioRequestType">
+		<xs:complexContent>
+			<xs:extension base="bizonylat10:BizonylatValidacioKeresAdatok">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="BizonylatValidacioResponseType">
+		<xs:complexContent>
+			<xs:extension base="bizonylat10:BizonylatValidacioValaszAdatok">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="BizonylatValidacioStatuszLekerdezesRequestType">
+		<xs:complexContent>
+			<xs:extension base="bizonylat10:BizonylatValidacioStatuszLekerdezesKeresAdatok">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="BizonylatValidacioStatuszLekerdezesResponseType">
+		<xs:complexContent>
+			<xs:extension base="bizonylat10:BizonylatValidacioStatuszLekerdezesValaszAdatok">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
 </xs:schema>

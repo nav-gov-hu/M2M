@@ -333,7 +333,6 @@ components:
               $ref: '#/components/schemas/CreateBizonylatResult'
       required:
         - ugyAzonosito
-        - resultCode
     BizonylatResponseType:
       allOf:
         - $ref: '#/components/schemas/BaseResponseType'
@@ -430,6 +429,7 @@ components:
         - ERVENYTELEN_BIZONYLAT_TIPUS
         - ERVENYTELEN_BIZONYLAT_VERZIO
         - HIBAS_TOMORITES
+        - KALKULACIOS_HIBA
         - SIKERES
         - EGYEB_HIBA
         - ERVENYTELEN_KODOLAS
@@ -488,7 +488,7 @@ components:
         - ERVENYTELEN_ADOZO
         - ERVENYTELEN_BEKULDO
         - EGYEB_HIBA
-        - SIKERTELEN_VALIDACIO
+        - VALIDACIOS_HIBA
         - ERVENYTELEN_KODOLAS
         - ERVENYTELEN_KARAKTER
         - SIKERTELEN_BEKULDES
@@ -512,7 +512,7 @@ components:
         - ERVENYTELEN_ADOZO
         - ERVENYTELEN_BEKULDO
         - EGYEB_HIBA
-        - SIKERTELEN_VALIDACIO
+        - VALIDACIOS_HIBA
         - ERVENYTELEN_KODOLAS
         - ERVENYTELEN_KARAKTER
         - SIKERTELEN_BEKULDES
@@ -562,8 +562,6 @@ components:
           properties:
             resultCode:
               $ref: '#/components/schemas/GetBizonylatResult'
-      required:
-        - resultCode
     BizonylatKalkulacioStatusz:
       type: string
       enum:
@@ -584,7 +582,6 @@ components:
               $ref: '#/components/schemas/CreateKalkulacioResult'
       required:
         - ugyAzonosito
-        - resultCode
     GetKalkulacioResult:
       type: string
       enum:
@@ -593,6 +590,7 @@ components:
         - ERVENYTELEN_BIZONYLAT_VERZIO
         - HIBAS_TOMORITES
         - SIKERES
+        - KALKULACIOS_HIBA
         - EGYEB_HIBA
         - NEMLETEZO_UGY_AZONOSITO
         - ERVENYTELEN_KODOLAS
@@ -606,8 +604,6 @@ components:
           properties:
             resultCode:
               $ref: '#/components/schemas/GetKalkulacioResult'
-      required:
-        - resultCode
     KalkulacioResponseType:
       allOf:
         - $ref: '#/components/schemas/BaseResponseType'
@@ -658,7 +654,6 @@ components:
               $ref: '#/components/schemas/CreateValidacioResult'
       required:
         - ugyAzonosito
-        - resultCode
     CreateValidacioResult:
       type: string
       enum:
@@ -667,6 +662,7 @@ components:
         - ERVENYTELEN_BIZONYLAT_VERZIO
         - HIBAS_TOMORITES
         - SIKERES
+        - VALIDACIOS_HIBA
         - EGYEB_HIBA
         - ERVENYTELEN_KODOLAS
         - ERVENYTELEN_KARAKTER
@@ -679,8 +675,6 @@ components:
           properties:
             resultCode:
               $ref: '#/components/schemas/GetValidacioResult'
-      required:
-        - resultCode
     GetValidacioResult:
       type: string
       enum:
@@ -689,6 +683,7 @@ components:
         - ERVENYTELEN_BIZONYLAT_VERZIO
         - HIBAS_TOMORITES
         - SIKERES
+        - VALIDACIOS_HIBA
         - EGYEB_HIBA
         - ERVENYTELEN_KODOLAS
         - ERVENYTELEN_KARAKTER
