@@ -367,11 +367,19 @@ components:
       type: object
       properties:
         bizonylatTipus:
-          description: A bizonylat típusa
+          description:
+            A bizonylat típusának azonosítója, pl T1042E.
+            A nav-gov-hu-templates Github oldalakon lévő XSD fájlokban lévő namespace-ből kell venni az értéket.
+            Ennek az azonosítónak egyeznie kell a beküldött xml namespace-ben lévő bizonylat azonosítóval.
+            Amennyiben nem egyezik az itt megadott érték a beküldött xml namespace-ben lévővel, úgy a válaszban XSD validációs hiba fog visszaérkezni.
           type: string
           maxLength: 100
         bizonylatVerzio:
-          description: A bizonylat verziószáma
+          description:
+            A bizonylat verziószáma, pl 1.0.
+            A nav-gov-hu-templates Github oldalakon lévő XSD fájlokban lévő namespace-ből kell venni az értéket.
+            Ennek az azonosítónak egyeznie kell a beküldött xml namespace-ben lévő bizonylat verzióval.
+            Amennyiben nem egyezik az itt megadott érték a beküldött xml namespace-ben lévővel, úgy a válaszban XSD validációs hiba fog visszaérkezni.
           type: string
           maxLength: 10
           pattern: ^[A-Za-z0-9.\-_]{1,10}$
@@ -446,11 +454,19 @@ components:
       type: object
       properties:
         bizonylatTipus:
-          description: A bizonylat típusa
+          description:
+            A bizonylat típusának azonosítója, pl T1042E.
+            A nav-gov-hu-templates Github oldalakon lévő XSD fájlokban lévő namespace-ből kell venni az értéket.
+            Ennek az azonosítónak egyeznie kell a beküldött xml namespace-ben lévő bizonylat azonosítóval.
+            Amennyiben nem egyezik az itt megadott érték a beküldött xml namespace-ben lévővel, úgy a válaszban XSD validációs hiba fog visszaérkezni.
           type: string
           maxLength: 100
         bizonylatVerzio:
-          description: A bizonylat verziószáma
+          description:
+            A bizonylat verziószáma, pl 1.0.
+            A nav-gov-hu-templates Github oldalakon lévő XSD fájlokban lévő namespace-ből kell venni az értéket.
+            Ennek az azonosítónak egyeznie kell a beküldött xml namespace-ben lévő bizonylat verzióval.
+            Amennyiben nem egyezik az itt megadott érték a beküldött xml namespace-ben lévővel, úgy a válaszban XSD validációs hiba fog visszaérkezni.
           type: string
           maxLength: 10
           pattern: ^[A-Za-z0-9.\-_]{1,10}$
@@ -527,11 +543,19 @@ components:
       type: object
       properties:
         bizonylatTipus:
-          description: A bizonylat típusa
+          description:
+            A bizonylat típusának azonosítója, pl T1042E.
+            A nav-gov-hu-templates Github oldalakon lévő XSD fájlokban lévő namespace-ből kell venni az értéket.
+            Ennek az azonosítónak egyeznie kell a beküldött xml namespace-ben lévő bizonylat azonosítóval.
+            Amennyiben nem egyezik az itt megadott érték a beküldött xml namespace-ben lévővel, úgy a válaszban XSD validációs hiba fog visszaérkezni.
           type: string
           maxLength: 100
         bizonylatVerzio:
-          description: A bizonylat verziószáma
+          description:
+            A bizonylat verziószáma, pl 1.0.
+            A nav-gov-hu-templates Github oldalakon lévő XSD fájlokban lévő namespace-ből kell venni az értéket.
+            Ennek a verziószámnak egyeznie kell a beküldött xml namespace-ben lévő bizonylat verzióval.
+            Amennyiben nem egyezik az itt megadott érték a beküldött xml namespace-ben lévővel, úgy a válaszban XSD validációs hiba fog visszaérkezni.
           type: string
           maxLength: 10
           pattern: ^[A-Za-z0-9.\-_]{1,10}$
@@ -612,15 +636,11 @@ components:
             bizonylatXml:
               description: >-
                 A kalkulált számított mezőket  tartalmazó bizonylat file base 64
-                kódolással. A tomorites paraméter adja, meg, hogy tömörtett
-                volt-e a fájl, és ha igen, akkor milyen módon, mielőtt kódolva
-                lett.
+                kódolással és bzip2 tömörítéssel.
               type: string
               format: byte
             kalkulaciosHiba:
               $ref: '#/components/schemas/KalkulaciosHiba'
-            tomorites:
-              $ref: '#/components/schemas/Tomorites'
             bizonylatKalkulacioStatusz:
               $ref: '#/components/schemas/BizonylatKalkulacioStatusz'
       required:
