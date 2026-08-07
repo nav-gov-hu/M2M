@@ -246,7 +246,7 @@ components:
           description: A csatolmány fájl neve kiterjesztéssel együtt
           type: string
         type:
-          description: 'A csatolmány típusa. Az enyk sablonból az attachment.id vagy description mező.'
+          description: 'A csatolmány típusa. Az enyk sablonból az attachment.id mező.'
           type: string
       required:
         - documentPartType

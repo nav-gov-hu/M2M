@@ -124,7 +124,7 @@ REPLY_STORE_ID_NOT_ALLOWED - Csak hivatal adhatja meg bizonylatbeküldéskor a t
 			</xs:element>
 			<xs:element name="type" type="xs:string" minOccurs="1" maxOccurs="1">
 				<xs:annotation>
-					<xs:documentation>A csatolmány típusa. </xs:documentation>
+					<xs:documentation>A csatolmány típusa. Az enyk sablonból az attachment.id mező.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
