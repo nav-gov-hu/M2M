@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:wnkerr10="https://soap.api.nav.gov.hu/external/webnyk/webhibalista/1.0.0" targetNamespace="https://soap.api.nav.gov.hu/external/webnyk/webhibalista/1.0.0">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:wnkerr10="https://soap.api.nav.gov.hu/external/webnyk/webhibalista/1.0.1" targetNamespace="https://soap.api.nav.gov.hu/external/webnyk/webhibalista/1.0.1">
 	<xs:simpleType name="Numeric10Type">
 		<xs:restriction base="xs:string">
 			<xs:pattern value="\d{10}"/>
@@ -151,7 +151,7 @@
 		    </xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="Nev" type="xs:string">
+			<xs:element name="Nev" type="xs:string" minOccurs="0">
 			<xs:annotation>
 				<xs:documentation xml:lang="hu">
 					 Adózó neve
