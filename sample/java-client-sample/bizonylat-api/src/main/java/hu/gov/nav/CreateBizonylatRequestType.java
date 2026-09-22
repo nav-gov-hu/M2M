@@ -143,10 +143,10 @@ public class CreateBizonylatRequestType {
   }
 
    /**
-   * Annak a tanúsítványa, hogy a beküldött bizonylat már validálva lett. Ha létezik ilyen tanúsítvány, akkor a bizonylat a beküldés során már nem lesz validálva. Gyorsabban lefut a művelet, ami szinkronválaszt ad. A tanúsítvány mező az elején pontosvesszővel elválasztva tartalmazza azokat az adatokat, amelyekből képezve lett. A végére kerül a maga a tanúsítvány base64 kódolva.
+   * Annak a tanúsítványa, hogy a beküldött bizonylat már validálva lett. Ha létezik ilyen tanúsítvány, akkor a bizonylat a beküldés során már nem lesz validálva.
    * @return validaciosTanusitvany
   **/
-  @Schema(description = "Annak a tanúsítványa, hogy a beküldött bizonylat már validálva lett. Ha létezik ilyen tanúsítvány, akkor a bizonylat a beküldés során már nem lesz validálva. Gyorsabban lefut a művelet, ami szinkronválaszt ad. A tanúsítvány mező az elején pontosvesszővel elválasztva tartalmazza azokat az adatokat, amelyekből képezve lett. A végére kerül a maga a tanúsítvány base64 kódolva.")
+  @Schema(description = "Annak a tanúsítványa, hogy a beküldött bizonylat már validálva lett. Ha létezik ilyen tanúsítvány, akkor a bizonylat a beküldés során már nem lesz validálva.")
   public String getValidaciosTanusitvany() {
     return validaciosTanusitvany;
   }

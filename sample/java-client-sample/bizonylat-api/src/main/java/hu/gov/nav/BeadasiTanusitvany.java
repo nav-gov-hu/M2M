@@ -56,10 +56,10 @@ public class BeadasiTanusitvany {
   }
 
    /**
-   * A befogadási a tanúsítvány. A tanúsítvány mező az elején pontosvesszővel elválasztva tartalmazza azokat az adatokat, amelyekből képezve lett. A végére kerül a maga a tanúsítvány base64 kódolva.
+   * A befogadási a tanúsítvány.
    * @return tanusitvany
   **/
-  @Schema(required = true, description = "A befogadási a tanúsítvány. A tanúsítvány mező az elején pontosvesszővel elválasztva tartalmazza azokat az adatokat, amelyekből képezve lett. A végére kerül a maga a tanúsítvány base64 kódolva.")
+  @Schema(required = true, description = "A befogadási a tanúsítvány.")
   public String getTanusitvany() {
     return tanusitvany;
   }

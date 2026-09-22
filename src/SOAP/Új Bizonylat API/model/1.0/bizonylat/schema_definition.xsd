@@ -382,8 +382,7 @@
             </xs:element>
             <xs:element name="validaciosTanusitvany" type="bizonylat10:BizonylatBekuldesKeresAdatokValidaciosTanusitvanyType" minOccurs="0" maxOccurs="1">
                 <xs:annotation>
-                    <xs:documentation>Annak a tanúsítványa, hogy a beküldött bizonylat már validálva lett. Ha létezik ilyen tanúsítvány, akkor a bizonylat a beküldés során már nem lesz validálva. Gyorsabban lefut a művelet, ami szinkronválaszt ad.&#xD;
-                        A tanúsítvány mező az elején pontosvesszővel elválasztva tartalmazza azokat az adatokat, amelyekből képezve lett. A végére kerül a maga a tanúsítvány base64 kódolva.</xs:documentation>
+                    <xs:documentation>Annak a tanúsítványa, hogy a beküldött bizonylat már validálva lett. Ha létezik ilyen tanúsítvány, akkor a bizonylat a beküldés során már nem lesz validálva.</xs:documentation>
                 </xs:annotation>
             </xs:element>
             <xs:element name="tomorites" type="bizonylat10:Tomorites" minOccurs="0" maxOccurs="1">
